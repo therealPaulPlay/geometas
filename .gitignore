@@ -1,5 +1,6 @@
 # Explicit ignores
 geobin/geobin/settings_local.py
+geobin/node_modules/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

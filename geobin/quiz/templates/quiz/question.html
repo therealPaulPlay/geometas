@@ -1,6 +1,16 @@
-<div>
-    <h2>{{fact.question}}</h2>
-    <h3>{{fact.country}} | {{fact.type}}</h3>
-    <p>{{fact.notes|default:''|safe}}</p>
-    <img src="{{fact.image_url}}" alt="{{fact.question}}" width="80%">
-</div>
+{% extends "base.html" %}
+
+{% block main %}
+    <div class="mt-10 max-w-2xl mx-auto p-10 border border-slate-400 bg-slate-100 rounded-lg">
+        <h2 class="text-2xl mb-4 text-slate-900">{{fact.question}}</h2>
+
+        <div class="flex space-x-4 mb-4">
+            <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{fact.country}}</span>
+            <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{fact.type}}</span>
+        </div>
+        
+        <p class="text-sm font-light text-slate-700 mb-4">{{fact.notes|default:''|safe}}</p>
+
+        <img src="{{fact.image_url}}" alt="{{fact.question}}" class="max-w-lg mx-auto">
+    </div>
+{% endblock %}

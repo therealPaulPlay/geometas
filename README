@@ -1,0 +1,2 @@
+## Run Tailwind from geobin dir
+npx tailwindcss -i static/css/input.css -o static/css/main.css --watch
