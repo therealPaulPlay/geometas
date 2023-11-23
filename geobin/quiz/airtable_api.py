@@ -15,8 +15,8 @@ def get_question():
     fact = {
         'question': fact_response['fields']['Fact'],
         'image_url': fact_response['fields']['Image'][0]['url'],
-        'country': fact_response['fields']['Country Name'][0],
-        'type': fact_response['fields']['Type Name'][0],
+        'countries': fact_response['fields']['Country Name'],
+        'type': fact_response['fields']['Type'],
         'notes': fact_response['fields'].get('Notes'),
     }
     return fact
