@@ -1,2 +1,0 @@
-Django==4.2.7
-pyairtable==2.2.0

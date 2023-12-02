@@ -1,6 +1,7 @@
 # Explicit ignores
-geobin/geobin/settings_local.py
-geobin/node_modules/
+geobin/settings_local.py
+node_modules/
+*.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
