@@ -151,7 +151,6 @@ os.makedirs(STATIC_ROOT, exist_ok=True)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Airtable
-AIRTABLE_FACT_COUNT = 32
 AIRTABLE_APP_ID = os.environ.get('AIRTABLE_APP_ID')
 AIRTABLE_TABLE_ID = os.environ.get('AIRTABLE_TABLE_ID')
 AIRTABLE_API_TOKEN = os.environ.get('AIRTABLE_API_TOKEN')
