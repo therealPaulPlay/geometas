@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 
 {% block main %}
-    <div class="mt-10 max-w-2xl mx-auto p-10 border border-slate-400 bg-slate-100 rounded-lg">
+<div class="max-w-2xl mx-auto">
+    <div class="mx-4 mt-10 p-10 border border-slate-400 bg-slate-100 rounded-lg">
         <h2 class="text-2xl mb-4 text-slate-900">{{fact.question|safe|linebreaksbr}}</h2>
 
-        <div class="flex space-x-4 mb-4">
+        <div class="flex flex-wrap space-x-4">
             {% for country in fact.countries %}
-                <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{country}}</span>
+                <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap mb-4 px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{country}}</span>
             {% endfor %}
-            <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{fact.type}}</span>
+            <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap mb-4 px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{fact.type}}</span>
         </div>
         
         <p class="text-sm font-light text-slate-700 mb-4">{{fact.notes|default:''|safe|linebreaksbr}}</p>
 
-        <img src="{{fact.image_url}}" alt="{{fact.question}}" class="max-w-lg mx-auto">
+        <img src="{{fact.image_url}}" alt="{{fact.question}}" class="max-w-full  mx-auto">
 
         <div class="max-w-lg pt-6 mx-auto">
             <a class="bg-sky-400 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-10 px-6 rounded-lg w-full flex items-center justify-center" href="{% url 'quiz:quiz' %}">Next</a>
@@ -21,4 +22,5 @@
 
         <p class="text-xs italic font-light text-slate-500 mt-10">id {{fact.airtable_id|default:''}}</p>
     </div>
+</div>
 {% endblock %}
