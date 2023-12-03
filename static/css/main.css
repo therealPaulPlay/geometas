@@ -554,6 +554,11 @@ video {
   margin-right: 1rem;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -714,6 +719,11 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .font-light {

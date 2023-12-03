@@ -29,6 +29,7 @@ def deserialize_fact(fact_response):
         'answer': fact_response['fields']['Answer'],
         'image_url': fact_response['fields']['Image'][0]['url'],
         'countries': fact_response['fields']['Country Name'],
+        'continents': fact_response['fields'].get('Continents'),
         'category': fact_response['fields']['Category'],
         'question_type': question_type,
         'notes': fact_response['fields'].get('Notes'),
@@ -43,7 +44,7 @@ def get_question_from_category(question_type):
         "MultipleCountry": "Which countries are these?",
         "SingleContinent": "Which continent is this?",
         "MultipleContinent": "Which continents are these?",
-        "NoAnswer": "General learning: what do you know about this?"
+        "NoAnswer": "General learning: did you know this?"
     }[question_type]
 
 
