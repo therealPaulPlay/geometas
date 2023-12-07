@@ -81,4 +81,7 @@ FACT_IDS = [
     'recrd6CTbB7mW23hS',
     'recvK7WY4F6g3yw4U',
     'recyAbFeV3B4Oj7Xu',
+    'recVHlQ0IvQiPuAAO',
+    'recKOGvz1jM44LPLT',
+    'rec8XXrnLRGgiypLQ',
 ]
