@@ -4,14 +4,14 @@
 
     {% if fact.question_type == 'SingleCountry' or fact.question_type == 'MultipleCountry' %}
         <h2 class="text-2xl mb-4 text-slate-900">    
-            {% for country in fact.countries %}
-                {{country}}{% if not forloop.last %}, {% endif %}
+            {% for country in fact.countries.all %}
+                {{ country.flag_emoji }} {{country}}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </h2>
     {% elif fact.question_type == 'SingleContintent' or fact.question_type == 'MultipleContinent' %}
         <h2 class="text-2xl mb-4 text-slate-900">    
-            {% for continent in fact.continents %}
-                {{continent}}{% if not forloop.last %}, {% endif %}
+            {% for country in fact.countries.all %}
+                {{country.continent}}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </h2>
     {% endif %}
@@ -21,7 +21,9 @@
     <p class="text-sm font-light text-slate-700">{{fact.notes|default:''|safe|linebreaksbr}}</p>
 
     <div class="my-4">
-        <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap mb-4 px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{fact.category}}</span>
+        <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap mb-4 px-3 py-1 leading-4 bg-sky-100 text-sky-700">
+            {{fact.get_category_display}}
+        </span>
     </div>
 
     <img src="{{fact.image_url}}" alt="{{fact.question}}" class="max-w-full mx-auto">

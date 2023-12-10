@@ -5,7 +5,9 @@
     <h2 class="text-2xl mb-4 text-slate-900">{{fact.question}}</h2>
 
     <div class="flex flex-wrap space-x-4">
-        <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap mb-4 px-3 py-1 leading-4 bg-sky-100 text-sky-700">{{fact.category}}</span>
+        <span class="items-center rounded-full text-sm font-semibold whitespace-nowrap mb-4 px-3 py-1 leading-4 bg-sky-100 text-sky-700">
+            {{fact.get_category_display}}
+        </span>
     </div>
 
     <img src="{{fact.image_url}}" alt="{{fact.question}}" class="max-w-full  mx-auto">
@@ -13,7 +15,7 @@
     <div class="max-w-full pt-6 mx-auto">
         <a 
             class="bg-sky-400 hover:bg-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-10 px-6 rounded-lg w-full flex items-center justify-center" 
-            href="{% url 'quiz:answer' fact.airtable_id %}">
+            href="{% url 'quiz:answer' fact.uuid %}">
             See Answer
         </a>
     </div>

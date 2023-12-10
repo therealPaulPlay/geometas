@@ -1,20 +1,24 @@
 from django.shortcuts import render, redirect
+import random
 
-from quiz.airtable_api import get_random_fact_id, get_specific_fact
+from .models import Fact
 
 
 def quiz(request, fact_id=None):
-    random_fact_id = get_random_fact_id()
-    return redirect('quiz:question', fact_id=random_fact_id)
+    # Get a random Fact uuid from quiz.models.Fact
+    facts = Fact.objects.all()
+    random_fact_id = random.choice(facts).uuid
+    return redirect('quiz:question', fact_uuid=random_fact_id)
 
 
-def question(request, fact_id):
-    fact = get_specific_fact(fact_id)
+def question(request, fact_uuid):
+    fact = Fact.objects.get(uuid=fact_uuid)
     context = {'fact': fact}
     return render(request, 'quiz/question.html', context)
 
-def answer(request, fact_id):
-    fact = get_specific_fact(fact_id)
+
+def answer(request, fact_uuid):
+    fact = Fact.objects.get(uuid=fact_uuid)
     context = {'fact': fact}
     return render(request, 'quiz/answer.html', context)
 

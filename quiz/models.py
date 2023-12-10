@@ -9,6 +9,12 @@ class Country(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def flag_emoji(self):
+        # Make sure the country code is in uppercase
+        iso2 = self.iso2.upper()
+        # Convert each letter to the corresponding regional indicator symbol
+        return ''.join(chr(ord(letter) + 0x1F1A5) for letter in iso2)
 
     class Meta:
         unique_together = ('name', 'iso2')
