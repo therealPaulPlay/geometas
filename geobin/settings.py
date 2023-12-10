@@ -150,6 +150,42 @@ os.makedirs(STATIC_ROOT, exist_ok=True)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+    },
+    'formatters': {
+        'standard': {
+            'format': '{levelname:8s} [{asctime:s}] {name:s}: {message:s}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'filters': [],
+            'formatter': 'standard'
+        },
+    },
+    'loggers': {
+        # default for all undefined Python modules
+        '': {
+            'level': 'INFO',
+            'handlers': ['console',],
+        },
+        'django.request': {
+            'level': 'ERROR'
+        },
+        'newrelic.core.agent_protocol': {
+            'level': 'ERROR'
+        }
+    },
+}
+
+
 
 import sentry_sdk
 
