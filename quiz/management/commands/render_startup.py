@@ -4,14 +4,24 @@ log = logging.getLogger(__name__)
 
 from django.core import management
 
-from quiz.airtable_api import import_all_facts_into_db
-from quiz.country_seeder import update_countries
-
-
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        import_all_facts_into_db()
+        
+        # Load countries
+        from quiz.country_seeder import update_countries
         update_countries()
+
+        # Load facts
+        from quiz.airtable_api import import_all_facts_into_db
+        import_all_facts_into_db()
+
+        # Create a new superuser
+        from django.contrib.auth.models import User
+        try:
+            User.objects.create_superuser('geobin', 'geo@kreuz.de', 'geobin')
+        except Exception as e:
+            print(e)
+
         print(">>>>>>>> DONE <<<<<<<<")
