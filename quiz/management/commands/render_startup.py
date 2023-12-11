@@ -18,10 +18,10 @@ class Command(BaseCommand):
         import_all_facts_into_db()
 
         # Create a new superuser
-        from django.contrib.auth.models import User
+        """from django.contrib.auth.models import User
         try:
             User.objects.create_superuser('geobin', 'geo@kreuz.de', 'geobin')
         except Exception as e:
-            print(e)
+            print(e)"""
 
         print(">>>>>>>> DONE <<<<<<<<")
