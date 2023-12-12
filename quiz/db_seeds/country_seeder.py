@@ -14,6 +14,7 @@ INPUT_COUNTRIES = [
     ["Austria", "AT", "Europe"],
     ["Belgium", "BE", "Europe"],
     ["Brazil", "BR", "South America"],
+    ["Bolivia", "BO", "South America"],
     ["Bulgaria", "BG", "Europe"],
     ["Canada", "CA", "North America"],
     ["Chile", "CL", "South America"],
@@ -33,6 +34,7 @@ INPUT_COUNTRIES = [
     ["Ireland", "IE", "Europe"],
     ["Italy", "IT", "Europe"],
     ["Japan", "JP", "Asia"],
+    ["Laos", "LA", "Asia"],
     ["Latvia", "LV", "Europe"],
     ["Lithuania", "LT", "Europe"],
     ["Luxembourg", "LU", "Europe"],
@@ -62,8 +64,8 @@ INPUT_COUNTRIES = [
     ["Ukraine", "UA", "Europe"],
     ["United Kingdom", "GB", "Europe"],
     ["United States", "US", "North America"],
+    ["Uruguay", "UY", "South America"],
     ["Vatican City", "VA", "Europe"],
-    ["Venezuela", "VE", "South America"],
     ["Ghana", "GH", "Africa"],
     ["Kenya", "KE", "Africa"],
     ["Senegal", "SN", "Africa"],
@@ -74,8 +76,8 @@ INPUT_COUNTRIES = [
     ["Lesotho", "", "Africa"],
     ["Faroe Islands", "FO", "Europe"],
     ["Andorra", "", "Europe"],
-    ["Montenegro", "", "Europe"],
-    ["North Macedonia", "", "Europe"]
+    ["Montenegro", "ME", "Europe"],
+    ["North Macedonia", "MK", "Europe"]
 ]
 
 

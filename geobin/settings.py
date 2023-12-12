@@ -211,3 +211,5 @@ AWS_SECRET_ACCESS_KEY = "FAZKzPNG+eYod1xx1wQQ0CrjxNqj0cCZDB1VuRhF"
 
 if DEBUG:
     from .settings_local import *
+    ALLOWED_HOSTS.append('localhost')
+    ALLOWED_HOSTS.append('127.0.0.1')

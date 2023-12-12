@@ -10,12 +10,16 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         
         # Load countries
-        from quiz.country_seeder import update_countries
+        from quiz.db_seeds.country_seeder import update_countries
         update_countries()
 
         # Load facts
         from quiz.airtable_api import import_all_facts_into_db
         import_all_facts_into_db()
+
+        # Load quizzes
+        from quiz.db_seeds.quiz_seeder import create_initial_quizzes
+        create_initial_quizzes()
 
         # Create a new superuser
         """from django.contrib.auth.models import User

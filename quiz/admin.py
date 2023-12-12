@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Country, Fact
+from .models import Country, Fact, Quiz
 
 
 class CountryAdmin(admin.ModelAdmin):
@@ -19,5 +19,14 @@ class FactAdmin(admin.ModelAdmin):
         return ", ".join([country.name for country in obj.countries.all()])
 
 
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ('name', 'get_countries_names', 'category', )
+    list_filter = ('category', 'countries')
+
+    def get_countries_names(self, obj):
+        return ", ".join([country.name for country in obj.countries.all()])
+
+
 admin.site.register(Fact, FactAdmin)
 admin.site.register(Country, CountryAdmin)
+admin.site.register(Quiz, QuizAdmin)

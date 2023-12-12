@@ -2,6 +2,36 @@ from django.db import models
 import uuid
 
 
+CATEGORY_CHOICES = [
+    ("coverage", "Coverage"),
+    ("driving_direction", "Driving direction"),
+    ("google_car", "Google Car"),
+    ("language", "Language"),
+    ("license_plate", "License Plate"),
+    ("road_lines", "Road Lines"),
+    ("settlement_sign", "Settlement Sign"),
+    ("bollards", "Bollards"),
+    ("street_numbering", "Street Numbering"),
+    ("street_markings", "Street Markings"),
+    ("street_name", "Street Name"),
+    ("street_sign", "Street Sign"),
+    ("poles", "Poles"),
+    ("other", "Other"),
+    ("cars", "Cars"),
+    ("pedestrian_crossign_sign", "Pedestrian Crossign Sign"),
+    ("buildings", "Buildings"),
+    ("flora", "Flora"),
+]
+
+QUESTION_TYPE_CHOICES = [
+    ("SingleCountry", "SingleCountry"),
+    ("SingleContinent", "SingleContinent"),
+    ("MultipleCountry", "MultipleCountry"),
+    ("MultipleContinent", "MultipleContinent"),
+    ("NoAnswer", "NoAnswer"),
+]
+
+
 class Country(models.Model):
     name = models.CharField(max_length=250)
     iso2 = models.CharField(max_length=2)
@@ -22,35 +52,6 @@ class Country(models.Model):
     
 
 class Fact(models.Model):
-    CATEGORY_CHOICES = [
-        ("coverage", "Coverage"),
-        ("driving_direction", "Driving direction"),
-        ("google_car", "Google Car"),
-        ("language", "Language"),
-        ("license_plate", "License Plate"),
-        ("road_lines", "Road Lines"),
-        ("settlement_sign", "Settlement Sign"),
-        ("bollards", "Bollards"),
-        ("street_numbering", "Street Numbering"),
-        ("street_markings", "Street Markings"),
-        ("street_name", "Street Name"),
-        ("street_sign", "Street Sign"),
-        ("poles", "Poles"),
-        ("other", "Other"),
-        ("cars", "Cars"),
-        ("pedestrian_crossign_sign", "Pedestrian Crossign Sign"),
-        ("buildings", "Buildings"),
-        ("flora", "Flora"),
-    ]
-
-    QUESTION_TYPE_CHOICES = [
-        ("SingleCountry", "SingleCountry"),
-        ("SingleContinent", "SingleContinent"),
-        ("MultipleCountry", "MultipleCountry"),
-        ("MultipleContinent", "MultipleContinent"),
-        ("NoAnswer", "NoAnswer"),
-    ]
-
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     answer = models.CharField(max_length=250)
     image_url = models.CharField(max_length=250)
@@ -77,3 +78,18 @@ class Fact(models.Model):
             "NoAnswer": "General learning: did you know this?"
         }[self.question_type]
     
+
+class Quiz(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=250)
+    countries = models.ManyToManyField(Country, related_name='quizzes', null=True, blank=True)
+    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name[:50] + (self.name[50:] and '...')
+
+    class Meta:
+        unique_together = ('name',)
+        verbose_name_plural = "Quizzes"
