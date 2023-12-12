@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from quiz.views import quiz
+from quiz.views import home
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('quiz/', include(('quiz.urls', 'quiz'), namespace='quiz')),
     # Route main page to view quiz.views.home_view directly without namespace
-    path('', quiz, name='home')
+    path('', home, name='home')
 ]

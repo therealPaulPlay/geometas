@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 import random
 
-from .models import Fact
+from .models import Fact, Quiz
 
 
 def quiz(request, fact_id=None):
@@ -23,6 +23,11 @@ def answer(request, fact_uuid):
     return render(request, 'quiz/answer.html', context)
 
 
-
-
-# Fact with formatted notes: rec3BZ4znZPlTNyS0
+def home(request):
+    quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
+    quizzes_by_country = Quiz.objects.filter(category__isnull=True)
+    context = {
+        'quizzes_by_meta': quizzes_by_meta,
+        'quizzes_by_country': quizzes_by_country
+    }
+    return render(request, 'quiz/home.html', context)
