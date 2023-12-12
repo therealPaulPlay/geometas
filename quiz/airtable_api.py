@@ -1,7 +1,9 @@
 from django.conf import settings
+from django.utils import timezone
 from pyairtable import Api
 import requests
 import boto3
+import datetime
 import os
 import logging
 log = logging.getLogger(__name__)
@@ -26,6 +28,10 @@ def import_all_facts_into_db():
     facts = table.all()
     deserialized_facts = []
     for fact in facts:
+        needs_update = check_if_fact_needs_update(fact)
+        if not needs_update:
+            log.info(f"Fact '{fact['id']}' does not need update")
+            continue
         deserialize_fact(fact)
         deserialized_facts.append(deserialize_fact(fact))
     # Create Fact object for each deserialized fact
@@ -54,6 +60,26 @@ def import_all_facts_into_db():
             db_fact.save()
 
         log.info(f"Fact '{db_fact.airtable_id}' saved")
+
+
+def check_if_fact_needs_update(fact_response):
+    """ 
+    Check last updated time of fact in airtable and database 
+    Airtable field: 'Last updated': '2023-12-10T10:35:53.000Z'
+    Database: Face.updated_at
+    """
+    airtable_updated_at = fact_response['fields']['Last updated']
+    airtable_updated_at = datetime.datetime.strptime(airtable_updated_at, '%Y-%m-%dT%H:%M:%S.%fZ')
+    # Handle timezone 
+    airtable_updated_at = timezone.make_aware(airtable_updated_at)
+    db_fact = Fact.objects.filter(airtable_id=fact_response['id']).first()
+    if db_fact:
+        if db_fact.updated_at < airtable_updated_at:
+            return True
+        else:
+            return False
+    else:
+        return True
         
 
 def deserialize_fact(fact_response):
