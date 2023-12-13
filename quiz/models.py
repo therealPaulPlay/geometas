@@ -82,7 +82,7 @@ class Fact(models.Model):
 class Quiz(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
-    countries = models.ManyToManyField(Country, related_name='quizzes', null=True, blank=True)
+    countries = models.ManyToManyField(Country, related_name='quizzes', blank=True)
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
