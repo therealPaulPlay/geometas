@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'quiz.apps.QuizConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -208,6 +209,11 @@ AWS_S3_IMAGE_STORAGE_BUCKET_NAME = 'geobin-images'
 AWS_S3_BASE_URL = "https://geobin-images.s3.eu-west-3.amazonaws.com/"
 AWS_ACCESS_KEY_ID = "AKIA2PKVSGWSYXZZBWHI"
 AWS_SECRET_ACCESS_KEY = "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"
+
+# Auth0
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
+AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
 
 if DEBUG:
     from .settings_local import *
