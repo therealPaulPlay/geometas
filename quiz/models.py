@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+import logging
+log = logging.getLogger(__name__)
 
 
 CATEGORY_CHOICES = [
@@ -93,3 +95,68 @@ class Quiz(models.Model):
     class Meta:
         unique_together = ('name',)
         verbose_name_plural = "Quizzes"
+
+
+class QuizSession(models.Model):
+    SESSION_STATES = [
+        ("in_progress", "In Progress"),
+        ("finished", "Finished"),
+        ("cancelled", "Cancelled"),
+    ]
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    state = models.CharField(max_length=100, choices=SESSION_STATES, default="in_progress")
+
+    class Meta:
+        unique_together = ('user', 'state')
+        verbose_name_plural = "Quiz Sessions"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.quiz.name}"
+    
+    def load_facts(self):
+        facts = Fact.objects.all()
+        if self.quiz.category:
+            facts = facts.filter(category=self.quiz.category)
+        if self.quiz.countries and self.quiz.countries.count() > 0:
+            facts = facts.filter(countries__in=self.quiz.countries.all())
+        # Sort facts in random order
+        facts = facts.order_by('?')
+        # Iterate over facts with index
+        for index, fact in enumerate(facts):
+            QuizSessionFact.objects.create(
+                user=self.user,
+                quiz=self.quiz,
+                quiz_session=self,
+                fact=fact,
+                sort_order=index
+            )
+        log.info(f"Loaded {facts.count()} facts for {self.quiz.name} quiz session")
+
+
+
+class QuizSessionFact(models.Model):
+    REVIEW_RESULT = [
+        ("correct", "Correct"),
+        ("false", "False"),
+        ("not_set", "Not Set"),
+    ]
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz_session = models.ForeignKey(QuizSession, on_delete=models.CASCADE)
+    fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
+    sort_order = models.IntegerField()
+    review_result = models.CharField(max_length=100, choices=REVIEW_RESULT, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.quiz_session} - {self.fact}"
+
+    class Meta:
+        unique_together = ('quiz_session', 'fact')
+        verbose_name_plural = "Quiz Session Facts"

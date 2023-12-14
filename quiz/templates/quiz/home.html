@@ -5,6 +5,16 @@
 {% block main %}
 
     <div class="">
+
+        {% if quiz_session %}
+            <h2 class="text-2xl font-bold text-slate-900">Active</h2>
+            <div class="mt-4 mb-10">
+                <a href="{% url 'quiz:quiz' quiz_session.quiz.uuid %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
+                    Continue {{quiz_session.quiz.name}}
+                </a>
+            </div>
+        {% endif %}
+
             
         <h2 class="text-2xl font-bold text-slate-900">By meta</h2>
         {% for quiz in quizzes_by_meta %}
