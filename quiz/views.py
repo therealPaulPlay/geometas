@@ -100,8 +100,10 @@ def answer(request, quiz_uuid, fact_uuid):
 
 @login_required
 def home(request):
+    # Get quizzes by category
     quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
     quizzes_by_country = Quiz.objects.filter(category__isnull=True)
+
     # Get in_progress quiz session of this user
     try:
         quiz_session = QuizSession.objects.get(
@@ -110,9 +112,14 @@ def home(request):
         )
     except QuizSession.DoesNotExist:
         quiz_session = None
+
+    # Get total fact count
+    total_fact_count = Fact.objects.all().count()
+
     context = {
         'quizzes_by_meta': quizzes_by_meta,
         'quizzes_by_country': quizzes_by_country,
-        'quiz_session': quiz_session
+        'quiz_session': quiz_session,
+        'total_fact_count': total_fact_count
     }
     return render(request, 'quiz/home.html', context)
