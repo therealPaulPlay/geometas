@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -86,15 +88,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-#if not DEBUG:
-#    import dj_database_url
-#    DATABASES = {
-#    'default': dj_database_url.config(
-#        # Feel free to alter this value to suit your needs.
-#        default='postgres://geobin_web_user:dBzuArCbMwpsahBagvH2PoHpG0tr0QRB@dpg-cllouupfb9qs7393dl80-a/geobin_web',
-#        conn_max_age=600
-#    )
-#}
+if not DEBUG:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgresql://postgres:postgres@localhost:5432/mysite',
+            conn_max_age=600
+        )
+    }
 
 
 # Password validation
