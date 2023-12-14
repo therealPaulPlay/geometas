@@ -57,7 +57,7 @@ INPUT_COUNTRIES = [
     ["Montenegro", "ME", "Europe"],
     ["Netherlands", "NL", "Europe"],
     ["New Zealand", "NZ", "Oceania"],
-    ["North Macedonia", "MK", "Europe"]
+    ["North Macedonia", "MK", "Europe"],
     ["Norway", "NO", "Europe"],
     ["Peru", "PE", "South America"],
     ["Philippines", "PH", "Asia"],
