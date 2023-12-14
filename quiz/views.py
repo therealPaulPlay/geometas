@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 import random
 
 from .models import Fact, Quiz
 
 
+@login_required
 def quiz(request, quiz_uuid):
     quiz = Quiz.objects.get(uuid=quiz_uuid)
     facts = Fact.objects.all()
@@ -15,6 +17,7 @@ def quiz(request, quiz_uuid):
     return redirect('quiz:question', quiz_uuid=quiz_uuid, fact_uuid=random_fact_id)
 
 
+@login_required
 def question(request, quiz_uuid, fact_uuid):
     fact = Fact.objects.get(uuid=fact_uuid)
     context = {
@@ -24,6 +27,7 @@ def question(request, quiz_uuid, fact_uuid):
     return render(request, 'quiz/question.html', context)
 
 
+@login_required
 def answer(request, quiz_uuid, fact_uuid):
     fact = Fact.objects.get(uuid=fact_uuid)
     context = {
@@ -33,6 +37,7 @@ def answer(request, quiz_uuid, fact_uuid):
     return render(request, 'quiz/answer.html', context)
 
 
+@login_required
 def home(request):
     quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
     quizzes_by_country = Quiz.objects.filter(category__isnull=True)

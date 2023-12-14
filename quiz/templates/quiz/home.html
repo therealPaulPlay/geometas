@@ -2,37 +2,26 @@
 
 {% block main %}
 
-<!-- Unauthenticated users -->
-{% if not user.is_authenticated %}
-
-    <a href="{% url 'login' %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-        Login or Sign Up
-    </a>
-
-<!-- Authenticated users -->
-{% else %}
-
-    <div class="max-w-2xl mx-auto">
-        <div class="mx-4 mt-10 p-10 border border-slate-400 bg-slate-100 rounded-lg">
+    <div class="">
             
-            <h2 class="text-2xl font-bold text-slate-900">By meta</h2>
-            {% for quiz in quizzes_by_meta %}
-                <div class="mt-4 ml-8">
-                    <a href="{% url 'quiz:quiz' quiz.uuid %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                        • {{quiz.name}}
-                    </a>
-                </div>
-            {% endfor %}
-            
-            <h2 class="text-2xl font-bold text-slate-900 mt-10">By country</h2>
-            {% for quiz in quizzes_by_country %}
-                <div class="mt-4 ml-8">
-                    <a href="{% url 'quiz:quiz' quiz.uuid %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                        • {{quiz.name}}
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+        <h2 class="text-2xl font-bold text-slate-900">By meta</h2>
+        {% for quiz in quizzes_by_meta %}
+            <div class="mt-4 ml-8">
+                <a href="{% url 'quiz:quiz' quiz.uuid %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
+                    • {{quiz.name}}
+                </a>
+            </div>
+        {% endfor %}
+        
+        <h2 class="text-2xl font-bold text-slate-900 mt-10">By country</h2>
+        {% for quiz in quizzes_by_country %}
+            <div class="mt-4 ml-8">
+                <a href="{% url 'quiz:quiz' quiz.uuid %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
+                    • {{quiz.name}}
+                </a>
+            </div>
+        {% endfor %}
+
     </div>
-{% endif %}
+
 {% endblock %}

@@ -188,14 +188,14 @@ LOGGING = {
 
 
 
-import sentry_sdk
-
-sentry_sdk.init(
-    dsn="https://59d08ec58b49e949cccc42c7d1ec8afd@o615967.ingest.sentry.io/4506332123234304",
-    # Set traces_sample_rate to 1.0 to capture 100% of transactions for performance monitoring.
-    traces_sample_rate=0.0,
-    # Set profiles_sample_rate to 1.0 to profile 100% of sampled transactions.
-    profiles_sample_rate=0.0,
+if not DEBUG:
+    import sentry_sdk
+    sentry_sdk.init(
+        dsn="https://59d08ec58b49e949cccc42c7d1ec8afd@o615967.ingest.sentry.io/4506332123234304",
+        # Set traces_sample_rate to 1.0 to capture 100% of transactions for performance monitoring.
+        traces_sample_rate=0.0,
+        # Set profiles_sample_rate to 1.0 to profile 100% of sampled transactions.
+        profiles_sample_rate=0.0,
 )
 
 
@@ -214,6 +214,7 @@ AWS_SECRET_ACCESS_KEY = "FAZKzPNG+eYod1xx1wQQ0CrjxNqj0cCZDB1VuRhF"
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
+LOGIN_URL = 'login'
 
 if DEBUG:
     from .settings_local import *
