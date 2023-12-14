@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="max-w-2xl">
+    <div class="">
+        
+        <p class="mt-4 text-slate-800">You're logged in as: {{ user.username }}</p>
+        <div class="pt-4">
+            <a href="{% url 'logout' %}" class="text-red-500">Logout</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

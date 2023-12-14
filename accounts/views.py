@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 
 
 """ Auth0 / Authlib config """
@@ -30,13 +30,17 @@ def accounts_login(request):
 
 
 def accounts_logout(request):
+    # Log the user out
+    logout(request)
+
+    # Clear the session
     request.session.clear()
 
     return redirect(
         f"https://{settings.AUTH0_DOMAIN}/v2/logout?"
         + urlencode(
             {
-                "returnTo": request.build_absolute_uri(reverse("home")),
+                "returnTo": request.build_absolute_uri(reverse("accounts:auth0_logout")),
                 "client_id": settings.AUTH0_CLIENT_ID,
             },
             quote_via=quote_plus,
@@ -74,4 +78,8 @@ def auto0_callback(request):
 
 
 def auto0_logout(request):
-    pass
+    return redirect(request.build_absolute_uri(reverse("home")))
+
+
+def profile(request):
+    return render(request, "accounts/profile.html")

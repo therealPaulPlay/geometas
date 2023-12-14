@@ -4,6 +4,7 @@ module.exports = {
     'templates/**/*.html',
     'quiz/**/*.html',
     'geobin/**/*.html',
+    'accounts/**/*.html',
   ],
   theme: {
     extend: {},
