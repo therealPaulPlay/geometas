@@ -78,8 +78,8 @@ def answer(request, quiz_uuid, fact_uuid):
         quiz=quiz,
         quiz_session__user=request.user,
         quiz_session__quiz=quiz,
-        fact=fact,
-        state="in_progress"
+        quiz_session__state="in_progress",
+        fact=fact
     )
     quiz_session_fact.review_result = "not_set"
     quiz_session_fact.save()
