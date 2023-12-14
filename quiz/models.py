@@ -53,8 +53,8 @@ class Country(models.Model):
 
 class Fact(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    answer = models.CharField(max_length=250)
-    image_url = models.CharField(max_length=250)
+    answer = models.CharField(max_length=1000)
+    image_url = models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     countries = models.ManyToManyField(Country, related_name='facts')
