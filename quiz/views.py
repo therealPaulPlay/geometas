@@ -19,20 +19,22 @@ def quiz(request, quiz_uuid):
 
 @login_required
 def question(request, quiz_uuid, fact_uuid):
+    quiz = Quiz.objects.get(uuid=quiz_uuid)
     fact = Fact.objects.get(uuid=fact_uuid)
     context = {
         'fact': fact,
-        'quiz_uuid': quiz_uuid
+        'quiz': quiz
     }
     return render(request, 'quiz/question.html', context)
 
 
 @login_required
 def answer(request, quiz_uuid, fact_uuid):
+    quiz = Quiz.objects.get(uuid=quiz_uuid)
     fact = Fact.objects.get(uuid=fact_uuid)
     context = {
         'fact': fact,
-        'quiz_uuid': quiz_uuid
+        'quiz': quiz
     }
     return render(request, 'quiz/answer.html', context)
 
