@@ -13,25 +13,34 @@ def quiz(request, quiz_uuid):
     quiz = Quiz.objects.get(uuid=quiz_uuid)
 
     # Get or create Quiz Session
-    quiz_session, created = QuizSession.objects.get_or_create(
-        user=request.user,
-        quiz=quiz,
-        state="in_progress"
-    )
-    if created:
-        log.info(f"Created new session {quiz_session.uuid}")
-        quiz_session.load_facts()
-
-        # Mark old in_progress sessions as cancelled
-        old_sessions = QuizSession.objects.filter(
+    try:
+        # Check if there's an existing quix of this type & user in progress
+        quiz_session = QuizSession.objects.get(
             user=request.user,
             quiz=quiz,
             state="in_progress"
-        ).exclude(uuid=quiz_session.uuid)
+        )
+    except QuizSession.DoesNotExist:
+        # Mark old in_progress sessions as cancelled
+        old_sessions = QuizSession.objects.filter(
+            user=request.user,
+            state="in_progress"
+        )
         for old_session in old_sessions:
             old_session.state = "cancelled"
             old_session.save()
             log.info(f"Cancelled old session {old_session.uuid}")
+        
+        # Create new session
+        quiz_session = QuizSession.objects.create(
+            user=request.user,
+            quiz=quiz,
+            state="in_progress"
+        )
+        log.info(f"Created new session {quiz_session.uuid}")
+        quiz_session.load_facts()
+
+        
     
     # Get first fact
     first_session_fact = QuizSessionFact.objects.filter(

@@ -111,22 +111,35 @@ class QuizSession(models.Model):
     state = models.CharField(max_length=100, choices=SESSION_STATES, default="in_progress")
 
     class Meta:
-        unique_together = ('user', 'state')
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'state'],
+                condition=models.Q(state='in_progress'),
+                name='unique_user_in_progress'
+            )
+        ]
         verbose_name_plural = "Quiz Sessions"
 
     def __str__(self):
-        return f"{self.user.username} - {self.quiz.name}"
+        return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
     
     def load_facts(self):
-        facts = Fact.objects.all()
+        # Filter applicable facts (IDs only to apply disticnt() to avoid duplicates due to many-to-many relationship)
+        fact_ids = Fact.objects.all()
         if self.quiz.category:
-            facts = facts.filter(category=self.quiz.category)
+            fact_ids = fact_ids.filter(category=self.quiz.category)
         if self.quiz.countries and self.quiz.countries.count() > 0:
-            facts = facts.filter(countries__in=self.quiz.countries.all())
-        # Sort facts in random order
-        facts = facts.order_by('?')
-        # Iterate over facts with index
-        for index, fact in enumerate(facts):
+            fact_ids = fact_ids.filter(countries__in=self.quiz.countries.all())
+        
+        # Getting distinct primary keys
+        fact_ids = fact_ids.values_list('uuid', flat=True).distinct()
+        
+        # Querying Fact objects based on the distinct ids
+        facts = Fact.objects.filter(uuid__in=fact_ids).order_by('?')
+        
+        # Iterate over facts to create QuizSessionFact objects with sort_order
+        index = 1
+        for fact in facts:
             QuizSessionFact.objects.create(
                 user=self.user,
                 quiz=self.quiz,
@@ -134,6 +147,8 @@ class QuizSession(models.Model):
                 fact=fact,
                 sort_order=index
             )
+            index += 1
+
         log.info(f"Loaded {facts.count()} facts for {self.quiz.name} quiz session")
 
 
