@@ -93,7 +93,7 @@ INPUT_COUNTRIES = [
     ["Ghana", "GH", "Africa"],
     ["Kenya", "KE", "Africa"],
     ["Senegal", "SN", "Africa"],
-    ["World", "ALL", ""],   
+    ["World", "__", ""],   
 ]
 
 
