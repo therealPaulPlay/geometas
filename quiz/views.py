@@ -91,9 +91,17 @@ def quiz(request, quiz_uuid):
 def question(request, quiz_uuid, fact_uuid):
     quiz = Quiz.objects.get(uuid=quiz_uuid)
     fact = Fact.objects.get(uuid=fact_uuid)
+    quiz_session_fact = QuizSessionFact.objects.get(
+        quiz=quiz,
+        quiz_session__user=request.user,
+        quiz_session__state="in_progress",
+        fact=fact
+    )
     context = {
         'fact': fact,
-        'quiz': quiz
+        'quiz': quiz,
+        'quiz_session_fact': quiz_session_fact,
+        'progress_pct': round(quiz_session_fact.sort_order / quiz.num_facts * 100, 0)
     }
     return render(request, 'quiz/question.html', context)
 
@@ -102,10 +110,18 @@ def question(request, quiz_uuid, fact_uuid):
 def answer(request, quiz_uuid, fact_uuid):
     quiz = Quiz.objects.get(uuid=quiz_uuid)
     fact = Fact.objects.get(uuid=fact_uuid)
+    quiz_session_fact = QuizSessionFact.objects.get(
+        quiz=quiz,
+        quiz_session__user=request.user,
+        quiz_session__state="in_progress",
+        fact=fact
+    )
 
     context = {
         'fact': fact,
-        'quiz': quiz
+        'quiz': quiz,
+        'quiz_session_fact': quiz_session_fact,
+        'progress_pct': round(quiz_session_fact.sort_order / quiz.num_facts * 100, 0)
     }
     return render(request, 'quiz/answer.html', context)
 
@@ -125,7 +141,6 @@ def rate_fact(request, quiz_uuid, fact_uuid):
     quiz_session_fact = QuizSessionFact.objects.get(
         quiz=quiz,
         quiz_session__user=request.user,
-        quiz_session__quiz=quiz,
         quiz_session__state="in_progress",
         fact=fact
     )
@@ -140,15 +155,13 @@ def rate_fact(request, quiz_uuid, fact_uuid):
 def summary(request, quiz_uuid, quiz_session_uuid):
     quiz_session = QuizSession.objects.get(uuid=quiz_session_uuid)
     # Calculate the total number of quizsessionfacts, how many are correct and how many are false
-    total_fact_count = quiz_session.quizsessionfacts.count()
+    total_fact_count = quiz_session.quiz.num_facts
     correct_fact_count = quiz_session.quizsessionfacts.filter(review_result="correct").count() or 0
-    false_fact_count = total_fact_count - correct_fact_count
     correct_percentage = round(correct_fact_count / total_fact_count * 100, 0)
     context = {
         'session': quiz_session,
         'total_fact_count': total_fact_count,
         'correct_fact_count': correct_fact_count,
-        'false_fact_count': false_fact_count,
         'correct_percentage': correct_percentage
     }
     return render(request, 'quiz/summary.html', context)

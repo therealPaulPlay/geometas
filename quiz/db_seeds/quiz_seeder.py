@@ -46,4 +46,8 @@ def create_initial_quizzes():
         quiz_db.countries.set(countries)
 
         log.info(f"Quiz {quiz_name} updated")
+    
+    # Compute and set the number of facts for each quiz
+    for quiz in Quiz.objects.all():
+        quiz.update_num_facts()
         
