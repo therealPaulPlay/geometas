@@ -7,6 +7,34 @@ log = logging.getLogger(__name__)
 from .models import Fact, Quiz, QuizSession, QuizSessionFact
 
 
+
+@login_required
+def home(request):
+    # Get quizzes by category
+    quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
+    quizzes_by_country = Quiz.objects.filter(category__isnull=True)
+
+    # Get in_progress quiz session of this user
+    try:
+        quiz_session = QuizSession.objects.get(
+            user=request.user,
+            state="in_progress"
+        )
+    except QuizSession.DoesNotExist:
+        quiz_session = None
+
+    # Get total fact count
+    total_fact_count = Fact.objects.all().count()
+
+    context = {
+        'quizzes_by_meta': quizzes_by_meta,
+        'quizzes_by_country': quizzes_by_country,
+        'quiz_session': quiz_session,
+        'total_fact_count': total_fact_count
+    }
+    return render(request, 'quiz/home.html', context)
+
+
 @login_required
 def quiz(request, quiz_uuid):
     # Retrieve Quiz
@@ -50,9 +78,11 @@ def quiz(request, quiz_uuid):
         review_result__isnull=True
     ).order_by('sort_order').first()
 
-    # Redirect to home if no facts left
+    # Redirect to summary page if no facts left
     if not first_session_fact:
-        raise Exception("No facts left")
+        quiz_session.state = "finished"
+        quiz_session.save()
+        return redirect('quiz:summary', quiz_uuid=quiz.uuid, quiz_session_uuid=quiz_session.uuid)
     
     return redirect('quiz:question', quiz_uuid=quiz_uuid, fact_uuid=first_session_fact.fact.uuid)
 
@@ -73,6 +103,24 @@ def answer(request, quiz_uuid, fact_uuid):
     quiz = Quiz.objects.get(uuid=quiz_uuid)
     fact = Fact.objects.get(uuid=fact_uuid)
 
+    context = {
+        'fact': fact,
+        'quiz': quiz
+    }
+    return render(request, 'quiz/answer.html', context)
+
+
+@login_required
+def rate_fact(request, quiz_uuid, fact_uuid):
+    quiz = Quiz.objects.get(uuid=quiz_uuid)
+    fact = Fact.objects.get(uuid=fact_uuid)
+
+    # Get rating from URL param
+    # Should be 'correct' or 'false'
+    rating = request.GET.get('r', None)
+    if rating not in ['correct', 'false']:
+        raise Exception("Invalid rating")
+
     # Get this Quiz Session Fact and set review result
     quiz_session_fact = QuizSessionFact.objects.get(
         quiz=quiz,
@@ -81,55 +129,26 @@ def answer(request, quiz_uuid, fact_uuid):
         quiz_session__state="in_progress",
         fact=fact
     )
-    quiz_session_fact.review_result = "not_set"
+    quiz_session_fact.review_result = rating
     quiz_session_fact.save()
 
-    # Check if this is the last fact in the quiz session
-    quiz_session = QuizSession.objects.get(
-        user=request.user,
-        quiz=quiz,
-        state="in_progress"
-    )
-    quiz_session_fact = QuizSessionFact.objects.filter(
-        quiz=quiz,
-        quiz_session=quiz_session,
-        user=request.user,
-        review_result__isnull=True
-    )
-    if quiz_session_fact.count() == 1:
-        quiz_session.state = "finished"
-        quiz_session.save()
-
-    context = {
-        'fact': fact,
-        'quiz': quiz,
-        'quiz_finished': (quiz_session.state == "finished")
-    }
-    return render(request, 'quiz/answer.html', context)
+    # Redirect to quiz 
+    return redirect('quiz:quiz', quiz_uuid=quiz_uuid)
 
 
 @login_required
-def home(request):
-    # Get quizzes by category
-    quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
-    quizzes_by_country = Quiz.objects.filter(category__isnull=True)
-
-    # Get in_progress quiz session of this user
-    try:
-        quiz_session = QuizSession.objects.get(
-            user=request.user,
-            state="in_progress"
-        )
-    except QuizSession.DoesNotExist:
-        quiz_session = None
-
-    # Get total fact count
-    total_fact_count = Fact.objects.all().count()
-
+def summary(request, quiz_uuid, quiz_session_uuid):
+    quiz_session = QuizSession.objects.get(uuid=quiz_session_uuid)
+    # Calculate the total number of quizsessionfacts, how many are correct and how many are false
+    total_fact_count = quiz_session.quizsessionfacts.count()
+    correct_fact_count = quiz_session.quizsessionfacts.filter(review_result="correct").count() or 0
+    false_fact_count = total_fact_count - correct_fact_count
+    correct_percentage = round(correct_fact_count / total_fact_count * 100, 0)
     context = {
-        'quizzes_by_meta': quizzes_by_meta,
-        'quizzes_by_country': quizzes_by_country,
-        'quiz_session': quiz_session,
-        'total_fact_count': total_fact_count
+        'session': quiz_session,
+        'total_fact_count': total_fact_count,
+        'correct_fact_count': correct_fact_count,
+        'false_fact_count': false_fact_count,
+        'correct_percentage': correct_percentage
     }
-    return render(request, 'quiz/home.html', context)
+    return render(request, 'quiz/summary.html', context)

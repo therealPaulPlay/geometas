@@ -165,7 +165,7 @@ class QuizSessionFact(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
-    quiz_session = models.ForeignKey(QuizSession, on_delete=models.CASCADE)
+    quiz_session = models.ForeignKey(QuizSession, on_delete=models.CASCADE, related_name='quizsessionfacts')
     fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
     sort_order = models.IntegerField()
     review_result = models.CharField(max_length=100, choices=REVIEW_RESULT, null=True, blank=True)
