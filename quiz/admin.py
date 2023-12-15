@@ -25,6 +25,7 @@ class QuizAdmin(admin.ModelAdmin):
 
     def get_countries_names(self, obj):
         return ", ".join([country.name for country in obj.countries.all()])
+    get_countries_names.short_description = 'Countries'
     
 
 class QuizSessionAdmin(admin.ModelAdmin):
