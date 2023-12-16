@@ -7,8 +7,6 @@ log = logging.getLogger(__name__)
 from .models import Fact, Quiz, QuizSession, QuizSessionFact
 
 
-
-@login_required
 def quiz_index(request):
     # Get quizzes by category
     quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
@@ -17,7 +15,7 @@ def quiz_index(request):
     # Get in_progress quiz session of this user
     try:
         quiz_session = QuizSession.objects.get(
-            user=request.user,
+            user_id=request.user.id,
             state="in_progress"
         )
     except QuizSession.DoesNotExist:

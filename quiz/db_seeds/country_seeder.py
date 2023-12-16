@@ -1,4 +1,5 @@
 from quiz.models import Country
+from quiz.helpers import convert_string_to_snakecase
 
 import logging
 log = logging.getLogger(__name__)
@@ -109,16 +110,20 @@ def update_countries():
     for input_country in INPUT_COUNTRIES:
         country_db = Country.objects.filter(name=input_country[0]).first()
         if country_db:
+            country_db.slug = convert_string_to_snakecase(input_country[0])
             country_db.iso2 = input_country[1]
             country_db.continent = input_country[2]
             country_db.region = input_country[3]
+            country_db.region_slug = convert_string_to_snakecase(input_country[3])
             country_db.save()
         else:
             Country.objects.create(
                 name=input_country[0],
                 iso2=input_country[1],
                 continent=input_country[2],
-                region=input_country[3]
+                region=input_country[3],
+                slug=convert_string_to_snakecase(input_country[0]),
+                region_slug=convert_string_to_snakecase(input_country[3])
             )
         log.info(f"Country {input_country[0]} updated")
         
