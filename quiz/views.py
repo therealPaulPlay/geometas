@@ -9,7 +9,7 @@ from .models import Fact, Quiz, QuizSession, QuizSessionFact
 
 
 @login_required
-def home(request):
+def quiz_index(request):
     # Get quizzes by category
     quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
     quizzes_by_country = Quiz.objects.filter(category__isnull=True)
@@ -32,7 +32,7 @@ def home(request):
         'quiz_session': quiz_session,
         'total_fact_count': total_fact_count
     }
-    return render(request, 'quiz/home.html', context)
+    return render(request, 'quiz/quiz_index.html', context)
 
 
 @login_required
