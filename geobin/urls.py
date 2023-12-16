@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 
-from quiz.views import quiz_index
+from cms.views import home
 from accounts.views import accounts_login, accounts_logout
 
 
@@ -11,5 +11,5 @@ urlpatterns = [
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('login/', accounts_login, name='login'),
     path('logout/', accounts_logout, name='logout'),
-    path('', quiz_index, name='home')
+    path('', home, name='home')
 ]
