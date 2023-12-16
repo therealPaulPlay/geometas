@@ -20,7 +20,7 @@ CATEGORY_CHOICES = [
     ("poles", "Poles"),
     ("other", "Other"),
     ("cars", "Cars"),
-    ("pedestrian_crossign_sign", "Pedestrian Crossign Sign"),
+    ("pedestrian_crossign_sign", "Pedestrian Crossing Sign"),
     ("buildings", "Buildings"),
     ("flora", "Flora"),
 ]
@@ -36,9 +36,11 @@ QUESTION_TYPE_CHOICES = [
 
 class Country(models.Model):
     name = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250)
     iso2 = models.CharField(max_length=2)
     continent = models.CharField(max_length=200)
     region = models.CharField(max_length=200, null=True, blank=True)
+    region_slug = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -89,7 +91,7 @@ class Quiz(models.Model):
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    num_facts = models.IntegerField()
+    num_facts = models.IntegerField(null=True, blank=True)
 
     class Meta:
         unique_together = ('name',)
@@ -99,12 +101,18 @@ class Quiz(models.Model):
         return self.name[:50] + (self.name[50:] and '...')
 
     def get_facts(self):
+        # Retrieve all facts, will have dupes due to M2M relationship
         facts = Fact.objects.all()
         if self.category:
             facts = facts.filter(category=self.category)
         if self.countries and self.countries.count() > 0:
             facts = facts.filter(countries__in=self.countries.all())
-        return facts
+        
+        # Getting distinct primary keys
+        fact_ids = facts.values_list('uuid', flat=True).distinct()
+        
+        # Querying Fact objects based on the distinct ids
+        return Fact.objects.filter(uuid__in=fact_ids).order_by('?')
     
     def update_num_facts(self):
         self.num_facts = self.get_facts().count()
@@ -139,13 +147,8 @@ class QuizSession(models.Model):
         return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
     
     def load_facts(self):
+        # Get facts
         facts = self.quiz.get_facts()
-        
-        # Getting distinct primary keys
-        fact_ids = facts.values_list('uuid', flat=True).distinct()
-        
-        # Querying Fact objects based on the distinct ids
-        facts = Fact.objects.filter(uuid__in=fact_ids).order_by('?')
         
         # Iterate over facts to create QuizSessionFact objects with sort_order
         index = 1
