@@ -20,7 +20,6 @@ INPUT_COUNTRIES = [
     ["Bermuda", "BM", "North America", "North America"],
     ["Bhutan", "BT", "Asia", "South & South-East Asia"],
     ["Brazil", "BR", "South America", "Latin America"],
-    ["Bolivia", "BO", "South America", "Latin America"],
     ["Botswana", "BW", "Africa", "Africa"],
     ["Bulgaria", "BG", "Europe", "Eastern Europe"],
     ["Cambodia", "KH", "Asia", "South & South-East Asia"],
@@ -96,7 +95,7 @@ INPUT_COUNTRIES = [
     ["Ukraine", "UA", "Europe", "Eastern Europe"],
     ["U.S. Virgin Islands", "VI", "North America", "Latin America"],
     ["United Arab Emirates (UAE)", "AE", "Asia", "Middle East"],
-    ["United Kingdom", "GB", "Europe", "Western Europe"],
+    ["United Kingdom (UK)", "GB", "Europe", "Western Europe"],
     ["United States of America (USA)", "US", "North America", "North America"],
     ["Uruguay", "UY", "South America", "Latin America"],
     ["Vatican City", "VA", "Europe", "Western Europe"],
@@ -129,4 +128,12 @@ def update_countries():
                 region_slug=convert_string_to_snakecase(input_country[3])
             )
         log.info(f"Country {input_country[0]} updated")
+    
+    # Run through DB countries to see if we need to delete any
+    input_country_names = [input_country[0] for input_country in INPUT_COUNTRIES]
+    db_countries = Country.objects.all()
+    for db_country in db_countries:
+        if db_country.name not in input_country_names:
+            db_country.delete()
+            log.info(f"Country {db_country.name} deleted")
         
