@@ -60,6 +60,16 @@ def import_all_facts_into_db():
             db_fact.save()
 
         log.info(f"Fact '{db_fact.airtable_id}' saved")
+    
+    # Check if facts have been deleted
+    db_facts = Fact.objects.all()
+    db_fact_ids = [db_fact.airtable_id for db_fact in db_facts]
+    airtable_fact_ids = [fact['id'] for fact in facts]
+    deleted_fact_ids = set(db_fact_ids) - set(airtable_fact_ids)
+    for deleted_fact_id in deleted_fact_ids:
+        log.info(f"Fact '{deleted_fact_id}' deleted")
+        Fact.objects.filter(airtable_id=deleted_fact_id).delete()
+
 
 
 def check_if_fact_needs_update(fact_response):
