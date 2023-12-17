@@ -102,8 +102,7 @@ INPUT_COUNTRIES = [
     ["Vietnam", "VN", "Asia", "South & South-East Asia"],
     ["Ghana", "GH", "Africa", "Africa"],
     ["Kenya", "KE", "Africa", "Africa"],
-    ["Senegal", "SN", "Africa", "Africa"],
-    ["World", "__", "", ""]
+    ["Senegal", "SN", "Africa", "Africa"]
 ]
 
 
