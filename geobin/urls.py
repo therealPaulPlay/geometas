@@ -1,8 +1,17 @@
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap as django_sitemap_view
 from django.urls import include, path
 
 from cms.views import home
+import cms.sitemaps
 from accounts.views import accounts_login, accounts_logout
+
+SITEMAPS_DICT = {
+    'static': cms.sitemaps.StaticViewSitemap,
+    'country': cms.sitemaps.CountryMetasSitemap,
+    'region': cms.sitemaps.RegionMetasSitemap,
+    'category': cms.sitemaps.CategoryMetasSitemap,
+}
 
 
 urlpatterns = [
@@ -12,5 +21,6 @@ urlpatterns = [
     path('metas/', include(('cms.urls', 'cms'), namespace='cms')),
     path('login/', accounts_login, name='login'),
     path('logout/', accounts_logout, name='logout'),
+    path('sitemap.xml', django_sitemap_view, {'sitemaps': SITEMAPS_DICT}, name='django.contrib.sitemaps.views.sitemap'),
     path('', home, name='home')
 ]
