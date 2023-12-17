@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap as django_sitemap_view
 from django.urls import include, path
 
-from cms.views import home
+from cms.views import metas_index
 import cms.sitemaps
 from accounts.views import accounts_login, accounts_logout
 
@@ -22,5 +22,5 @@ urlpatterns = [
     path('login/', accounts_login, name='login'),
     path('logout/', accounts_logout, name='logout'),
     path('sitemap.xml', django_sitemap_view, {'sitemaps': SITEMAPS_DICT}, name='django.contrib.sitemaps.views.sitemap'),
-    path('', home, name='home')
+    path('', metas_index, name='metas_index')
 ]

@@ -7,32 +7,6 @@ log = logging.getLogger(__name__)
 from .models import Fact, Quiz, QuizSession, QuizSessionFact
 
 
-def quiz_index(request):
-    # Get quizzes by category
-    quizzes_by_meta = Quiz.objects.filter(category__isnull=False)
-    quizzes_by_country = Quiz.objects.filter(category__isnull=True)
-
-    # Get in_progress quiz session of this user
-    try:
-        quiz_session = QuizSession.objects.get(
-            user_id=request.user.id,
-            state="in_progress"
-        )
-    except QuizSession.DoesNotExist:
-        quiz_session = None
-
-    # Get total fact count
-    total_fact_count = Fact.objects.all().count()
-
-    context = {
-        'quizzes_by_meta': quizzes_by_meta,
-        'quizzes_by_country': quizzes_by_country,
-        'quiz_session': quiz_session,
-        'total_fact_count': total_fact_count
-    }
-    return render(request, 'quiz/quiz_index.html', context)
-
-
 @login_required
 def quiz(request, quiz_uuid):
     # Retrieve Quiz
@@ -99,7 +73,7 @@ def question(request, quiz_uuid, fact_uuid):
         'fact': fact,
         'quiz': quiz,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round(quiz_session_fact.sort_order / quiz.num_facts * 100, 0)
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts * 100, 0)
     }
     return render(request, 'quiz/question.html', context)
 
@@ -119,7 +93,7 @@ def answer(request, quiz_uuid, fact_uuid):
         'fact': fact,
         'quiz': quiz,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round(quiz_session_fact.sort_order / quiz.num_facts * 100, 0)
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts * 100, 0)
     }
     return render(request, 'quiz/answer.html', context)
 

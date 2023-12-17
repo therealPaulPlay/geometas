@@ -13,9 +13,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
 
     def items(self):
         return [
-                'home',
-                'cms:metas_index',
-                'quiz:quiz_index',
+                'metas_index',
                ]
 
     def location(self, item):

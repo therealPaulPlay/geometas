@@ -74,11 +74,11 @@ def auto0_callback(request):
     # Log the user in
     login(request, user)
 
-    return redirect(request.build_absolute_uri(reverse("quiz:quiz_index")))
+    return redirect(request.build_absolute_uri(reverse("metas_index")))
 
 
 def auto0_logout(request):
-    return redirect(request.build_absolute_uri(reverse("quiz:quiz_index")))
+    return redirect(request.build_absolute_uri(reverse("metas_index")))
 
 
 def profile(request):
