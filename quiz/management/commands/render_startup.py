@@ -18,8 +18,8 @@ class Command(BaseCommand):
         import_all_facts_into_db()
 
         # Load quizzes
-        from quiz.db_seeds.quiz_seeder import create_initial_quizzes
-        create_initial_quizzes()
+        from quiz.db_seeds.quiz_seeder import update_quizzes
+        update_quizzes()
 
         # Create a new superuser
         from django.contrib.auth.models import User

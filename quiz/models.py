@@ -64,7 +64,18 @@ class Country(models.Model):
     class Meta:
         unique_together = ('name', 'iso2')
         verbose_name_plural = "Countries"
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
     
+    class Meta:
+        verbose_name_plural = "Categories"
+
 
 class Fact(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -73,7 +84,7 @@ class Fact(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     countries = models.ManyToManyField(Country, related_name='facts')
-    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='facts', null=True)
     difficulty = models.IntegerField()
     question_type = models.CharField(max_length=100, choices=QUESTION_TYPE_CHOICES)
     notes = models.CharField(max_length=1000, null=True, blank=True)
@@ -98,7 +109,7 @@ class Quiz(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     countries = models.ManyToManyField(Country, related_name='quizzes', blank=True)
-    category = models.CharField(max_length=100, choices=CATEGORY_CHOICES, null=True, blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='quizzes', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     num_facts = models.IntegerField(null=True, blank=True)

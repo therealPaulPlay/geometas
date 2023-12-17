@@ -13,8 +13,8 @@
                 <h2 class="text-2xl font-bold text-slate-900">Categories</h2>
                 <div class="grid grid-cols-2 gap-2 sm:gap-3 mt-4">
                     {% for category in categories %}
-                        <a href="{% url 'cms:category' category.0 %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                            {{category.1}}
+                        <a href="{% url 'cms:category' category.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
+                            {{category.name}}
                         </a>
                     {% endfor %}
                 </div>

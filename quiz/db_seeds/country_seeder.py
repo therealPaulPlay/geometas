@@ -4,10 +4,6 @@ from quiz.helpers import convert_string_to_snakecase
 import logging
 log = logging.getLogger(__name__)
 
-"""
-from quiz.country_seeder import update_countries
-update_countries()
-"""
 
 INPUT_REGIONS = [
     "Western Europe",

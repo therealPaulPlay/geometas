@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block html_title %}Quizzes - Geometas{% endblock %}
+{% block html_title %}{{ session.quiz.name }} - Summary - Geometas{% endblock %}
 
-{% block title_main %}{{ quiz.name }} - Summary{% endblock %}
+{% block title_main %}{{ session.quiz.name }} - Summary{% endblock %}
 
 {% block main %}
 

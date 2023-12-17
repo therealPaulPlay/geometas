@@ -8,7 +8,7 @@ import os
 import logging
 log = logging.getLogger(__name__)
 
-from quiz.models import Country, Fact
+from quiz.models import Country, Fact, Category
 
 
 """
@@ -40,7 +40,7 @@ def import_all_facts_into_db():
         if not db_fact:
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
-        db_fact.category = deserialized_fact['category'].lower().replace(" ", "_")
+        db_fact.category = Category.objects.filter(name=deserialized_fact['category']).first()
         db_fact.question_type = deserialized_fact['question_type']
         db_fact.difficulty = deserialized_fact['difficulty']
         db_fact.notes = deserialized_fact['notes']
@@ -48,8 +48,8 @@ def import_all_facts_into_db():
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
         image_name = f"{db_fact.uuid}.jpg"
-        move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
-        db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
+        #move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
+        #db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
         # Get all countries and add to db_fact.countries
         for country_name in deserialized_fact['countries']:
             country = Country.objects.filter(name=country_name).first()
@@ -78,6 +78,7 @@ def check_if_fact_needs_update(fact_response):
     Airtable field: 'Last updated': '2023-12-10T10:35:53.000Z'
     Database: Face.updated_at
     """
+    return True
     airtable_updated_at = fact_response['fields']['Last updated']
     airtable_updated_at = datetime.datetime.strptime(airtable_updated_at, '%Y-%m-%dT%H:%M:%S.%fZ')
     # Handle timezone 

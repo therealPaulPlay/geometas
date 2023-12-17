@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from quiz.models import Country, Fact, Region, CATEGORY_CHOICES
+from quiz.models import Country, Fact, Region, Category
 
 
 def home(request):
@@ -9,7 +9,7 @@ def home(request):
 def metas_index(request):
     context = {
         'countries': Country.objects.all().order_by('name'),
-        'categories': CATEGORY_CHOICES,
+        'categories': Category.objects.all().order_by('name'),
         'regions': Region.objects.all().order_by('name'),
     }
     return render(request, 'cms/metas_index.html', context)
@@ -40,10 +40,10 @@ def region(request, region_slug):
     return render(request, 'cms/region.html', context)
 
 def category(request, category_slug):
-    facts = Fact.objects.filter(category=category_slug)
-    category_name = dict(CATEGORY_CHOICES)[category_slug]
+    category = Category.objects.get(slug=category_slug)
+    facts = Fact.objects.filter(category=category)
     context = {
-        'category': category_name,
+        'category': category.name,
         'facts': facts
     }
     return render(request, 'cms/category.html', context)

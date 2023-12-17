@@ -8,8 +8,8 @@ class CountryAdmin(admin.ModelAdmin):
 
 
 class FactAdmin(admin.ModelAdmin):
-    list_display = ('get_str', 'get_countries_names', 'category', 'question_type')
-    list_filter = ('category', 'question_type', 'countries')
+    list_display = ('get_str', 'get_countries_names', 'question_type') # 'category',
+    list_filter = ( 'question_type', 'countries') # 'category',
 
     def get_str(self, obj):
         return obj.__str__()
@@ -20,8 +20,8 @@ class FactAdmin(admin.ModelAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-    list_display = ('name', 'get_countries_names', 'category', )
-    list_filter = ('category', 'countries')
+    list_display = ('name', 'get_countries_names', ) #  'category', 
+    list_filter = ('countries',) #'category', 
 
     def get_countries_names(self, obj):
         return ", ".join([country.name for country in obj.countries.all()])

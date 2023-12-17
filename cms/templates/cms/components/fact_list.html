@@ -6,7 +6,7 @@
                     <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
                 </div>
                 <div class="col-span-2">
-                    <span class="bg-sky-500 text-white rounded-lg px-2 py-1 font-medium text-xs">{{ fact.get_category_display }}</span>
+                    <span class="bg-sky-500 text-white rounded-lg px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
                     <div class="my-auto mt-2">{{ fact.answer }}</div>
                 </div>
             </div>
