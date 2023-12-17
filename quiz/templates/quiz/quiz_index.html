@@ -28,7 +28,7 @@
             {% endfor %}
         </div>
         
-        <h2 class="text-2xl font-bold text-slate-900 mt-10">By country</h2>
+        <h2 class="text-2xl font-bold text-slate-900 mt-10">By region</h2>
         <div class="grid grid-cols-2 gap-4 mt-4">
             {% for quiz in quizzes_by_country %}
                 <a href="{% url 'quiz:quiz' quiz.uuid %}" class="text-base font-normal text-sky-600 hover:text-sky-700">

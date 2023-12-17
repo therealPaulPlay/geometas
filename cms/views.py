@@ -34,7 +34,7 @@ def region(request, region_slug):
     # Dedupe facts
     facts = list(set(facts))
     context = {
-        'region': countries[0].region,
+        'region': countries[0].region.name,
         'facts': facts
     }
     return render(request, 'cms/region.html', context)

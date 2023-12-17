@@ -1,4 +1,4 @@
-from quiz.models import Country
+from quiz.models import Country, Region
 from quiz.helpers import convert_string_to_snakecase
 
 import logging
@@ -8,6 +8,20 @@ log = logging.getLogger(__name__)
 from quiz.country_seeder import update_countries
 update_countries()
 """
+
+INPUT_REGIONS = [
+    "Western Europe",
+    "Eastern Europe", 
+    "Baltics",
+    "Nordics",
+    "North America",
+    "Latin America", 
+    "South & South-East Asia",
+    "Middle East",
+    "Rest of Asia",
+    "Oceania", 
+    "Africa",
+]
 
 INPUT_COUNTRIES = [
     ["Albania", "AL", "Europe", "Eastern Europe"],
@@ -106,33 +120,57 @@ INPUT_COUNTRIES = [
 ]
 
 
+def update_regions():
+    # Create Regions
+    for input_region in INPUT_REGIONS:
+        region_db = Region.objects.filter(name=input_region).first()
+        if region_db:
+            region_db.slug = convert_string_to_snakecase(input_region)
+            region_db.save()
+        else:
+            Region.objects.create(
+                name=input_region,
+                slug=convert_string_to_snakecase(input_region)
+            )
+        log.info(f"Region {input_region} updated")
+    
+    # Delete Regions
+    db_regions = Region.objects.all()
+    for db_region in db_regions:
+        if db_region.name not in INPUT_REGIONS:
+            db_region.delete()
+            log.info(f"Region {db_region.name} deleted")
+
+
 
 def update_countries():
+    # Create regions
+    update_regions()
+
+    # Create Countrys
     for input_country in INPUT_COUNTRIES:
         country_db = Country.objects.filter(name=input_country[0]).first()
         if country_db:
             country_db.slug = convert_string_to_snakecase(input_country[0])
             country_db.iso2 = input_country[1]
             country_db.continent = input_country[2]
-            country_db.region = input_country[3]
-            country_db.region_slug = convert_string_to_snakecase(input_country[3])
+            country_db.region = Region.objects.get(name=input_country[3])
             country_db.save()
         else:
             Country.objects.create(
                 name=input_country[0],
                 iso2=input_country[1],
                 continent=input_country[2],
-                region=input_country[3],
+                region=Region.objects.get(name=input_country[3]),
                 slug=convert_string_to_snakecase(input_country[0]),
                 region_slug=convert_string_to_snakecase(input_country[3])
             )
         log.info(f"Country {input_country[0]} updated")
     
-    # Run through DB countries to see if we need to delete any
+    # Delete Countries
     input_country_names = [input_country[0] for input_country in INPUT_COUNTRIES]
     db_countries = Country.objects.all()
     for db_country in db_countries:
         if db_country.name not in input_country_names:
             db_country.delete()
             log.info(f"Country {db_country.name} deleted")
-        

@@ -34,13 +34,23 @@ QUESTION_TYPE_CHOICES = [
 ]
 
 
+class Region(models.Model):
+    name = models.CharField(max_length=250)
+    slug = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name_plural = "Regions"
+
+
 class Country(models.Model):
     name = models.CharField(max_length=250)
     slug = models.CharField(max_length=250)
     iso2 = models.CharField(max_length=2)
     continent = models.CharField(max_length=200)
-    region = models.CharField(max_length=200, null=True, blank=True)
-    region_slug = models.CharField(max_length=200, null=True, blank=True)
+    region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='countries', null=True)
 
     def __str__(self):
         return self.name
