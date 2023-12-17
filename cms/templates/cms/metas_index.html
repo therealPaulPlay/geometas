@@ -24,8 +24,8 @@
                 <h2 class="text-2xl font-bold text-slate-900">Regions</h2>
                 <div class="grid grid-cols-2 gap-2 sm:gap-3 mt-4">
                     {% for region in regions %}
-                        <a href="{% url 'cms:region' region.1 %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                            {{region.0}}
+                        <a href="{% url 'cms:region' region.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
+                            {{region.name}}
                         </a>
                     {% endfor %}
                 </div>
