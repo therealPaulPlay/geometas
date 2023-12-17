@@ -8,9 +8,9 @@ def home(request):
 
 def metas_index(request):
     context = {
-        'countries': Country.objects.filter(slug__isnull=False).exclude(slug='').order_by('name'),
+        'countries': Country.objects.all().order_by('name'),
         'categories': CATEGORY_CHOICES,
-        'regions': Country.objects.filter(region__isnull=False).exclude(region='').values_list('region', 'region_slug').distinct(),
+        'regions': Country.objects.all().values_list('region', 'region_slug').distinct(),
     }
     return render(request, 'cms/metas_index.html', context)
 

@@ -30,7 +30,7 @@ def create_initial_quizzes():
     # Create one quiz for each Country region 
     
     # Get distinct regions from Country objects that are not empty strings
-    regions = Country.objects.exclude(region="").exclude(region=None).values_list('region', flat=True).distinct()
+    regions = Country.objects.all().values_list('region', flat=True).distinct()
     
     for region in regions:
         # Region name is quiz name, already in title case

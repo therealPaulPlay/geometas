@@ -42,7 +42,7 @@ class RegionMetasSitemap(sitemaps.Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return Country.objects.filter(region__isnull=False).exclude(region='').values_list('region_slug', flat=True).distinct()
+        return Country.objects.all().values_list('region_slug', flat=True).distinct()
 
     def location(self, item):
         return reverse('cms:region', args=[item])
