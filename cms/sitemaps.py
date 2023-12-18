@@ -1,7 +1,7 @@
 from django.contrib import sitemaps
 from django.urls import reverse
 
-from quiz.models import Country, Fact, CATEGORY_CHOICES
+from quiz.models import Country, Category, Region
 
 ###########################################################
 # Static pages
@@ -40,7 +40,7 @@ class RegionMetasSitemap(sitemaps.Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return Country.objects.all().values_list('region_slug', flat=True).distinct()
+        return Region.objects.all().values_list('slug', flat=True)
 
     def location(self, item):
         return reverse('cms:region', args=[item])
@@ -51,7 +51,7 @@ class CategoryMetasSitemap(sitemaps.Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return [category[0] for category in CATEGORY_CHOICES]
+        return Category.objects.all().values_list('slug', flat=True)
 
     def location(self, item):
         return reverse('cms:category', args=[item])
