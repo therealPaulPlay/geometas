@@ -25,7 +25,7 @@ class Command(BaseCommand):
         )
 
         print("********** COMPLETION **********")
-        print(completion.choices[0].message)
+        print(completion.choices[0].message.content)
         print("**********    INFO    **********")
         print("prompt_tokens: %s" % completion.usage.prompt_tokens)
         print("completion_tokens: %s" % completion.usage.completion_tokens)
