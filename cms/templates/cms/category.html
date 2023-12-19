@@ -1,11 +1,15 @@
 {% extends "base.html" %}
 
-{% block html_title %}{{ category }} Metas - Geometas{% endblock %}
-{% block title_main %}{{ category }} Metas{% endblock %}
+{% block html_title %}{{ category.name }} Metas - Geometas{% endblock %}
+{% block title_main %}{{ category.name }} Metas{% endblock %}
 
 {% block main %}
 
     <div class="">
+
+        <div class="text-slate-800">
+            {{ category.description  }}
+        </div>
 
         {% include 'cms/components/fact_list.html'  %}
 

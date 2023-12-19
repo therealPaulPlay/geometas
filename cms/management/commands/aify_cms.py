@@ -1,0 +1,60 @@
+from django.core.management.base import BaseCommand
+from django.conf import settings
+from openai import OpenAI
+import logging
+log = logging.getLogger(__name__)
+
+from .ai_input.prompt import SYSTEM_MESSAGE, USER_MESSAGE
+from quiz.models import Category, Region, Country, Fact
+
+# https://platform.openai.com/docs/models
+# https://openai.com/pricing
+OPEN_AI_MODEL = "gpt-4-1106-preview"
+
+
+class Command(BaseCommand):
+
+    def handle(self, *args, **options):
+        client = OpenAI(api_key=settings.OPENAI_API_KEY)
+
+        ###### CATEGORIES
+        categories = Category.objects.exclude(name="Bollards").exclude(name="Coverage").exclude(slug="driving_direction")
+        for category in categories:
+            user_message = create_user_message("Category", category.name, category.facts.all())
+
+            completion = client.chat.completions.create(
+                model=OPEN_AI_MODEL,
+                messages=[
+                    {"role": "user", "content": SYSTEM_MESSAGE.strip()},
+                    {"role": "user", "content": user_message.strip()}
+                ]
+            )
+            print("**********   PROMPT   **********")
+            print("Category: %s" % category.name)
+            print("********** COMPLETION **********")
+            print(completion.choices[0].message.content)
+            #print("**********    INFO    **********")
+            #print("prompt_tokens: %s" % completion.usage.prompt_tokens)
+            #print("completion_tokens: %s" % completion.usage.completion_tokens)
+            #print("total_tokens: %s" % completion.usage.total_tokens)
+            #price_usd = completion.usage.total_tokens * 0.01 / 1000
+            #print("price: $%s" % round(price_usd, 4))
+            #print("requests per $1: %s" % int((1/price_usd)))
+            #print("**********    DONE    **********")
+
+
+
+
+def create_user_message(type, name, facts):
+    """
+    Create the user message in this format:
+    "<type>: <name>. <All fact.questions separated by ". ">"
+    """
+    # Get all questions
+    questions = []
+    for fact in facts:
+        questions.append(fact.question)
+    
+    # Create the message
+    message = f"{type}: {name}. " + ". ".join(questions) + "."
+    return message
