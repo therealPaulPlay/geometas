@@ -63,7 +63,7 @@ def region(request, region_slug):
         quiz = None
 
     context = {
-        'region': region.name,
+        'region': region,
         'facts': facts,
         'quiz': quiz
     }
