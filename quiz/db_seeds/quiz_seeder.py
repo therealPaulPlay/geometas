@@ -32,6 +32,7 @@ def update_categories():
         category_db = Category.objects.filter(slug=input_category[0]).first()
         if category_db:
             category_db.name = input_category[1]
+            category_db.description = input_category[2]
             category_db.save()
         else:
             Category.objects.create(
