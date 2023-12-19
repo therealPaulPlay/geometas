@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Country, Fact, Quiz, QuizSession, QuizSessionFact
+from .models import Country, Fact, Quiz, QuizSession, QuizSessionFact, Category
 
 
 class CountryAdmin(admin.ModelAdmin):
@@ -43,3 +43,4 @@ admin.site.register(Country, CountryAdmin)
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(QuizSession, QuizSessionAdmin)
 admin.site.register(QuizSessionFact, QuizSessionFactAdmin)
+admin.site.register(Category)

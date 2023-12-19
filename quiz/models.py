@@ -4,27 +4,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-CATEGORY_CHOICES = [
-    ("coverage", "Coverage"),
-    ("driving_direction", "Driving direction"),
-    ("google_car", "Google Car"),
-    ("language", "Language"),
-    ("license_plate", "License Plate"),
-    ("road_lines", "Road Lines"),
-    ("settlement_sign", "Settlement Sign"),
-    ("bollards", "Bollards"),
-    ("street_numbering", "Street Numbering"),
-    ("street_markings", "Street Markings"),
-    ("street_name", "Street Name"),
-    ("street_sign", "Street Sign"),
-    ("poles", "Poles"),
-    ("other", "Other"),
-    ("cars", "Cars"),
-    ("pedestrian_crossign_sign", "Pedestrian Crossing Sign"),
-    ("buildings", "Buildings"),
-    ("flora", "Flora"),
-]
-
 QUESTION_TYPE_CHOICES = [
     ("SingleCountry", "SingleCountry"),
     ("SingleContinent", "SingleContinent"),
@@ -69,6 +48,7 @@ class Country(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=250)
     slug = models.CharField(max_length=250)
+    description = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.name

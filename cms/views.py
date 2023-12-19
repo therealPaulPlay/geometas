@@ -83,7 +83,7 @@ def category(request, category_slug):
         quiz = None
 
     context = {
-        'category': category.name,
+        'category': category,
         'facts': facts,
         'quiz': quiz
     }
