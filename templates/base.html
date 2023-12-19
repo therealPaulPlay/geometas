@@ -58,15 +58,7 @@
             </header>
         </div>
 
-        <main class="-mt-32">
-            <div class="mx-auto max-w-7xl pb-12 sm:px-6 lg:px-8">
-                <div class="sm:rounded-lg bg-white px-4 py-6 sm:p-8 sm:shadow">
-                    <div class="flex-grow">
-                        {% block main %}{% endblock %}
-                    </div>
-                </div>
-            </div>
-        </main>
+        {% block main %}{% endblock %}
     </div>
 </body>
 

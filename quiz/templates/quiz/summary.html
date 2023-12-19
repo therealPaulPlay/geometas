@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "template_content.html" %}
 
 {% block html_title %}{{ session.quiz.name }} - Summary - Geometas{% endblock %}
 
 {% block title_main %}{{ session.quiz.name }} - Summary{% endblock %}
 
-{% block main %}
+{% block content %}
 
     <div class="">
         <h2 class="text-2xl mb-4 text-slate-900">{{ session.quiz.name }}</h2>
