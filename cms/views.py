@@ -24,7 +24,10 @@ def metas_index(request):
         'categories': Category.objects.all().order_by('name'),
         'regions': Region.objects.all().order_by('name'),
         'quiz_session': quiz_session,
-        'total_fact_count': total_fact_count
+        'total_fact_count': total_fact_count,
+        'html_meta_title': None,
+        'html_meta_description': 'Become a Geoguessr champion by learning new metas and taking quizzes to practice your country meta knowledge.',
+        'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
     return render(request, 'cms/metas_index.html', context)
 
@@ -41,7 +44,10 @@ def country(request, country_slug):
 
     context = {
         'country': country,
-        'facts': facts
+        'facts': facts,
+        'html_meta_title': country.name,
+        'html_meta_description': country.description,
+        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
     return render(request, 'cms/country.html', context)
 
@@ -65,7 +71,10 @@ def region(request, region_slug):
     context = {
         'region': region,
         'facts': facts,
-        'quiz': quiz
+        'quiz': quiz,
+        'html_meta_title': region.name,
+        'html_meta_description': region.description,
+        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
     return render(request, 'cms/region.html', context)
 
@@ -85,6 +94,9 @@ def category(request, category_slug):
     context = {
         'category': category,
         'facts': facts,
-        'quiz': quiz
+        'quiz': quiz,
+        'html_meta_title': category.name,
+        'html_meta_description': category.description,
+        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
     return render(request, 'cms/category.html', context)

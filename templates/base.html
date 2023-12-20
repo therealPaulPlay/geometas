@@ -6,11 +6,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Local imports like Favicon and CSS -->
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
-    <title>{% block html_title %}Geometas{% endblock %}</title>
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'logo/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logo/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'logo/favicon-16x16.png' %}">
+
+
+    <!-- Meta tags -->
+    <title>{{ html_meta_title }}{% if html_meta_title %} - {% endif %}Geometas</title>
+
+    
+    <meta name="description" content="Become a Geoguessr champion by learning new metas and taking quizzes to practice your country meta knowledge.">
+    <meta name="keywords" content="geoguessr, metas, country, continent, bollard, cars, driving direction, license plate, google car, street view, poles, street, markings, numbering, coverage, flora, language, settlement, sign">
+
+    <!-- Open Graph tags for Facebook and other social media -->
+    <meta property="og:title" content="{{ html_meta_title }}">
+    <meta property="og:description" content="{{ html_meta_description }}">
+    <meta property="og:image" content="{{ html_meta_image_url }}">
+    <meta property="og:url" content="https://www.geometas.com{{ request.path }}">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ html_meta_title }}">
+    <meta name="twitter:description" content="{{ html_meta_description }}">
+    <meta name="twitter:image" content="{{ html_meta_image_url }}">
+
+    <!-- Robots tag -->
+    <meta name="robots" content="index, follow">
 </head>
 
 <body class="h-full">
