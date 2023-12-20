@@ -1,7 +1,7 @@
 from django.contrib import sitemaps
 from django.urls import reverse
 
-from quiz.models import Country, Category, Region
+from quiz.models import Country, Category, Region, Fact
 
 ###########################################################
 # Static pages
@@ -21,7 +21,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
     
 
 ###########################################################
-# Metas
+# Index Pages
 ###########################################################
 
 class CountryMetasSitemap(sitemaps.Sitemap):
@@ -55,3 +55,18 @@ class CategoryMetasSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse('cms:category', args=[item])
+
+
+###########################################################
+# Meta Details Pages
+###########################################################
+
+class MetasDetailSitemap(sitemaps.Sitemap):
+    priority = 0.5
+    changefreq = 'daily'
+
+    def items(self):
+        return Fact.objects.all().values_list('uuid', flat=True)
+
+    def location(self, item):
+        return reverse('cms:fact_detail', args=[item])

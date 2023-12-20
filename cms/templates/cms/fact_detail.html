@@ -1,0 +1,27 @@
+{% extends "template_content.html" %}
+
+{% block title_main %}{{ fact_title }}{% endblock %}
+
+
+
+{% block content %}
+
+<div class="mb-10">
+    <div class="grid grid-cols-3 gap-4 mt-4">
+        <div class="">
+            <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
+        </div>
+        <div class="col-span-2">
+            <div class="flex gap-2">
+                <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
+                {% for country in fact.countries.all %}
+                    <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ country.flag_emoji }} {{country}}</span>
+                {% endfor %}
+            </div>
+            <div class="my-auto mt-2">{{ fact.answer }}</div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock %}

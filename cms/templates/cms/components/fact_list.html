@@ -1,14 +1,26 @@
-
 <div class="grid grid-cols">
     <div class="mb-10">
         {% for fact in facts %}
-            <div class="grid grid-cols-3 gap-4 mt-4">
-                <div class="">
-                    <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
-                </div>
-                <div class="col-span-2">
-                    <span class="bg-sky-500 text-white rounded-lg px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
-                    <div class="my-auto mt-2">{{ fact.answer }}</div>
+            <div class="py-6 odd:bg-slate-50 border-t border-slate-200">
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="">
+                        <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
+                    </div>
+                    <div class="col-span-2">
+                        <div class="flex gap-2">
+                            {% if not category %}
+                                <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
+                            {% endif %}
+                            {% if not country %}
+                                {% for country in fact.countries.all %}
+                                    <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ country.flag_emoji }} {{country}}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="my-auto mt-2">
+                            <a href="{% url 'cms:fact_detail' fact.uuid %}">{{ fact.answer }}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endfor %}

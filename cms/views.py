@@ -46,7 +46,7 @@ def country(request, country_slug):
         'country': country,
         'facts': facts,
         'html_meta_title': country.name,
-        'html_meta_description': country.description,
+        'html_meta_description': "Learn the Geoguessr metas for %s to become a Geoguessr champion" % country.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
     return render(request, 'cms/country.html', context)
@@ -100,3 +100,20 @@ def category(request, category_slug):
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
     return render(request, 'cms/category.html', context)
+
+
+def fact_detail(request, fact_uuid):
+    fact = Fact.objects.get(uuid=fact_uuid)
+    country_name_list = []
+    for country in fact.countries.all():
+        country_name_list.append(country.name)
+    country_name_list = ', '.join(country_name_list)
+    fact_title = "%s - %s - Meta" % (country_name_list, fact.category.name)
+    context = {
+        'fact': fact,
+        'fact_title': fact_title,
+        'html_meta_title': fact_title,
+        'html_meta_description': fact.answer,
+         'html_meta_image_url': fact.image_url,
+    }
+    return render(request, 'cms/fact_detail.html', context)

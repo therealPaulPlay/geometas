@@ -11,6 +11,7 @@ SITEMAPS_DICT = {
     'country': cms.sitemaps.CountryMetasSitemap,
     'region': cms.sitemaps.RegionMetasSitemap,
     'category': cms.sitemaps.CategoryMetasSitemap,
+    'metas': cms.sitemaps.MetasDetailSitemap
 }
 
 
