@@ -1220,6 +1220,10 @@ video {
     bottom: auto;
   }
 
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+
   .sm\:mr-4 {
     margin-right: 1rem;
   }
@@ -1232,12 +1236,20 @@ video {
     margin-top: 2.5rem;
   }
 
+  .sm\:grid {
+    display: grid;
+  }
+
   .sm\:max-h-\[55vh\] {
     max-height: 55vh;
   }
 
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sm\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .sm\:gap-3 {
