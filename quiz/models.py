@@ -4,15 +4,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-QUESTION_TYPE_CHOICES = [
-    ("SingleCountry", "SingleCountry"),
-    ("SingleContinent", "SingleContinent"),
-    ("MultipleCountry", "MultipleCountry"),
-    ("MultipleContinent", "MultipleContinent"),
-    ("NoAnswer", "NoAnswer"),
-]
-
-
 class Region(models.Model):
     name = models.CharField(max_length=250)
     slug = models.CharField(max_length=250)
@@ -67,23 +58,14 @@ class Fact(models.Model):
     countries = models.ManyToManyField(Country, related_name='facts')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='facts', null=True)
     difficulty = models.IntegerField()
-    question_type = models.CharField(max_length=100, choices=QUESTION_TYPE_CHOICES)
     notes = models.CharField(max_length=1000, null=True, blank=True)
     google_streetview_url = models.CharField(max_length=250, null=True, blank=True)
     airtable_id = models.CharField(max_length=100)
+    distinctive = models.BooleanField(default=False, null=True, blank=True)
+    distinctive_in_region = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self):
         return self.answer[:50] + (self.answer[50:] and '...')
-
-    @property
-    def question(self):
-        return {
-            "SingleCountry": "Which country is this?",
-            "MultipleCountry": "Which countries are these?",
-            "SingleContinent": "Which continent is this?",
-            "MultipleContinent": "Which continents are these?",
-            "NoAnswer": "General learning: did you know this?"
-        }[self.question_type]
     
 
 class Quiz(models.Model):

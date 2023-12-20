@@ -41,10 +41,11 @@ def import_all_facts_into_db():
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
         db_fact.category = Category.objects.filter(name=deserialized_fact['category']).first()
-        db_fact.question_type = deserialized_fact['question_type']
         db_fact.difficulty = deserialized_fact['difficulty']
         db_fact.notes = deserialized_fact['notes']
         db_fact.airtable_id = deserialized_fact['airtable_id']
+        db_fact.distinctive = deserialized_fact['distinctive']
+        db_fact.distinctive_in_region = deserialized_fact['distinctive_in_region']
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
         image_name = f"{db_fact.uuid}.jpg"
@@ -97,17 +98,16 @@ def check_if_fact_needs_update(fact_response):
 
 def deserialize_fact(fact_response):
     """ Deserializes a fact from API to a dictionary """
-    question_type = fact_response['fields']['QuestionType']
     return {
         'answer': fact_response['fields']['Answer'],
         'image_url': fact_response['fields']['Image'][0]['url'],
         'countries': fact_response['fields']['Country Name'],
-        'continents': fact_response['fields'].get('Continents'),
         'category': fact_response['fields']['Category'],
         'difficulty': fact_response['fields']['Difficulty'],
-        'question_type': question_type,
         'notes': fact_response['fields'].get('Notes'),
-        'airtable_id': fact_response['id']
+        'airtable_id': fact_response['id'],
+        'distinctive': fact_response['fields'].get('Distinctive'),
+        'distinctive_in_region': fact_response['fields'].get('Distinctive in Region'),
     }
 
 

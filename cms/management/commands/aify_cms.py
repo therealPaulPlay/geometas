@@ -96,12 +96,12 @@ def call_openai(system_message, user_message):
 def create_user_message(type, name, facts):
     """
     Create the user message in this format:
-    "<type>: <name>. <All fact.questions separated by ". ">"
+    "<type>: <name>. <All fact.answer separated by ". ">"
     """
     # Get all questions
     questions = []
     for fact in facts:
-        questions.append(fact.question)
+        questions.append(fact.answer)
     
     # Create the message
     message = f"{type}: {name}. " + ". ".join(questions) + "."

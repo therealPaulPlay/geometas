@@ -7,19 +7,11 @@
 
     {% include 'quiz/components/progress_bar.html' %}
 
-    {% if fact.question_type == 'SingleCountry' or fact.question_type == 'MultipleCountry' %}
-        <h2 class="text-2xl mt-8 sm:mt-10 mb-8 text-slate-900">    
-            {% for country in fact.countries.all %}
-                {{ country.flag_emoji }} {{country}}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </h2>
-    {% elif fact.question_type == 'SingleContinent' or fact.question_type == 'MultipleContinent' %}
-        <h2 class="text-2xl mt-8 sm:mt-10 mb-8 text-slate-900">    
-            {% for country in fact.countries.all %}
-                {{country.continent}}{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </h2>
-    {% endif %}
+    <h2 class="text-2xl mt-8 sm:mt-10 mb-8 text-slate-900">    
+        {% for country in fact.countries.all %}
+            {{ country.flag_emoji }} {{country}}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </h2>
 
     <p class="text-base mb-4 text-slate-900">{{fact.answer|safe|linebreaksbr}}</p>
     
