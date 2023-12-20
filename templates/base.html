@@ -17,7 +17,7 @@
     <!-- Meta tags -->
     <title>{% if html_meta_title %}{{ html_meta_title }} - {% endif %}Geometas</title>
 
-    
+
     <meta name="description" content="Become a Geoguessr champion by learning new metas and taking quizzes to practice your country meta knowledge.">
     <meta name="keywords" content="geoguessr, metas, country, continent, bollard, cars, driving direction, license plate, google car, street view, poles, street, markings, numbering, coverage, flora, language, settlement, sign">
 
@@ -39,10 +39,10 @@
 
 <body class="h-full">
     <div class="sm:bg-slate-200 min-h-full">
-        <div class="bg-slate-700 pb-32">
-            <nav class="bg-slate-700">
+        <div class="bg-slate-700 bg-gradient-to-r from-sky-900 to-sky-700 pb-32">
+            <nav class="">
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div class="border-b border-slate-600">
+                    <div class="border-b border-sky-300/10">
                         <div class="flex h-16 items-center justify-between px-4 sm:px-0">
                             <div class="flex space-x-6 sm:space-x-8">
                                 <a class="flex" href="{% url 'metas_index' %}">
@@ -67,12 +67,9 @@
                                     </a>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
-
             </nav>
 
             <header class="py-5 sm:py-8">
@@ -82,7 +79,7 @@
             </header>
         </div>
 
-        {% block main %}{% endblock %}
+    {% block main %}{% endblock %}
     </div>
 </body>
 
