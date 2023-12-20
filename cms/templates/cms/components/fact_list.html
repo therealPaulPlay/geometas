@@ -9,13 +9,13 @@
                         </a>
                     </div>
                     <div class="col-span-2">
-                        <div class="flex gap-2">
+                        <div class="flex flex-wrap gap-x-2 gap-y-1">
                             {% if not category %}
-                                <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
+                                <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.category.name }}</span>
                             {% endif %}
                             {% if not country %}
                                 {% for country in fact.countries.all %}
-                                    <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ country.flag_emoji }} {{country}}</span>
+                                    <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs truncate">{{ country.flag_emoji }} {{country}}</span>
                                 {% endfor %}
                             {% endif %}
                         </div>
