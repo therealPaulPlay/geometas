@@ -1,9 +1,9 @@
-<div class="grid grid-cols">
+<div class="grid grid-cols -mt-6">
     <div class="mb-10">
         {% for fact in facts %}
-            <div class="py-6 odd:bg-slate-50 border-t border-slate-200">
+            <div class="py-10 even:bg-slate-100 -mx-4 px-4 sm:-mx-8 sm:px-8">
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="">
+                    <div class="my-auto">
                         <a href="{% url 'cms:fact_detail' fact.uuid %}">
                             <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
                         </a>
