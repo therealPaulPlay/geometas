@@ -21,8 +21,8 @@ def metas_index(request):
 
     context = {
         'countries': Country.objects.all().order_by('name'),
-        'categories': Category.objects.all().order_by('name'),
-        'regions': Region.objects.all().order_by('name'),
+        'categories': Category.objects.all().order_by('name').select_related('quiz'),
+        'regions': Region.objects.all().order_by('name').select_related('quiz'),
         'quiz_session': quiz_session,
         'total_fact_count': total_fact_count,
         'html_meta_title': None,
@@ -62,16 +62,10 @@ def region(request, region_slug):
         facts.extend(country.facts.all().order_by('category'))
     facts = list(set(facts))
 
-    # Get related quiz
-    try:
-        quiz = Quiz.objects.get(name=region.name)
-    except Quiz.DoesNotExist:
-        quiz = None
-
     context = {
         'region': region,
         'facts': facts,
-        'quiz': quiz,
+        'quiz': region.quiz,
         'html_meta_title': region.name,
         'html_meta_description': region.description,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
@@ -85,16 +79,10 @@ def category(request, category_slug):
     # Get facts (no dupes because its not M2M)
     facts = Fact.objects.filter(category=category)
 
-    # Get related quiz
-    try:
-        quiz = Quiz.objects.get(category=category)
-    except Quiz.DoesNotExist:
-        quiz = None
-
     context = {
         'category': category,
         'facts': facts,
-        'quiz': quiz,
+        'quiz': category.quiz,
         'html_meta_title': category.name,
         'html_meta_description': category.description,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
