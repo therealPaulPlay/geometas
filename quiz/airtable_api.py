@@ -40,7 +40,7 @@ def import_all_facts_into_db():
         if not db_fact:
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
-        db_fact.category = Category.objects.filter(name=deserialized_fact['category']).first()
+        db_fact.category = Category.objects.get(name=deserialized_fact['category'])
         db_fact.difficulty = deserialized_fact['difficulty']
         db_fact.notes = deserialized_fact['notes']
         db_fact.airtable_id = deserialized_fact['airtable_id']

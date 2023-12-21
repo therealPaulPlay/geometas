@@ -46,7 +46,8 @@ def update_categories():
     input_category_slugs = [input_category[0] for input_category in CATEGORY_CHOICES]
     for db_category in db_categories:
         if db_category.slug not in input_category_slugs:
-            db_category.quiz.delete()
+            if db_category.quiz:
+                db_category.quiz.delete()
             db_category.delete()
             log.info(f"Category {db_category.name} deleted")
 

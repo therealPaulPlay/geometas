@@ -139,7 +139,8 @@ def update_regions():
     db_regions = Region.objects.all()
     for db_region in db_regions:
         if db_region.name not in INPUT_REGIONS:
-            db_region.quiz.delete()
+            if db_region.quiz:
+                db_region.quiz.delete()
             db_region.delete()
             log.info(f"Region {db_region.name} deleted")
 
@@ -173,6 +174,7 @@ def update_countries():
     db_countries = Country.objects.all()
     for db_country in db_countries:
         if db_country.name not in input_country_names:
-            db_country.quiz.delete()
+            if db_country.quiz:
+                db_country.quiz.delete()
             db_country.delete()
             log.info(f"Country {db_country.name} deleted")
