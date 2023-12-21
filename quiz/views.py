@@ -14,7 +14,7 @@ def quiz(request, quiz_uuid):
 
     # Get or create Quiz Session
     try:
-        # Check if there's an existing quix of this type & user in progress
+        # Check if there's an existing quiz of this type & user in progress
         quiz_session = QuizSession.objects.get(
             user=request.user,
             quiz=quiz,
@@ -73,8 +73,8 @@ def question(request, quiz_uuid, fact_uuid):
         'fact': fact,
         'quiz': quiz,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts * 100, 0),
-        'html_meta_title': "%s - Question %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts),
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts_user_facing * 100, 0),
+        'html_meta_title': "%s - Question %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts_user_facing),
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
@@ -96,8 +96,8 @@ def answer(request, quiz_uuid, fact_uuid):
         'fact': fact,
         'quiz': quiz,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts * 100, 0),
-        'html_meta_title': "%s - Answer %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts),
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts_user_facing * 100, 0),
+        'html_meta_title': "%s - Answer %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts_user_facing),
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
@@ -133,7 +133,7 @@ def rate_fact(request, quiz_uuid, fact_uuid):
 def summary(request, quiz_uuid, quiz_session_uuid):
     quiz_session = QuizSession.objects.get(uuid=quiz_session_uuid)
     # Calculate the total number of quizsessionfacts, how many are correct and how many are false
-    total_fact_count = quiz_session.quiz.num_facts
+    total_fact_count = quiz_session.quiz.num_facts_user_facing
     correct_fact_count = quiz_session.quizsessionfacts.filter(review_result="correct").count() or 0
     correct_percentage = round(correct_fact_count / total_fact_count * 100, 0)
     context = {

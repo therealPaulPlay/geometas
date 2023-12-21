@@ -72,6 +72,8 @@ class Fact(models.Model):
     
 
 class Quiz(models.Model):
+    RANDOM_QUIZ_NAME = "Geometas - All Random"
+    RANDOM_QUIZ_NUM_FACTS = 10
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     countries = models.ManyToManyField(Country, related_name='quizzes', blank=True)
@@ -105,6 +107,12 @@ class Quiz(models.Model):
         self.num_facts = self.get_facts().count()
         self.save()
         log.info(f"Quiz {self.name} updated with {self.num_facts} facts")
+    
+    @property
+    def num_facts_user_facing(self):
+        if self.name == Quiz.RANDOM_QUIZ_NAME:
+            return Quiz.RANDOM_QUIZ_NUM_FACTS
+        return self.num_facts
 
 
 class QuizSession(models.Model):
@@ -136,6 +144,10 @@ class QuizSession(models.Model):
     def load_facts(self):
         # Get facts
         facts = self.quiz.get_facts()
+        
+        # Restrict to N facts if it's the random quiz
+        if self.quiz.name == Quiz.RANDOM_QUIZ_NAME:
+            facts = facts[:Quiz.RANDOM_QUIZ_NUM_FACTS]
         
         # Iterate over facts to create QuizSessionFact objects with sort_order
         index = 1

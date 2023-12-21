@@ -25,6 +25,7 @@ def metas_index(request):
         'regions': Region.objects.all().order_by('name').select_related('quiz'),
         'quiz_session': quiz_session,
         'total_fact_count': total_fact_count,
+        'random_quiz_uuid': Quiz.objects.get(name=Quiz.RANDOM_QUIZ_NAME).uuid,
         'html_meta_title': None,
         'html_meta_description': 'Become a Geoguessr champion by learning new metas and taking quizzes to practice your country meta knowledge.',
         'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),

@@ -119,6 +119,14 @@ def update_quizzes():
 
         log.info(f"Quiz {quiz_name} updated")
     
+    # Create 'Random' quiz for all facts
+    random_quiz_name = Quiz.RANDOM_QUIZ_NAME
+    try:
+        quiz_db = Quiz.objects.get(name=random_quiz_name)
+    except Quiz.DoesNotExist:
+        quiz_db = Quiz.objects.create(name=random_quiz_name)
+    log.info(f"Quiz {random_quiz_name} updated")
+    
     
     # Compute and set the number of facts for each quiz
     for quiz in Quiz.objects.all():
