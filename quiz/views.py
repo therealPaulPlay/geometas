@@ -141,7 +141,7 @@ def summary(request, quiz_uuid, quiz_session_uuid):
         'total_fact_count': total_fact_count,
         'correct_fact_count': correct_fact_count,
         'correct_percentage': correct_percentage,
-        'html_meta_title': "%s - Summary" % quiz.name,
+        'html_meta_title': "%s - Summary" % quiz_session.quiz.name,
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
     }
