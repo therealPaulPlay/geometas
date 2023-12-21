@@ -76,7 +76,7 @@ def question(request, quiz_uuid, fact_uuid):
         'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts_user_facing * 100, 0),
         'html_meta_title': "%s - Question %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts_user_facing),
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
-        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
+        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'quiz/question.html', context)
 
@@ -99,7 +99,7 @@ def answer(request, quiz_uuid, fact_uuid):
         'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts_user_facing * 100, 0),
         'html_meta_title': "%s - Answer %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts_user_facing),
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
-        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
+        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'quiz/answer.html', context)
 
@@ -143,6 +143,6 @@ def summary(request, quiz_uuid, quiz_session_uuid):
         'correct_percentage': correct_percentage,
         'html_meta_title': "%s - Summary" % quiz_session.quiz.name,
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz_session.quiz.name,
-        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),
+        # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'quiz/summary.html', context)
