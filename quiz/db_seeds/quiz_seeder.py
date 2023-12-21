@@ -46,6 +46,7 @@ def update_categories():
     input_category_slugs = [input_category[0] for input_category in CATEGORY_CHOICES]
     for db_category in db_categories:
         if db_category.slug not in input_category_slugs:
+            db_category.quiz.delete()
             db_category.delete()
             log.info(f"Category {db_category.name} deleted")
 
@@ -56,8 +57,6 @@ def update_quizzes():
     update_categories()
     
     # Category Quizzes
-
-    # Creat category quizzes
     categories = Category.objects.all()
     for category in categories:
         # Name
@@ -76,21 +75,9 @@ def update_quizzes():
         
         log.info(f"Quiz {quiz_name} updated")
     
-    # Delete old category quizzes
-    db_quizzes = Quiz.objects.filter(category__isnull=False)
-    category_names = [category.name for category in categories]
-    for db_quiz in db_quizzes:
-        if db_quiz.name not in category_names:
-            db_quiz.delete()
-            log.info(f"Quiz {db_quiz.name} deleted")
-    
 
-    # Country Quizzes
-    # Create one quiz for each Country region 
-    
-    # Get distinct regions from Country objects that are not empty strings
+    # Region Quizzes
     regions = Region.objects.all()
-    
     for region in regions:
         # Name
         quiz_name = region.name
@@ -110,13 +97,27 @@ def update_quizzes():
 
         log.info(f"Quiz {quiz_name} updated")
     
-    # Delete old country quizzes
-    db_quizzes = Quiz.objects.filter(category__isnull=True)
-    region_names = [region.name for region in regions]
-    for db_quiz in db_quizzes:
-        if db_quiz.name not in region_names:
-            db_quiz.delete()
-            log.info(f"Quiz {db_quiz.name} deleted")
+    
+    # Country Quizzes
+    countries = Country.objects.all()
+    for country in countries:
+        # Name
+        quiz_name = country.name
+
+        # Get or create quiz
+        quiz_db = Quiz.objects.filter(name=quiz_name).first()
+        if not quiz_db:
+            quiz_db = Quiz.objects.create(name=quiz_name)    
+        
+        # Set country
+        quiz_db.countries.set([country,])
+        
+        # Add Quiz FK to Country
+        country.quiz = quiz_db
+        country.save()
+
+        log.info(f"Quiz {quiz_name} updated")
+    
     
     # Compute and set the number of facts for each quiz
     for quiz in Quiz.objects.all():

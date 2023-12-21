@@ -50,7 +50,7 @@
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-4">
                     {% for country in countries %}
                         <a href="{% url 'cms:country' country.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                            {{ country.flag_emoji }} {{country.name}}
+                            {{ country.flag_emoji }} {{country.name}}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span>
                         </a>
                     {% endfor %}
                 </div>

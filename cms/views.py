@@ -20,7 +20,7 @@ def metas_index(request):
     total_fact_count = Fact.objects.all().count()
 
     context = {
-        'countries': Country.objects.all().order_by('name'),
+        'countries': Country.objects.all().order_by('name').select_related('quiz'),
         'categories': Category.objects.all().order_by('name').select_related('quiz'),
         'regions': Region.objects.all().order_by('name').select_related('quiz'),
         'quiz_session': quiz_session,
@@ -45,6 +45,7 @@ def country(request, country_slug):
     context = {
         'country': country,
         'facts': facts,
+        'quiz': country.quiz,
         'html_meta_title': country.name,
         'html_meta_description': "Learn the Geoguessr metas for %s to become a Geoguessr champion" % country.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/location-smile-solid.png'),

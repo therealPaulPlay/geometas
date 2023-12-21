@@ -23,6 +23,7 @@ class Country(models.Model):
     iso2 = models.CharField(max_length=2)
     continent = models.CharField(max_length=200)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='countries', null=True)
+    quiz = models.OneToOneField('quiz.Quiz', on_delete=models.SET_NULL, null=True, blank=True, related_name='country_quiz')
 
     def __str__(self):
         return self.name
