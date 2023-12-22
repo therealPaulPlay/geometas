@@ -41,7 +41,11 @@ def update_categories():
         geo_content_output = completion.choices[0].message.content
         geo_content_output = geo_content_output.strip('```json\n ')
         geo_content_output = geo_content_output.strip('\n```')
-        geo_content_output = json.loads(geo_content_output)['description']
+        try:
+            geo_content_output = json.loads(geo_content_output)['description']
+        except:
+            print("ERROR: %s" % geo_content_output)
+            raise
         # print("**********   %s   **********" % category.name)
         # print(geo_content_output)
         # Add to output array
@@ -72,7 +76,11 @@ def update_regions():
         geo_content_output = completion.choices[0].message.content
         geo_content_output = geo_content_output.strip('```json\n ')
         geo_content_output = geo_content_output.strip('\n```')
-        geo_content_output = json.loads(geo_content_output)['description']
+        try:
+            geo_content_output = json.loads(geo_content_output)['description']
+        except:
+            print("ERROR: %s" % geo_content_output)
+            raise
         # print("**********   %s   **********" % region.name)
         # print(geo_content_output)
         # Add to output array

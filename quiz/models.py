@@ -69,6 +69,11 @@ class Fact(models.Model):
 
     def __str__(self):
         return self.answer[:50] + (self.answer[50:] and '...')
+
+    def get_question(self):
+        if self.distinctive_in_region and not self.distinctive:
+            return "Which country(s) in %s is this?" % self.countries.first().region.name
+        return "Which country(s) is this?"
     
 
 class Quiz(models.Model):

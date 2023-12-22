@@ -12,6 +12,8 @@ SYSTEM_MESSAGE = """
     The content should be returned as a JSON with two keys:
     "description": the content you wrote. max 700 characters
     "data": show three keys nested within: "internet_domain", "iso2_code", "driving_direction", no other values. Only return this if a specific country name was given.
+    
+    Remember that only the JSON with these two keys will be returned to the user. The user will not see the system message or the user message or other messages.
 
     The user will also give you some metas of the respective category, region, or country. Include the content of these metas if you consider them relevant for the user to recognize the country or region. 
 """
