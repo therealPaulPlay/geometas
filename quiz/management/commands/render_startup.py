@@ -11,13 +11,14 @@ class Command(BaseCommand):
         from quiz.db_seeds.country_seeder import update_countries
         update_countries()
 
+        # Load quizzes
+        # Shiuld extract categories here and quiz af end
+        from quiz.db_seeds.quiz_seeder import update_quizzes
+        update_quizzes()
+        
         # Load facts
         from quiz.airtable_api import import_all_facts_into_db
         import_all_facts_into_db()
-
-        # Load quizzes
-        from quiz.db_seeds.quiz_seeder import update_quizzes
-        update_quizzes()
 
         # Create a new superuser
         from django.contrib.auth.models import User
