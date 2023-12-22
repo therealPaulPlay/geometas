@@ -53,11 +53,7 @@ def update_categories():
             log.info(f"Category {db_category.name} deleted")
 
 
-def update_quizzes():
-
-    # Create Categories
-    update_categories()
-    
+def update_quizzes():    
     # Category Quizzes
     categories = Category.objects.all()
     for category in categories:
