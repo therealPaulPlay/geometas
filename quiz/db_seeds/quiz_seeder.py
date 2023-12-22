@@ -134,4 +134,6 @@ def update_quizzes():
         if quiz.num_facts == 0:
             quiz.delete()
             log.info(f"Quiz {quiz.name} deleted")
+    
+    Quiz.objects.filter(name="Geometas - All Random").delete()
         

@@ -77,7 +77,7 @@ class Fact(models.Model):
     
 
 class Quiz(models.Model):
-    RANDOM_QUIZ_NAME = "Geometas - All Random"
+    RANDOM_QUIZ_NAME = "Random"
     RANDOM_QUIZ_NUM_FACTS = 10
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
