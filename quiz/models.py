@@ -76,8 +76,8 @@ class Fact(models.Model):
     
 
 class Quiz(models.Model):
+    QUIZ_NUM_FACTS = 7
     RANDOM_QUIZ_NAME = "Random"
-    RANDOM_QUIZ_NUM_FACTS = 10
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     countries = models.ManyToManyField(Country, related_name='quizzes', blank=True)
@@ -115,7 +115,7 @@ class Quiz(models.Model):
     @property
     def num_facts_user_facing(self):
         if self.name == Quiz.RANDOM_QUIZ_NAME:
-            return Quiz.RANDOM_QUIZ_NUM_FACTS
+            return Quiz.QUIZ_NUM_FACTS
         return self.num_facts
 
 
@@ -146,13 +146,46 @@ class QuizSession(models.Model):
         return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
     
     def load_facts(self):
-        # Get facts
+        # Get facts (in random order)
         facts = self.quiz.get_facts()
         
-        # Restrict to N facts if it's the random quiz
-        if self.quiz.name == Quiz.RANDOM_QUIZ_NAME:
-            facts = facts[:Quiz.RANDOM_QUIZ_NUM_FACTS]
+        # We have 3 Leitner boxes and 1 'new' box and 7 facts per session
+        # We prioritize loading facts as follows:
+        # 70% from 'new' 
+        # Of remainder:
+        # 70% box 1
+        # 20% box 2
+        # 10% box 3
+        BOX_NEW_PERCENT = 0.7
+        BOX_1_REMAINDER_PERCENT = 0.7
+        BOX_2_REMAINDER_PERCENT = 0.2
+        BOX_3_REMAINDER_PERCENT = 0.1
         
+        # Loop over facts and fill boxes until their max number is reached
+        fact_boxes = {
+            "new": [],
+            "1": [],
+            "2": [],
+            "3": [],
+        }
+        for fact in facts:
+            ufp, created = UserFactPerformance.objects.get_or_create(user=self.user, fact=fact)
+            if created:
+                fact_boxes["new"].append(fact)
+            else:
+                fact_boxes[str(ufp.box)].append(fact)
+            
+            # Check if we have enough facts in each box
+            if len(fact_boxes["new"]) >= Quiz.QUIZ_NUM_FACTS * BOX_NEW_PERCENT \
+                and len(fact_boxes["1"]) >= Quiz.QUIZ_NUM_FACTS * BOX_1_REMAINDER_PERCENT \
+                and len(fact_boxes["2"]) >= Quiz.QUIZ_NUM_FACTS * BOX_2_REMAINDER_PERCENT \
+                and len(fact_boxes["3"]) >= Quiz.QUIZ_NUM_FACTS * BOX_3_REMAINDER_PERCENT:
+                break
+    
+        
+        # Restrict to N facts 
+        facts = facts[:Quiz.QUIZ_NUM_FACTS]
+            
         # Iterate over facts to create QuizSessionFact objects with sort_order
         index = 1
         for fact in facts:
