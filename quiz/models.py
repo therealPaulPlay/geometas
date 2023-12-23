@@ -170,7 +170,7 @@ class QuizSession(models.Model):
         missing_fact_count = Quiz.QUIZ_NUM_FACTS - from_box_new
         
         # Add missing facts
-        from_box_1, from_box_2, from_box_3 = 0, 0, 0
+        box_counts = {1: 0, 2: 0, 3: 0}
         if missing_fact_count > 0:
             # Box 1/2/3 facts
             facts_box_1 = ufps.filter(box=1)
@@ -178,21 +178,51 @@ class QuizSession(models.Model):
             facts_box_3 = ufps.filter(box=3)
             
             remaining_slots = 7 - len(performance_based_fact_list)
-
-            # Calculate how many elements to take from each list
-            from_box_1 = math.ceil(0.6 * remaining_slots)
-            from_box_2 = math.ceil(0.2 * remaining_slots)
-            from_box_3 = remaining_slots - from_box_1 - from_box_2  # Rest from list3
+            
+            # Calculate how many elements to take from each box
+            box_counts = {
+                1: {
+                    "needed": math.ceil(0.6 * remaining_slots),
+                    "available": facts_box_1.count(),
+                },
+                2: {
+                    "needed": math.ceil(0.2 * remaining_slots),
+                    "available": facts_box_2.count()
+                },
+                3: {
+                    "needed": remaining_slots,
+                    "available": facts_box_3.count()
+                }  
+            }
+            total_needed = sum([box_count["needed"] for box_count in box_counts.values()])
+            total_available = sum([box_count["available"] for box_count in box_counts.values()])
+            gap = total_needed - total_available
+            
+            # If there is a gap, take as many as possible from box 1, then box 2, then box 3
+            if gap > 0:
+                for box in range(1, 4):
+                    # Calculate how many more this box has available
+                    box_has_available = box_counts[box]["available"] - box_counts[box]["needed"]
+                    # If this box has more available, take as many as possible up to the gap
+                    if box_has_available > 0:
+                        box_counts[box]["needed"] += min(box_has_available, gap)
+                        gap -= min(box_has_available, gap)
+                        if gap == 0:
+                            break
+            
+            # Remove available key from dict and map to needed
+            box_counts = {box: count["needed"] for box, count in box_counts.items()}
 
             # Add elements from each list
-            performance_based_fact_list.extend(facts_box_1[:from_box_1])
-            performance_based_fact_list.extend(facts_box_2[:from_box_2])
-            performance_based_fact_list.extend(facts_box_3[:from_box_3])
+            for box, count in box_counts.items():
+                if count > 0:
+                    selected_facts = [ufp.fact for ufp in ufps.filter(box=box)[:count]]
+                    performance_based_fact_list.extend(selected_facts)
             
-        log.info("Quiz session %s: included %s new facts, %s facts from box 1, %s facts from box 2, %s facts from box 3" % (self.uuid, from_box_new, from_box_1, from_box_2, from_box_3))
+        log.info(f"Quiz session %s fact distribution: New: {from_box_new}, Box 1: {box_counts[1]}, Box 2: {box_counts[2]}, Box 3: {box_counts[3]}")
         
         # Restrict to N facts 
-        facts = facts[:Quiz.QUIZ_NUM_FACTS]
+        facts = performance_based_fact_list[:Quiz.QUIZ_NUM_FACTS]
             
         # Iterate over facts to create QuizSessionFact objects with sort_order
         index = 1
@@ -206,7 +236,7 @@ class QuizSession(models.Model):
             )
             index += 1
 
-        log.info(f"Quiz session {self.uuid}: Loaded {facts.count()} facts for {self.quiz.name} quiz session")
+        log.info(f"Quiz session {self.uuid}: Loaded {len(facts)} facts for {self.quiz.name} quiz session")
         return facts
 
 
