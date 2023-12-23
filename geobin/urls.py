@@ -23,5 +23,6 @@ urlpatterns = [
     path('login/', accounts_login, name='login'),
     path('logout/', accounts_logout, name='logout'),
     path('sitemap.xml', django_sitemap_view, {'sitemaps': SITEMAPS_DICT}, name='django.contrib.sitemaps.views.sitemap'),
+    #path('__debug__/', include('debug_toolbar.urls')),
     path('', metas_index, name='metas_index')
 ]
