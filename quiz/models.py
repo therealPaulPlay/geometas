@@ -178,25 +178,21 @@ class QuizSession(models.Model):
             facts_box_3 = ufps.filter(box=3)
             
             remaining_slots = 7 - len(performance_based_fact_list)
+            box_1_needed = math.ceil(0.60 * remaining_slots)
+            box_2_needed = math.ceil(0.14 * remaining_slots)
+            box_3_needed = remaining_slots - box_1_needed - box_2_needed
             
             # Calculate how many elements to take from each box
             box_counts = {
-                1: {
-                    "needed": math.ceil(0.6 * remaining_slots),
-                    "available": facts_box_1.count(),
-                },
-                2: {
-                    "needed": math.ceil(0.2 * remaining_slots),
-                    "available": facts_box_2.count()
-                },
-                3: {
-                    "needed": remaining_slots,
-                    "available": facts_box_3.count()
-                }  
+                1: {"needed": box_1_needed, "available": facts_box_1.count()},
+                2: {"needed": box_2_needed, "available": facts_box_2.count()},
+                3: {"needed": box_3_needed, "available": facts_box_3.count()}  
             }
-            total_needed = sum([box_count["needed"] for box_count in box_counts.values()])
-            total_available = sum([box_count["available"] for box_count in box_counts.values()])
-            gap = total_needed - total_available
+            gap = 0
+            for box, count in box_counts.items():
+                # If there are more available than needed, set gap to the difference
+                if count["available"] < count["needed"]:
+                    gap += count["needed"] - count["available"]
             
             # If there is a gap, take as many as possible from box 1, then box 2, then box 3
             if gap > 0:
@@ -240,7 +236,6 @@ class QuizSession(models.Model):
 
         log.info(f"Quiz session {self.uuid}: Loaded {len(facts)} facts for {self.quiz.name} quiz session")
         return facts
-
 
 
 class QuizSessionFact(models.Model):

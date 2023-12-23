@@ -42,6 +42,26 @@ class QuizSessionTestCase(TestCase):
         
         # Third session - no new facts plus 4 old ones
         session = QuizSession.objects.create(user_id=1, quiz=quiz)
-        session_2_list = session.load_facts()        
+        session.load_facts()
+        session.mark_cancelled()
+        quiz_session_facts = QuizSessionFact.objects.filter(quiz_session=session)
+        for quiz_session_fact in quiz_session_facts:
+            quiz_session_fact.set_correct()
+            
+        # Fourth session
+        session = QuizSession.objects.create(user_id=1, quiz=quiz)
+        session.load_facts()
+        session.mark_cancelled()
+        quiz_session_facts = QuizSessionFact.objects.filter(quiz_session=session)
+        for quiz_session_fact in quiz_session_facts:
+            quiz_session_fact.set_correct()
+        
+        # Fifth session
+        session = QuizSession.objects.create(user_id=1, quiz=quiz)
+        session.load_facts()
+        session.mark_cancelled()
+        quiz_session_facts = QuizSessionFact.objects.filter(quiz_session=session)
+        for quiz_session_fact in quiz_session_facts:
+            quiz_session_fact.set_correct()
         
         
