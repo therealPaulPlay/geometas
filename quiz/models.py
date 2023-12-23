@@ -60,7 +60,6 @@ class Fact(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     countries = models.ManyToManyField(Country, related_name='facts')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='facts', null=True)
-    difficulty = models.IntegerField()
     notes = models.CharField(max_length=1000, null=True, blank=True)
     google_streetview_url = models.CharField(max_length=250, null=True, blank=True)
     airtable_id = models.CharField(max_length=100)
@@ -185,10 +184,59 @@ class QuizSessionFact(models.Model):
     fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
     sort_order = models.IntegerField()
     review_result = models.CharField(max_length=100, choices=REVIEW_RESULT, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.user.username} - {self.quiz_session} - {self.fact}"
-
+    
     class Meta:
         unique_together = ('quiz_session', 'fact')
         verbose_name_plural = "Quiz Session Facts"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.quiz_session} - {self.fact}"
+    
+    def set_correct(self):
+        # Set this session fact result to correct
+        self.review_result = "correct"
+        self.save()
+        
+        # Update UserFactPerformance
+        ufp = UserFactPerformance.objects.get_or_create(user=self.user, fact=self.fact)[0]
+        ufp.set_correct()
+    
+    def set_false(self):
+        # Set this session fact result to false
+        self.review_result = "false"
+        self.save()
+        
+        # Update UserFactPerformance
+        ufp = UserFactPerformance.objects.get_or_create(user=self.user, fact=self.fact)[0]
+        ufp.set_false()
+        
+
+
+
+class UserFactPerformance(models.Model):
+    MAX_BOX_NUM = 3
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
+    updated_at = models.DateTimeField(auto_now=True)
+    review_count = models.IntegerField(default=0)
+    box = models.IntegerField(default=0)
+    
+    class Meta:
+        unique_together = ('user', 'fact')
+        verbose_name_plural = "User Fact Performances"
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.fact}"
+    
+    def set_correct(self):
+        self.review_count += 1
+        if self.box < UserFactPerformance.MAX_BOX_NUM:
+            self.box += 1
+        self.save()
+    
+    def set_false(self):
+        self.review_count += 1
+        self.box = 0
+        self.save()
+    
+    

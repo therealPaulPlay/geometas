@@ -122,8 +122,12 @@ def rate_fact(request, quiz_uuid, fact_uuid):
         quiz_session__state="in_progress",
         fact=fact
     )
-    quiz_session_fact.review_result = rating
-    quiz_session_fact.save()
+    if rating == 'correct':
+        quiz_session_fact.set_correct()
+        log.info(f"User {request.user.username} rated fact {fact.uuid} as correct")
+    elif rating == 'false':
+        quiz_session_fact.set_false()
+        log.info(f"User {request.user.username} rated fact {fact.uuid} as false")
 
     # Redirect to quiz 
     return redirect('quiz:quiz', quiz_uuid=quiz_uuid)

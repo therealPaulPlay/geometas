@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Country, Fact, Quiz, QuizSession, QuizSessionFact, Category, Region
+from .models import Country, Fact, Quiz, QuizSession, QuizSessionFact, Category, Region, UserFactPerformance
 
 
 class CountryAdmin(admin.ModelAdmin):
@@ -37,6 +37,10 @@ class QuizSessionFactAdmin(admin.ModelAdmin):
     list_display = ('quiz_session', 'fact', 'review_result', 'user', 'quiz',)
     readonly_fields = ('quiz_session', 'quiz', 'user', 'fact')
 
+class UserFactPerformanceAdmin(admin.ModelAdmin):
+    list_display = ('user', 'fact', 'box' )
+    readonly_fields = ('user', 'fact',  )
+
 
 admin.site.register(Fact, FactAdmin)
 admin.site.register(Country, CountryAdmin)
@@ -45,3 +49,4 @@ admin.site.register(QuizSession, QuizSessionAdmin)
 admin.site.register(QuizSessionFact, QuizSessionFactAdmin)
 admin.site.register(Category)
 admin.site.register(Region)
+admin.site.register(UserFactPerformance, UserFactPerformanceAdmin)

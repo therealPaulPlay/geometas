@@ -41,7 +41,6 @@ def import_all_facts_into_db():
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
         db_fact.category = Category.objects.get(name=deserialized_fact['category'])
-        db_fact.difficulty = deserialized_fact['difficulty']
         db_fact.notes = deserialized_fact['notes']
         db_fact.airtable_id = deserialized_fact['airtable_id']
         db_fact.distinctive = deserialized_fact['distinctive']
@@ -103,7 +102,6 @@ def deserialize_fact(fact_response):
         'image_url': fact_response['fields']['Image'][0]['url'],
         'countries': fact_response['fields']['Country Name'],
         'category': fact_response['fields']['Category'],
-        'difficulty': 4,
         'notes': fact_response['fields'].get('Notes'),
         'airtable_id': fact_response['id'],
         'distinctive': fact_response['fields'].get('Distinctive'),
