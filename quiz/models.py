@@ -170,7 +170,7 @@ class QuizSession(models.Model):
         missing_fact_count = Quiz.QUIZ_NUM_FACTS - from_box_new
         
         # Add missing facts
-        box_counts = {1: 0, 2: 0, 3: 0}
+        box_added_counts = {1: 0, 2: 0, 3: 0}
         if missing_fact_count > 0:
             # Box 1/2/3 facts
             facts_box_1 = ufps.filter(box=1)
@@ -218,8 +218,10 @@ class QuizSession(models.Model):
                 if count > 0:
                     selected_facts = [ufp.fact for ufp in ufps.filter(box=box)[:count]]
                     performance_based_fact_list.extend(selected_facts)
+                    # Add to box_added_counts
+                    box_added_counts[box] = len(selected_facts)
             
-        log.info(f"Quiz session %s fact distribution: New: {from_box_new}, Box 1: {box_counts[1]}, Box 2: {box_counts[2]}, Box 3: {box_counts[3]}")
+        log.info(f"Quiz session %s fact distribution: New: {from_box_new}, Box 1: {box_added_counts[1]}, Box 2: {box_added_counts[2]}, Box 3: {box_added_counts[3]}")
         
         # Restrict to N facts 
         facts = performance_based_fact_list[:Quiz.QUIZ_NUM_FACTS]
