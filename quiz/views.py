@@ -27,9 +27,7 @@ def quiz(request, quiz_uuid):
             state="in_progress"
         )
         for old_session in old_sessions:
-            old_session.state = "cancelled"
-            old_session.save()
-            log.info(f"Cancelled old session {old_session.uuid}")
+            old_session.mark_cancelled()
         
         # Create new session
         quiz_session = QuizSession.objects.create(
@@ -38,7 +36,7 @@ def quiz(request, quiz_uuid):
             state="in_progress"
         )
         log.info(f"Created new session {quiz_session.uuid}")
-        quiz_session.load_facts(request.user)
+        quiz_session.load_facts()
 
         
     

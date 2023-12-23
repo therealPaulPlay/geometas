@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+import math
 import logging
 log = logging.getLogger(__name__)
 
@@ -144,39 +145,51 @@ class QuizSession(models.Model):
 
     def __str__(self):
         return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
+
+    def mark_cancelled(self):
+        self.state = "cancelled"
+        self.save()
+        log.info(f"Quiz session {self.uuid} marked as cancelled")
     
-    def load_facts(self, user):
+    def load_facts(self):
         # Get facts (in random order)
         facts = self.quiz.get_facts()
         
+        # Prioritized fact_list
+        performance_based_fact_list = []
+        
         # First fill up with as many new facts as we have
-        ufps = UserFactPerformance.objects.filter(user=self.user, facts__in=facts)
-        new_facts = facts.exclude(userfactperformance__in=ufps)
-        fact_new_count = new_facts.count()
+        ufps = UserFactPerformance.objects.filter(user=self.user, fact__in=facts)
         
-        # If we have less than Quiz length, fill from box 1, 2, 3
+        # Box new facts
+        facts_box_new = facts.exclude(userfactperformance__in=ufps)
         
-        # Loop over facts and fill boxes until their max number is reached
-        fact_boxes = {
-            "new": [],
-            "1": [],
-            "2": [],
-            "3": [],
-        }
-        for fact in facts:
-            ufp, created = UserFactPerformance.objects.get_or_create(user=self.user, fact=fact)
-            if created:
-                fact_boxes["new"].append(fact)
-            else:
-                fact_boxes[str(ufp.box)].append(fact)
+        # Add all new facts to performance_based_fact_list
+        performance_based_fact_list.extend(facts_box_new)
+        from_box_new = len(facts_box_new)
+        missing_fact_count = Quiz.QUIZ_NUM_FACTS - from_box_new
+        
+        # Add missing facts
+        from_box_1, from_box_2, from_box_3 = 0, 0, 0
+        if missing_fact_count > 0:
+            # Box 1/2/3 facts
+            facts_box_1 = ufps.filter(box=1)
+            facts_box_2 = ufps.filter(box=2)
+            facts_box_3 = ufps.filter(box=3)
             
-            # Check if we have enough facts in each box
-            if len(fact_boxes["new"]) >= BOX_NEW_COUNT \
-                and len(fact_boxes["1"]) >= Quiz.QUIZ_NUM_FACTS * BOX_1_REMAINDER_PERCENT \
-                and len(fact_boxes["2"]) >= Quiz.QUIZ_NUM_FACTS * BOX_2_REMAINDER_PERCENT \
-                and len(fact_boxes["3"]) >= Quiz.QUIZ_NUM_FACTS * BOX_3_REMAINDER_PERCENT:
-                break
-    
+            remaining_slots = 7 - len(performance_based_fact_list)
+
+            # Calculate how many elements to take from each list
+            from_box_1 = math.ceil(0.6 * remaining_slots)
+            from_box_2 = math.ceil(0.2 * remaining_slots)
+            from_box_3 = remaining_slots - from_box_1 - from_box_2  # Rest from list3
+
+            # Add elements from each list
+            performance_based_fact_list.extend(facts_box_1[:from_box_1])
+            performance_based_fact_list.extend(facts_box_2[:from_box_2])
+            performance_based_fact_list.extend(facts_box_3[:from_box_3])
+            
+        log.info("Quiz session %s: included %s new facts, %s facts from box 1, %s facts from box 2, %s facts from box 3" % (self.uuid, from_box_new, from_box_1, from_box_2, from_box_3))
         
         # Restrict to N facts 
         facts = facts[:Quiz.QUIZ_NUM_FACTS]
@@ -193,7 +206,8 @@ class QuizSession(models.Model):
             )
             index += 1
 
-        log.info(f"Loaded {facts.count()} facts for {self.quiz.name} quiz session")
+        log.info(f"Quiz session {self.uuid}: Loaded {facts.count()} facts for {self.quiz.name} quiz session")
+        return facts
 
 
 
