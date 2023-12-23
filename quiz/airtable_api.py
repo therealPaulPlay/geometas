@@ -103,7 +103,7 @@ def deserialize_fact(fact_response):
         'image_url': fact_response['fields']['Image'][0]['url'],
         'countries': fact_response['fields']['Country Name'],
         'category': fact_response['fields']['Category'],
-        'difficulty': fact_response['fields']['Difficulty'],
+        'difficulty': 4,
         'notes': fact_response['fields'].get('Notes'),
         'airtable_id': fact_response['id'],
         'distinctive': fact_response['fields'].get('Distinctive'),
