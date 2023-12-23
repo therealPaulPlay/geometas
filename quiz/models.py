@@ -145,21 +145,16 @@ class QuizSession(models.Model):
     def __str__(self):
         return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
     
-    def load_facts(self):
+    def load_facts(self, user):
         # Get facts (in random order)
         facts = self.quiz.get_facts()
         
-        # We have 3 Leitner boxes and 1 'new' box and 7 facts per session
-        # We prioritize loading facts as follows:
-        # 70% from 'new' 
-        # Of remainder:
-        # 70% box 1
-        # 20% box 2
-        # 10% box 3
-        BOX_NEW_PERCENT = 0.7
-        BOX_1_REMAINDER_PERCENT = 0.7
-        BOX_2_REMAINDER_PERCENT = 0.2
-        BOX_3_REMAINDER_PERCENT = 0.1
+        # First fill up with as many new facts as we have
+        ufps = UserFactPerformance.objects.filter(user=self.user, facts__in=facts)
+        new_facts = facts.exclude(userfactperformance__in=ufps)
+        fact_new_count = new_facts.count()
+        
+        # If we have less than Quiz length, fill from box 1, 2, 3
         
         # Loop over facts and fill boxes until their max number is reached
         fact_boxes = {
@@ -176,7 +171,7 @@ class QuizSession(models.Model):
                 fact_boxes[str(ufp.box)].append(fact)
             
             # Check if we have enough facts in each box
-            if len(fact_boxes["new"]) >= Quiz.QUIZ_NUM_FACTS * BOX_NEW_PERCENT \
+            if len(fact_boxes["new"]) >= BOX_NEW_COUNT \
                 and len(fact_boxes["1"]) >= Quiz.QUIZ_NUM_FACTS * BOX_1_REMAINDER_PERCENT \
                 and len(fact_boxes["2"]) >= Quiz.QUIZ_NUM_FACTS * BOX_2_REMAINDER_PERCENT \
                 and len(fact_boxes["3"]) >= Quiz.QUIZ_NUM_FACTS * BOX_3_REMAINDER_PERCENT:

@@ -38,7 +38,7 @@ def quiz(request, quiz_uuid):
             state="in_progress"
         )
         log.info(f"Created new session {quiz_session.uuid}")
-        quiz_session.load_facts()
+        quiz_session.load_facts(request.user)
 
         
     
