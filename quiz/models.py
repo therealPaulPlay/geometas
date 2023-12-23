@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+import math
 import logging
 log = logging.getLogger(__name__)
 
@@ -76,8 +77,8 @@ class Fact(models.Model):
     
 
 class Quiz(models.Model):
+    QUIZ_NUM_FACTS = 7
     RANDOM_QUIZ_NAME = "Random"
-    RANDOM_QUIZ_NUM_FACTS = 10
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=250)
     countries = models.ManyToManyField(Country, related_name='quizzes', blank=True)
@@ -115,7 +116,7 @@ class Quiz(models.Model):
     @property
     def num_facts_user_facing(self):
         if self.name == Quiz.RANDOM_QUIZ_NAME:
-            return Quiz.RANDOM_QUIZ_NUM_FACTS
+            return Quiz.QUIZ_NUM_FACTS
         return self.num_facts
 
 
@@ -144,15 +145,83 @@ class QuizSession(models.Model):
 
     def __str__(self):
         return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
+
+    def mark_cancelled(self):
+        self.state = "cancelled"
+        self.save()
+        log.info(f"Quiz session {self.uuid} marked as cancelled")
     
     def load_facts(self):
-        # Get facts
+        # Get facts (in random order)
         facts = self.quiz.get_facts()
         
-        # Restrict to N facts if it's the random quiz
-        if self.quiz.name == Quiz.RANDOM_QUIZ_NAME:
-            facts = facts[:Quiz.RANDOM_QUIZ_NUM_FACTS]
+        # Prioritized fact_list
+        performance_based_fact_list = []
         
+        # First fill up with as many new facts as we have
+        ufps = UserFactPerformance.objects.filter(user=self.user, fact__in=facts)
+        
+        # Box new facts
+        facts_box_new = facts.exclude(userfactperformance__in=ufps)
+        
+        # Add all new facts to performance_based_fact_list
+        performance_based_fact_list.extend(facts_box_new)
+        from_box_new = len(facts_box_new)
+        missing_fact_count = Quiz.QUIZ_NUM_FACTS - from_box_new
+        
+        # Add missing facts
+        box_added_counts = {1: 0, 2: 0, 3: 0}
+        if missing_fact_count > 0:
+            # Box 1/2/3 facts
+            facts_box_1 = ufps.filter(box=1)
+            facts_box_2 = ufps.filter(box=2)
+            facts_box_3 = ufps.filter(box=3)
+            
+            remaining_slots = 7 - len(performance_based_fact_list)
+            box_1_needed = math.ceil(0.60 * remaining_slots)
+            box_2_needed = math.ceil(0.14 * remaining_slots)
+            box_3_needed = remaining_slots - box_1_needed - box_2_needed
+            
+            # Calculate how many elements to take from each box
+            box_counts = {
+                1: {"needed": box_1_needed, "available": facts_box_1.count()},
+                2: {"needed": box_2_needed, "available": facts_box_2.count()},
+                3: {"needed": box_3_needed, "available": facts_box_3.count()}  
+            }
+            gap = 0
+            for box, count in box_counts.items():
+                # If there are more available than needed, set gap to the difference
+                if count["available"] < count["needed"]:
+                    gap += count["needed"] - count["available"]
+            
+            # If there is a gap, take as many as possible from box 1, then box 2, then box 3
+            if gap > 0:
+                for box in range(1, 4):
+                    # Calculate how many more this box has available
+                    box_has_available = box_counts[box]["available"] - box_counts[box]["needed"]
+                    # If this box has more available, take as many as possible up to the gap
+                    if box_has_available > 0:
+                        box_counts[box]["needed"] += min(box_has_available, gap)
+                        gap -= min(box_has_available, gap)
+                        if gap == 0:
+                            break
+            
+            # Remove available key from dict and map to needed
+            box_counts = {box: count["needed"] for box, count in box_counts.items()}
+
+            # Add elements from each list
+            for box, count in box_counts.items():
+                if count > 0:
+                    selected_facts = [ufp.fact for ufp in ufps.filter(box=box)[:count]]
+                    performance_based_fact_list.extend(selected_facts)
+                    # Add to box_added_counts
+                    box_added_counts[box] = len(selected_facts)
+            
+        log.info(f"Quiz session %s fact distribution: New: {from_box_new}, Box 1: {box_added_counts[1]}, Box 2: {box_added_counts[2]}, Box 3: {box_added_counts[3]}")
+        
+        # Restrict to N facts 
+        facts = performance_based_fact_list[:Quiz.QUIZ_NUM_FACTS]
+            
         # Iterate over facts to create QuizSessionFact objects with sort_order
         index = 1
         for fact in facts:
@@ -165,8 +234,8 @@ class QuizSession(models.Model):
             )
             index += 1
 
-        log.info(f"Loaded {facts.count()} facts for {self.quiz.name} quiz session")
-
+        log.info(f"Quiz session {self.uuid}: Loaded {len(facts)} facts for {self.quiz.name} quiz session")
+        return facts
 
 
 class QuizSessionFact(models.Model):
