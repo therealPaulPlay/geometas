@@ -159,7 +159,7 @@ class QuizSession(models.Model):
         performance_based_fact_list = []
         
         # First fill up with as many new facts as we have
-        ufps = UserFactPerformance.objects.filter(user=self.user, fact__in=facts)
+        ufps = UserFactPerformance.objects.filter(user=self.user, fact__in=facts).exclude(box=0)
         
         # Box new facts
         facts_box_new = facts.exclude(userfactperformance__in=ufps)
