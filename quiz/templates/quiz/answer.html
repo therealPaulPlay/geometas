@@ -1,6 +1,6 @@
 {% extends "quiz/quiz.html" %}
 
-{% block title_main %}{{ quiz.name }}{% endblock %}
+{% block title_main %}{{ quiz_session.quiz.name }}{% endblock %}
 
 {% block quiz %}
 
@@ -21,12 +21,12 @@
     <div class="max-w-full flex pt-6 fixed bottom-0 inset-x-0 sm:relative sm:bottom-auto">
         <a 
             class="font-semibold h-16 px-6 w-1/2 sm:mr-4 sm:rounded-lg flex items-center justify-center bg-green-500 border border-t-0 border-b-0 border-l-0 border-white rounded-tr-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
-            href="{% url 'quiz:rate' quiz.uuid fact.uuid %}?r=correct">
+            href="{% url 'quiz:rate' quiz_session.uuid fact.uuid %}?r=correct">
             Easy
         </a>
         <a 
             class="font-semibold h-16 px-6 w-1/2 sm:rounded-lg flex items-center justify-center bg-red-500 rounded-tl-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
-            href="{% url 'quiz:rate' quiz.uuid fact.uuid %}?r=false">
+            href="{% url 'quiz:rate' quiz_session.uuid fact.uuid %}?r=false">
             Didn't know
         </a>
     </div>

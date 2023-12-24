@@ -129,7 +129,7 @@ class QuizSession(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     state = models.CharField(max_length=100, choices=SESSION_STATES, default="in_progress")
 
@@ -144,7 +144,7 @@ class QuizSession(models.Model):
         verbose_name_plural = "Quiz Sessions"
 
     def __str__(self):
-        return f"{self.uuid} - {self.user.username} - {self.quiz.name} - {self.state}"
+        return f"{self.uuid} - {self.user} - {self.quiz.name} - {self.state}"
 
     def mark_cancelled(self):
         self.state = "cancelled"
@@ -155,6 +155,30 @@ class QuizSession(models.Model):
         # Get facts (in random order)
         facts = self.quiz.get_facts()
         
+        # Add performance-based weighting if user is logged in
+        if self.user:
+            # Weigh facts based on user performance
+            facts = self.weigh_facts_based_on_user_performance(facts)
+        
+        # Restrict to N facts 
+        facts = facts[:Quiz.QUIZ_NUM_FACTS]
+            
+        # Iterate over facts to create QuizSessionFact objects with sort_order
+        index = 1
+        for fact in facts:
+            QuizSessionFact.objects.create(
+                user=self.user,
+                quiz=self.quiz,
+                quiz_session=self,
+                fact=fact,
+                sort_order=index
+            )
+            index += 1
+
+        log.info(f"Quiz session {self.uuid}: Loaded {len(facts)} facts for {self.quiz.name} quiz session")
+        return facts
+
+    def weigh_facts_based_on_user_performance(self, facts):
         # Prioritized fact_list
         performance_based_fact_list = []
         
@@ -219,24 +243,21 @@ class QuizSession(models.Model):
             
         log.info(f"Quiz session %s fact distribution: New: {from_box_new}, Box 1: {box_added_counts[1]}, Box 2: {box_added_counts[2]}, Box 3: {box_added_counts[3]}")
         
-        # Restrict to N facts 
-        facts = performance_based_fact_list[:Quiz.QUIZ_NUM_FACTS]
-            
-        # Iterate over facts to create QuizSessionFact objects with sort_order
-        index = 1
-        for fact in facts:
-            QuizSessionFact.objects.create(
-                user=self.user,
-                quiz=self.quiz,
-                quiz_session=self,
-                fact=fact,
-                sort_order=index
-            )
-            index += 1
+        return performance_based_fact_list
 
-        log.info(f"Quiz session {self.uuid}: Loaded {len(facts)} facts for {self.quiz.name} quiz session")
-        return facts
+    def get_next_fact(self):
+        return QuizSessionFact.objects.filter(
+            quiz=self.quiz,
+            quiz_session=self,
+            user=self.user,
+            review_result__isnull=True
+        ).order_by('sort_order').first()
 
+    def mark_finished(self):
+        self.state = "finished"
+        self.save()
+        log.info(f"Quiz session {self.uuid} marked as finished")
+    
 
 class QuizSessionFact(models.Model):
     REVIEW_RESULT = [
@@ -247,7 +268,7 @@ class QuizSessionFact(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     quiz_session = models.ForeignKey(QuizSession, on_delete=models.CASCADE, related_name='quizsessionfacts')
     fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
@@ -266,18 +287,20 @@ class QuizSessionFact(models.Model):
         self.review_result = "correct"
         self.save()
         
-        # Update UserFactPerformance
-        ufp = UserFactPerformance.objects.get_or_create(user=self.user, fact=self.fact)[0]
-        ufp.set_correct()
+        # Update UserFactPerformance if user is logged in
+        if self.user:
+            ufp = UserFactPerformance.objects.get_or_create(user=self.user, fact=self.fact)[0]
+            ufp.set_correct()
     
     def set_false(self):
         # Set this session fact result to false
         self.review_result = "false"
         self.save()
         
-        # Update UserFactPerformance
-        ufp = UserFactPerformance.objects.get_or_create(user=self.user, fact=self.fact)[0]
-        ufp.set_false()
+        # Update UserFactPerformance if user is logged in
+        if self.user:
+            ufp = UserFactPerformance.objects.get_or_create(user=self.user, fact=self.fact)[0]
+            ufp.set_false()
         
 
 

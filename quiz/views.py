@@ -1,110 +1,110 @@
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-import random
+from django.http import Http404
 import logging
 log = logging.getLogger(__name__)
 
 from .models import Fact, Quiz, QuizSession, QuizSessionFact
 
 
-@login_required
-def quiz(request, quiz_uuid):
+def start_quiz(request, quiz_uuid):
     # Retrieve Quiz
     quiz = Quiz.objects.get(uuid=quiz_uuid)
 
-    # Get or create Quiz Session
-    try:
-        # Check if there's an existing quiz of this type & user in progress
-        quiz_session = QuizSession.objects.get(
-            user=request.user,
-            quiz=quiz,
-            state="in_progress"
-        )
-    except QuizSession.DoesNotExist:
-        # Mark old in_progress sessions as cancelled
+    # Create Quiz Session
+    # Mark old in_progress sessions as cancelled if user is logged in
+    if request.user.is_authenticated:
         old_sessions = QuizSession.objects.filter(
             user=request.user,
             state="in_progress"
         )
         for old_session in old_sessions:
             old_session.mark_cancelled()
-        
-        # Create new session
-        quiz_session = QuizSession.objects.create(
-            user=request.user,
-            quiz=quiz,
-            state="in_progress"
-        )
-        log.info(f"Created new session {quiz_session.uuid}")
-        quiz_session.load_facts()
-
-        
     
-    # Get first fact
-    first_session_fact = QuizSessionFact.objects.filter(
+    # Create new session
+    quiz_session = QuizSession.objects.create(
+        user=request.user if request.user.is_authenticated else None,
         quiz=quiz,
-        quiz_session=quiz_session,
-        user=request.user,
-        review_result__isnull=True
-    ).order_by('sort_order').first()
+        state="in_progress"
+    )
+    log.info(f"Created new session {quiz_session.uuid}")
+    quiz_session.load_facts()
 
-    # Redirect to summary page if no facts left
+    # Get first fact
+    first_session_fact = quiz_session.get_next_fact()
     if not first_session_fact:
-        quiz_session.state = "finished"
-        quiz_session.save()
-        return redirect('quiz:summary', quiz_uuid=quiz.uuid, quiz_session_uuid=quiz_session.uuid)
+        raise Exception("No facts found for newly started quiz session")
     
-    return redirect('quiz:question', quiz_uuid=quiz_uuid, fact_uuid=first_session_fact.fact.uuid)
+    return redirect('quiz:question', quiz_session_uuid=quiz_session.uuid, fact_uuid=first_session_fact.fact.uuid)
 
 
-@login_required
-def question(request, quiz_uuid, fact_uuid):
-    quiz = Quiz.objects.get(uuid=quiz_uuid)
+def continue_quiz(request, quiz_session_uuid):
+    try:
+        quiz_session = QuizSession.objects.select_related('quiz').get(uuid=quiz_session_uuid, user_id=request.user.id)
+    except QuizSession.DoesNotExist:
+        raise Http404("Quiz session does not exist for this user")
+    next_quiz_session_fact = quiz_session.get_next_fact()
+    
+    # If no facts left then mark finished and redirect to summary page 
+    if not next_quiz_session_fact:
+        quiz_session.mark_finished()
+        return redirect('quiz:summary', quiz_session_uuid=quiz_session.uuid)
+    
+    # Redirect to next question
+    return redirect('quiz:question', quiz_session_uuid=quiz_session.uuid, fact_uuid=next_quiz_session_fact.fact.uuid)
+    
+
+def question(request, quiz_session_uuid, fact_uuid):
+    try:
+        quiz_session = QuizSession.objects.select_related('quiz').get(uuid=quiz_session_uuid, user_id=request.user.id)
+    except QuizSession.DoesNotExist:
+        raise Http404("Quiz session does not exist for this user")
     fact = Fact.objects.get(uuid=fact_uuid)
     quiz_session_fact = QuizSessionFact.objects.get(
-        quiz=quiz,
-        quiz_session__user=request.user,
+        quiz_session=quiz_session,
         quiz_session__state="in_progress",
         fact=fact
     )
     context = {
         'fact': fact,
-        'quiz': quiz,
+        'quiz_session': quiz_session,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts_user_facing * 100, 0),
-        'html_meta_title': "%s - Question %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts_user_facing),
-        'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz_session.quiz.num_facts_user_facing * 100, 0),
+        'html_meta_title': "%s - Question %s / %s" % (quiz_session.quiz.name, quiz_session_fact.sort_order, quiz_session.quiz.num_facts_user_facing),
+        'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz_session.quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'quiz/question.html', context)
 
 
-@login_required
-def answer(request, quiz_uuid, fact_uuid):
-    quiz = Quiz.objects.get(uuid=quiz_uuid)
+def answer(request, quiz_session_uuid, fact_uuid):
+    try:
+        quiz_session = QuizSession.objects.select_related('quiz').get(uuid=quiz_session_uuid, user_id=request.user.id)
+    except QuizSession.DoesNotExist:
+        raise Http404("Quiz session does not exist for this user")
     fact = Fact.objects.get(uuid=fact_uuid)
     quiz_session_fact = QuizSessionFact.objects.get(
-        quiz=quiz,
-        quiz_session__user=request.user,
+        quiz_session=quiz_session,
         quiz_session__state="in_progress",
         fact=fact
     )
 
     context = {
         'fact': fact,
-        'quiz': quiz,
+        'quiz_session': quiz_session,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz.num_facts_user_facing * 100, 0),
-        'html_meta_title': "%s - Answer %s / %s" % (quiz.name, quiz_session_fact.sort_order, quiz.num_facts_user_facing),
-        'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz.name,
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz_session.quiz.num_facts_user_facing * 100, 0),
+        'html_meta_title': "%s - Answer %s / %s" % (quiz_session.quiz.name, quiz_session_fact.sort_order, quiz_session.quiz.num_facts_user_facing),
+        'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz_session.quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'quiz/answer.html', context)
 
 
-@login_required
-def rate_fact(request, quiz_uuid, fact_uuid):
-    quiz = Quiz.objects.get(uuid=quiz_uuid)
+def rate_fact(request, quiz_session_uuid, fact_uuid):
+    try:
+        quiz_session = QuizSession.objects.select_related('quiz').get(uuid=quiz_session_uuid, user_id=request.user.id)
+    except QuizSession.DoesNotExist:
+        raise Http404("Quiz session does not exist for this user")
     fact = Fact.objects.get(uuid=fact_uuid)
 
     # Get rating from URL param
@@ -115,8 +115,7 @@ def rate_fact(request, quiz_uuid, fact_uuid):
 
     # Get this Quiz Session Fact and set review result
     quiz_session_fact = QuizSessionFact.objects.get(
-        quiz=quiz,
-        quiz_session__user=request.user,
+        quiz_session=quiz_session,
         quiz_session__state="in_progress",
         fact=fact
     )
@@ -128,12 +127,14 @@ def rate_fact(request, quiz_uuid, fact_uuid):
         log.info(f"User {request.user.username} rated fact {fact.uuid} as false")
 
     # Redirect to quiz 
-    return redirect('quiz:quiz', quiz_uuid=quiz_uuid)
+    return redirect('quiz:continue_quiz', quiz_session_uuid=quiz_session.uuid)
 
 
-@login_required
-def summary(request, quiz_uuid, quiz_session_uuid):
-    quiz_session = QuizSession.objects.get(uuid=quiz_session_uuid)
+def summary(request, quiz_session_uuid):
+    try:
+        quiz_session = QuizSession.objects.select_related('quiz').get(uuid=quiz_session_uuid, user_id=request.user.id)
+    except QuizSession.DoesNotExist:
+        raise Http404("Quiz session does not exist for this user")
     # Calculate the total number of quizsessionfacts, how many are correct and how many are false
     total_fact_count = quiz_session.quiz.num_facts_user_facing
     correct_fact_count = quiz_session.quizsessionfacts.filter(review_result="correct").count() or 0

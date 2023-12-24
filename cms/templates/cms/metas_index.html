@@ -11,14 +11,14 @@
         {% if quiz_session %}
         <a 
             class="py-3 px-6 flex flex-col flex-grow rounded-md items-center justify-center bg-sky-500 hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
-            href="{% url 'quiz:quiz' quiz_session.quiz.uuid %}">
+            href="{% url 'quiz:start_quiz' quiz_session.quiz.uuid %}">
             <div class="text-xs font-light">Continue your in-progress quiz</div>
             <div class="font-bold">{{quiz_session.quiz.name}}</div>
         </a>
         {% endif %}
         <a 
             class="mt-2 sm:mt-0 sm:max-w-[50%] mx-auto py-3 px-6 flex flex-col flex-grow rounded-md items-center justify-center bg-teal-500 hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
-            href="{% url 'quiz:quiz' random_quiz_uuid %}">
+            href="{% url 'quiz:start_quiz' random_quiz_uuid %}">
             <div class="text-xs font-light">Learn some Geometas</div>
             <div class="font-bold">Start new random quiz</div>
         </a>

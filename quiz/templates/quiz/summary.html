@@ -14,17 +14,23 @@
         <div class="mt-4">
             <div class="grid grid-cols-2 gap-4">
                 {% for quiz_session_fact in session.quizsessionfacts.all %}
-                    <div class="flex">
+                    <div class="flex h-12">
                         <div class="w-20 mr-4">
-                            <img src="{{ quiz_session_fact.fact.image_url }}" class="max-h-12">
+                            <a href="{% url 'cms:fact_detail' quiz_session_fact.fact.uuid %}">
+                                <img src="{{ quiz_session_fact.fact.image_url }}" class="max-h-12">
+                            </a>
                         </div>
-                        <div class="my-auto">{{ quiz_session_fact.fact.answer|truncatechars:'50' }}</div>
+                        <div class="my-auto">
+                            <a href="{% url 'cms:fact_detail' quiz_session_fact.fact.uuid %}">
+                                {{ quiz_session_fact.fact.answer|truncatechars:'50' }}
+                            </a>
+                        </div>
                     </div>
                     <div class="my-auto font-medium">
                         {% if quiz_session_fact.review_result == 'correct' %}
                             <span class="text-green-600">✅ Easy</span>
                         {% else %}
-                            <span class="text-red-600">❌ Hard</span>
+                            <span class="text-red-600">❌ Didn't know</span>
                         {% endif %}
                     </div>
                 {% endfor %}
