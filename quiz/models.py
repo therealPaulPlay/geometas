@@ -309,7 +309,7 @@ class UserFactPerformance(models.Model):
     fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
     updated_at = models.DateTimeField(auto_now=True)
     review_count = models.IntegerField(default=0)
-    box = models.IntegerField(default=0)
+    box = models.IntegerField(default=1)
     
     class Meta:
         unique_together = ('user', 'fact')
@@ -320,13 +320,16 @@ class UserFactPerformance(models.Model):
     
     def set_correct(self):
         self.review_count += 1
+        # Temp 0 fix
+        if self.box == 0:
+            self.box = 1
         if self.box < UserFactPerformance.MAX_BOX_NUM:
             self.box += 1
         self.save()
     
     def set_false(self):
         self.review_count += 1
-        self.box = 0
+        self.box = 1
         self.save()
     
     
