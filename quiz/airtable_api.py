@@ -85,13 +85,13 @@ def check_if_fact_needs_update(fact_response):
     db_fact = Fact.objects.filter(airtable_id=fact_response['id']).first()
     if db_fact:
         if db_fact.updated_at < airtable_updated_at:
-            log.info(f"Fact '{fact_response['id']}' updating: last updated at {airtable_updated_at} and DB fact last updated at {db_fact.updated_at}")
+            #log.info(f"Fact '{fact_response['id']}' updating: last updated at {airtable_updated_at} and DB fact last updated at {db_fact.updated_at}")
             return True
         else:
-            log.info(f"Fact '{fact_response['id']}' NOT updating: last updated at {airtable_updated_at} and DB fact last updated at {db_fact.updated_at}")
+            #log.info(f"Fact '{fact_response['id']}' NOT updating: last updated at {airtable_updated_at} and DB fact last updated at {db_fact.updated_at}")
             return False
     else:
-        log.info(f"Fact '{fact_response['id']}' needs to be created")
+        #log.info(f"Fact '{fact_response['id']}' needs to be created")
         return True
         
 

@@ -29,7 +29,7 @@ def metas_index(request):
         'total_fact_count': total_fact_count,
         'random_quiz_uuid': Quiz.objects.get(name=Quiz.RANDOM_QUIZ_NAME).uuid,
         'html_meta_title': None,
-        'html_meta_description': 'Become a Geoguessr champion by learning new metas and taking quizzes to practice your country meta knowledge.',
+        'html_meta_description': 'Become a Geoguessr champion: find new Geoguessr metas from Google Streetview around the world and test your knowledge with quizzes.',
         'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'cms/metas_index.html', context)
@@ -100,12 +100,12 @@ def fact_detail(request, fact_uuid):
     for country in fact.countries.all():
         country_name_list.append(country.name)
     country_name_list = ', '.join(country_name_list)
-    fact_title = "%s - %s - Meta" % (country_name_list, fact.category.name)
+    fact_title = "%s: %s meta" % (country_name_list, fact.category.name.lower())
     context = {
         'fact': fact,
         'fact_title': fact_title,
         'html_meta_title': fact_title,
         'html_meta_description': fact.answer,
-         'html_meta_image_url': fact.image_url,
+        'html_meta_image_url': fact.image_url,
     }
     return render(request, 'cms/fact_detail.html', context)
