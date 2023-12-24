@@ -1,0 +1,24 @@
+{% extends "template_content_with_extra.html" %}
+
+{%load static %}
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <img src="{% static 'seo/country_coverage.png' %}" alt="{{ html_meta_title }}" class="w-full">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="flex flex-col gap-y-4">
+
+    <h2 class="text-2xl font-bold text-slate-900">Geoguessr's coverage depends on Google Streetview</h2>
+    <p>Geoguessr uses Google Streetview to create its maps. Therefore, Geoguessr's coverage depends on Google Streetview's coverage. Currently, Geoguessr is available in {{ country_count }} countries.</p>
+    
+    <p>Here is the list of countries covered on Geoguessr:</p>
+
+    {% include 'cms/components/country_quiz_list.html' %}
+
+</div>
+{% endblock %}

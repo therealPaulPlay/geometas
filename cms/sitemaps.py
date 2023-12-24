@@ -14,6 +14,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
     def items(self):
         return [
                 'metas_index',
+                'articles:country_coverage',
                ]
 
     def location(self, item):
@@ -70,3 +71,4 @@ class MetasDetailSitemap(sitemaps.Sitemap):
 
     def location(self, item):
         return reverse('cms:fact_detail', args=[item])
+    

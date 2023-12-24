@@ -6,6 +6,7 @@ module.exports = {
     'geobin/**/*.html',
     'accounts/**/*.html',
     'cms/**/*.html',
+    'articles/**/*.html',
   ],
   theme: {
     extend: {},
