@@ -1,0 +1,43 @@
+{% extends "template_content_with_extra.html" %}
+
+{%load static %}
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <img src="{% static 'seo/driving_direction.png' %}" alt="{{ html_meta_title }}" class="w-full">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="flex flex-col gap-y-4">
+
+    <p>The direction of driving is an important factor in Geoguessr. It is important to know which side of the road you should be driving on. Most countries covered by Geoguessr drive on the right-hand side. It's decisive to check the driving direction - if you see left-hand side traffic you can significantly narrow down the list of options.</p>
+    
+    <p>Here is the list of driving directions for countries covered on Geoguessr:</p>
+
+    <div class="max-w-md">
+        {% for country in countries %}
+            <div class="flex px-2 py-2 first:border-t border-b border-slate-300 {% if not country.right_hand_traffic %}bg-emerald-100{% else %}bg-sky-50{% endif %}">
+                <div class="flex-grow">
+                    <a href="{% url 'cms:country' country.slug %}">
+                        {{ country.flag_emoji }} {{country.name}}
+                    </a>
+                </div>
+                <div class="flex-none">
+                    {% if country.right_hand_traffic %}
+                        <span class="text-sky-600">Right-hand traffic</span>
+                    {% else %}
+                        <span class="text-emerald-600">Left-hand traffic</span>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+            
+
+
+
+</div>
+{% endblock %}

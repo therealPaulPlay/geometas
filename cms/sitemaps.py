@@ -15,6 +15,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
         return [
                 'metas_index',
                 'articles:country_coverage',
+                'articles:driving_direction',
                ]
 
     def location(self, item):

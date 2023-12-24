@@ -15,3 +15,13 @@ def country_coverage(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/country_coverage.png'),
     }
     return render(request, 'articles/country_coverage.html', context)
+
+
+def driving_direction(request):
+    context = {
+        'countries': Country.objects.all().order_by('name').select_related('quiz'),
+        'html_meta_title': "Driving direction in Geoguessr",
+        'html_meta_description': "The direction of traffic is a key meta in Geoguessr. Learn the driving direction for each country to become a Geoguessr champion.",
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/driving_direction.png'),
+    }
+    return render(request, 'articles/driving_direction.html', context)

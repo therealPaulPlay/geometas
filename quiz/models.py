@@ -25,6 +25,7 @@ class Country(models.Model):
     continent = models.CharField(max_length=200)
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='countries', null=True)
     quiz = models.OneToOneField('quiz.Quiz', on_delete=models.SET_NULL, null=True, blank=True, related_name='country_quiz')
+    right_hand_traffic = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
