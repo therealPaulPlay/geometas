@@ -23,8 +23,7 @@ def start_quiz(request, quiz_uuid):
     # Create new session
     quiz_session = QuizSession.objects.create(
         user=request.user if request.user.is_authenticated else None,
-        quiz=quiz,
-        state="in_progress"
+        quiz=quiz
     )
     log.info(f"Created new session {quiz_session.uuid}")
     quiz_session.load_facts()
@@ -61,7 +60,6 @@ def question(request, quiz_session_uuid, fact_uuid):
     fact = Fact.objects.get(uuid=fact_uuid)
     quiz_session_fact = QuizSessionFact.objects.get(
         quiz_session=quiz_session,
-        quiz_session__state="in_progress",
         fact=fact
     )
     context = {
@@ -84,7 +82,6 @@ def answer(request, quiz_session_uuid, fact_uuid):
     fact = Fact.objects.get(uuid=fact_uuid)
     quiz_session_fact = QuizSessionFact.objects.get(
         quiz_session=quiz_session,
-        quiz_session__state="in_progress",
         fact=fact
     )
 
@@ -116,7 +113,6 @@ def rate_fact(request, quiz_session_uuid, fact_uuid):
     # Get this Quiz Session Fact and set review result
     quiz_session_fact = QuizSessionFact.objects.get(
         quiz_session=quiz_session,
-        quiz_session__state="in_progress",
         fact=fact
     )
     if rating == 'correct':
