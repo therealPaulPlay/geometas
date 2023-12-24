@@ -21,34 +21,31 @@
               </div>
         {% endif %}
 
-        <div class="font-medium py-4">
+        <div class="text-xl font-medium py-4">
             You mastered {{ correct_fact_count }} of {{ total_fact_count }} metas ({{correct_percentage|floatformat:"0"}}%)
         </div>
 
-        <div class="mt-4">
-            <div class="grid grid-cols-2 gap-4">
-                {% for quiz_session_fact in session.quizsessionfacts.all %}
-                    <div class="flex h-12">
-                        <div class="w-20 mr-4">
-                            <a href="{% url 'cms:fact_detail' quiz_session_fact.fact.uuid %}">
-                                <img src="{{ quiz_session_fact.fact.image_url }}" class="max-h-12">
-                            </a>
-                        </div>
-                        <div class="my-auto">
-                            <a href="{% url 'cms:fact_detail' quiz_session_fact.fact.uuid %}">
-                                {{ quiz_session_fact.fact.answer|truncatechars:'50' }}
-                            </a>
-                        </div>
+        <div class="mt-4 max-w-xl">
+            {% for quiz_session_fact in session.quizsessionfacts.all %}
+                <div class="flex mb-3 h-12">
+                    <div class="w-20 mr-3 flex-none">
+                        <a href="{% url 'cms:fact_detail' quiz_session_fact.fact.uuid %}">
+                            <img src="{{ quiz_session_fact.fact.image_url }}" class="max-h-12 ml-auto">
+                        </a>
                     </div>
-                    <div class="my-auto font-medium">
-                        {% if quiz_session_fact.review_result == 'correct' %}
-                            <span class="text-green-600">✅ Easy</span>
-                        {% else %}
-                            <span class="text-red-600">❌ Didn't know</span>
-                        {% endif %}
+                    <div class="my-auto mr-3 grow">
+                        <a href="{% url 'cms:fact_detail' quiz_session_fact.fact.uuid %}">
+                            <p class="leading-5 text-sm sm:hidden">{{ quiz_session_fact.fact.answer|truncatechars:'50' }}</p>
+                            <p class="leading-5 text-sm hidden sm:block">{{ quiz_session_fact.fact.answer|truncatechars:'100' }}</p>
+                        </a>
                     </div>
-                {% endfor %}
-            </div>
+                    {% if quiz_session_fact.review_result == 'correct' %}
+                        <div class="flex-none my-auto text-green-600 text-sm">✅</div>
+                    {% else %}
+                        <div class="flex-none my-auto text-red-600 text-sm">❌</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
         </div>
 
         <div class="max-w-full pt-12 fixed bottom-0 inset-x-0 sm:relative sm:bottom-auto">
