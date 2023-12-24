@@ -1,5 +1,5 @@
 <div class="flex">
-    <div class="text-xs text-sky-500 my-auto mr-3 whitespace-nowrap">Meta {{ quiz_session_fact.sort_order }}/{{ quiz_session.quiz.num_facts_user_facing }}</div>
+    <div class="text-xs text-sky-500 my-auto mr-3 whitespace-nowrap">Meta {{ quiz_session_fact.sort_order }}/{{ quiz_session.num_questions }}</div>
     <div class="w-full my-auto bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
         <div class="bg-sky-400 h-2.5 rounded-full" style="width: {{progress_pct|floatformat:"0"}}%"></div>
     </div>

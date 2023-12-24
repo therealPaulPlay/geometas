@@ -112,12 +112,6 @@ class Quiz(models.Model):
         self.num_facts = self.get_facts().count()
         self.save()
         log.info(f"Quiz {self.name} updated with {self.num_facts} facts")
-    
-    @property
-    def num_facts_user_facing(self):
-        if self.name == Quiz.RANDOM_QUIZ_NAME:
-            return Quiz.QUIZ_NUM_FACTS
-        return self.num_facts
 
 
 class QuizSession(models.Model):
@@ -145,6 +139,10 @@ class QuizSession(models.Model):
 
     def __str__(self):
         return f"{self.uuid} - {self.user} - {self.quiz.name} - {self.state}"
+    
+    @property
+    def num_questions(self):
+        return Quiz.QUIZ_NUM_FACTS
 
     def mark_cancelled(self):
         self.state = "cancelled"

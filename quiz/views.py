@@ -68,8 +68,8 @@ def question(request, quiz_session_uuid, fact_uuid):
         'fact': fact,
         'quiz_session': quiz_session,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz_session.quiz.num_facts_user_facing * 100, 0),
-        'html_meta_title': "%s - Question %s / %s" % (quiz_session.quiz.name, quiz_session_fact.sort_order, quiz_session.quiz.num_facts_user_facing),
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz_session.num_questions * 100, 0),
+        'html_meta_title': "%s - Question %s / %s" % (quiz_session.quiz.name, quiz_session_fact.sort_order, quiz_session.num_questions),
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz_session.quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
@@ -92,8 +92,8 @@ def answer(request, quiz_session_uuid, fact_uuid):
         'fact': fact,
         'quiz_session': quiz_session,
         'quiz_session_fact': quiz_session_fact,
-        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz_session.quiz.num_facts_user_facing * 100, 0),
-        'html_meta_title': "%s - Answer %s / %s" % (quiz_session.quiz.name, quiz_session_fact.sort_order, quiz_session.quiz.num_facts_user_facing),
+        'progress_pct': round((quiz_session_fact.sort_order-1) / quiz_session.num_questions * 100, 0),
+        'html_meta_title': "%s - Answer %s / %s" % (quiz_session.quiz.name, quiz_session_fact.sort_order, quiz_session.num_questions),
         'html_meta_description': "Take the quiz '%s' on Geometas to become a Geoguessr champion" % quiz_session.quiz.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
@@ -136,7 +136,7 @@ def summary(request, quiz_session_uuid):
     except QuizSession.DoesNotExist:
         raise Http404("Quiz session does not exist for this user")
     # Calculate the total number of quizsessionfacts, how many are correct and how many are false
-    total_fact_count = quiz_session.quiz.num_facts_user_facing
+    total_fact_count = quiz_session.num_questions
     correct_fact_count = quiz_session.quizsessionfacts.filter(review_result="correct").count() or 0
     correct_percentage = round(correct_fact_count / total_fact_count * 100, 0)
     context = {
