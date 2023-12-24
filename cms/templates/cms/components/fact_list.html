@@ -2,13 +2,13 @@
     <div class="mb-10">
         {% for fact in facts %}
             <div class="py-10 even:bg-slate-100 -mx-4 px-4 sm:-mx-8 sm:px-8">
-                <div class="grid grid-cols-3 gap-4">
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     <div class="my-auto">
                         <a href="{% url 'cms:fact_detail' fact.uuid %}">
                             <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
                         </a>
                     </div>
-                    <div class="col-span-2">
+                    <div class="sm:col-span-2">
                         <div class="flex flex-wrap gap-x-2 gap-y-1">
                             {% if not category %}
                                 <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.category.name }}</span>
