@@ -21,7 +21,7 @@ INPUT_REGIONS = [
 
 INPUT_COUNTRIES = [
     ["Albania", "AL", "Europe", "Eastern Europe", True],
-    ["Andorra", "AS", "Europe", "Western Europe", True],
+    ["Andorra", "AD", "Europe", "Western Europe", True],
     ["Argentina", "AR", "South America", "Latin America", True],
     ["Australia", "AU", "Oceania", "Oceania", False],
     ["Austria", "AT", "Europe", "Western Europe", True],
