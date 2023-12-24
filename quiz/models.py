@@ -138,7 +138,7 @@ class QuizSession(models.Model):
         verbose_name_plural = "Quiz Sessions"
 
     def __str__(self):
-        return f"{self.uuid} - {self.user} - {self.quiz.name} - {self.state}"
+        return f"{self.uuid}"
     
     @property
     def num_questions(self):
