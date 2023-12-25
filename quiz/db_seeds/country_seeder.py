@@ -86,6 +86,8 @@ INPUT_COUNTRIES = [
     ["North Macedonia", "MK", "Europe", "Eastern Europe", True],
     ["Northern Mariana Islands", "MP", "Oceania", "Oceania", True],
     ["Norway", "NO", "Europe", "Nordics", True],
+    ["Pakistan", "PK", "Asia", "South & South-East Asia", False],
+    ["Palestine", "PS", "Asia", "Middle East", True],
     ["Panama", "PA", "North America", "Latin America", True],
     ["Peru", "PE", "South America", "Latin America", True],
     ["Philippines", "PH", "Asia", "South & South-East Asia", True],
