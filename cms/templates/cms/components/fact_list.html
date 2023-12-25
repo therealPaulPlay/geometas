@@ -1,7 +1,7 @@
 <div class="grid grid-cols -mt-6">
     <div class="mb-10">
         {% for fact in facts %}
-            <div class="py-10 even:bg-slate-100 -mx-4 px-4 sm:-mx-8 sm:px-8">
+            <div class="py-5 sm:py-10 even:bg-slate-100 -mx-4 px-4 sm:-mx-8 sm:px-8">
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     <div class="my-auto">
                         <a href="{% url 'cms:fact_detail' fact.uuid %}">
@@ -19,7 +19,7 @@
                                 {% endfor %}
                             {% endif %}
                         </div>
-                        <div class="my-auto mt-2">
+                        <div class="my-auto mt-2 text-sm sm:text-base">
                             <a href="{% url 'cms:fact_detail' fact.uuid %}">{{ fact.answer }}</a>
                         </div>
                     </div>
