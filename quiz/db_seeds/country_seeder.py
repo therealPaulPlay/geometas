@@ -56,6 +56,7 @@ INPUT_COUNTRIES = [
     ["Greenland", "GL", "Europe", "Nordics", True],
     ["Guam", "GU", "Oceania", "Oceania", True],
     ["Guatemala", "GT", "North America", "Latin America", True],
+    ["Hong Kong", "HK", "Asia", "Rest of Asia", False],
     ["Hungary", "HU", "Europe", "Eastern Europe", True],
     ["Iceland", "IS", "Europe", "Nordics", True],
     ["India", "IN", "Asia", "South & South-East Asia", False],
