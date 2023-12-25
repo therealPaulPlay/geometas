@@ -5,7 +5,7 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                     <div class="my-auto">
                         <a href="{% url 'cms:fact_detail' fact.uuid %}">
-                            <img src="{{ fact.image_url }}" class="max-h-40 ml-auto">
+                            <img src="{{ fact.image_url }}" loading="lazy" class="max-h-40 ml-auto">
                         </a>
                     </div>
                     <div class="sm:col-span-2">
