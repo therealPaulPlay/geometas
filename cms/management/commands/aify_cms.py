@@ -17,47 +17,54 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         
+        cost = 0
+        
         # Regions
-        update_regions()
+        cost_regions = update_regions()
 
         # Categories
-        update_categories()
+        cost_categories = update_categories()
         
+        cost = cost_regions + cost_categories
+        
+        print("Total cost: $%s" % round(cost, 2))
         
 
 
 def update_categories():
     categories = Category.objects.all()
     output_dict = {}
+    total_costs = 0
+    
     for category in categories:
         
         # Create message
-        user_message = create_user_message("Category: ", category.name, category.facts.all())
+        user_message = create_user_message("Category: %s", category.name, category.facts.all())
 
         # Call OpenAI
         completion = call_openai(SYSTEM_MESSAGE.strip(), user_message.strip())
 
-        # Print output
+        # Get output
         geo_content_output = completion.choices[0].message.content
-        geo_content_output = geo_content_output.strip('```json\n ')
-        geo_content_output = geo_content_output.strip('\n```')
-        try:
-            geo_content_output = json.loads(geo_content_output)['description']
-        except:
-            print("ERROR: %s" % geo_content_output)
-            raise
-        # print("**********   %s   **********" % category.name)
-        # print(geo_content_output)
+        #print("geo_content_output: %s" % geo_content_output)
+        #print(len(geo_content_output), "chars")
+        
         # Add to output array
         output_dict[category.slug] = geo_content_output
+        
+        total_costs += (completion.usage.total_tokens * 0.01 / 1000)
 
     # Print output array
     print(output_dict)
+    
+    return total_costs
     
 
 def update_regions():
     regions = Region.objects.all()
     output_dict = {}
+    total_costs = 0
+    
     for region in regions:
         
         # Get all Facts
@@ -72,22 +79,20 @@ def update_regions():
         # Call OpenAI
         completion = call_openai(SYSTEM_MESSAGE.strip(), user_message.strip())
 
-        # Print output
+        # Get output
         geo_content_output = completion.choices[0].message.content
-        geo_content_output = geo_content_output.strip('```json\n ')
-        geo_content_output = geo_content_output.strip('\n```')
-        try:
-            geo_content_output = json.loads(geo_content_output)['description']
-        except:
-            print("ERROR: %s" % geo_content_output)
-            raise
-        # print("**********   %s   **********" % region.name)
-        # print(geo_content_output)
+        #print("geo_content_output: %s" % geo_content_output)
+        #print(len(geo_content_output), "chars")
+
         # Add to output array
         output_dict[region.slug] = geo_content_output
+        
+        total_costs += (completion.usage.total_tokens * 0.01 / 1000)
 
     # Print output array
     print(output_dict)
+    
+    return total_costs
 
 
 def call_openai(system_message, user_message):
@@ -102,17 +107,14 @@ def call_openai(system_message, user_message):
 
 
 def create_user_message(type, name, facts):
-    """
-    Create the user message in this format:
-    "<type>: <name>. <All fact.answer separated by ". ">"
-    """
-    # Get all questions
-    questions = []
+    answers = []
     for fact in facts:
-        questions.append(fact.answer)
+        answers.append(fact.answer)
     
-    # Create the message
-    message = f"{type}: {name}. " + ". ".join(questions) + "."
+    message = f"{type}: {name}. Metas:"
+    # Add answers row by row with bullets
+    for answer in answers:
+        message += f"\n- {answer}"
     return message
 
 
