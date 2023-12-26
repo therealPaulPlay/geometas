@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /quiz/
+Disallow: /accounts/
+
+Sitemap: https://www.geometas.com/sitemap.xml

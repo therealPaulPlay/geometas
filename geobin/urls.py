@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap as django_sitemap_view
+from django.views.generic.base import TemplateView
 from django.urls import include, path
 
 from cms.views import metas_index
@@ -24,6 +25,7 @@ urlpatterns = [
     path('login/', accounts_login, name='login'),
     path('logout/', accounts_logout, name='logout'),
     path('sitemap.xml', django_sitemap_view, {'sitemaps': SITEMAPS_DICT}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     #path('__debug__/', include('debug_toolbar.urls')),
     path('', metas_index, name='metas_index')
 ]
