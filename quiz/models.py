@@ -58,6 +58,7 @@ class Fact(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     answer = models.CharField(max_length=1000)
     image_url = models.CharField(max_length=1000)
+    google_streetview_url = models.CharField(max_length=1000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     countries = models.ManyToManyField(Country, related_name='facts')
