@@ -74,7 +74,7 @@ INPUT_COUNTRIES = [
     ["Lesotho", "LS", "Africa", "Africa", False],
     ["Lithuania", "LT", "Europe", "Baltics", True],
     ["Luxembourg", "LU", "Europe", "Western Europe", True],
-    ["Madagascar", "MG", "Africa", "Africa", True],
+    ["Madagascar", "MG", "Africa", "Africa", False],
     ["Malaysia", "MY", "Asia", "South & South-East Asia", False],
     ["Malta", "MT", "Europe", "Western Europe", True],
     ["Mexico", "MX", "North America", "Latin America", True],
