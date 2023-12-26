@@ -151,7 +151,7 @@ def resize_image_in_memory(image_data, max_size):
 
         # Check if the image needs to be resized
         if width > max_size or height > max_size:
-            log.info("Resizing image to %sx%s" % (new_width, new_height))
+            log.info("Resizing image")
             # Calculate the new size maintaining aspect ratio
             if width > height:
                 new_width = max_size
