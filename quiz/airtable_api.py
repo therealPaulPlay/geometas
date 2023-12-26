@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.utils import timezone
+from PIL import Image
 from pyairtable import Api
 import requests
 import boto3
 import datetime
 import os
+import io
 import logging
 log = logging.getLogger(__name__)
 
@@ -112,6 +114,7 @@ def deserialize_fact(fact_response):
 def move_image_from_airtable_to_s3(image_url, image_name):
     """ Moves an image from airtable to S3 """
     image_content = download_image_from_airtable(image_url)
+    image_content = resize_image_in_memory(image_content, 1000)
     return upload_image_to_s3_via_boto(image_content, image_name)
 
 
@@ -138,3 +141,39 @@ def upload_image_to_s3_via_boto(image_content, image_name):
         log.exception("S3 upload failed %s" % e)
         return False
     return True 
+
+
+def resize_image_in_memory(image_data, max_size):
+    # Load the image from bytes
+    with Image.open(io.BytesIO(image_data)) as img:
+        # Get the size of the image
+        width, height = img.size
+
+        # Check if the image needs to be resized
+        if width > max_size or height > max_size:
+            log.info("Resizing image to %sx%s" % (new_width, new_height))
+            # Calculate the new size maintaining aspect ratio
+            if width > height:
+                new_width = max_size
+                new_height = int(max_size * height / width)
+            else:
+                new_height = max_size
+                new_width = int(max_size * width / height)
+
+            # Resize the image
+            img = img.resize((new_width, new_height))
+
+            # Save the resized image to a bytes object for further use
+            output = io.BytesIO()
+            
+            # Preserve PNG alpha channel if it exists
+            if img.mode == 'RGBA':
+                img_format = 'PNG'  # Use PNG format for images with alpha channel
+            else:
+                img_format = img.format if img.format else 'JPEG' 
+            img.save(output, format=img_format)
+            log.info("Resized image to %sx%s" % (new_width, new_height))
+            return output.getvalue()
+    
+    # Return original image if it wasnt resized
+    return image_data
