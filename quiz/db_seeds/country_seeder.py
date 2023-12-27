@@ -6,17 +6,17 @@ log = logging.getLogger(__name__)
 
 
 INPUT_REGIONS = [
-    "Western Europe",
-    "Eastern Europe", 
-    "Baltics",
-    "Nordics",
-    "North America",
-    "Latin America", 
-    "South & South-East Asia",
-    "Middle East",
-    "Rest of Asia",
-    "Oceania", 
-    "Africa",
+    ["Western Europe", 1],
+    ["Eastern Europe",  2],
+    ["Baltics", 4],
+    ["Nordics", 3],
+    ["North America", 6],
+    ["Latin America",  5],
+    ["South & South-East Asia", 7],
+    ["Middle East", 11],
+    ["Rest of Asia", 8],
+    ["Oceania",  9],
+    ["Africa", 10],
 ]
 
 INPUT_COUNTRIES = [
@@ -131,23 +131,28 @@ OPENAI_CONTENT = {'western_europe': 'Recognizing Western Europe in Geoguessr inv
 def update_regions():
     # Create Regions
     for input_region in INPUT_REGIONS:
-        region_db = Region.objects.filter(name=input_region).first()
+        region_name = input_region[0]
+        region_sort_order = input_region[1]
+        region_db = Region.objects.filter(name=region_name).first()
         if region_db:
-            region_db.slug = convert_string_to_snakecase(input_region)
+            region_db.slug = convert_string_to_snakecase(region_name)
             region_db.description = OPENAI_CONTENT[region_db.slug]
+            region_db.sort_order = region_sort_order
             region_db.save()
         else:
             Region.objects.create(
-                name=input_region,
-                slug=convert_string_to_snakecase(input_region),
-                description=OPENAI_CONTENT[convert_string_to_snakecase(input_region)]
+                name=region_name,
+                slug=convert_string_to_snakecase(region_name),
+                description=OPENAI_CONTENT[convert_string_to_snakecase(region_name)],
+                sort_order=region_sort_order
             )
-        log.info(f"Region {input_region} updated")
+        log.info(f"Region {region_name} updated")
     
     # Delete Regions
     db_regions = Region.objects.all()
+    region_names = [input_region[0] for input_region in INPUT_REGIONS]
     for db_region in db_regions:
-        if db_region.name not in INPUT_REGIONS:
+        if db_region.name not in region_names:
             if db_region.quiz:
                 db_region.quiz.delete()
             db_region.delete()

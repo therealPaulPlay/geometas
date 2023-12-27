@@ -9,6 +9,7 @@ class Region(models.Model):
     name = models.CharField(max_length=250)
     slug = models.CharField(max_length=250)
     description = models.TextField(null=True, blank=True)
+    sort_order = models.IntegerField(default=0)
     quiz = models.OneToOneField('quiz.Quiz', on_delete=models.SET_NULL, null=True, blank=True, related_name='region_quiz')
 
     def __str__(self):

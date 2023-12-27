@@ -20,10 +20,7 @@ def metas_index(request):
     total_fact_count = Fact.objects.all().count()
 
     context = {
-        'countries_europe': Country.objects.filter(continent="Europe").order_by('region', 'name').select_related('quiz', 'region__quiz'),
-        'countries_asia': Country.objects.filter(continent="Asia").order_by('region', 'name').select_related('quiz', 'region__quiz'),
-        'countries_americas': Country.objects.filter(continent__icontains="America").order_by('region', 'name').select_related('quiz', 'region__quiz'),
-        'countries_row': Country.objects.all().exclude(continent="Europe").exclude(continent="Asia").exclude(continent__icontains="America").order_by('region', 'name').select_related('quiz', 'region__quiz'),
+        'countries': Country.objects.all().order_by('region__sort_order', 'name').select_related('quiz', 'region__quiz'),
         'categories': Category.objects.all().order_by('name').select_related('quiz'),
         'quiz_session': quiz_session,
         'total_fact_count': total_fact_count,

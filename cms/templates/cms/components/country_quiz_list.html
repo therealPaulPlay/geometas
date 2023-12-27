@@ -1,107 +1,27 @@
-<div class="grid grid-cols-1 sm:grid-cols-4 gap-2 sm:gap-x-6">
+<h2 class="text-2xl font-bold text-slate-900">Regions</h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-x-6">
+
+    {% regroup countries by region as region_list %}
+        
+    {% for region in region_list %}
+        <div class="pt-3 pb-5">
+            <div class="mb-2">
+                <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-950 hover:text-sky-700 whitespace-nowrap">
+                    <span class="text-xl font-bold mb-2 mt-4">{{ region.grouper.name }}</span>
+                    <span class="text-slate-400 font-base text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-2">
+                {% for country in region.list %}
+                    <div class="mb-1">
+                        <a href="{% url 'cms:country' country.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-800 whitespace-nowrap">
+                            {{ country.flag_emoji }} {{country.name}}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
     
-    <div>
-        <h3 class="text-2xl font-bold text-slate-900 mb-2 mt-4">Europe</h3>
-        <div class="">
-            {% regroup countries_europe by region as region_list %}
-            {% for region in region_list %}
-                <div class="pt-3 pb-5">
-                    <div class="mb-2">
-                        <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-900 hover:text-sky-700">
-                            {{ region.grouper.name }}
-                            <span class="text-slate-400 text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
-                        </a>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-2">
-                        {% for country in region.list %}
-                            <div class="mb-1">
-                                <a href="{% url 'cms:country' country.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                                    {{ country.flag_emoji }} {{country.name}}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div>
-        <h3 class="text-2xl font-bold text-slate-900 mb-2 mt-4">Asia</h3>
-        <div class="">
-            {% regroup countries_asia by region as region_list %}
-            {% for region in region_list %}
-                <div class="pt-3 pb-5">
-                    <div class="mb-2">
-                        <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-900 hover:text-sky-700">
-                            {{ region.grouper.name }}
-                            <span class="text-slate-400 text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
-                        </a>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-2">
-                        {% for country in region.list %}
-                            <div class="mb-1">
-                                <a href="{% url 'cms:country' country.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                                    {{ country.flag_emoji }} {{country.name}}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div>
-        <h3 class="text-2xl font-bold text-slate-900 mb-2 mt-4">Americas</h3>
-        <div class="">
-            {% regroup countries_americas by region as region_list %}
-            {% for region in region_list %}
-                <div class="pt-3 pb-5">
-                    <div class="mb-2">
-                        <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-900 hover:text-sky-700">
-                            {{ region.grouper.name }}
-                            <span class="text-slate-400 text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
-                        </a>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-2">
-                        {% for country in region.list %}
-                            <div class="mb-1">
-                                <a href="{% url 'cms:country' country.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                                    {{ country.flag_emoji }} {{country.name}}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div>
-        <h3 class="text-2xl font-bold text-slate-900 mb-2 mt-4">Rest of World</h3>
-        <div class="">
-            {% regroup countries_row by region as region_list %}
-            {% for region in region_list %}
-                <div class="pt-3 pb-5">
-                    <div class="mb-2">
-                        <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-900 hover:text-sky-700">
-                            {{ region.grouper.name }}
-                            <span class="text-slate-400 text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
-                        </a>
-                    </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-2">
-                        {% for country in region.list %}
-                            <div class="mb-1">
-                                <a href="{% url 'cms:country' country.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
-                                    {{ country.flag_emoji }} {{country.name}}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span>
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
 </div>
