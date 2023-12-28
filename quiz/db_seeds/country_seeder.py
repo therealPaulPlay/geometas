@@ -42,6 +42,7 @@ INPUT_COUNTRIES = [
     ["Colombia", "CO", "South America", "Latin America", True],
     ["Costa Rica", "CR", "North America", "Latin America", True],
     ["Croatia", "HR", "Europe", "Eastern Europe", True],
+    ["Curaçao", "CW", "South America", "Latin America", True],
     ["Czech Republic", "CZ", "Europe", "Eastern Europe", True],
     ["Denmark", "DK", "Europe", "Nordics", True],
     ["Dominican Republic", "DO", "South America", "Latin America", True],
