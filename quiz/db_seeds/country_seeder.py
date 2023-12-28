@@ -30,6 +30,7 @@ INPUT_COUNTRIES = [
     ["Belgium", "BE", "Europe", "Western Europe", True],
     ["Bermuda", "BM", "North America", "North America", True],
     ["Bhutan", "BT", "Asia", "South & South-East Asia", False],
+    ["Bolivia", "BO", "South America", "Latin America", True],
     ["Brazil", "BR", "South America", "Latin America", True],
     ["Botswana", "BW", "Africa", "Africa", False],
     ["Bulgaria", "BG", "Europe", "Eastern Europe", True],
