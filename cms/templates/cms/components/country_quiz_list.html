@@ -7,7 +7,7 @@
     {% for region in region_list %}
         <div class="pt-3 pb-5">
             <div class="mb-2">
-                <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-950 hover:text-sky-700 whitespace-nowrap">
+                <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-950 hover:text-sky-700 whitespace-nowrap truncate">
                     <span class="text-xl font-bold mb-2 mt-4">{{ region.grouper.name }}</span>
                     <span class="text-slate-400 font-base text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
                 </a>
