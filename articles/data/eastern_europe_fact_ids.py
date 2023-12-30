@@ -85,7 +85,7 @@ EASTERN_EUROPE_FACT_IDS = {
             "direction_sign": ["recL0RZCEXxUzP2jh"],
             "street_name": [None],
             "bollard": ["recDaAenzaLrxBBS0"],
-            "uniques": ["rec1MwnKrMIYUzR2p", "viwH8wjxGpzElVyj9"],
+            "uniques": ["rec1MwnKrMIYUzR2p", "recz4omfv0Q20z3pc"],
         },
         "slovenia": {
             "language": [None],
@@ -104,11 +104,11 @@ EASTERN_EUROPE_FACT_IDS = {
             "uniques": [None,],
         },
         "serbia": {
-            "language": [None],
+            "language": ["recSwmmsgOWOMVsIi"],
             "license_plate": [None],
-            "direction_sign": [None],
+            "direction_sign": ["recS1GDw2ihg83uQv"],
             "street_name": [None],
-            "bollard": [None],
-            "uniques": [None,],
+            "bollard": ["rec0SL87Dl88uaYNL"],
+            "uniques": ["recKDzh6pC6co9gkm", "recAhLi7tmiRgab9K"],
         },
     }

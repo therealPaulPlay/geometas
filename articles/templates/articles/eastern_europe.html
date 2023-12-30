@@ -135,7 +135,7 @@
                             </tr>
                             <tr>
                                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇷🇸 Serbia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
+                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin and Cyrillic</a>{% endfor %}</td>
                                 <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
                                 <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
                                 <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
