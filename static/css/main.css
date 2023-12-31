@@ -683,6 +683,14 @@ video {
   margin-top: 2rem;
 }
 
+.-mt-4 {
+  margin-top: -1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1247,6 +1255,18 @@ video {
   padding-top: 1.5rem;
 }
 
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1320,6 +1340,14 @@ video {
 
 .leading-5 {
   line-height: 1.25rem;
+}
+
+.leading-tight {
+  line-height: 1.25;
+}
+
+.leading-snug {
+  line-height: 1.375;
 }
 
 .tracking-tight {
@@ -1590,6 +1618,10 @@ video {
 
   .sm\:mt-16 {
     margin-top: 4rem;
+  }
+
+  .sm\:mt-12 {
+    margin-top: 3rem;
   }
 
   .sm\:block {

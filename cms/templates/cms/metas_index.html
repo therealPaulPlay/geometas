@@ -29,8 +29,8 @@
 
     <div class="">
 
-        <div class="">
-            {% heading_primary title="Categories" %}
+        <div class="-mt-4">
+            {% #heading_primary %}Categories{% /heading_primary %}
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-x-6 mt-4">
                 {% for category in categories %}
                     {% url 'cms:category' category.slug as link_url %}
@@ -41,7 +41,7 @@
             </div>
         </div> 
         
-        <div class="mt-8 sm:mt-16">
+        <div class="mt-4 sm:mt-12">
             {% include 'cms/components/country_quiz_list.html' %}
         </div>
 
@@ -50,10 +50,12 @@
             <h2 class="text-2xl font-bold text-slate-900">Learn more with Geometa's Articles</h2>
             <ul class="ml-6 mt-2 list-disc list-outside">
                 <li class="mt-1">
-                    <a class="text-base font-normal text-sky-600 hover:text-sky-700" href="{% url 'articles:country_coverage' %}">Country Coverage</a>
+                    {% url 'articles:country_coverage' category.slug as link_url %}
+                    {% #link_primary url=link_url %}Country Coverage{% /link_primary %}
                 </li>
                 <li class="mt-1">
-                    <a class="text-base font-normal text-sky-600 hover:text-sky-700" href="{% url 'articles:driving_direction' %}">Driving Direction</a>
+                    {% url 'articles:driving_direction' category.slug as link_url %}
+                    {% #link_primary url=link_url %}Driving Direction{% /link_primary %}
                 </li>
                 <!--<li class="mt-1">
                     <a class="text-base font-normal text-sky-600 hover:text-sky-700" href="{% url 'articles:eastern_europe' %}">Eastern Europe</a>

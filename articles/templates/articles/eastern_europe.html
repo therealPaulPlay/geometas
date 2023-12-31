@@ -1,4 +1,4 @@
-{% extends "template_content_with_extra.html" %}
+{% extends "template_content.html" %}
 
 {%load static %}
 
@@ -11,12 +11,34 @@
 
 {% block content %}
 
+{% #paragraph_text %}
+    In Geoguessr, a lot of Eastern European countries look alike. But, you can use some tips to figure out which country you're in more quickly.
+{% /paragraph_text %}
+
+{% #heading_primary %}Where to start{% /heading_primary %}
+{% #paragraph_text %}
+    First, look around for at least one of the following clues: bollards, warning signs, directional signs, and language. It allows you to quickly reduce the number of possible countries to just a few.
+{% /paragraph_text %}
+{% #paragraph_text %}
+    Next, check if you can find any metas that allow you to find the right country: rifts in the sky, holey poles, a red Google car, milestone markers, or no antenna on the car.
+{% /paragraph_text %}
+{% #paragraph_text %}
+    This article will first list the broad meta categories you should look for first (step 1) and then list the most important metas to identify the specific country (second step).
+{% /paragraph_text %}
+
+{% #heading_primary %}Bollards{% /heading_primary %}
+{% #paragraph_text %}
+    There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
+{% /paragraph_text %}
+<div class="grid grid-cols-2 gap-4">
+    <div class=""><img class="" url="{{ facts.hungary.bollard.1.image_url }}"></div>
+    <div>
+        Hungary<br>
+        {{ facts.hungary.bollard.1 }}
+    </div>
+</div>
+
 <div class="flex flex-col gap-y-4">
-
-    <p>In the game Geoguessr, a lot of Eastern European countries look alike. But, you can use some tips to figure out which country you're in more quickly. First, look around for the following clues: bollards, warning signs, directional signs, and language. Next, check if you can find any metas that allow you to narrow down the country much more quickly: rifts in the sky, holey poles, a red Google car, milestone markers, or no antenna on the car.</p>
-    
-    <p>Here is the list of driving directions for countries covered on Geoguessr:</p>
-
     <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
