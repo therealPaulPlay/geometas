@@ -14,9 +14,7 @@
         <div class="col-span-2">
             <div class="flex gap-2">
                 <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
-                {% for country in fact.countries.all %}
-                    <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ country.flag_emoji }} {{country}}</span>
-                {% endfor %}
+                <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.country.flag_emoji }} {{fact.country}}</span>
             </div>
             <div class="my-auto mt-2">{{ fact.answer }}</div>
         </div>

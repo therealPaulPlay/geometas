@@ -15,6 +15,7 @@
     In Geoguessr, a lot of Eastern European countries look alike. But, you can use some tips to figure out which country you're in more quickly.
 {% /paragraph_text %}
 
+
 {% #heading_primary %}Where to start{% /heading_primary %}
 {% #paragraph_text %}
     First, look around for at least one of the following clues: bollards, warning signs, directional signs, and language. It allows you to quickly reduce the number of possible countries to just a few.
@@ -26,19 +27,106 @@
     This article will first list the broad meta categories you should look for first (step 1) and then list the most important metas to identify the specific country (second step).
 {% /paragraph_text %}
 
+
+{% #heading_primary %}Language{% /heading_primary %}
+{% #paragraph_text %}
+    There are 3 relevant categories of countries depending on their use of the Latin and Cyrillic alphabets. You will find text on street signs and many other places and you should memorize which countries use which alphabet. 
+{% /paragraph_text %}
+
+<div class="pb-2 space-y-2 grid grid-cols-3">
+    <div>
+        {% #heading_secondary %}Latin only{% /heading_secondary %}
+        <div class="space-y-0.5 my-auto">
+            <div>🇵🇱 Poland</div>
+            <div>🇭🇺 Hungary</div>
+            <div>🇭🇷 Croatia</div>
+            <div>🇨🇿 Czech Republic</div>
+            <div>🇸🇰 Slovakia</div>
+            <div>🇸🇮 Slovenia</div>
+            <div>🇷🇴 Romania</div>
+            <div>🇦🇱 Albania</div>
+        </div>
+    </div>
+    <div>
+        {% #heading_secondary %}Latin and Cyrillic{% /heading_secondary %}
+        <div class="space-y-0.5 my-auto">
+            <div>🇲🇪 Montenegro {% #text_italic %}(mostly Latin){% /text_italic %}</div>
+            <div>🇷🇸 Serbia {% #text_italic %}(equal Latin and Cyrillic){% /text_italic %}</div>
+            <div>🇲🇰 North Macedonia {% #text_italic %}(mostly Cyrillic){% /text_italic %}</div>
+        </div>
+    </div>
+    <div>
+        {% #heading_secondary %}Cyrillic only{% /heading_secondary %}
+        <div class="space-y-0.5 my-auto">
+            <div>🇧🇬 Bulgaria</div>
+            <div>🇺🇦 Ukraine</div>
+            <div>🇷🇺 Russia</div>
+        </div>
+    </div>
+</div>
+
 {% #heading_primary %}Bollards{% /heading_primary %}
 {% #paragraph_text %}
     There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
 {% /paragraph_text %}
-<div class="grid grid-cols-2 gap-4">
-    <div class=""><img class="" url="{{ facts.hungary.bollard.1.image_url }}"></div>
-    <div>
-        Hungary<br>
-        {{ facts.hungary.bollard.1 }}
+
+<div class="mt-4 pb-2 space-y-2">
+    <div class="flex gap-4">
+        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ bollard_facts.hungary.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇭🇺 Hungary</div>
+            <div>🇭🇷 Croatia</div>
+            <div>🇧🇬 Bulgaria</div>
+            <div>🇲🇰 North Macedonia {% #text_italic %}(also has a second type with round shape){% /text_italic %}</div>
+            <div>{% #text_italic %}Ukraine's bollard looks similar but its red rectangle is wider.{% /text_italic %}</div>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ bollard_facts.slovenia.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇸🇮 Slovenia</div>
+            <div>🇲🇪 Montenegro</div>
+            <div>{% #text_italic %}Serbia's bollard looks similar but its red rectangle is on the left side, not centered.{% /text_italic %}</div>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ bollard_facts.slovakia.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇸🇰 Slovakia</div>
+            <div>🇨🇿 Czech Republic</div>
+        </div>
     </div>
 </div>
 
-<div class="flex flex-col gap-y-4">
+{% #paragraph_text %}
+    Additionally, 🇵🇱 Poland has unique bollards with a single broad red stripe, 🇷🇴 Romania hardly uses bollards, 🇦🇱 Albania uses Italy-style bollards with a black section that goes all the way to the top, and 🇷🇺 Russia uses a variety of bollards.
+{% /paragraph_text %}
+
+
+{% #heading_primary %}Directional Signs{% /heading_primary %}
+{% #paragraph_text %}
+    There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
+{% /paragraph_text %}
+
+
+{% #heading_primary %}Yellow Street Signs{% /heading_primary %}
+{% #paragraph_text %}
+    Some have some street signs with yellow background. When you see one, you can instantly limit the number of applicable countries. 
+{% /paragraph_text %}
+<div class="mt-4 pb-2 space-y-2">
+    <div class="flex gap-4">
+        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ warning_sign.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇲🇰 North Macedonia</div>
+            <div>🇷🇸 Serbia</div>
+            <div>🇵🇱 Poland </div>
+            <div>{% #text_italic %}Note that Poland has a thinner red border than the Serbian example shown here. The thinner red border is a great way to identify Poland right away.{% /text_italic %}</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="flex flex-col gap-y-4 mt-20">
     <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
