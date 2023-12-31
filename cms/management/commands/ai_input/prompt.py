@@ -11,3 +11,14 @@ SYSTEM_MESSAGE = """
     Limit your response to 700 characters or 125 words.
     Do not use new lines. The response should be one paragraph.
 """
+
+
+
+
+######################################
+# Other prompts
+######################################
+
+BLOG_LANGUAGE_SANITIZER = """
+Rewrite the following text to be grammatically correct, fix spelling, and make it sound straightforward and to the point. Use common, everyday words that a normal average human being would use.
+"""
