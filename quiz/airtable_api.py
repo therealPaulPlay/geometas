@@ -31,7 +31,8 @@ def import_all_facts_into_db():
     deserialized_facts = []
     for fact in facts:
         needs_update = check_if_fact_needs_update(fact)
-        if not needs_update:
+        needs_temp_update = True
+        if not needs_temp_update:
             log.info(f"Fact '{fact['id']}' does not need update")
             continue
         deserialize_fact(fact)
@@ -42,6 +43,8 @@ def import_all_facts_into_db():
         if not db_fact:
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
+        print(deserialized_fact['country'])
+        db_fact.country = Country.objects.get(name=deserialized_fact['country'])
         db_fact.category = Category.objects.get(name=deserialized_fact['category'])
         db_fact.notes = deserialized_fact['notes']
         db_fact.airtable_id = deserialized_fact['airtable_id']
@@ -49,17 +52,10 @@ def import_all_facts_into_db():
         db_fact.distinctive_in_region = deserialized_fact['distinctive_in_region']
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
-        image_name = f"{db_fact.uuid}.jpg"
-        move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
-        db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
-        # Get all countries and add to db_fact.countries
-        for country_name in deserialized_fact['countries']:
-            country = Country.objects.filter(name=country_name).first()
-            if country:
-                db_fact.countries.add(country)
-            else:
-                log.error(f"Country {country_name} not found")
-            db_fact.save()
+        if needs_update:
+            image_name = f"{db_fact.uuid}.jpg"
+            move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
+            db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
 
         log.info(f"Fact '{db_fact.airtable_id}' saved")
     
@@ -87,13 +83,10 @@ def check_if_fact_needs_update(fact_response):
     db_fact = Fact.objects.filter(airtable_id=fact_response['id']).first()
     if db_fact:
         if db_fact.updated_at < airtable_updated_at:
-            #log.info(f"Fact '{fact_response['id']}' updating: last updated at {airtable_updated_at} and DB fact last updated at {db_fact.updated_at}")
             return True
         else:
-            #log.info(f"Fact '{fact_response['id']}' NOT updating: last updated at {airtable_updated_at} and DB fact last updated at {db_fact.updated_at}")
             return False
     else:
-        #log.info(f"Fact '{fact_response['id']}' needs to be created")
         return True
         
 
@@ -102,7 +95,7 @@ def deserialize_fact(fact_response):
     return {
         'answer': fact_response['fields']['Answer'],
         'image_url': fact_response['fields']['Image'][0]['url'],
-        'countries': fact_response['fields']['Country Name'],
+        'country': fact_response['fields']['Country Name'][0],
         'category': fact_response['fields']['Category'],
         'notes': fact_response['fields'].get('Notes'),
         'airtable_id': fact_response['id'],

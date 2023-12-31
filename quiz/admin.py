@@ -8,16 +8,12 @@ class CountryAdmin(admin.ModelAdmin):
 
 
 class FactAdmin(admin.ModelAdmin):
-    list_display = ('get_str', 'get_countries_names', 'category')
-    list_filter = ( 'countries', 'category') 
+    list_display = ('get_str', 'country', 'category')
+    list_filter = ( 'country', 'category') 
 
     def get_str(self, obj):
         return obj.__str__()
     get_str.short_description = 'Answer'
-
-    def get_countries_names(self, obj):
-        return ", ".join([country.name for country in obj.countries.all()])
-    get_countries_names.short_description = 'Countries'
 
 
 class QuizAdmin(admin.ModelAdmin):

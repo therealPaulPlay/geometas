@@ -62,7 +62,7 @@ class Fact(models.Model):
     google_streetview_url = models.CharField(max_length=1000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    countries = models.ManyToManyField(Country, related_name='facts')
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='facts', null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='facts', null=True)
     notes = models.CharField(max_length=1000, null=True, blank=True)
     google_streetview_url = models.CharField(max_length=250, null=True, blank=True)
@@ -75,8 +75,8 @@ class Fact(models.Model):
 
     def get_question(self):
         if not self.distinctive:
-            return "Which country(s) in %s is this?" % self.countries.first().region.name
-        return "Which country(s) is this?"
+            return "Which country in %s is this?" % self.country.region.name
+        return "Which country is this?"
     
 
 class Quiz(models.Model):
@@ -103,7 +103,7 @@ class Quiz(models.Model):
         if self.category:
             facts = facts.filter(category=self.category)
         if self.countries and self.countries.count() > 0:
-            facts = facts.filter(countries__in=self.countries.all())
+            facts = facts.filter(country__in=self.countries.all())
         
         # Getting distinct primary keys
         fact_ids = facts.values_list('uuid', flat=True).distinct()

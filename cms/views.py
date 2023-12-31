@@ -37,8 +37,7 @@ def country(request, country_slug):
     country = Country.objects.get(slug=country_slug)
 
     # Get de-duped facts
-    facts = country.facts.all().order_by('category')
-    facts = list(set(facts))
+    facts = Fact.objects.select_related('country', 'category').filter(country=country).order_by('category')
 
     # No quizzes yet
 
@@ -78,7 +77,7 @@ def category(request, category_slug):
     category = Category.objects.get(slug=category_slug)
 
     # Get facts (no dupes because its not M2M)
-    facts = Fact.objects.filter(category=category)
+    facts = Fact.objects.select_related('country', 'category').filter(category=category)
 
     context = {
         'category': category,
@@ -92,12 +91,8 @@ def category(request, category_slug):
 
 
 def fact_detail(request, fact_uuid):
-    fact = Fact.objects.get(uuid=fact_uuid)
-    country_name_list = []
-    for country in fact.countries.all():
-        country_name_list.append(country.name)
-    country_name_list = ', '.join(country_name_list)
-    fact_title = "%s: %s meta" % (country_name_list, fact.category.name.lower())
+    fact = Fact.objects.select_related('country', 'category').get(uuid=fact_uuid)
+    fact_title = "%s: %s meta" % (fact.country.name, fact.category.name.lower())
     context = {
         'fact': fact,
         'fact_title': fact_title,

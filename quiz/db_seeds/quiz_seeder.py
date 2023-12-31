@@ -115,6 +115,7 @@ def update_quizzes():
 
         log.info(f"Quiz {quiz_name} updated")
     
+    
     # Create 'Random' quiz for all facts
     random_quiz_name = Quiz.RANDOM_QUIZ_NAME
     try:

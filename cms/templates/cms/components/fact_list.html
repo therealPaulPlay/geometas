@@ -14,9 +14,7 @@
                                 <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.category.name }}</span>
                             {% endif %}
                             {% if not country %}
-                                {% for country in fact.countries.all %}
-                                    <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs truncate">{{ country.flag_emoji }} {{country}}</span>
-                                {% endfor %}
+                                <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.country.flag_emoji }} {{fact.country}}</span>
                             {% endif %}
                         </div>
                         <div class="my-auto mt-2 text-sm sm:text-base">

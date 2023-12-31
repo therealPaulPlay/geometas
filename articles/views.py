@@ -36,6 +36,11 @@ def eastern_europe(request):
             fact_objects = Fact.objects.filter(airtable_id__in=airtable_ids)
             facts_dict[country][fact_type] = fact_objects
     
+    # Topics
+    #bollard = {
+    #    "hungary": Fact.objects.filter()
+    #}
+    
     context = {
         'facts': facts_dict,
         'html_meta_title': "Eastern Europe in Geoguessr",
