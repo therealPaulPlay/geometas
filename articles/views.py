@@ -38,15 +38,21 @@ def eastern_europe(request):
     
     # Topics
     bollard = {
-        "hungary": Fact.objects.select_related('category', 'country').filter(category__slug="bollards", country__slug="hungary").first(),
-        "slovenia": Fact.objects.select_related('category', 'country').filter(category__slug="bollards", country__slug="slovenia").first(),
-        "slovakia": Fact.objects.select_related('category', 'country').filter(category__slug="bollards", country__slug="slovakia").first(),
+        "hungary": Fact.objects.filter(category__slug="bollards", country__slug="hungary").first(),
+        "slovenia": Fact.objects.filter(category__slug="bollards", country__slug="slovenia").first(),
+        "slovakia": Fact.objects.filter(category__slug="bollards", country__slug="slovakia").first(),
     }
     warning_sign = Fact.objects.get(airtable_id="recAhLi7tmiRgab9K")
+    directional_signs = {
+        "green": Fact.objects.get(airtable_id="recrti8CSFCOOQhHX"),
+        "yellow": Fact.objects.get(airtable_id="rec3PWgpmNOrrVPPC"),
+        "blue": Fact.objects.get(airtable_id="recDjo4Syy89o6KaO"),
+    }
     
     context = {
         'bollard_facts': bollard,
         'warning_sign': warning_sign,
+        'directional_signs': directional_signs,
         'facts': facts_dict,
         'html_meta_title': "Eastern Europe in Geoguessr",
         'html_meta_description': "Eastern Europe is a region in Geoguessr. Learn the countries in Eastern Europe to become a Geoguessr champion.",

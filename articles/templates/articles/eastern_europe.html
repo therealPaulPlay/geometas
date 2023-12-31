@@ -50,9 +50,9 @@
     <div>
         {% #heading_secondary %}Latin and Cyrillic{% /heading_secondary %}
         <div class="space-y-0.5 my-auto">
-            <div>🇲🇪 Montenegro {% #text_italic %}(mostly Latin){% /text_italic %}</div>
-            <div>🇷🇸 Serbia {% #text_italic %}(equal Latin and Cyrillic){% /text_italic %}</div>
-            <div>🇲🇰 North Macedonia {% #text_italic %}(mostly Cyrillic){% /text_italic %}</div>
+            <div>🇲🇪 Montenegro <span class="text-xs sm:text-base">{% #text_italic %}(mostly Latin){% /text_italic %}</span></div>
+            <div>🇷🇸 Serbia <span class="text-xs sm:text-base">{% #text_italic %}(equal Latin and Cyrillic){% /text_italic %}</span></div>
+            <div>🇲🇰 North Macedonia <span class="text-xs sm:text-base">{% #text_italic %}(mostly Cyrillic){% /text_italic %}</span></div>
         </div>
     </div>
     <div>
@@ -72,25 +72,25 @@
 
 <div class="mt-4 pb-2 space-y-2">
     <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ bollard_facts.hungary.image_url }})"></div>
+        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ bollard_facts.hungary.image_url }})"></div>
         <div class="space-y-0.5 my-auto">
             <div>🇭🇺 Hungary</div>
             <div>🇭🇷 Croatia</div>
             <div>🇧🇬 Bulgaria</div>
-            <div>🇲🇰 North Macedonia {% #text_italic %}(also has a second type with round shape){% /text_italic %}</div>
-            <div>{% #text_italic %}Ukraine's bollard looks similar but its red rectangle is wider.{% /text_italic %}</div>
+            <div>🇲🇰 North Macedonia <span class="text-xs sm:text-base">{% #text_italic %}(also has a second type with round shape){% /text_italic %}</span></div>
+            <div class="text-xs sm:text-base">{% #text_italic %}Ukraine's bollard looks similar but its red rectangle is wider.{% /text_italic %}</div>
         </div>
     </div>
     <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ bollard_facts.slovenia.image_url }})"></div>
+        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ bollard_facts.slovenia.image_url }})"></div>
         <div class="space-y-0.5 my-auto">
             <div>🇸🇮 Slovenia</div>
             <div>🇲🇪 Montenegro</div>
-            <div>{% #text_italic %}Serbia's bollard looks similar but its red rectangle is on the left side, not centered.{% /text_italic %}</div>
+            <div class="text-xs sm:text-base">{% #text_italic %}Serbia's bollard looks similar but its red rectangle is on the left side, not centered.{% /text_italic %}</div>
         </div>
     </div>
     <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ bollard_facts.slovakia.image_url }})"></div>
+        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ bollard_facts.slovakia.image_url }})"></div>
         <div class="space-y-0.5 my-auto">
             <div>🇸🇰 Slovakia</div>
             <div>🇨🇿 Czech Republic</div>
@@ -108,6 +108,39 @@
     There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
 {% /paragraph_text %}
 
+<div class="mt-4 pb-2 space-y-5">
+    <div class="flex gap-4">
+        <div class="sm:my-auto h-28 w-48 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ directional_signs.blue.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇷🇴 Romania</div>
+            <div>🇦🇱 Albania</div>
+            <div>🇸🇰 Slovakia</div>
+            <div>🇧🇬 Bulgaria</div>
+            <div>🇺🇦 Ukraine</div>
+            <div>🇷🇺 Russia</div>
+            <div>🇨🇿 Czech Republic</div>
+            <div class="text-xs sm:text-base">{% #text_italic %}Czechia's signs have these large arrows forming the sign, as shown in this example. It's a great way to uniquely identify the country.{% /text_italic %}</div>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <div class="sm:my-auto h-28 w-48 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ directional_signs.yellow.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇸🇮 Slovenia</div>
+            <div>🇭🇷 Croatia</div>
+            <div>🇲🇪 Montenegro</div>
+            <div>🇷🇸 Serbia</div>
+            <div>🇲🇰 North Macedonia</div>
+        </div>
+    </div>
+    <div class="flex gap-4">
+        <div class="sm:my-auto h-28 w-48 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ directional_signs.green.image_url }})"></div>
+        <div class="space-y-0.5 my-auto">
+            <div>🇵🇱 Poland</div>
+            <div>🇨🇿 Hungary</div>
+        </div>
+    </div>
+</div>
+
 
 {% #heading_primary %}Yellow Street Signs{% /heading_primary %}
 {% #paragraph_text %}
@@ -115,12 +148,12 @@
 {% /paragraph_text %}
 <div class="mt-4 pb-2 space-y-2">
     <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md" style="background-image: url({{ warning_sign.image_url }})"></div>
+        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ warning_sign.image_url }})"></div>
         <div class="space-y-0.5 my-auto">
             <div>🇲🇰 North Macedonia</div>
             <div>🇷🇸 Serbia</div>
             <div>🇵🇱 Poland </div>
-            <div>{% #text_italic %}Note that Poland has a thinner red border than the Serbian example shown here. The thinner red border is a great way to identify Poland right away.{% /text_italic %}</div>
+            <div class="text-xs sm:text-base">{% #text_italic %}Note that Poland has a thinner red border than the Serbian example shown here. The thinner red border is a great way to identify Poland right away.{% /text_italic %}</div>
         </div>
     </div>
 </div>

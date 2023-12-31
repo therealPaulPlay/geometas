@@ -2,7 +2,7 @@ EASTERN_EUROPE_FACT_IDS = {
         "albania": {
             "language": ["recSTMZJxHKX0gQHY"],
             "license_plate": ["receyxRDqnI6yxVtu", "recy9bj7rjZ2CpNGc"],
-            "direction_sign": [None],
+            "direction_sign": ["recSni3g4HBKcD454"],
             "street_name": ["recpACjGvaYP3I0o3"],
             "bollard": ["rec7LDxnXkL4GgXmm"],
             "uniques": ["recXrWdj97x8taiOJ",],
