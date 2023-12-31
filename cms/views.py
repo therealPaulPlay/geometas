@@ -7,7 +7,7 @@ from quiz.models import Country, Fact, Region, Category, Quiz, QuizSession
 def metas_index(request):
     # Get in_progress quiz session of this user
     quiz_session = None
-    if request.user:
+    if request.user.is_authenticated:
         try:
             quiz_session = QuizSession.objects.get(
                 user_id=request.user.id,

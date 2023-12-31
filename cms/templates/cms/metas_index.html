@@ -9,19 +9,18 @@
 
     <div class="mt-4 sm:flex gap-x-4">
         {% if quiz_session %}
-        <a 
-            class="py-3 px-6 flex flex-col flex-grow rounded-md items-center justify-center bg-sky-500 hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
-            href="{% url 'quiz:start_quiz' quiz_session.quiz.uuid %}">
-            <div class="text-xs font-light">Continue your in-progress quiz</div>
-            <div class="font-bold">{{quiz_session.quiz.name}}</div>
-        </a>
+            {% url 'quiz:start_quiz' quiz_session.quiz.uuid as button_url %}
+            {% #button_primary url=button_url %}
+                <div class="text-xs font-light">Continue your in-progress quiz</div>
+                <div class="font-bold">{{quiz_session.quiz.name}}</div>
+            {% /button_primary %}
         {% endif %}
-        <a 
-            class="mt-2 sm:mt-0 sm:max-w-[50%] mx-auto py-3 px-6 flex flex-col flex-grow rounded-md items-center justify-center bg-teal-500 hover:bg-teal-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
-            href="{% url 'quiz:start_quiz' random_quiz_uuid %}">
+        
+        {% url 'quiz:start_quiz' random_quiz_uuid as button_url %}
+        {% #button_accent url=button_url %}
             <div class="text-xs font-light">Learn some Geometas</div>
             <div class="font-bold">Start new random quiz</div>
-        </a>
+        {% /button_accent %}
     </div>
     
 {% endblock %}
@@ -31,12 +30,13 @@
     <div class="">
 
         <div class="">
-            <h2 class="text-2xl font-bold text-slate-900">Categories</h2>
+            {% heading_primary title="Categories" %}
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-x-6 mt-4">
                 {% for category in categories %}
-                    <a href="{% url 'cms:category' category.slug %}" class="text-base font-normal text-sky-600 hover:text-sky-700">
+                    {% url 'cms:category' category.slug as link_url %}
+                    {% #link_primary url=link_url %}
                         {{category.name}}<span class="text-slate-400 text-sm"> ({{ category.quiz.num_facts }})</span>
-                    </a>
+                    {% /link_primary %}
                 {% endfor %}
             </div>
         </div> 

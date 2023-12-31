@@ -1,0 +1,5 @@
+components:
+  heading_primary: "components/heading_primary.html"
+  link_primary: "components/link_primary.html"
+  button_accent: "components/button_primary_green.html"
+  button_primary: "components/button_primary_blue.html"
