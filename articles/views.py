@@ -28,15 +28,11 @@ def driving_direction(request):
 
 
 def eastern_europe(request):
-    fact_ids = EASTERN_EUROPE_FACT_IDS
-    facts_dict = copy.deepcopy(fact_ids)
-    for country in fact_ids:
-        for fact_type in fact_ids[country]:
-            airtable_ids = fact_ids[country][fact_type]
-            fact_objects = Fact.objects.filter(airtable_id__in=airtable_ids)
-            facts_dict[country][fact_type] = fact_objects
-    
-    # Topics
+    languages = {
+        "latin": Fact.objects.get(airtable_id="recqNCngQR2DXrjfz"),
+        "both": Fact.objects.get(airtable_id="recS1GDw2ihg83uQv"),
+        "cyrillic": Fact.objects.get(airtable_id="recNUAgPDyiNRZEgQ"),
+    }
     bollard = {
         "hungary": Fact.objects.filter(category__slug="bollards", country__slug="hungary").first(),
         "slovenia": Fact.objects.filter(category__slug="bollards", country__slug="slovenia").first(),
@@ -48,12 +44,28 @@ def eastern_europe(request):
         "yellow": Fact.objects.get(airtable_id="rec3PWgpmNOrrVPPC"),
         "blue": Fact.objects.get(airtable_id="recDjo4Syy89o6KaO"),
     }
+    uniques = {
+        "rift": Fact.objects.get(airtable_id="recXrWdj97x8taiOJ"),
+        "holey_pole": Fact.objects.get(airtable_id="recL1IehAsZgyVXTV"),
+        "albania_license_plate": Fact.objects.get(airtable_id="receyxRDqnI6yxVtu"),
+        "ukraine_google_car": Fact.objects.get(airtable_id="rectcLmHQY0fnPnHW"),
+        "no_antenna": Fact.objects.get(airtable_id="recKDzh6pC6co9gkm"),
+        "hungary_road_marker": Fact.objects.get(airtable_id="recAmDvHOIO0TRSyt"),
+        "romania_road_marker": Fact.objects.get(airtable_id="recAcphJ7gaoJUrVd"),
+        "slovenia_road_marker": Fact.objects.get(airtable_id="recSAQvo4pRfOP7EX"),
+        "romania_yellow_sign": Fact.objects.get(airtable_id="recNRvyTTPazZ12yn"),
+        "white_trees": Fact.objects.get(airtable_id="recXkaRoxe8URAuZF"),
+        "bulgaria_poles": Fact.objects.get(airtable_id="recI20n5tP82U3zt8"),
+        "hungary_hydrant": Fact.objects.get(airtable_id="recLF9YHiUxOB0gml"),
+        "croatia_hydrant": Fact.objects.get(airtable_id="recvrPtJKoclKERj6"),
+    }
     
     context = {
-        'bollard_facts': bollard,
-        'warning_sign': warning_sign,
+        'languages': languages,
+        'bollards': bollard,
+        'warning_signs': warning_sign,
         'directional_signs': directional_signs,
-        'facts': facts_dict,
+        'uniques': uniques,
         'html_meta_title': "Eastern Europe in Geoguessr",
         'html_meta_description': "Eastern Europe is a region in Geoguessr. Learn the countries in Eastern Europe to become a Geoguessr champion.",
         'html_meta_image_url': request.build_absolute_uri('/static/seo/eastern_europe.png'),

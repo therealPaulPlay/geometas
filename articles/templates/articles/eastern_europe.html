@@ -10,33 +10,26 @@
 
 
 {% block content %}
-
-{% #paragraph_text %}
-    In Geoguessr, a lot of Eastern European countries look alike. But, you can use some tips to figure out which country you're in more quickly.
-{% /paragraph_text %}
-
-
-{% #heading_primary %}Where to start{% /heading_primary %}
-{% #paragraph_text %}
-    First, look around for at least one of the following clues: bollards, warning signs, directional signs, and language. It allows you to quickly reduce the number of possible countries to just a few.
-{% /paragraph_text %}
-{% #paragraph_text %}
-    Next, check if you can find any metas that allow you to find the right country: rifts in the sky, holey poles, a red Google car, milestone markers, or no antenna on the car.
-{% /paragraph_text %}
-{% #paragraph_text %}
-    This article will first list the broad meta categories you should look for first (step 1) and then list the most important metas to identify the specific country (second step).
-{% /paragraph_text %}
+    {% #heading_primary mt='0' %}Where to start{% /heading_primary %}
+    {% #paragraph_text %}
+        First, look around for at least one of the following clues: bollards, warning signs, directional signs, and language. It allows you to quickly reduce the number of possible countries to just a few.
+    {% /paragraph_text %}
+    {% #paragraph_text %}
+        Next, check if you can find any metas that allow you to find the right country: rifts in the sky, holey poles, a red Google car, milestone markers, or no antenna on the car.
+    {% /paragraph_text %}
+    {% #paragraph_text %}
+        This article will first list the broad meta categories you should look for first (step 1) and then list the most important metas to identify the specific country (second step).
+    {% /paragraph_text %}
 
 
-{% #heading_primary %}Language{% /heading_primary %}
-{% #paragraph_text %}
-    There are 3 relevant categories of countries depending on their use of the Latin and Cyrillic alphabets. You will find text on street signs and many other places and you should memorize which countries use which alphabet. 
-{% /paragraph_text %}
+    {% #heading_primary %}Language{% /heading_primary %}
+    {% #paragraph_text %}
+        There are 3 relevant categories of countries depending on their use of the Latin and Cyrillic alphabets. You will find text on street signs and many other places and you should memorize which countries use which alphabet. 
+    {% /paragraph_text %}
 
-<div class="pb-2 space-y-2 grid grid-cols-3">
-    <div>
-        {% #heading_secondary %}Latin only{% /heading_secondary %}
-        <div class="space-y-0.5 my-auto">
+    {% #card_image_with_description_container %}
+    {% url 'cms:fact_detail' languages.latin.uuid as image_link %}    
+    {% #card_image_with_description image_css="w-28 h-32 sm:w-32 sm:h-36" image_link=image_link image_url=languages.latin.image_url heading="Latin only" %}
             <div>🇵🇱 Poland</div>
             <div>🇭🇺 Hungary</div>
             <div>🇭🇷 Croatia</div>
@@ -45,73 +38,69 @@
             <div>🇸🇮 Slovenia</div>
             <div>🇷🇴 Romania</div>
             <div>🇦🇱 Albania</div>
-        </div>
-    </div>
-    <div>
-        {% #heading_secondary %}Latin and Cyrillic{% /heading_secondary %}
-        <div class="space-y-0.5 my-auto">
-            <div>🇲🇪 Montenegro <span class="text-xs sm:text-base">{% #text_italic %}(mostly Latin){% /text_italic %}</span></div>
-            <div>🇷🇸 Serbia <span class="text-xs sm:text-base">{% #text_italic %}(equal Latin and Cyrillic){% /text_italic %}</span></div>
-            <div>🇲🇰 North Macedonia <span class="text-xs sm:text-base">{% #text_italic %}(mostly Cyrillic){% /text_italic %}</span></div>
-        </div>
-    </div>
-    <div>
-        {% #heading_secondary %}Cyrillic only{% /heading_secondary %}
-        <div class="space-y-0.5 my-auto">
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' languages.both.uuid as image_link %}
+        {% #card_image_with_description image_css="w-28 h-32 sm:w-32 sm:h-36" image_link=image_link image_url=languages.both.image_url heading="Latin and Cyrillic" %}
+            <div>🇲🇪 Montenegro {% #text_italic html_tag="span" %}(mostly Latin){% /text_italic %}</div>
+            <div>🇷🇸 Serbia {% #text_italic html_tag="span" %}(equal Latin and Cyrillic){% /text_italic %}</div>
+            <div>🇲🇰 North Macedonia {% #text_italic html_tag="span" %}(mostly Cyrillic){% /text_italic %}</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' languages.cyrillic.uuid as image_link %}
+        {% #card_image_with_description image_css="w-28 h-20 sm:w-32 sm:h-24" image_link=image_link image_url=languages.cyrillic.image_url heading="Cyrillic only" %}
             <div>🇧🇬 Bulgaria</div>
             <div>🇺🇦 Ukraine</div>
             <div>🇷🇺 Russia</div>
-        </div>
-    </div>
-</div>
+        {% /card_image_with_description %}
 
-{% #heading_primary %}Bollards{% /heading_primary %}
-{% #paragraph_text %}
-    There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
-{% /paragraph_text %}
+    {% /card_image_with_description_container %}
 
-<div class="mt-4 pb-2 space-y-2">
-    <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ bollard_facts.hungary.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+
+    {% #heading_primary %}Bollards{% /heading_primary %}
+    {% #paragraph_text %}
+        There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
+    {% /paragraph_text %}
+
+    {% #card_image_with_description_container %}
+    
+    {% url 'cms:fact_detail' bollards.hungary.uuid as image_link %}    
+    {% #card_image_with_description image_css="w-24 h-36" image_link=image_link image_url=bollards.hungary.image_url %}
             <div>🇭🇺 Hungary</div>
             <div>🇭🇷 Croatia</div>
             <div>🇧🇬 Bulgaria</div>
-            <div>🇲🇰 North Macedonia <span class="text-xs sm:text-base">{% #text_italic %}(also has a second type with round shape){% /text_italic %}</span></div>
-            <div class="text-xs sm:text-base">{% #text_italic %}Ukraine's bollard looks similar but its red rectangle is wider.{% /text_italic %}</div>
-        </div>
-    </div>
-    <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ bollard_facts.slovenia.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+            <div>🇲🇰 North Macedonia</div>
+            <div>{% #text_italic %}North Macedonia also has a second type with round shape.{% /text_italic %}</div>
+            <div>{% #text_italic %}Ukraine's bollard looks similar but its red rectangle is wider.{% /text_italic %}</div>
+        {% /card_image_with_description %}
+        
+        {% url 'cms:fact_detail' bollards.slovenia.uuid as image_link %}
+        {% #card_image_with_description image_css="w-24 h-36" image_link=image_link image_url=bollards.slovenia.image_url %}
             <div>🇸🇮 Slovenia</div>
             <div>🇲🇪 Montenegro</div>
-            <div class="text-xs sm:text-base">{% #text_italic %}Serbia's bollard looks similar but its red rectangle is on the left side, not centered.{% /text_italic %}</div>
-        </div>
-    </div>
-    <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ bollard_facts.slovakia.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+            <div>{% #text_italic %}Serbia's bollard looks similar but its red rectangle is on the left side, not centered.{% /text_italic %}</div>
+        {% /card_image_with_description %}
+        
+        {% url 'cms:fact_detail' bollards.slovakia.uuid as image_link %}
+        {% #card_image_with_description image_css="w-24 h-36" image_link=image_link image_url=bollards.slovakia.image_url %}
             <div>🇸🇰 Slovakia</div>
             <div>🇨🇿 Czech Republic</div>
-        </div>
-    </div>
-</div>
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
 
-{% #paragraph_text %}
-    Additionally, 🇵🇱 Poland has unique bollards with a single broad red stripe, 🇷🇴 Romania hardly uses bollards, 🇦🇱 Albania uses Italy-style bollards with a black section that goes all the way to the top, and 🇷🇺 Russia uses a variety of bollards.
-{% /paragraph_text %}
+    {% #paragraph_text %}
+        Additionally, 🇵🇱 Poland has unique bollards with a single broad red stripe, 🇷🇴 Romania hardly uses bollards, 🇦🇱 Albania uses Italy-style bollards with a black section that goes all the way to the top, and 🇷🇺 Russia uses a variety of bollards.
+    {% /paragraph_text %}
 
 
-{% #heading_primary %}Directional Signs{% /heading_primary %}
-{% #paragraph_text %}
-    There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
-{% /paragraph_text %}
+    {% #heading_primary %}Directional Signs{% /heading_primary %}
+    {% #paragraph_text %}
+        There are a number of different bollard designs that you should memorize. It will let you narrow down the possible countries quickly.
+    {% /paragraph_text %}
 
-<div class="mt-4 pb-2 space-y-5">
-    <div class="flex gap-4">
-        <div class="sm:my-auto h-28 w-48 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ directional_signs.blue.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+    {% #card_image_with_description_container %}
+    {% url 'cms:fact_detail' directional_signs.blue.uuid as image_link %}    
+    {% #card_image_with_description image_css="h-20 w-36 sm:h-28 sm:w-48" image_link=image_link image_url=directional_signs.blue.image_url heading="Blue" %}
             <div>🇷🇴 Romania</div>
             <div>🇦🇱 Albania</div>
             <div>🇸🇰 Slovakia</div>
@@ -119,196 +108,113 @@
             <div>🇺🇦 Ukraine</div>
             <div>🇷🇺 Russia</div>
             <div>🇨🇿 Czech Republic</div>
-            <div class="text-xs sm:text-base">{% #text_italic %}Czechia's signs have these large arrows forming the sign, as shown in this example. It's a great way to uniquely identify the country.{% /text_italic %}</div>
-        </div>
-    </div>
-    <div class="flex gap-4">
-        <div class="sm:my-auto h-28 w-48 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ directional_signs.yellow.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+            <div>{% #text_italic %}Czechia's signs have these large arrows forming the sign, as shown in this example. It's a great way to uniquely identify the country.{% /text_italic %}</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' directional_signs.yellow.uuid as image_link %}
+        {% #card_image_with_description image_css="h-20 w-36 sm:h-28 sm:w-48" image_link=image_link image_url=directional_signs.yellow.image_url heading="Yellow" %}
             <div>🇸🇮 Slovenia</div>
             <div>🇭🇷 Croatia</div>
             <div>🇲🇪 Montenegro</div>
             <div>🇷🇸 Serbia</div>
             <div>🇲🇰 North Macedonia</div>
-        </div>
-    </div>
-    <div class="flex gap-4">
-        <div class="sm:my-auto h-28 w-48 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ directional_signs.green.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' directional_signs.green.uuid as image_link %}
+        {% #card_image_with_description image_css="h-20 w-36 sm:h-28 sm:w-48" image_link=image_link image_url=directional_signs.green.image_url heading="Green" %}
             <div>🇵🇱 Poland</div>
             <div>🇨🇿 Hungary</div>
-        </div>
-    </div>
-</div>
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
 
 
-{% #heading_primary %}Yellow Street Signs{% /heading_primary %}
-{% #paragraph_text %}
-    Some have some street signs with yellow background. When you see one, you can instantly limit the number of applicable countries. 
-{% /paragraph_text %}
-<div class="mt-4 pb-2 space-y-2">
-    <div class="flex gap-4">
-        <div class="w-24 h-36 bg-contain bg-center rounded-md shrink-0" style="background-image: url({{ warning_sign.image_url }})"></div>
-        <div class="space-y-0.5 my-auto">
+    {% #heading_primary %}Yellow Street Signs{% /heading_primary %}
+    {% #paragraph_text %}
+        Some have some street signs with yellow background. When you see one, you can instantly limit the number of applicable countries. 
+    {% /paragraph_text %}
+    
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' warning_signs.uuid as image_link %}
+        {% #card_image_with_description image_css="w-24 h-36" image_link=image_link image_url=warning_signs.image_url %}
             <div>🇲🇰 North Macedonia</div>
             <div>🇷🇸 Serbia</div>
             <div>🇵🇱 Poland </div>
-            <div class="text-xs sm:text-base">{% #text_italic %}Note that Poland has a thinner red border than the Serbian example shown here. The thinner red border is a great way to identify Poland right away.{% /text_italic %}</div>
-        </div>
-    </div>
-</div>
+            {% #text_italic %}Note that Poland has a thinner red border than the Serbian example shown here. The thinner red border is a great way to identify Poland right away.{% /text_italic %}</div>
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
 
 
-<div class="flex flex-col gap-y-4 mt-20">
-    <div class="mt-8 flow-root">
-        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-300">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Country</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Language</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">License Plate</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Direction Sign</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Bollards</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Street Name</th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Unique Features</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-200 bg-white">
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇵🇱 Poland</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.poland.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.poland.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.poland.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.poland.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.poland.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.poland.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇭🇺 Hungary</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.hungary.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.hungary.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.hungary.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.hungary.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.hungary.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.hungary.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇭🇷Croatia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.croatia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.croatia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.croatia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.croatia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.croatia.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.croatia.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇨🇿 Czech Republic</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.czech_republic.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.czech_republic.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.czech_republic.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.czech_republic.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.czech_republic.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.czech_republic.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇸🇰 Slovakia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovakia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovakia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovakia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovakia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovakia.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovakia.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇸🇮 Slovenia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovenia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovenia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovenia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovenia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovenia.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.slovenia.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇷🇴 Romania</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.romania.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.romania.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.romania.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.romania.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.romania.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.romania.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇦🇱 Albania</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.albania.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.albania.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.albania.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.albania.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.albania.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.albania.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇲🇪 Montenegro</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.montenegro.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin, rarely Cyrillic</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.montenegro.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.montenegro.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.montenegro.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.montenegro.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.montenegro.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇷🇸 Serbia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Latin and Cyrillic</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.serbia.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇲🇰 North Macedonia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.north_macedonia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Cyrillic, some Latin</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.north_macedonia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.north_macedonia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.north_macedonia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.north_macedonia.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.north_macedonia.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇧🇬 Bulgaria</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.bulgaria.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Cyrillic</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.bulgaria.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.bulgaria.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.bulgaria.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.bulgaria.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.bulgaria.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇺🇦 Ukraine</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.ukraine.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Cyrillic</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.ukraine.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.ukraine.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.ukraine.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.ukraine.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.ukraine.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                            <tr>
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">🇷🇺 Russia</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.russia.language %}<a href="{% url 'cms:fact_detail' fact.uuid %}">Cyrillic</a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.russia.license_plate %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.russia.direction_sign %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.russia.bollard %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.russia.street_name %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                                <td class="whitespace-nowrap px-2 py-1 text-sm text-gray-500">{% for fact in facts.russia.uniques %}<a href="{% url 'cms:fact_detail' fact.uuid %}"><img loading="lazy" class="max-h-20 mx-auto mb-1" src="{{ fact.image_url }}"></a>{% endfor %}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% #heading_primary %}Unique Metas{% /heading_primary %}
+    {% #paragraph_text %}
+        Many Eastern European countries have distinct metas that are easy to find and help to quickly identify the country.
+    {% /paragraph_text %}
+    
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' uniques.rift.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-24" image_url=uniques.rift.image_url image_link=image_link heading="Rifts in the sky" %}
+            <div>🇲🇪 Montenegro</div>
+            <div>🇲🇦 Albania</div>
+        {% /card_image_with_description %}
+        
+        {% url 'cms:fact_detail' uniques.holey_pole.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-60" image_url=uniques.holey_pole.image_url image_link=image_link heading="Holey pole" %}
+            <div>🇷🇴 Romania</div>
+            <div>🇨🇿 Hungary</div>
+            <div>🇵🇱 Poland {% #text_italic html_tag="span" %}(not extending to the ground){% /text_italic %}</div>
+        {% /card_image_with_description %}
 
-</div>
+        {% url 'cms:fact_detail' uniques.albania_license_plate.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-20" image_url=uniques.albania_license_plate.image_url image_link=image_link heading="Red license plate strip" %}
+            <div>🇲🇦 Albania</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.no_antenna.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-20" image_url=uniques.no_antenna.image_url image_link=image_link heading="No Google Car Antenna" %}
+            <div>🇲🇰 North Macedonia</div>
+            <div>🇷🇸 Serbia</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.hungary_road_marker.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-32" image_url=uniques.hungary_road_marker.image_url image_link=image_link heading="Road marker #1" %}
+            <div>🇨🇿 Hungary</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.romania_road_marker.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-32" image_url=uniques.romania_road_marker.image_url image_link=image_link heading="Road marker #2" %}
+            <div>🇷🇴 Romania</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.slovenia_road_marker.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-32" image_url=uniques.slovenia_road_marker.image_url image_link=image_link heading="Road marker #3" %}
+            <div>🇸🇮 Slovenia</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.romania_yellow_sign.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-32" image_url=uniques.romania_yellow_sign.image_url image_link=image_link heading="Neon yellow sign outline" %}
+            <div>🇷🇴 Romania</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.white_trees.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-40" image_url=uniques.white_trees.image_url image_link=image_link heading="White painted tree or pole base" %}
+            <div>🇺🇦 Ukraine</div>
+            <div>🇷🇺 Russia</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.bulgaria_poles.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-56" image_url=uniques.bulgaria_poles.image_url image_link=image_link heading="Eiffel-tower like poles" %}
+            <div>🇧🇬 Bulgaria</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.hungary_hydrant.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-52" image_url=uniques.hungary_hydrant.image_url image_link=image_link heading="Red hydrant" %}
+            <div>🇨🇿 Hungary</div>
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' uniques.croatia_hydrant.uuid as image_link %}
+        {% #card_image_with_description image_css="w-32 h-44" image_url=uniques.croatia_hydrant.image_url image_link=image_link heading="Blue hydrant" %}
+            <div>🇭🇷 Croatia</div>
+        {% /card_image_with_description %}
+
+    {% /card_image_with_description_container %}
+
 {% endblock %}

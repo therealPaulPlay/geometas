@@ -16,7 +16,8 @@
                 <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.category.name }}</span>
                 <span class="bg-sky-400 text-white rounded-xl px-2 py-1 font-medium text-xs">{{ fact.country.flag_emoji }} {{fact.country}}</span>
             </div>
-            <div class="my-auto mt-2">{{ fact.answer }}</div>
+            <div class="mt-5">{{ fact.answer }}</div>
+            <p class="mt-4 text-sm font-light text-slate-500">{{fact.notes|default:''|safe|linebreaksbr}}</p>
         </div>
     </div>
 </div> 
