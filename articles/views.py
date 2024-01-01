@@ -2,7 +2,6 @@ from django.shortcuts import render
 import copy
 
 from quiz.models import Country, Fact
-from articles.data.eastern_europe_fact_ids import EASTERN_EUROPE_FACT_IDS
 
 
 def country_coverage(request):
