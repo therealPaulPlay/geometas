@@ -16,6 +16,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
                 'metas_index',
                 'articles:country_coverage',
                 'articles:driving_direction',
+                'articles:eastern_europe',
                ]
 
     def location(self, item):
