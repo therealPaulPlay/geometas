@@ -29,7 +29,25 @@
 
     <div class="">
 
-        <div class="-mt-4">
+        <div class="">
+            <h2 class="text-2xl font-bold text-slate-900">Learn Geoguessr</h2>
+            <ul class="ml-6 mt-2 list-disc list-outside sm:grid sm:grid-cols-2">
+                <li class="mt-1">
+                    {% url 'articles:country_coverage' as link_url %}
+                    {% #link_primary url=link_url %}Country Coverage{% /link_primary %}
+                </li>
+                <li class="mt-1">
+                    {% url 'articles:driving_direction' as link_url %}
+                    {% #link_primary url=link_url %}Driving Direction{% /link_primary %}
+                </li>
+                <li class="mt-1">
+                    {% url 'articles:eastern_europe' as link_url %}
+                    {% #link_primary url=link_url %}Eastern Europe country-guessing{% /link_primary %}
+                </li>
+            </ul>
+        </div>
+
+        <div class="mt-4 sm:mt-12">
             {% #heading_primary %}Categories{% /heading_primary %}
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-x-6 mt-4">
                 {% for category in categories %}
@@ -43,28 +61,6 @@
         
         <div class="mt-4 sm:mt-12">
             {% include 'cms/components/country_quiz_list.html' %}
-        </div>
-
-
-        <div class="mt-8 sm:mt-16">
-            <h2 class="text-2xl font-bold text-slate-900">Learn more with Geometa's Articles</h2>
-            <ul class="ml-6 mt-2 list-disc list-outside">
-                <li class="mt-1">
-                    {% url 'articles:country_coverage' as link_url %}
-                    {% #link_primary url=link_url %}Country Coverage{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:driving_direction' as link_url %}
-                    {% #link_primary url=link_url %}Driving Direction{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:eastern_europe' as link_url %}
-                    {% #link_primary url=link_url %}Eastern Europe country-guessing{% /link_primary %}
-                </li>
-                <!--<li class="mt-1">
-                    <a class="text-base font-normal text-sky-600 hover:text-sky-700" href="{% url 'articles:eastern_europe' %}">Eastern Europe</a>
-                </li>-->
-            </ul>
         </div>
 
     </div>

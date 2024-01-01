@@ -1,11 +1,13 @@
-{% extends "template_content.html" %}
+{% extends "template_content_with_extra.html" %}
 
 {%load static %}
 
 {% block title_main %}{{ html_meta_title }}{% endblock %}
 
 {% block content_top_extra %}
-    <!--<img src="{% static 'seo/driving_direction.png' %}" alt="{{ html_meta_title }}" class="w-full">-->
+    <div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
+        <img src="{% static 'seo/eastern_europe.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
+    </div>
 {% endblock %}
 
 
