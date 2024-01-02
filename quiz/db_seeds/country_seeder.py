@@ -78,7 +78,7 @@ INPUT_COUNTRIES = [
     ["Luxembourg", "LU", "Europe", "Western Europe", True],
     ["Madagascar", "MG", "Africa", "Africa", False],
     ["Malaysia", "MY", "Asia", "South & South-East Asia", False],
-    ["Malta", "MT", "Europe", "Western Europe", True],
+    ["Malta", "MT", "Europe", "Western Europe", False],
     ["Mexico", "MX", "North America", "Latin America", True],
     ["Monaco", "MC", "Europe", "Western Europe", True],
     ["Mongolia", "MN", "Asia", "Rest of Asia", True],
