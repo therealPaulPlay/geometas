@@ -50,10 +50,9 @@ def import_all_facts_into_db():
         db_fact.distinctive_in_region = deserialized_fact['distinctive_in_region']
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
-        if needs_update:
-            image_name = f"{db_fact.uuid}.jpg"
-            move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
-            db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
+        image_name = f"{db_fact.uuid}.jpg"
+        move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
+        db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
 
         log.info(f"Fact '{db_fact.airtable_id}' saved")
     
@@ -127,7 +126,7 @@ def upload_image_to_s3_via_boto(image_content, image_name):
     s3_object = s3.Object(bucket_name, image_name)
     try:
         s3_object.put(Body=image_content)
-        log.info("S3 upload successful")
+        # log.info("S3 upload successful")
     except Exception as e:
         log.exception("S3 upload failed %s" % e)
         return False
