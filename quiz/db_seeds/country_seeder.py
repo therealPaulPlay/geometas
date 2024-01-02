@@ -149,7 +149,7 @@ def update_regions():
                 description=OPENAI_CONTENT[convert_string_to_snakecase(region_name)],
                 sort_order=region_sort_order
             )
-        log.info(f"Region {region_name} updated")
+            log.info(f"Region {region_name} created")
     
     # Delete Regions
     db_regions = Region.objects.all()
@@ -186,7 +186,7 @@ def update_countries():
                 slug=convert_string_to_snakecase(input_country[0]),
                 right_hand_traffic=input_country[4]
             )
-        log.info(f"Country {input_country[0]} updated")
+            log.info(f"Country {input_country[0]} created")
     
     # Delete Countries
     input_country_names = [input_country[0] for input_country in INPUT_COUNTRIES]

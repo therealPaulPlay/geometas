@@ -39,7 +39,7 @@ def update_categories():
                 slug=input_category[0],
                 description=OPENAI_CONTENT[input_category[0]]
             )
-        log.info(f"Category {input_category[1]} updated")
+            log.info(f"Category {input_category[1]} created")
     
     # Delete Categories
     db_categories = Category.objects.all()
@@ -65,13 +65,12 @@ def update_quizzes():
             quiz_db.category = category
         else:
             quiz_db = Quiz.objects.create(name=quiz_name, category=category)    
+            log.info(f"Quiz {quiz_name} created")
         
         # Add Quiz FK to Category
         category.quiz = quiz_db
         category.save()
-        
-        log.info(f"Quiz {quiz_name} updated")
-    
+
 
     # Region Quizzes
     regions = Region.objects.all()
@@ -82,7 +81,8 @@ def update_quizzes():
         # Get or create quiz
         quiz_db = Quiz.objects.filter(name=quiz_name).first()
         if not quiz_db:
-            quiz_db = Quiz.objects.create(name=quiz_name)    
+            quiz_db = Quiz.objects.create(name=quiz_name)  
+            log.info(f"Quiz {quiz_name} created")
         
         # Set all countries in region
         countries = Country.objects.filter(region=region)
@@ -91,8 +91,6 @@ def update_quizzes():
         # Add Quiz FK to Region
         region.quiz = quiz_db
         region.save()
-
-        log.info(f"Quiz {quiz_name} updated")
     
     
     # Country Quizzes
@@ -105,6 +103,7 @@ def update_quizzes():
         quiz_db = Quiz.objects.filter(name=quiz_name).first()
         if not quiz_db:
             quiz_db = Quiz.objects.create(name=quiz_name)    
+            log.info(f"Quiz {quiz_name} created")
         
         # Set country
         quiz_db.countries.set([country,])
@@ -112,8 +111,6 @@ def update_quizzes():
         # Add Quiz FK to Country
         country.quiz = quiz_db
         country.save()
-
-        log.info(f"Quiz {quiz_name} updated")
     
     
     # Create 'Random' quiz for all facts
@@ -122,7 +119,7 @@ def update_quizzes():
         quiz_db = Quiz.objects.get(name=random_quiz_name)
     except Quiz.DoesNotExist:
         quiz_db = Quiz.objects.create(name=random_quiz_name)
-    log.info(f"Quiz {random_quiz_name} updated")
+        log.info(f"Quiz {random_quiz_name} created")
     
     
     # Compute and set the number of facts for each quiz
@@ -135,5 +132,4 @@ def update_quizzes():
             quiz.delete()
             log.info(f"Quiz {quiz.name} deleted")
     
-    Quiz.objects.filter(name="Geometas - All Random").delete()
         

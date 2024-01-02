@@ -70,3 +70,22 @@ def eastern_europe(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/eastern_europe.png'),
     }
     return render(request, 'articles/eastern_europe.html', context)
+
+
+def world_map_common_locations(request):
+    facts = {
+        "hong_kong": "recLhAiKhFfBcV4Sd",
+        "midway_atoll": "recUgzOC1LIFgzlrS",
+        "xmas_island": "recmvCVQEvgwq30sv",
+        "bermuda": "receGLe5opxKOJCRy",
+        "madagascar": "recYZ7O6Qk1fQMktB",
+        "monaco": "recvxUK4ni7oIoMnI",
+        "vienna": "rec8iDOvUqIaHLkMo",
+        "singapore": "rec9hEYcOwW90WHcq"
+    }
+    context = {
+        'html_meta_title': "Common Locations in the Geoguessr World Map",
+        'html_meta_description': "Learn the most common locations on the Geoguessr world map to become a Geoguessr champion.",
+        #'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map_common_locations.png'),
+    }
+    return render(request, 'articles/world_map_common_locations.html', context)

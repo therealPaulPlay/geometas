@@ -28,18 +28,14 @@ def import_all_facts_into_db():
     api = Api(settings.AIRTABLE_API_TOKEN)
     table = api.table(settings.AIRTABLE_APP_ID, settings.AIRTABLE_TABLE_ID)
     facts = table.all()
-    deserialized_facts = []
     for fact in facts:
-        needs_update = check_if_fact_needs_update(fact)
-        if not needs_update:
-            log.info(f"Fact '{fact['id']}' does not need update")
-            continue
-        deserialize_fact(fact)
-        deserialized_facts.append(deserialize_fact(fact))
-    # Create Fact object for each deserialized fact
-    for deserialized_fact in deserialized_facts:
-        db_fact = Fact.objects.filter(airtable_id=deserialized_fact['airtable_id']).first()
-        if not db_fact:
+        deserialized_fact = deserialize_fact(fact)
+        try:
+            db_fact = Fact.objects.get(airtable_id=deserialized_fact['airtable_id'])
+            # Don't update if fact was updated recently and image url exists (might have been broken)
+            if db_fact.updated_at > deserialized_fact['updated_at'] and db_fact.image_url:
+                continue
+        except Fact.DoesNotExist:
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
         db_fact.country = Country.objects.get(name=deserialized_fact['country'])
@@ -66,30 +62,10 @@ def import_all_facts_into_db():
         Fact.objects.filter(airtable_id=deleted_fact_id).delete()
 
 
-
-def check_if_fact_needs_update(fact_response):
-    """ 
-    Check last updated time of fact in airtable and database 
-    Airtable field: 'Last updated': '2023-12-10T10:35:53.000Z'
-    Database: Face.updated_at
-    """
-    airtable_updated_at = fact_response['fields']['Last updated']
-    airtable_updated_at = datetime.datetime.strptime(airtable_updated_at, '%Y-%m-%dT%H:%M:%S.%fZ')
-    # Handle timezone 
-    airtable_updated_at = timezone.make_aware(airtable_updated_at)
-    db_fact = Fact.objects.filter(airtable_id=fact_response['id']).first()
-    if db_fact:
-        if db_fact.updated_at < airtable_updated_at:
-            return True
-        else:
-            return False
-    else:
-        return True
-        
-
 def deserialize_fact(fact_response):
     """ Deserializes a fact from API to a dictionary """
     return {
+        'updated_at': timezone.make_aware(datetime.datetime.strptime(fact_response['fields']['Last updated'], '%Y-%m-%dT%H:%M:%S.%fZ')),
         'answer': fact_response['fields']['Answer'],
         'image_url': fact_response['fields']['Image'][0]['url'],
         'country': fact_response['fields']['Country Name'][0],
