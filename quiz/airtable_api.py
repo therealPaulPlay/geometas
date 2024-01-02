@@ -31,8 +31,7 @@ def import_all_facts_into_db():
     deserialized_facts = []
     for fact in facts:
         needs_update = check_if_fact_needs_update(fact)
-        needs_temp_update = True
-        if not needs_temp_update:
+        if not needs_update:
             log.info(f"Fact '{fact['id']}' does not need update")
             continue
         deserialize_fact(fact)
@@ -43,7 +42,6 @@ def import_all_facts_into_db():
         if not db_fact:
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
-        print(deserialized_fact['country'])
         db_fact.country = Country.objects.get(name=deserialized_fact['country'])
         db_fact.category = Category.objects.get(name=deserialized_fact['category'])
         db_fact.notes = deserialized_fact['notes']
