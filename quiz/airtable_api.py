@@ -53,7 +53,7 @@ def import_all_facts_into_db():
         image_name = f"{db_fact.uuid}.jpg"
         move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
         db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
-
+        db_fact.save()
         log.info(f"Fact '{db_fact.airtable_id}' saved")
     
     # Check if facts have been deleted
