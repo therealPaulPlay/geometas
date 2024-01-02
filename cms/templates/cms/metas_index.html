@@ -42,7 +42,11 @@
                 </li>
                 <li class="mt-1">
                     {% url 'articles:eastern_europe' as link_url %}
-                    {% #link_primary url=link_url %}Eastern Europe country-guessing{% /link_primary %}
+                    {% #link_primary url=link_url %}Country-guessing Eastern Europe{% /link_primary %}
+                </li>
+                <li class="mt-1">
+                    {% url 'articles:world_map_common_locations' as link_url %}
+                    {% #link_primary url=link_url %}Common World Map locations{% /link_primary %}
                 </li>
             </ul>
         </div>

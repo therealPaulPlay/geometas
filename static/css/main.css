@@ -695,6 +695,10 @@ video {
   margin-top: 2rem;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .block {
   display: block;
 }
@@ -849,6 +853,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-44 {
+  width: 11rem;
 }
 
 .max-w-2xl {
@@ -1280,6 +1288,14 @@ video {
   padding-top: 1.5rem;
 }
 
+.pb-0 {
+  padding-bottom: 0px;
+}
+
+.pb-0\.5 {
+  padding-bottom: 0.125rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1658,6 +1674,10 @@ video {
 
   .sm\:w-36 {
     width: 9rem;
+  }
+
+  .sm\:w-44 {
+    width: 11rem;
   }
 
   .sm\:max-w-\[50\%\] {

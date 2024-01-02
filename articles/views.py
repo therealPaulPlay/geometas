@@ -74,18 +74,19 @@ def eastern_europe(request):
 
 def world_map_common_locations(request):
     facts = {
-        "hong_kong": "recLhAiKhFfBcV4Sd",
-        "midway_atoll": "recUgzOC1LIFgzlrS",
-        "xmas_island": "recmvCVQEvgwq30sv",
-        "bermuda": "receGLe5opxKOJCRy",
-        "madagascar": "recYZ7O6Qk1fQMktB",
-        "monaco": "recvxUK4ni7oIoMnI",
-        "vienna": "rec8iDOvUqIaHLkMo",
-        "singapore": "rec9hEYcOwW90WHcq"
+        "hong_kong": Fact.objects.get(airtable_id="recLhAiKhFfBcV4Sd"),
+        "midway_atoll": Fact.objects.get(airtable_id="recUgzOC1LIFgzlrS"),
+        "xmas_island": Fact.objects.get(airtable_id="recmvCVQEvgwq30sv"),
+        "bermuda": Fact.objects.get(airtable_id="receGLe5opxKOJCRy"),
+        "madagascar": Fact.objects.get(airtable_id="recYZ7O6Qk1fQMktB"),
+        "monaco": Fact.objects.get(airtable_id="recvxUK4ni7oIoMnI"),
+        "vienna": Fact.objects.get(airtable_id="rec8iDOvUqIaHLkMo"),
+        "singapore": Fact.objects.get(airtable_id="rec9hEYcOwW90WHcq")
     }
     context = {
-        'html_meta_title': "Common Locations in the Geoguessr World Map",
-        'html_meta_description': "Learn the most common locations on the Geoguessr world map to become a Geoguessr champion.",
+        'facts': facts,
+        'html_meta_title': "The Most Geoguessr World Map Locations",
+        'html_meta_description': "Find the most common locations on the Geoguessr world map to become a Geoguessr champion.",
         #'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map_common_locations.png'),
     }
     return render(request, 'articles/world_map_common_locations.html', context)
