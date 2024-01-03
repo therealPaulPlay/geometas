@@ -95,14 +95,14 @@ def world_map_common_locations(request):
 def south_african_countries(request):
     facts = {
         "landscape": {
-            "za": Fact.objects.get(airtable_id="ADDHERE"),
-            "bw": Fact.objects.get(airtable_id="ADDHERE"),
+            "za": Fact.objects.get(airtable_id="reczOidbaTUzO1STa"),
+            "bw": Fact.objects.get(airtable_id="recOFlH3oYGnbwAws"),
             "ls": Fact.objects.get(airtable_id="recmSErrRkPVTu3WF"),
-            "sz": Fact.objects.get(airtable_id="ADDHERE"),
+            "sz": Fact.objects.get(airtable_id="recJuSsPub8EBpjrC"),
         },
         "road_names": {
             "za": Fact.objects.get(airtable_id="recsocCI1w2pgB7xb"),
-            "bw": Fact.objects.get(airtable_id="ADDHERE"),
+            "bw": Fact.objects.get(airtable_id="recWdVZrnHBuc1akc"),
             "ls": Fact.objects.get(airtable_id="recSV2CDdndB21Qcb"),
             "sz": Fact.objects.get(airtable_id="ADDHERE"),
         },
@@ -111,6 +111,7 @@ def south_african_countries(request):
             "za_gen2": Fact.objects.get(airtable_id="recWdqg8xB95fg2Pt"),
             "ls_blanket": Fact.objects.get(airtable_id="recm47pOVclnJu7AP"),
             "ls_huts": Fact.objects.get(airtable_id="reci9yiBkW0F8uJH3"),
+            "bw_signpost": Fact.objects.get(airtable_id="recMVDmrhwxvgB2Rz"),
         }
     }
     context = {
