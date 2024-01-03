@@ -87,6 +87,36 @@ def world_map_common_locations(request):
         'facts': facts,
         'html_meta_title': "The Most Geoguessr World Map Locations",
         'html_meta_description': "Find the most common locations on the Geoguessr world map to become a Geoguessr champion.",
-        #'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map_common_locations.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map.jpg'),
     }
     return render(request, 'articles/world_map_common_locations.html', context)
+
+
+def south_african_countries(request):
+    facts = {
+        "landscape": {
+            "za": Fact.objects.get(airtable_id="ADDHERE"),
+            "bw": Fact.objects.get(airtable_id="ADDHERE"),
+            "ls": Fact.objects.get(airtable_id="recmSErrRkPVTu3WF"),
+            "sz": Fact.objects.get(airtable_id="ADDHERE"),
+        },
+        "road_names": {
+            "za": Fact.objects.get(airtable_id="recsocCI1w2pgB7xb"),
+            "bw": Fact.objects.get(airtable_id="ADDHERE"),
+            "ls": Fact.objects.get(airtable_id="recSV2CDdndB21Qcb"),
+            "sz": Fact.objects.get(airtable_id="ADDHERE"),
+        },
+        "uniques": {
+            "za_chevrons": Fact.objects.get(airtable_id="recL0VdwPgEBf9gaL"),
+            "za_gen2": Fact.objects.get(airtable_id="recWdqg8xB95fg2Pt"),
+            "ls_blanket": Fact.objects.get(airtable_id="recm47pOVclnJu7AP"),
+            "ls_huts": Fact.objects.get(airtable_id="reci9yiBkW0F8uJH3"),
+        }
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing in Southern Africa: South Africa, Botswana, Eswatini, Lesotho",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to identify  South Africa, Botswana, Eswatini, and Lesotho.",
+        #'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map_common_locations.png'),
+    }
+    return render(request, 'articles/south_african_countries.html', context)
