@@ -104,7 +104,7 @@ def south_african_countries(request):
             "za": Fact.objects.get(airtable_id="recsocCI1w2pgB7xb"),
             "bw": Fact.objects.get(airtable_id="recWdVZrnHBuc1akc"),
             "ls": Fact.objects.get(airtable_id="recSV2CDdndB21Qcb"),
-            "sz": Fact.objects.get(airtable_id="ADDHERE"),
+            "sz": Fact.objects.get(airtable_id="rec5e3S51TI8eNvVK"),
         },
         "uniques": {
             "za_chevrons": Fact.objects.get(airtable_id="recL0VdwPgEBf9gaL"),
@@ -112,11 +112,12 @@ def south_african_countries(request):
             "ls_blanket": Fact.objects.get(airtable_id="recm47pOVclnJu7AP"),
             "ls_huts": Fact.objects.get(airtable_id="reci9yiBkW0F8uJH3"),
             "bw_signpost": Fact.objects.get(airtable_id="recMVDmrhwxvgB2Rz"),
+            "sz_poles": Fact.objects.get(airtable_id="recmM2AGUQirOTqqJ"), 
         }
     }
     context = {
         'facts': facts,
-        'html_meta_title': "Country-guessing in Southern Africa: South Africa, Botswana, Eswatini, Lesotho",
+        'html_meta_title': "Country-guessing Southern African",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify  South Africa, Botswana, Eswatini, and Lesotho.",
         #'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map_common_locations.png'),
     }

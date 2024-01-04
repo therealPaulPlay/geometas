@@ -39,7 +39,11 @@ def import_all_facts_into_db():
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
         db_fact.country = Country.objects.get(name=deserialized_fact['country'])
-        db_fact.category = Category.objects.get(name=deserialized_fact['category'])
+        try:
+            db_fact.category = Category.objects.get(name=deserialized_fact['category'])
+        except Category.DoesNotExist as ex:
+            log.info(f"Category '{deserialized_fact['category']}' does not exist")
+            raise ex
         db_fact.notes = deserialized_fact['notes']
         db_fact.airtable_id = deserialized_fact['airtable_id']
         db_fact.distinctive = deserialized_fact['distinctive']

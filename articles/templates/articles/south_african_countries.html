@@ -18,57 +18,33 @@
     
     {% #heading_primary %}General Landscape{% /heading_primary %}
     {% #paragraph_text %}
-        Each of the 4 countries has distinct landscapes. Botswana has a lot of flat, sandy, well maintained roads; Lesotho and Eswatini have distinct mountains but only Eswatini has trees; and South Africa has a diverse landscape, which typically doesn't fit the other landscapes.
+        Each of the 4 countries has distinct landscapes. Try identifying Botswana, Lesotho, or Eswatini by the landscape. South Africa is the most diverse country in Africa, so it's harder to identify by landscape.
     {% /paragraph_text %}
     {% #card_image_with_description_container %}
-        {% url 'cms:fact_detail' facts.hong_kong.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.hong_kong.image_url image_link=image_link heading="🇭🇰 Hong Kong" %}
-            {% #paragraph_text extra_css="text-sm" %}
-                This specific location comes up quite often and can be an easy 5k.
+        {% url 'cms:fact_detail' facts.landscape.bw.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.bw.image_url image_link=image_link heading="🇧🇼 Botswana" %}
+            {% #paragraph_text %}
+                {{ facts.landscape.bw.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.midway_atoll.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.midway_atoll.image_url image_link=image_link heading="🇺🇸 Midway Atoll" %}
-            {% #paragraph_text extra_css="text-sm" %}
-                If you see many albatrosses, you’re probably here.
+        {% url 'cms:fact_detail' facts.landscape.ls.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.ls.image_url image_link=image_link heading="🇱🇸 Lesotho" %}
+            {% #paragraph_text %}
+            {{ facts.landscape.ls.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.vienna.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.vienna.image_url image_link=image_link heading="🇦🇹 Vienna" %}
-            {% #paragraph_text extra_css="text-sm" %}
-                If you're in a Western European country and see these blue signs with German street names, it's most likely Vienna, Austria.
+        {% url 'cms:fact_detail' facts.landscape.sz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.sz.image_url image_link=image_link heading="🇸🇿 Eswatini" %}
+            {% #paragraph_text %}
+            {{ facts.landscape.sz.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.singapore.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.singapore.image_url image_link=image_link heading="🇸🇬 Singapore" %}
-            {% #paragraph_text extra_css="text-sm" %}
-                When you see these green street signs with bold font in a big city, it's probably Singapore.
+        {% url 'cms:fact_detail' facts.landscape.sa.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.sa.image_url image_link=image_link heading="🇿🇦 South Africa" %}
+            {% #paragraph_text %}
+            {{ facts.landscape.sa.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.monaco.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.monaco.image_url image_link=image_link heading="🇲🇨 Monaco" %}
-            {% #paragraph_text extra_css="text-sm" %}
-                Monaco is very easy to guess and often shows up with the same location.
-            {% /paragraph_text %}
-        {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.bermuda.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bermuda.image_url image_link=image_link heading="🇧🇲 Bermuda" %}
-            {% #paragraph_text extra_css="text-sm" %}
-                Boat coverage in a tropical, western location.
-            {% /paragraph_text %}
-        {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.madagascar.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.madagascar.image_url image_link=image_link heading="🇲🇬 Madagascar" %}
-            {% #paragraph_text extra_css="text-sm" %}
-            Boat coverage in an African, sandy location.
-            {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description %}        
     {% /card_image_with_description_container %}
 
 {% endblock %}
