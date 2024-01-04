@@ -1259,6 +1259,10 @@ video {
   font-size: 1.25rem;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1277,6 +1281,10 @@ video {
 
 .font-semibold {
   font-weight: 600;
+}
+
+.font-thin {
+  font-weight: 100;
 }
 
 .italic {
@@ -1679,10 +1687,6 @@ video {
 
   .sm\:pr-10 {
     padding-right: 2.5rem;
-  }
-
-  .sm\:text-base {
-    font-size: 0.95rem;
   }
 
   .sm\:shadow {
