@@ -85,7 +85,7 @@ def world_map_common_locations(request):
     }
     context = {
         'facts': facts,
-        'html_meta_title': "The Most Geoguessr World Map Locations",
+        'html_meta_title': "The Most Common Geoguessr World Map Locations",
         'html_meta_description': "Find the most common locations on the Geoguessr world map to become a Geoguessr champion.",
         'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map.jpg'),
     }
@@ -117,8 +117,8 @@ def south_african_countries(request):
     }
     context = {
         'facts': facts,
-        'html_meta_title': "Country-guessing Southern African",
+        'html_meta_title': "Country-guessing Southern Africa",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify  South Africa, Botswana, Eswatini, and Lesotho.",
-        #'html_meta_image_url': request.build_absolute_uri('/static/seo/world_map_common_locations.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_africa.png'),
     }
     return render(request, 'articles/south_african_countries.html', context)
