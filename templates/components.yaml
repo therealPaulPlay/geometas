@@ -8,6 +8,7 @@ components:
 
   paragraph_text: "components/paragraph_text.html"
   text_italic: "components/text_italic.html"
+  country: "components/country.html"
 
   card_image_with_description: "components/card_image_with_description.html"
   card_image_with_description_container: "components/card_image_with_description_container.html"

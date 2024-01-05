@@ -31,12 +31,18 @@ class Country(models.Model):
     def __str__(self):
         return self.name
     
-    def flag_emoji(self):
+    @staticmethod
+    def get_flag_emoji(iso2):
+        if not iso2 or len(iso2) != 2:
+            return ''
         # Make sure the country code is in uppercase
-        iso2 = self.iso2.upper()
+        iso2 = iso2.upper()
         # Convert each letter to the corresponding regional indicator symbol
         return ''.join(chr(ord(letter) + 0x1F1A5) for letter in iso2)
-
+    
+    def flag_emoji(self):
+        return Country.get_flag_emoji(self.iso2)
+        
     class Meta:
         unique_together = ('name', 'iso2')
         verbose_name_plural = "Countries"
