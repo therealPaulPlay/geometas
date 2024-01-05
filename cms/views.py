@@ -1,6 +1,7 @@
 from django.shortcuts import render
+from django.http import Http404
 
-from quiz.models import Country, Fact, Region, Category, Quiz, QuizSession
+from quiz.models import Country, Fact, Category, Quiz, QuizSession
 
 
 
@@ -51,6 +52,7 @@ def country(request, country_slug):
     }
     return render(request, 'cms/country.html', context)
 
+
 def region(request, region_slug):
     # Get region countries
     countries = Country.objects.filter(region__slug=region_slug).order_by('name')
@@ -72,6 +74,7 @@ def region(request, region_slug):
     }
     return render(request, 'cms/region.html', context)
 
+
 def category(request, category_slug):
     # Get category
     category = Category.objects.get(slug=category_slug)
@@ -91,7 +94,10 @@ def category(request, category_slug):
 
 
 def fact_detail(request, fact_uuid):
-    fact = Fact.objects.select_related('country', 'category').get(uuid=fact_uuid)
+    try:
+        fact = Fact.objects.select_related('country', 'category').get(uuid=fact_uuid)
+    except Fact.DoesNotExist:
+        raise Http404("Fact does not exist")
     fact_title = "%s: %s meta" % (fact.country.name, fact.category.name.lower())
     context = {
         'fact': fact,
