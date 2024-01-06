@@ -129,22 +129,27 @@ def latin_america(request):
     facts = {
         "easy": {
             "br_lang": Fact.objects.get(airtable_id="recKlE0T6Bgf0PAQk"),
+            "black_car": Fact.objects.get(airtable_id="recegeaejCsi778fX"),
         },
         "license_plates": {
             "br": Fact.objects.get(airtable_id="recawRpccIfzUD1gp"),
+            "ar": Fact.objects.get(airtable_id="rec7Z2Z9Z2Z2Z2Z2Z"),
         },
         "milestones": {
             "br": Fact.objects.get(airtable_id="recgB0Z9FqR4yG1Zl"),
+            "ar": Fact.objects.get(airtable_id="recyDxGHvGK44IAUi"),
         },
         "signposts": {
             "br": Fact.objects.get(airtable_id="recWQah3rdoEIfUJJ"),
         },
         "poles": {
             "br": Fact.objects.get(airtable_id="recYT9xm6HXILql3C"),
+            "ar": Fact.objects.get(airtable_id="recLr5Qwya4xYjaVM"),
         },
         "uniques":{
             "br_chevron": Fact.objects.get(airtable_id="recSeCzJqjBfTjykf"),
             "br_dishes": Fact.objects.get(airtable_id="recE2KCQrNLsbDuN7"),
+            "ar_chevron": Fact.objects.get(airtable_id="recaTnH59sa3DVLwz"),
         }
     }
     context = {
