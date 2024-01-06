@@ -122,3 +122,35 @@ def south_african_countries(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/south_africa.png'),
     }
     return render(request, 'articles/south_african_countries.html', context)
+
+
+
+def latin_america(request):
+    facts = {
+        "easy": {
+            "br_lang": Fact.objects.get(airtable_id="recKlE0T6Bgf0PAQk"),
+        },
+        "license_plates": {
+            "br": Fact.objects.get(airtable_id="recawRpccIfzUD1gp"),
+        },
+        "milestones": {
+            "br": Fact.objects.get(airtable_id="recgB0Z9FqR4yG1Zl"),
+        },
+        "signposts": {
+            "br": Fact.objects.get(airtable_id="recWQah3rdoEIfUJJ"),
+        },
+        "poles": {
+            "br": Fact.objects.get(airtable_id="recYT9xm6HXILql3C"),
+        },
+        "uniques":{
+            "br_chevron": Fact.objects.get(airtable_id="recSeCzJqjBfTjykf"),
+            "br_dishes": Fact.objects.get(airtable_id="recE2KCQrNLsbDuN7"),
+        }
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing Southern Africa",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to identify  South Africa, Botswana, Eswatini, and Lesotho.",
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_africa.png'),
+    }
+    return render(request, 'articles/south_african_countries.html', context)
