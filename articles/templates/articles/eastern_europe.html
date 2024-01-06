@@ -34,9 +34,9 @@
     {% #card_image_with_description_container %}
     {% url 'cms:fact_detail' languages.latin.uuid as image_link %}    
     {% #card_image_with_description image_css="w-28 sm:w-36" image_link=image_link image_url=languages.latin.image_url heading="Latin only" %}
-            <div>🇵🇱 Poland</div>
-            <div>🇭🇺 Hungary</div>
-            <div>🇭🇷 Croatia</div>
+            <div>{% country name="Poland" %}</div>
+            <div>{% country name="Hungary" %}</div>
+            <div>{% country name="Croatia" %}</div>
             <div>🇨🇿 Czech Republic</div>
             <div>🇸🇰 Slovakia</div>
             <div>🇸🇮 Slovenia</div>
