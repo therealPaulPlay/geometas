@@ -1,5 +1,5 @@
 {% extends "template_content_with_extra.html" %}
-{% load static %}
+{% load static %} 
 
 {% block title_main %}{{ html_meta_title }}{% endblock %}
 
@@ -11,89 +11,66 @@
 
 
 {% block content %}
-    {% fragment as za %}{% country name="South Africa" %}{% endfragment %}
-    {% fragment as bw %}{% country name="Botswana" %}{% endfragment %}
-    {% fragment as ls %}{% country name="Lesotho" %}{% endfragment %}
-    {% fragment as sz %}{% country name="Eswatini" %}{% endfragment %}
+    {% fragment as bra %}{% country name="Brazil" %}{% endfragment %}
+    {% fragment as arg %}{% country name="Argentina" %}{% endfragment %}
+    {% fragment as per %}{% country name="Peru" %}{% endfragment %}
+    {% fragment as col %}{% country name="Colombia" %}{% endfragment %}
+    {% fragment as ecu %}{% country name="Ecuador" %}{% endfragment %}
+    {% fragment as chi %}{% country name="Chile" %}{% endfragment %}
+    {% fragment as bol %}{% country name="Bolivia" %}{% endfragment %}
+    {% fragment as mex %}{% country name="Mexico" %}{% endfragment %}
+    {% fragment as uru %}{% country name="Uruguay" %}{% endfragment %}
 
-    
+
     {% #paragraph_text %}
-        In Geoguessr, if you see an African country with left-hand traffic, yellow road markings and no unique Google Car meta like the Kenyan snorkel, then you are in South Africa, Botswana, Lesotho, or Eswatini. Identifying which of the 4 countries you're in can be difficult at first, but there are some easy metas to learn to help you out.
+        Text
     {% /paragraph_text %}
     
 
-    {% #heading_primary %}General Landscape{% /heading_primary %}
+    {% #heading_primary %}First impressions{% /heading_primary %}
     {% #paragraph_text %}
-        Each of the 4 countries has distinct landscapes. Try identifying Botswana, Lesotho, or Eswatini by the landscape. South Africa is the most diverse country in Africa, so it's harder to identify by landscape.
+        text
     {% /paragraph_text %}
 
     {% #card_image_with_description_container %}
-        {% url 'cms:fact_detail' facts.landscape.bw.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.bw.image_url image_link=image_link heading=bw %}
+        {% url 'cms:fact_detail' facts.easy.br_lang.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.easy.br_lang.image_url image_link=image_link heading="Portuguese language" %}
             {% #paragraph_text %}
-                {{ facts.landscape.bw.answer }}
+                {{bra}} uses the Portuguese language which includes the 'Ç' and 'ã' characters.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.landscape.ls.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.ls.image_url image_link=image_link heading=ls %}
+        {% url 'cms:fact_detail' facts.easy.black_car.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.easy.black_car.image_url image_link=image_link heading="Black Google car" %}
             {% #paragraph_text %}
-                {{ facts.landscape.ls.answer }}
+                {{arg}}, {{uru}}, and some of {{per}} have a black Google car.
             {% /paragraph_text %}
         {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.landscape.sz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.sz.image_url image_link=image_link heading=sz %}
-            {% #paragraph_text %}
-                {{ facts.landscape.sz.answer }}
-            {% /paragraph_text %}
-        {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.landscape.za.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.za.image_url image_link=image_link heading=za %}
-            {% #paragraph_text %}
-                {{ facts.landscape.za.answer }}
-            {% /paragraph_text %}
-        {% /card_image_with_description %}        
     {% /card_image_with_description_container %}
 
 
-    {% #heading_primary %}Road Names{% /heading_primary %}
+    {% #heading_primary %}License Plates{% /heading_primary %}
     {% #paragraph_text %}
         Thankfully, the 4 South African countries share the same highway sign design, which is a great way to identify the region. When you see a sign, you can use the highway letter prefix to identify the specific country.
     {% /paragraph_text %}
 
     {% #card_image_with_description_container %}
-        {% url 'cms:fact_detail' facts.road_names.bw.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.bw.image_url image_link=image_link heading=bw %}
+        {% url 'cms:fact_detail' facts.license_plates.br.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.br.image_url image_link=image_link heading=bra %}
             {% #paragraph_text %}
-                Botswana's highway signs have a "A" prefix.
+                Commercial vehicles in Brazil have a red license plate. Non-commercial vehicles have long white plates, sometimes with a top blue bar.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.road_names.ls.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.ls.image_url image_link=image_link heading=ls %}
+        {% url 'cms:fact_detail' facts.license_plates.ar.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.ar.image_url image_link=image_link heading=arg %}
             {% #paragraph_text %}
-                Lesotho's highway signs have a "A" prefix as well, but many signs don't show the letter at all. If you see signs without a letter, you're probably in Lesotho.
+                Some plates in Argentina have a black blob in the middle. Others are white with a top blue bar like in Brazil.
             {% /paragraph_text %}
         {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.road_names.sz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.sz.image_url image_link=image_link heading=sz %}
-            {% #paragraph_text %}
-                Eswatini's highway signs have a "MR" prefix.
-            {% /paragraph_text %}
-        {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.road_names.za.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.za.image_url image_link=image_link heading=za %}
-            {% #paragraph_text %}
-                South Africa's highway signs have a "N", "M", or "R" prefix.
-            {% /paragraph_text %}
-        {% /card_image_with_description %}        
     {% /card_image_with_description_container %}
 
-    
+
     {% #heading_primary %}Unique Metas{% /heading_primary %}
     {% #paragraph_text %}
         Each South African country has some distinct metas that are easy to find and help to quickly identify the country.
