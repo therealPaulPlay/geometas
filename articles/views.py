@@ -78,7 +78,8 @@ def world_map_common_locations(request):
         "midway_atoll": Fact.objects.get(airtable_id="recUgzOC1LIFgzlrS"),
         "xmas_island": Fact.objects.get(airtable_id="recmvCVQEvgwq30sv"),
         "bermuda": Fact.objects.get(airtable_id="receGLe5opxKOJCRy"),
-        "madagascar": Fact.objects.get(airtable_id="recYZ7O6Qk1fQMktB"),
+        "madagascar_boat": Fact.objects.get(airtable_id="recYZ7O6Qk1fQMktB"),
+        "madagascar_trekker": Fact.objects.get(airtable_id="recyK6OYPOPzEoCUG"),
         "monaco": Fact.objects.get(airtable_id="recvxUK4ni7oIoMnI"),
         "vienna": Fact.objects.get(airtable_id="rec8iDOvUqIaHLkMo"),
         "singapore": Fact.objects.get(airtable_id="rec9hEYcOwW90WHcq")
@@ -130,6 +131,7 @@ def latin_america(request):
         "easy": {
             "br_lang": Fact.objects.get(airtable_id="recKlE0T6Bgf0PAQk"),
             "black_car": Fact.objects.get(airtable_id="recegeaejCsi778fX"),
+            "uy_overcast": Fact.objects.get(airtable_id="recunqjCGpJNIY4wS"),
         },
         "license_plates": {
             "br": Fact.objects.get(airtable_id="recawRpccIfzUD1gp"),
@@ -146,6 +148,7 @@ def latin_america(request):
         "poles": {
             "br": Fact.objects.get(airtable_id="recYT9xm6HXILql3C"),
             "ar": Fact.objects.get(airtable_id="recLr5Qwya4xYjaVM"),
+            "uy": Fact.objects.get(airtable_id="recbSqcA91CLCuzYf"),
         },
         "road_markings": {
             "br": Fact.objects.get(airtable_id="recx9eHtJ9GcgEeE6"),
@@ -156,6 +159,9 @@ def latin_america(request):
             "br_chevron": Fact.objects.get(airtable_id="recSeCzJqjBfTjykf"),
             "br_dishes": Fact.objects.get(airtable_id="recE2KCQrNLsbDuN7"),
             "ar_chevron": Fact.objects.get(airtable_id="recaTnH59sa3DVLwz"),
+            "uy_arrows": Fact.objects.get(airtable_id="rec5ZlY6VDpX4zkeQ"),
+            "uy_trafficlights": Fact.objects.get(airtable_id="recXPIuAw90ulQPGo"),
+            "cl_google_car": Fact.objects.get(airtable_id="rec2PfXhfJT7CtD80"),
         }
     }
     context = {

@@ -62,10 +62,17 @@
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.madagascar.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.madagascar.image_url image_link=image_link heading="🇲🇬 Madagascar" %}
+        {% url 'cms:fact_detail' facts.madagascar_boat.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.madagascar_boat.image_url image_link=image_link heading="🇲🇬 Madagascar" %}
             {% #paragraph_text %}
             Boat coverage in an African, sandy location.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.madagascar_trekker.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.madagascar_trekker.image_url image_link=image_link heading="🇲🇬 Madagascar" %}
+            {% #paragraph_text %}
+                Besides the boat coverage, Madagascar also has a common trekker coverage in the center of the country.
             {% /paragraph_text %}
         {% /card_image_with_description %}
     {% /card_image_with_description_container %}
