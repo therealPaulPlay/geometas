@@ -4,9 +4,9 @@
 {% block title_main %}{{ html_meta_title }}{% endblock %}
 
 {% block content_top_extra %}
-    <div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
+    <!--<div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
         <img src="{% static 'seo/south_africa.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
-    </div>
+    </div>-->
 {% endblock %}
 
 
@@ -46,6 +46,13 @@
                 {{arg}}, {{uru}}, and some of {{per}} have a black Google car.
             {% /paragraph_text %}
         {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.easy.uy_overcast.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.easy.uy_overcast.image_url image_link=image_link heading="Overcast scenerie" %}
+            {% #paragraph_text %}
+                {{ facts.easy.uy_overcast.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
     {% /card_image_with_description_container %}
 
 
@@ -68,57 +75,282 @@
                 Some plates in Argentina have a black blob in the middle. Others are white with a top blue bar like in Brazil.
             {% /paragraph_text %}
         {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.license_plates.co.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.co.image_url image_link=image_link heading=col %}
+            {% #paragraph_text %}
+            {{ facts.license_plates.co.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.license_plates.ec.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.ec.image_url image_link=image_link heading="🇪🇨 Ecuador & 🇨🇱 Chile" %}
+            {% #paragraph_text %}
+                In Ecuador and Chile, commercial vehicles such as taxis have orange license plates.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Milestones{% /heading_primary %}
+    {% #paragraph_text %}
+        DESCRIPTION HERE
+    {% /paragraph_text %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.milestones.br.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.milestones.br.image_url image_link=image_link heading=bra %}
+            {% #paragraph_text %}
+            {{ facts.milestones.br.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.milestones.ar.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.milestones.ar.image_url image_link=image_link heading=arg %}
+            {% #paragraph_text %}
+            {{ facts.milestones.ar.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.milestones.uy.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.milestones.uy.image_url image_link=image_link heading=uru %}
+            {% #paragraph_text %}
+            {{ facts.milestones.uy.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.milestones.cl.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.milestones.cl.image_url image_link=image_link heading=chi %}
+            {% #paragraph_text %}
+            {{ facts.milestones.cl.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.milestones.co.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.milestones.co.image_url image_link=image_link heading=col %}
+            {% #paragraph_text %}
+            {{ facts.milestones.co.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Signposts{% /heading_primary %}
+    {% #paragraph_text %}
+        DESCRIPTION HERE
+    {% /paragraph_text %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.signposts.br.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.br.image_url image_link=image_link heading=bra %}
+            {% #paragraph_text %}
+            {{ facts.signposts.br.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.signposts.ec.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.ec.image_url image_link=image_link heading=ecu %}
+            {% #paragraph_text %}
+            {{ facts.signposts.ec.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.signposts.uy.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.uy.image_url image_link=image_link heading=uru %}
+            {% #paragraph_text %}
+            {{ facts.signposts.uy.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.signposts.cl.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.cl.image_url image_link=image_link heading=chi %}
+            {% #paragraph_text %}
+            {{ facts.signposts.cl.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.signposts.co.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.co.image_url image_link=image_link heading=col %}
+            {% #paragraph_text %}
+                In Colombia, it's common to see crosses on the backs of road signs. Also, Colombian signs use unique thin poles, which sometimes are painted white.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Poles{% /heading_primary %}
+    {% #paragraph_text %}
+        DESCRIPTION HERE
+    {% /paragraph_text %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.poles.br.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.br.image_url image_link=image_link heading=bra %}
+            {% #paragraph_text %}
+            {{ facts.poles.br.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.cl.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.cl.image_url image_link=image_link heading=chi %}
+            {% #paragraph_text %}
+            {{ facts.poles.cl.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.ar.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.ar.image_url image_link=image_link heading=arg %}
+            {% #paragraph_text %}
+            {{ facts.poles.ar.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.ec.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.ec.image_url image_link=image_link heading=ecu %}
+            {% #paragraph_text %}
+            {{ facts.poles.ec.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.uy.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.uy.image_url image_link=image_link heading=uru %}
+            {% #paragraph_text %}
+            {{ facts.poles.uy.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.mx_co.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.mx_co.image_url image_link=image_link heading="🇲🇽 Mexico & 🇨🇴 Colombia" %}
+            {% #paragraph_text %}
+                Maxico and Colombia have octagonal poles. They tend to be more prevalent in Mexico.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Road Markings{% /heading_primary %}
+    {% #paragraph_text %}
+        DESCRIPTION HERE
+    {% /paragraph_text %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.road_markings.br.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.br.image_url image_link=image_link heading=bra %}
+            {% #paragraph_text %}
+            {{ facts.road_markings.br.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.road_markings.ar_uy.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.ar_uy.image_url image_link=image_link heading=arg %}
+            {% #paragraph_text %}
+            {{ facts.road_markings.ar_uy.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.road_markings.uy.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.uy.image_url image_link=image_link heading=uru %}
+            {% #paragraph_text %}
+            {{ facts.road_markings.uy.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.road_markings.cl.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.cl.image_url image_link=image_link heading=chi %}
+            {% #paragraph_text %}
+                In Chile, all-white or all-yellow road lines are common. Be aware that Argentina also sometimes has all-white roads, but not all-yellow.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
     {% /card_image_with_description_container %}
 
 
     {% #heading_primary %}Unique Metas{% /heading_primary %}
     {% #paragraph_text %}
-        Each South African country has some distinct metas that are easy to find and help to quickly identify the country.
+        DESCRIPTION HERE
     {% /paragraph_text %}
 
     {% #card_image_with_description_container %}
-        {% url 'cms:fact_detail' facts.uniques.za_chevrons.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.za_chevrons.image_url image_link=image_link heading="Red & White Chevrons" %}
+        {% url 'cms:fact_detail' facts.uniques.br_dishes.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.br_dishes.image_url image_link=image_link heading="Transparent satellite dishes" %}
             {% #paragraph_text %}
-                {{za}} has these red and white chevrons on many roads.
-            {% /paragraph_text %}
-            {% #paragraph_text %}
-                {{bw}} uses them as well but less frequently than South Africa.
+                🇧🇷 Brazil often has transparent satellite dishes.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.uniques.za_gen2.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.za_gen2.image_url image_link=image_link heading="Gen 2 Halo & Blur" %}
+        {% url 'cms:fact_detail' facts.uniques.br_chevron.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.br_chevron.image_url image_link=image_link heading="Yellow-on-black chevrons" %}
             {% #paragraph_text %}
-            {{ za }} has Gen 2 camera coverage. You will often see the halo in the sky, the circular blur beneath the Street View car, and a more blurry picture quality.
+                🇧🇷 Brazil mostly uses yellow-on-black chevrons.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.uniques.bw_signpost.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.bw_signpost.image_url image_link=image_link heading="Black & Yellow Signposts" %}
+        {% url 'cms:fact_detail' facts.uniques.ar_chevron.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ar_chevron.image_url image_link=image_link heading="Red-on-white chevrons" %}
             {% #paragraph_text %}
-                {{bw}} uses black & yellow signposts for some, but not all, of their signs.
+                🇦🇷 Argentina mostly uses red-on-white chevrons.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.uniques.ls_huts.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ls_huts.image_url image_link=image_link heading="Round Huts with Thatched Roofs" %}
+        {% url 'cms:fact_detail' facts.uniques.uy_arrows.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.uy_arrows.image_url image_link=image_link heading="Black and white arrows" %}
             {% #paragraph_text %}
-                {{ls}} has many of these traditional round huts with thatched roofs.
+                🇺🇾 Uruguayan has many of these black and white arrows affixed to walls and poles.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.uniques.ls_blanket.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ls_blanket.image_url image_link=image_link heading="Basotho blanket" %}
+        {% url 'cms:fact_detail' facts.uniques.uy_trafficlights.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.uy_trafficlights.image_url image_link=image_link heading="Striped traffic light poles" %}
             {% #paragraph_text %}
-                {{ls}} is known for people wearing the traditional "Basotho blanket".
+                🇺🇾 Uruguay traffic lights are often mounted on poles with black/white or black/yellow stripes.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.uniques.sz_poles.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.sz_poles.image_url image_link=image_link heading="Simple Pole with 3 Insulators" %}
+        {% url 'cms:fact_detail' facts.uniques.cl_google_car.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.cl_google_car.image_url image_link=image_link heading="Back of Google car visibile" %}
             {% #paragraph_text %}
-                {{sz}}'s most common pole is wooden with three insulators on the side and has an overall simple design.
+                🇨🇱 Chile's Google car often has its white rear visible.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.cl_bus_stop.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.cl_bus_stop.image_url image_link=image_link heading="Unique bus stops" %}
+            {% #paragraph_text %}
+                🇨🇱 Chile has many of these bus stop shelters.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.ec_double_guardrail.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ec_double_guardrail.image_url image_link=image_link heading="Double guardrails" %}
+            {% #paragraph_text %}
+                🇪🇨 Ecuador frequently uses double guardrails.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.ec_bollards.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ec_bollards.image_url image_link=image_link heading="Many bollards with red elements" %}
+            {% #paragraph_text %}
+            🇪🇨 Ecuador has many bollards. They are either round with two red stripes or flat with two red reflectors on a black background. 
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.co_taxis.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.co_taxis.image_url image_link=image_link heading="Side taxi license plates" %}
+            {% #paragraph_text %}
+                🇨🇴 Colombian taxis often have license plates printed on their side. 
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.co_fence.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.co_fence.image_url image_link=image_link heading="Rudimentary wooden fences" %}
+            {% #paragraph_text %}
+                🇨🇴 Colombia has many of these rudimentary wooden fences. 
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.co_sidewalk.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.co_sidewalk.image_url image_link=image_link heading="Reddish sidewalk tiles" %}
+            {% #paragraph_text %}
+                🇨🇴 Colombia often use reddish tiles on sidewalks.
             {% /paragraph_text %}
         {% /card_image_with_description %}
     {% /card_image_with_description_container %}
