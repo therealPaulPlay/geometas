@@ -146,9 +146,7 @@ def latin_america(request):
             "uy": Fact.objects.get(airtable_id="recByR3K4qCIMkmiV"),
             "cl": Fact.objects.get(airtable_id="recbtPqqSbnemFAsq"),
             "co": Fact.objects.get(airtable_id="receUwMRY1nheW5kU"),
-            #"pu": Fact.objects.get(airtable_id="ADDHERE"),
             #"mx": Fact.objects.get(airtable_id="ADDHERE"),
-            #"bo": Fact.objects.get(airtable_id="ADDHERE"),
         },
         "signposts": {
             "br": Fact.objects.get(airtable_id="recWQah3rdoEIfUJJ"),
@@ -157,6 +155,8 @@ def latin_america(request):
             "ec": Fact.objects.get(airtable_id="recNAWFDClJPBBMJL"),
             "uy": Fact.objects.get(airtable_id="recQft8BR0F6339Qu"),
             "cl": Fact.objects.get(airtable_id="rec1x9f30oEDouC6b"),
+            "bo": Fact.objects.get(airtable_id="recQq3hvgei9IGRdl"),
+            "pe": Fact.objects.get(airtable_id="recNrZMPUBQqYB7Ue"), 
         },
         "poles": {
             "br": Fact.objects.get(airtable_id="recYT9xm6HXILql3C"),
@@ -166,6 +166,7 @@ def latin_america(request):
             "ec": Fact.objects.get(airtable_id="recJN8eV0GsNze6f6"),
             "cl": Fact.objects.get(airtable_id="recWb2PakDetVCNv0"),
             "mx_co": Fact.objects.get(airtable_id="recOS5xEzGhLFQjyi"),
+            "pe": Fact.objects.get(airtable_id="recIlL6wXQftTnnQP"),
         },
         "road_markings": {
             "br": Fact.objects.get(airtable_id="recx9eHtJ9GcgEeE6"),
@@ -186,6 +187,8 @@ def latin_america(request):
             "co_taxis": Fact.objects.get(airtable_id="rec33UwISuPwDckxN"),
             "co_fence": Fact.objects.get(airtable_id="recCJ6As5Uv9TWVXm"),
             "co_sidewalk": Fact.objects.get(airtable_id="recQXzZU6Yb1j6EXG"),
+            "pe_counter": Fact.objects.get(airtable_id="reclO1QGQHEPCqR5B"), #ADD
+            "pe_rikshaw": Fact.objects.get(airtable_id="recbKD4hGMSmQrs8Z"), #ADD
         }
     }
     context = {
