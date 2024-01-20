@@ -187,14 +187,14 @@ def latin_america(request):
             "co_taxis": Fact.objects.get(airtable_id="rec33UwISuPwDckxN"),
             "co_fence": Fact.objects.get(airtable_id="recCJ6As5Uv9TWVXm"),
             "co_sidewalk": Fact.objects.get(airtable_id="recQXzZU6Yb1j6EXG"),
-            "pe_counter": Fact.objects.get(airtable_id="reclO1QGQHEPCqR5B"), #ADD
-            "pe_rikshaw": Fact.objects.get(airtable_id="recbKD4hGMSmQrs8Z"), #ADD
+            "pe_counter": Fact.objects.get(airtable_id="reclO1QGQHEPCqR5B"), 
+            "pe_rikshaw": Fact.objects.get(airtable_id="recbKD4hGMSmQrs8Z"), 
         }
     }
     context = {
         'facts': facts,
         'html_meta_title': "Country-guessing Latin America",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the main Latin American countries: Brazil, Argentina, Mexico, Peru, Uruguay, Ecuador, Colombia, Bolivia, and Chile.",
-        #'html_meta_image_url': request.build_absolute_uri('/static/seo/south_africa.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/latin_america.png'),
     }
     return render(request, 'articles/latin_america.html', context)
