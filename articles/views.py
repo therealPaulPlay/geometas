@@ -132,7 +132,7 @@ def latin_america(request):
             "br_lang": Fact.objects.get(airtable_id="recKlE0T6Bgf0PAQk"),
             "black_car": Fact.objects.get(airtable_id="recegeaejCsi778fX"),
             "uy_overcast": Fact.objects.get(airtable_id="recunqjCGpJNIY4wS"),
-            #"mx_stop": Fact.objects.get(airtable_id="ADDHERE"),
+            "mx_stop": Fact.objects.get(airtable_id="recmrUL5xw4uu6NbM"),
         },
         "license_plates": {
             "br": Fact.objects.get(airtable_id="recawRpccIfzUD1gp"),
@@ -146,7 +146,6 @@ def latin_america(request):
             "uy": Fact.objects.get(airtable_id="recByR3K4qCIMkmiV"),
             "cl": Fact.objects.get(airtable_id="recbtPqqSbnemFAsq"),
             "co": Fact.objects.get(airtable_id="receUwMRY1nheW5kU"),
-            #"mx": Fact.objects.get(airtable_id="ADDHERE"),
         },
         "signposts": {
             "br": Fact.objects.get(airtable_id="recWQah3rdoEIfUJJ"),
@@ -189,6 +188,8 @@ def latin_america(request):
             "co_sidewalk": Fact.objects.get(airtable_id="recQXzZU6Yb1j6EXG"),
             "pe_counter": Fact.objects.get(airtable_id="reclO1QGQHEPCqR5B"), 
             "pe_rikshaw": Fact.objects.get(airtable_id="recbKD4hGMSmQrs8Z"), 
+            "mx_counter": Fact.objects.get(airtable_id="recCVBKrzKxpYM833"),
+            "mx_tank": Fact.objects.get(airtable_id="rece3lzUqO6xeBdso"),
         }
     }
     context = {

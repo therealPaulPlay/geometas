@@ -53,6 +53,13 @@
                 {{ facts.easy.uy_overcast.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.easy.mx_stop.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.easy.mx_stop.image_url image_link=image_link heading="ALTO stop sign" %}
+            {% #paragraph_text %}
+                {{ facts.easy.mx_stop.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
     {% /card_image_with_description_container %}
 
 
@@ -227,9 +234,9 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.uy.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.uy.image_url image_link=image_link heading=uru %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.uy.image_url image_link=image_link heading="🇲🇽 Mexico & 🇺🇾 Uruguay" %}
             {% #paragraph_text %}
-            {{ facts.poles.uy.answer }}
+                Mexico and Uruguay feature three upward-facing bulbs that makes the pole resemble a trident. 
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
@@ -375,6 +382,13 @@
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
+        {% url 'cms:fact_detail' facts.uniques.pe_rikshaw.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.pe_rikshaw.image_url image_link=image_link heading="Tuktuks" %}
+            {% #paragraph_text %}
+                {{per}} is the only Latin America country that has Tuktuks.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
         {% url 'cms:fact_detail' facts.uniques.pe_counter.uuid as image_link %}
         {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.pe_counter.image_url image_link=image_link heading="Square electricity counters" %}
             {% #paragraph_text %}
@@ -382,10 +396,17 @@
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.uniques.pe_rikshaw.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.pe_rikshaw.image_url image_link=image_link heading="Tuktuks" %}
+        {% url 'cms:fact_detail' facts.uniques.mx_counter.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.mx_counter.image_url image_link=image_link heading="Square electricity counters" %}
             {% #paragraph_text %}
-                {{per}} is the only Latin America country that has Tuktuks.
+                {{mex}} has these circular-shaped electricity counters
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.mx_tank.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.mx_tank.image_url image_link=image_link heading="Black water tanks" %}
+            {% #paragraph_text %}
+                {{mex}} has these large black water tanks atop many houses.
             {% /paragraph_text %}
         {% /card_image_with_description %}
     {% /card_image_with_description_container %}
