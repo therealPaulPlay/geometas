@@ -33,8 +33,8 @@ def import_all_facts_into_db():
         try:
             db_fact = Fact.objects.get(airtable_id=deserialized_fact['airtable_id'])
             # Don't update if fact was updated recently and image url exists (might have been broken)
-            if db_fact.updated_at > deserialized_fact['updated_at'] and db_fact.image_url:
-                continue
+            #if db_fact.updated_at > deserialized_fact['updated_at'] and db_fact.image_url:
+            #    continue
         except Fact.DoesNotExist:
             db_fact = Fact()
         db_fact.answer = deserialized_fact['answer']
@@ -48,12 +48,13 @@ def import_all_facts_into_db():
         db_fact.airtable_id = deserialized_fact['airtable_id']
         db_fact.distinctive = deserialized_fact['distinctive']
         db_fact.distinctive_in_region = deserialized_fact['distinctive_in_region']
+        db_fact.google_streetview_url = deserialized_fact['google_streetview_url']
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
-        image_name = f"{db_fact.uuid}.jpg"
-        move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
-        db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
-        db_fact.save()
+        #image_name = f"{db_fact.uuid}.jpg"
+        #move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
+        #db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
+        #db_fact.save()
         log.info(f"Fact '{db_fact.airtable_id}' saved")
     
     # Check if facts have been deleted
@@ -78,6 +79,7 @@ def deserialize_fact(fact_response):
         'airtable_id': fact_response['id'],
         'distinctive': fact_response['fields'].get('Distinctive'),
         'distinctive_in_region': fact_response['fields'].get('Distinctive in Region'),
+        'google_streetview_url': fact_response['fields'].get('GSV URL'),
     }
 
 
