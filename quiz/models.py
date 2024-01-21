@@ -71,6 +71,7 @@ class Fact(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='facts', null=True)
     notes = models.CharField(max_length=1000, null=True, blank=True)
     google_streetview_url = models.CharField(max_length=250, null=True, blank=True)
+    google_streetview_latlng = models.CharField(max_length=250, null=True, blank=True)
     airtable_id = models.CharField(max_length=100)
     distinctive = models.BooleanField(default=False, null=True, blank=True)
     distinctive_in_region = models.BooleanField(default=False, null=True, blank=True)

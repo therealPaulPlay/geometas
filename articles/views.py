@@ -198,4 +198,11 @@ def latin_america(request):
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the main Latin American countries: Brazil, Argentina, Mexico, Peru, Uruguay, Ecuador, Colombia, Bolivia, and Chile.",
         'html_meta_image_url': request.build_absolute_uri('/static/seo/latin_america.png'),
     }
+    # Make a request to Fact.objects.get(airtable_id="rece3lzUqO6xeBdso").google_streetview_url and print the forwarded URL
+    fact = Fact.objects.get(airtable_id="rece3lzUqO6xeBdso")
+    url = fact.google_streetview_url
+    # Make request to URL and follow forward
+    import requests
+    response = requests.get(url, allow_redirects=True)
+    print(response.url)
     return render(request, 'articles/latin_america.html', context)

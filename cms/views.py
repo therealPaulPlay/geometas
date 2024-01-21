@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
+from urllib.parse import urlparse, parse_qs
+import requests
 
 from quiz.models import Country, Fact, Category, Quiz, QuizSession
 
@@ -99,6 +101,12 @@ def fact_detail(request, fact_uuid):
     except Fact.DoesNotExist:
         raise Http404("Fact does not exist")
     fact_title = "%s: %s meta" % (fact.country.name, fact.category.name.lower())
+
+    # Ensure we have latlng for Fact
+    if not fact.google_streetview_latlng:
+        fact.google_streetview_latlng = get_streetview_latlng(fact.google_streetview_url)
+        fact.save()
+    
     context = {
         'fact': fact,
         'fact_title': fact_title,
@@ -107,3 +115,32 @@ def fact_detail(request, fact_uuid):
         'html_meta_image_url': fact.image_url,
     }
     return render(request, 'cms/fact_detail.html', context)
+
+
+def get_streetview_latlng(url):
+    # Call URL
+    response = requests.get(url, allow_redirects=True)
+    
+    # Parse the URL
+    parsed_url = urlparse(response.url)
+
+    # Extract query parameters
+    query_params = parse_qs(parsed_url.query)
+
+    # Get the 'viewpoint' parameter
+    viewpoint = query_params.get("viewpoint", [None])[0]
+    
+    # Sometimes Google doesnt give the viewpoint parameter, so we have to extract it from the path
+    if not viewpoint:
+        path = parsed_url.path
+        at_symbol_index = path.find('@')
+        if at_symbol_index != -1:
+            coordinates_part = path[at_symbol_index + 1:]  # Get the part after '@'
+            comma_index = coordinates_part.find(',')  # Find the first comma
+            second_comma_index = coordinates_part.find(',', comma_index + 1)  # Find the second comma
+            if second_comma_index != -1:
+                # Extract everything before the second comma
+                coordinates = coordinates_part[:second_comma_index]
+                return coordinates
+    
+    return viewpoint

@@ -22,6 +22,26 @@
             <p class="mt-4 text-sm font-light text-slate-500">{{fact.notes|default:''|safe|linebreaksbr}}</p>
         </div>
     </div>
+
+    <div class="mt-16 sm:mt-32">
+        {% #heading_primary %}Explore on Google Streetview{% /heading_primary %}
+        <div class="relative w-100 h-[32rem]">
+            <iframe
+                width="100%"
+                height="100%"
+                frameborder="0" style="border:0"
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDZJ2U4vQ0agW_byslDEWc8sKiHd5ydtiY&location={{fact.google_streetview_latlng}}"
+                allowfullscreen>
+            </iframe>
+            <div id="map-overlay" class="absolute inset-0 w-100 h-100 bg-white/50 backdrop-blur-md text-slate-700 text-center pt-[20%] text-3xl font-semibold cursor-pointer">Click to enable</div>
+        </div>
+        <script>
+            document.getElementById('map-overlay').addEventListener('click', function() {
+                this.style.display = 'none';
+            });            
+        </script>
+    </div>
 </div> 
 
 
