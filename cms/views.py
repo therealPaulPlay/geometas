@@ -122,53 +122,57 @@ def fact_detail(request, fact_uuid):
 def get_streetview_latlng(url):
     if not url:
         return None
-    response = requests.get(url, allow_redirects=True)    
-    return parce_viewpoint_from_url(response.url)
+    response = requests.get(url, allow_redirects=True)  
+    return parse_viewpoint_from_url(response.url)
     
-def parce_viewpoint_from_url(url):
-    # Parse the URL
-    parsed_url = urlparse(url)
+def parse_viewpoint_from_url(url):
+    try:
+        # Parse the URL
+        parsed_url = urlparse(url)
 
-    # Extract query parameters
-    query_params = parse_qs(parsed_url.query)
+        # Extract query parameters
+        query_params = parse_qs(parsed_url.query)
 
-    # Attempt 1
-    viewpoint = query_params.get("viewpoint", [None])[0]
-    
-    # Attempt 2
-    if not viewpoint:
-        path = parsed_url.path
-        at_symbol_index = path.find('@')
-        if at_symbol_index != -1:
-            coordinates_part = path[at_symbol_index + 1:]  # Get the part after '@'
-            comma_index = coordinates_part.find(',')  # Find the first comma
-            second_comma_index = coordinates_part.find(',', comma_index + 1)  # Find the second comma
-            if second_comma_index != -1:
-                # Extract everything before the second comma
-                viewpoint = coordinates_part[:second_comma_index]
-    
-    # Attempt 3
-    if not viewpoint:
-        google_maps_url = query_params.get('continue', [None])[0]
-        if google_maps_url:
-            # Decode the URL
-            decoded_url = unquote(google_maps_url)
-            # Now parse the decoded URL
-            parsed_maps_url = urlparse(decoded_url)
-            # The coordinates are in the 'viewpoint' parameter
-            maps_query_params = parse_qs(parsed_maps_url.query)
-            viewpoint = maps_query_params.get('viewpoint', [None])[0]
-    
-    # Attempt 4
-    if not viewpoint:
-        maps_url = query_params.get('continue', [''])[0]
-        # Further parse the maps URL to extract the coordinates
-        maps_parsed = urlparse(maps_url)
-        coordinates = maps_parsed.path.split('@')[1].split(',')[0:2]
-        viewpoint =  ','.join(coordinates)
-    
-    if not viewpoint:
-        log.error("Could not extract viewpoint from URL: %s" % url)
+        # Attempt 1
+        viewpoint = query_params.get("viewpoint", [None])[0]
+        
+        # Attempt 2
+        if not viewpoint:
+            path = parsed_url.path
+            at_symbol_index = path.find('@')
+            if at_symbol_index != -1:
+                coordinates_part = path[at_symbol_index + 1:]  # Get the part after '@'
+                comma_index = coordinates_part.find(',')  # Find the first comma
+                second_comma_index = coordinates_part.find(',', comma_index + 1)  # Find the second comma
+                if second_comma_index != -1:
+                    # Extract everything before the second comma
+                    viewpoint = coordinates_part[:second_comma_index]
+        
+        # Attempt 3
+        if not viewpoint:
+            google_maps_url = query_params.get('continue', [None])[0]
+            if google_maps_url:
+                # Decode the URL
+                decoded_url = unquote(google_maps_url)
+                # Now parse the decoded URL
+                parsed_maps_url = urlparse(decoded_url)
+                # The coordinates are in the 'viewpoint' parameter
+                maps_query_params = parse_qs(parsed_maps_url.query)
+                viewpoint = maps_query_params.get('viewpoint', [None])[0]
+        
+        # Attempt 4
+        if not viewpoint:
+            maps_url = query_params.get('continue', [''])[0]
+            # Further parse the maps URL to extract the coordinates
+            maps_parsed = urlparse(maps_url)
+            coordinates = maps_parsed.path.split('@')[1].split(',')[0:2]
+            viewpoint =  ','.join(coordinates)
+        
+        if not viewpoint:
+            log.error("Could not extract viewpoint from URL: %s" % url)
+            return None
+        
+        return viewpoint
+    except Exception as ex:
+        log.error("Error extracting viewpoint from URL: %s due to %s" % (url, ex))
         return None
-    
-    return viewpoint
