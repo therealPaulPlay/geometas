@@ -120,7 +120,7 @@ def fact_detail(request, fact_uuid):
 def get_streetview_latlng(url):
     # Call URL
     response = requests.get(url, allow_redirects=True)
-    
+    print(response.url)
     # Parse the URL
     parsed_url = urlparse(response.url)
 
@@ -132,6 +132,7 @@ def get_streetview_latlng(url):
     
     # Sometimes Google doesnt give the viewpoint parameter, so we have to extract it from the path
     if not viewpoint:
+        print("second")
         path = parsed_url.path
         at_symbol_index = path.find('@')
         if at_symbol_index != -1:
@@ -140,7 +141,6 @@ def get_streetview_latlng(url):
             second_comma_index = coordinates_part.find(',', comma_index + 1)  # Find the second comma
             if second_comma_index != -1:
                 # Extract everything before the second comma
-                coordinates = coordinates_part[:second_comma_index]
-                return coordinates
-    
+                viewpoint = coordinates_part[:second_comma_index]
+    print(viewpoint)
     return viewpoint
