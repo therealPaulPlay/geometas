@@ -159,7 +159,7 @@ def get_streetview_latlng(url):
             viewpoint = maps_query_params.get('viewpoint', [None])[0]
     
     if not viewpoint:
-        log.error("Could not extract viewpoint from URL: %s" % url)
+        log.error("Could not extract viewpoint from URL: %s with response url of %s" % (url, response.url))
         return None
     
     return viewpoint
