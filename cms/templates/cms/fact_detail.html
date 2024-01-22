@@ -23,6 +23,7 @@
         </div>
     </div>
 
+    {% if fact.google_streetview_latlng %}
     <div class="mt-16 sm:mt-32">
         {% #heading_primary %}Explore on Google Streetview{% /heading_primary %}
         <div class="relative w-100 h-[32rem]">
@@ -42,6 +43,7 @@
             });            
         </script>
     </div>
+    {% endif %}
 </div> 
 
 
