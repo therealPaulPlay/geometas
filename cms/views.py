@@ -122,20 +122,20 @@ def fact_detail(request, fact_uuid):
 def get_streetview_latlng(url):
     if not url:
         return None
+    response = requests.get(url, allow_redirects=True)    
+    return parce_viewpoint_from_url(response.url)
     
-    # Call URL
-    response = requests.get(url, allow_redirects=True)
-
+def parce_viewpoint_from_url(url):
     # Parse the URL
-    parsed_url = urlparse(response.url)
+    parsed_url = urlparse(url)
 
     # Extract query parameters
     query_params = parse_qs(parsed_url.query)
 
-    # Get the 'viewpoint' parameter
+    # Attempt 1
     viewpoint = query_params.get("viewpoint", [None])[0]
     
-    # Sometimes Google doesnt give the viewpoint parameter, so we have to extract it from the path``
+    # Attempt 2
     if not viewpoint:
         path = parsed_url.path
         at_symbol_index = path.find('@')
@@ -147,6 +147,7 @@ def get_streetview_latlng(url):
                 # Extract everything before the second comma
                 viewpoint = coordinates_part[:second_comma_index]
     
+    # Attempt 3
     if not viewpoint:
         google_maps_url = query_params.get('continue', [None])[0]
         if google_maps_url:
@@ -158,8 +159,16 @@ def get_streetview_latlng(url):
             maps_query_params = parse_qs(parsed_maps_url.query)
             viewpoint = maps_query_params.get('viewpoint', [None])[0]
     
+    # Attempt 4
     if not viewpoint:
-        log.error("Could not extract viewpoint from URL: %s with response url of %s" % (url, response.url))
+        maps_url = query_params.get('continue', [''])[0]
+        # Further parse the maps URL to extract the coordinates
+        maps_parsed = urlparse(maps_url)
+        coordinates = maps_parsed.path.split('@')[1].split(',')[0:2]
+        viewpoint =  ','.join(coordinates)
+    
+    if not viewpoint:
+        log.error("Could not extract viewpoint from URL: %s" % url)
         return None
     
     return viewpoint
