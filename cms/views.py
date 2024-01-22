@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import Http404
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, unquote
 import requests
+import logging
+log = logging.getLogger(__name__)
 
 from quiz.models import Country, Fact, Category, Quiz, QuizSession
 
@@ -118,9 +120,12 @@ def fact_detail(request, fact_uuid):
 
 
 def get_streetview_latlng(url):
+    if not url:
+        return None
+    
     # Call URL
     response = requests.get(url, allow_redirects=True)
-    print(response.url)
+
     # Parse the URL
     parsed_url = urlparse(response.url)
 
@@ -130,9 +135,8 @@ def get_streetview_latlng(url):
     # Get the 'viewpoint' parameter
     viewpoint = query_params.get("viewpoint", [None])[0]
     
-    # Sometimes Google doesnt give the viewpoint parameter, so we have to extract it from the path
+    # Sometimes Google doesnt give the viewpoint parameter, so we have to extract it from the path``
     if not viewpoint:
-        print("second")
         path = parsed_url.path
         at_symbol_index = path.find('@')
         if at_symbol_index != -1:
@@ -142,5 +146,20 @@ def get_streetview_latlng(url):
             if second_comma_index != -1:
                 # Extract everything before the second comma
                 viewpoint = coordinates_part[:second_comma_index]
-    print(viewpoint)
+    
+    if not viewpoint:
+        google_maps_url = query_params.get('continue', [None])[0]
+        if google_maps_url:
+            # Decode the URL
+            decoded_url = unquote(google_maps_url)
+            # Now parse the decoded URL
+            parsed_maps_url = urlparse(decoded_url)
+            # The coordinates are in the 'viewpoint' parameter
+            maps_query_params = parse_qs(parsed_maps_url.query)
+            viewpoint = maps_query_params.get('viewpoint', [None])[0]
+    
+    if not viewpoint:
+        log.error("Could not extract viewpoint from URL: %s" % url)
+        return None
+    
     return viewpoint
