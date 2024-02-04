@@ -6,7 +6,7 @@ import logging
 log = logging.getLogger(__name__)
 
 from .ai_input.prompt import SYSTEM_MESSAGE
-from quiz.models import Category, Region, Country, Fact
+from quiz.models import Category, Region
 
 # https://platform.openai.com/docs/models
 # https://openai.com/pricing
