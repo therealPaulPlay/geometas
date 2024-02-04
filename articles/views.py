@@ -252,6 +252,6 @@ def nordics(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Europe's Nordic Countries",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the Nordic countries in Europe: Norway, Sweden, Finland, Denmark, Iceland, and the Faroe Islands.",
-        #'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
     }
     return render(request, 'articles/nordics.html', context)
