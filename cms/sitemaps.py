@@ -20,6 +20,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
                 'articles:world_map_common_locations',
                 'articles:south_african_countries',
                 'articles:latin_america',
+                'articles:nordics',
                ]
 
     def location(self, item):

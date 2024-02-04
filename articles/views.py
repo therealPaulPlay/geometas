@@ -198,11 +198,60 @@ def latin_america(request):
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the main Latin American countries: Brazil, Argentina, Mexico, Peru, Uruguay, Ecuador, Colombia, Bolivia, and Chile.",
         'html_meta_image_url': request.build_absolute_uri('/static/seo/latin_america.png'),
     }
-    # Make a request to Fact.objects.get(airtable_id="rece3lzUqO6xeBdso").google_streetview_url and print the forwarded URL
-    fact = Fact.objects.get(airtable_id="rece3lzUqO6xeBdso")
-    url = fact.google_streetview_url
-    # Make request to URL and follow forward
-    import requests
-    response = requests.get(url, allow_redirects=True)
-    print(response.url)
     return render(request, 'articles/latin_america.html', context)
+
+
+def nordics(request):
+    facts = {
+        "isfo": {
+            "is_landscape": Fact.objects.get(airtable_id="recbTF8Fyif1Fwc1a"),
+            "is_bollard": Fact.objects.get(airtable_id="recZjUf6lFJKJDHsM"),
+            "fo_landscape": Fact.objects.get(airtable_id="recVHlQ0IvQiPuAAO"),
+            "fo_car": Fact.objects.get(airtable_id="recKgmcmtCvRMXVCk"),
+        },
+        "road_markings": {
+            "dk": Fact.objects.get(airtable_id="recdKb67HYla0jhix"),
+            "no": Fact.objects.get(airtable_id="recnWBxGeY9ELtPGY"),
+            "se": Fact.objects.get(airtable_id="reccKxIzYIjYl2Vyk"),
+            "fi": Fact.objects.get(airtable_id="recthzUZz6lTVxyGU"),
+        },
+        "giveway_sign": {
+            "dk": Fact.objects.get(airtable_id="recGX3NfgsRN81BdY"),
+            "no": Fact.objects.get(airtable_id="recKBmtGYIoctGDU4"),
+            "se": Fact.objects.get(airtable_id="rectvlwuA7NB7MHLk"),
+            "fi": Fact.objects.get(airtable_id="recXGQjVGBVaKHEZW"),
+        },
+        "language": {
+            "dk": Fact.objects.get(airtable_id="recvpr0t4XFbN6CuX"),
+            "no": Fact.objects.get(airtable_id="recVpOYNf9wYBukxs"),
+            "se": Fact.objects.get(airtable_id="recc9H7izDidSzGkO"),
+            "fi": Fact.objects.get(airtable_id="rectq62OjHhiQbDyj"),
+            "is": Fact.objects.get(airtable_id="recVEuKE9w1wPyaBn"),
+        },
+        "bollards": {
+            "dk": Fact.objects.get(airtable_id="recdaFxNHMs9woKrU"),
+            "se": Fact.objects.get(airtable_id="recNG5egXPIMuavOu"),
+            "fi": Fact.objects.get(airtable_id="rec8a7mHYz4B0tJwv"),
+            "is": Fact.objects.get(airtable_id="recZjUf6lFJKJDHsM"),
+        },
+        "direction_sign": {
+            "dk": Fact.objects.get(airtable_id="recctMSnmyCCajGgC"),
+            "no": Fact.objects.get(airtable_id="recml8WZQjWYqs9LK"),
+            "se": Fact.objects.get(airtable_id="recymdJQGucwb4Q3n"),
+            "fi": Fact.objects.get(airtable_id="recZU6fCDtoQfwLoK"),
+        },
+        "uniques":{
+            "no_green": Fact.objects.get(airtable_id="reclQeees8dbRYxPA"),
+            "dk_yellow": Fact.objects.get(airtable_id="recFrzGj34PIaRj1r"),
+            "se_chevron": Fact.objects.get(airtable_id="recLmwVRP19x3ADCj"),
+            "fi_dirtroad": Fact.objects.get(airtable_id="reckfmejpFMLOa9yg"),
+            "is_pedyellow": Fact.objects.get(airtable_id="recJ3SiekYDIGxFcZ"),
+        }
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing Europe's Nordic Countries",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to identify the Nordic countries in Europe: Norway, Sweden, Finland, Denmark, Iceland, and the Faroe Islands.",
+        #'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+    }
+    return render(request, 'articles/nordics.html', context)

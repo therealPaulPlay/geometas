@@ -9,4 +9,5 @@ urlpatterns = [
     path('world_map_common_locations', views.world_map_common_locations, name='world_map_common_locations'),
     path('south_african_countries', views.south_african_countries, name='south_african_countries'),
     path('latin_america', views.latin_america, name='latin_america'),
+    path('nordics', views.nordics, name='nordics'),
 ]
