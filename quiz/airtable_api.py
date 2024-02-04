@@ -49,8 +49,6 @@ def import_all_facts_into_db():
                 raise ex
         db_fact.notes = deserialized_fact['notes']
         db_fact.airtable_id = deserialized_fact['airtable_id']
-        db_fact.distinctive = deserialized_fact['distinctive']
-        db_fact.distinctive_in_region = deserialized_fact['distinctive_in_region']
         db_fact.google_streetview_url = deserialized_fact['google_streetview_url']
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
@@ -80,8 +78,6 @@ def deserialize_fact(fact_response):
         'category': fact_response['fields']['Category'],
         'notes': fact_response['fields'].get('Notes'),
         'airtable_id': fact_response['id'],
-        'distinctive': fact_response['fields'].get('Distinctive'),
-        'distinctive_in_region': fact_response['fields'].get('Distinctive in Region'),
         'google_streetview_url': fact_response['fields'].get('GSV URL'),
     }
 

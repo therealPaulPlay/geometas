@@ -73,16 +73,12 @@ class Fact(models.Model):
     google_streetview_url = models.CharField(max_length=250, null=True, blank=True)
     google_streetview_latlng = models.CharField(max_length=250, null=True, blank=True)
     airtable_id = models.CharField(max_length=100)
-    distinctive = models.BooleanField(default=False, null=True, blank=True)
-    distinctive_in_region = models.BooleanField(default=False, null=True, blank=True)
 
     def __str__(self):
         return self.answer[:50] + (self.answer[50:] and '...')
 
     def get_question(self):
-        if not self.distinctive:
-            return "Which country in %s is this?" % self.country.region.name
-        return "Which country is this?"
+        return "Which country in %s is this?" % self.country.region.name
     
 
 class Quiz(models.Model):

@@ -108,7 +108,8 @@ def rate_fact(request, quiz_session_uuid, fact_uuid):
     # Should be 'correct' or 'false'
     rating = request.GET.get('r', None)
     if rating not in ['correct', 'false']:
-        raise Exception("Invalid rating")
+        log.warning("User %s tried to rate fact %s with invalid rating %s" % (request.user, fact, rating))
+        raise Http404("Invalid rating")
 
     # Get this Quiz Session Fact and set review result
     quiz_session_fact = QuizSessionFact.objects.get(

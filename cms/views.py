@@ -5,7 +5,7 @@ import requests
 import logging
 log = logging.getLogger(__name__)
 
-from quiz.models import Country, Fact, Category, Quiz, QuizSession
+from quiz.models import Country, Fact, Category, Quiz, QuizSession, Region
 
 
 
@@ -39,7 +39,10 @@ def metas_index(request):
 
 def country(request, country_slug):
     # Get Country
-    country = Country.objects.get(slug=country_slug)
+    try:
+        country = Country.objects.get(slug=country_slug)
+    except Country.DoesNotExist:
+        raise Http404("Country does not exist")
 
     # Get de-duped facts
     facts = Fact.objects.select_related('country', 'category').filter(country=country).order_by('category')
@@ -58,9 +61,12 @@ def country(request, country_slug):
 
 
 def region(request, region_slug):
-    # Get region countries
-    countries = Country.objects.filter(region__slug=region_slug).order_by('name')
-    region = countries[0].region
+    # Get region and countries
+    try:
+        region = Region.objects.get(slug=region_slug)
+    except Region.DoesNotExist:
+        raise Http404("Region does not exist")
+    countries = Country.objects.filter(region=region).order_by('name')
 
     # Get de-duped facts
     facts = []
@@ -81,7 +87,10 @@ def region(request, region_slug):
 
 def category(request, category_slug):
     # Get category
-    category = Category.objects.get(slug=category_slug)
+    try:
+        category = Category.objects.get(slug=category_slug)
+    except Category.DoesNotExist:
+        raise Http404("Category does not exist")
 
     # Get facts (no dupes because its not M2M)
     facts = Fact.objects.select_related('country', 'category').filter(category=category)
