@@ -255,3 +255,43 @@ def nordics(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
     }
     return render(request, 'articles/nordics.html', context)
+
+
+def australia_new_zealand(request):
+    facts = {
+        "bollards": {
+            "au": Fact.objects.get(airtable_id="recadtEFirgLEBMzp"),
+            "nz": Fact.objects.get(airtable_id="recvoX8oU3zL9YwtO"),
+        },
+        "giveway": {
+            "au": Fact.objects.get(airtable_id="recWXamEMlek9YMu1"),
+            "nz": Fact.objects.get(airtable_id="recuCIJ9BfSYEVCkN"),
+        },
+        "speed": {
+            "au": Fact.objects.get(airtable_id="reclTHsJTSmdBV9hO"),
+            "nz": Fact.objects.get(airtable_id="reckHK6z7edNFpXLN"),
+        },
+        "street": {
+            "au": Fact.objects.get(airtable_id="recsMFil4wE5NIFUP"),
+            "nz": Fact.objects.get(airtable_id="recjgR4m8RN8LfOMW"),
+        },
+        "chevron": {
+            "au": Fact.objects.get(airtable_id="recjn9gWerSHM5OAv"),
+            "nz": Fact.objects.get(airtable_id="recpiYU68FXMuNhTU"),
+        },
+        "flora": {
+            "au": Fact.objects.get(airtable_id="recuY1l9FbKAgojX0"),
+            "nz": Fact.objects.get(airtable_id="recOcGuAZczLfB7we"),
+        },
+        "others": {
+            "nz_giveway": Fact.objects.get(airtable_id="recDnOYYTZ8sI60Np"),
+            "nz_wrap": Fact.objects.get(airtable_id="recuboFUD4ePyguWF"),
+        }
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing Australia vs. New Zealand",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to tell Australia apart from New Zealand.",
+        #'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+    }
+    return render(request, 'articles/australia_new_zealand.html', context)

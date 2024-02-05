@@ -21,6 +21,7 @@ class StaticViewSitemap(sitemaps.Sitemap):
                 'articles:south_african_countries',
                 'articles:latin_america',
                 'articles:nordics',
+                'articles:australia_new_zealand',
                ]
 
     def location(self, item):
