@@ -1,0 +1,155 @@
+{% extends "template_content_with_extra.html" %}
+{% load static %} 
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
+        <img src="{% static 'seo/australia_new_zealand.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% fragment as aus %}{% country name="Australia" %}{% endfragment %}
+    {% fragment as zea %}{% country name="New Zealand" %}{% endfragment %}
+
+
+    {% #paragraph_text %}
+        Australia and New Zealand are easy to regonize thanks to their unique landscaope and left-hand-driving, amongst other clues. However, telling the two countries apart can be tricky. You can lose a lot of points when you get it wrong, because of the vast size of the two countries. Here are some tips to help you distinguish between the two.
+    {% /paragraph_text %}
+    
+
+    {% #heading_primary %}Bollards{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.bollards.au.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.au.image_url image_link=image_link heading=aus %}
+            {% #paragraph_text %}
+                {{ facts.bollards.au.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.bollards.nz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.nz.image_url image_link=image_link heading=zea %}
+            {% #paragraph_text %}
+                {{ facts.bollards.nz.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Give-way signs{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.giveway.au.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway.au.image_url image_link=image_link heading=aus %}
+            {% #paragraph_text %}
+                {{ facts.giveway.au.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.giveway.nz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway.nz.image_url image_link=image_link heading=zea %}
+            {% #paragraph_text %}
+                {{ facts.giveway.nz.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Soeed signs{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.speed.au.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.speed.au.image_url image_link=image_link heading=aus %}
+            {% #paragraph_text %}
+                {{ facts.speed.au.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.speed.nz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.speed.nz.image_url image_link=image_link heading=zea %}
+            {% #paragraph_text %}
+                {{ facts.speed.nz.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Street name signs{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.street.au.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.street.au.image_url image_link=image_link heading=aus %}
+            {% #paragraph_text %}
+                {{ facts.street.au.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.street.nz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.street.nz.image_url image_link=image_link heading=zea %}
+            {% #paragraph_text %}
+                {{ facts.street.nz.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Chevrons{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.chevron.au.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.chevron.au.image_url image_link=image_link heading=aus %}
+            {% #paragraph_text %}
+                {{ facts.chevron.au.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.chevron.nz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.chevron.nz.image_url image_link=image_link heading=zea %}
+            {% #paragraph_text %}
+                {{ facts.chevron.nz.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Flora{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.flora.au.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.flora.au.image_url image_link=image_link heading=aus %}
+            {% #paragraph_text %}
+                {{ facts.flora.au.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.flora.nz.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.flora.nz.image_url image_link=image_link heading=zea %}
+            {% #paragraph_text %}
+                {{ facts.flora.nz.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Other 🇳🇿 New Zealand clues{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.others.nz_giveway.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.others.nz_giveway.image_url image_link=image_link heading="Give-way street marking" %}
+            {% #paragraph_text %}
+                {{ facts.others.nz_giveway.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.others.nz_wrap.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.others.nz_wrap.image_url image_link=image_link heading="Silver pole wrapping" %}
+            {% #paragraph_text %}
+                In New Zealand, most utility poles have a lone piece of metal, usually silver or white, wrapping around them.<br>Note that the Australian state of Tasmania also has pole wrappings, but they are usually olive green.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+{% endblock %}
