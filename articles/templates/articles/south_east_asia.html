@@ -1,0 +1,299 @@
+{% extends "template_content_with_extra.html" %}
+{% load static %} 
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <!--<div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
+        <img src="{% static 'seo/australia_new_zealand.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
+    </div>-->
+{% endblock %}
+
+
+{% block content %}
+    {% fragment as thai %}{% country name="Thailand" %}{% endfragment %}
+    {% fragment as malay %}{% country name="Malaysia" %}{% endfragment %}
+    {% fragment as sri %}{% country name="Sri Lanka" %}{% endfragment %}
+    {% fragment as phili %}{% country name="Philippines" %}{% endfragment %}
+    {% fragment as indo %}{% country name="Indonesia" %}{% endfragment %}
+    {% fragment as cambo %}{% country name="Cambodia" %}{% endfragment %}
+
+
+    {% #paragraph_text %}
+        South-East Asia consists of several countries that are hard to distinguish in Geoguessr. In this article, we will cover how you can recognize the following countries: {{ thai }}, {{ malay }}, {{ phili }}, {{ indo }}, {{ sri }}, and {{ cambo }}. 
+    {% /paragraph_text %}
+    
+
+    {% #heading_primary %}Driving Direction{% /heading_primary %}
+    .,..
+
+
+    {% #heading_primary %}Signposts{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.signposts.thai.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.thai.image_url image_link=image_link heading=thai %}
+            {% #paragraph_text %}
+                {{ facts.signposts.thai.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.signposts.stripes.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.stripes.image_url image_link=image_link heading=stripes %}
+            {% #paragraph_text %}
+                {{ facts.signposts.stripes.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Poles{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.poles.thai_holes.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.thai_holes.image_url image_link=image_link heading=thai_holes %}
+            {% #paragraph_text %}
+                {{ facts.poles.thai_holes.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.thai_base.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.thai_base.image_url image_link=image_link heading=thai_base %}
+            {% #paragraph_text %}
+                {{ facts.poles.thai_base.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.malay.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.malay.image_url image_link=image_link heading=malay %}
+            {% #paragraph_text %}
+                {{ facts.poles.malay.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.indo.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.indo.image_url image_link=image_link heading=indo %}
+            {% #paragraph_text %}
+                {{ facts.poles.indo.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.sri_1.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.sri_1.image_url image_link=image_link heading=sri_1 %}
+            {% #paragraph_text %}
+                {{ facts.poles.sri_1.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.poles.cambo_1.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.poles.cambo_1.image_url image_link=image_link heading=cambo_1 %}
+            {% #paragraph_text %}
+                {{ facts.poles.cambo_1.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Street Markings{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.street_markings.yellow.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.street_markings.yellow.image_url image_link=image_link heading=yellow %}
+            {% #paragraph_text %}
+                {{ facts.street_markings.yellow.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.street_markings.white.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.street_markings.white.image_url image_link=image_link heading=white %}
+            {% #paragraph_text %}
+                {{ facts.street_markings.white.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Bollards{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.bollards.thai.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.thai.image_url image_link=image_link heading=thai %}
+            {% #paragraph_text %}
+                {{ facts.bollards.thai.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.bollards.malay_1.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.malay_1.image_url image_link=image_link heading=malay_1 %}
+            {% #paragraph_text %}
+                {{ facts.bollards.malay_1.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.bollards.cambo.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.cambo.image_url image_link=image_link heading=cambo %}
+            {% #paragraph_text %}
+                {{ facts.bollards.cambo.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.bollards.sri.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.sri.image_url image_link=image_link heading=sri %}
+            {% #paragraph_text %}
+                {{ facts.bollards.sri.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}License Plates{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.license_plates.yellow.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.yellow.image_url image_link=image_link heading=yellow %}
+            {% #paragraph_text %}
+                {{ facts.license_plates.yellow.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.license_plates.black_malay.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.black_malay.image_url image_link=image_link heading=black_malay %}
+            {% #paragraph_text %}
+                {{ facts.license_plates.black_malay.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.license_plates.black_indo.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.black_indo.image_url image_link=image_link heading=black_indo %}
+            {% #paragraph_text %}
+                {{ facts.license_plates.black_indo.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.license_plates.phili.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.license_plates.phili.image_url image_link=image_link heading=phili %}
+            {% #paragraph_text %}
+                {{ facts.license_plates.phili.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Language{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.language.thai.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.thai.image_url image_link=image_link heading=thai %}
+            {% #paragraph_text %}
+                {{ facts.language.thai.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.language.cambo.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.cambo.image_url image_link=image_link heading=cambo %}
+            {% #paragraph_text %}
+                {{ facts.language.cambo.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.language.indo_malay.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.indo_malay.image_url image_link=image_link heading=indo %}
+            {% #paragraph_text %}
+                {{ facts.language.indo_malay.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.language.sri.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.sri.image_url image_link=image_link heading=sri %}
+            {% #paragraph_text %}
+                {{ facts.language.sri.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Others{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.other.indo_dish.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.indo_dish.image_url image_link=image_link heading=indo_dish %}
+            {% #paragraph_text %}
+                {{ facts.other.indo_dish.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.malay_bars.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.malay_bars.image_url image_link=image_link heading=malay_bars %}
+            {% #paragraph_text %}
+                {{ facts.other.malay_bars.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.malay_stop.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.malay_stop.image_url image_link=image_link heading=malay_stop %}
+            {% #paragraph_text %}
+                {{ facts.other.malay_stop.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.phili_sidecar.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.phili_sidecar.image_url image_link=image_link heading=phili_sidecar %}
+            {% #paragraph_text %}
+                {{ facts.other.phili_sidecar.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.phili_roads.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.phili_roads.image_url image_link=image_link heading=phili_roads %}
+            {% #paragraph_text %}
+                {{ facts.other.phili_roads.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.phili_bus.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.phili_bus.image_url image_link=image_link heading=phili_bus %}
+            {% #paragraph_text %}
+                {{ facts.other.phili_bus.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.sri_googlecar.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.sri_googlecar.image_url image_link=image_link heading=sri_googlecar %}
+            {% #paragraph_text %}
+                {{ facts.other.sri_googlecar.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.sri_lowcam.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.sri_lowcam.image_url image_link=image_link heading=sri_lowcam %}
+            {% #paragraph_text %}
+                {{ facts.other.sri_lowcam.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.sri_soil.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.sri_soil.image_url image_link=image_link heading=sri_soil %}
+            {% #paragraph_text %}
+                {{ facts.other.sri_soil.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.cambo_beer.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.cambo_beer.image_url image_link=image_link heading=cambo_beer %}
+            {% #paragraph_text %}
+                {{ facts.other.cambo_beer.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.other.cambo_houses.uuid as image_link %}
+        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.other.cambo_houses.image_url image_link=image_link heading=cambo_houses %}
+            {% #paragraph_text %}
+                {{ facts.other.cambo_houses.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    
+
+{% endblock %}

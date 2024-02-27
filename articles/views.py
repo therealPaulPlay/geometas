@@ -292,6 +292,68 @@ def australia_new_zealand(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Australia vs. New Zealand",
         'html_meta_description': "Learn the most relevant Geoguessr metas to tell Australia apart from New Zealand.",
-        #'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/australia_new_zealand.png'),
     }
     return render(request, 'articles/australia_new_zealand.html', context)
+
+
+def south_east_asia(request):
+    facts = {
+        "license_plates": {
+            "yellow": Fact.objects.get(airtable_id="recc75037uI4rJYV6"),
+            "black_malay": Fact.objects.get(airtable_id="recpYqx87zFyIp7lm"),
+            "black_indo": Fact.objects.get(airtable_id="recdewQ75Xy0H99QP"),
+            "phili": Fact.objects.get(airtable_id="rec4cMmGAg7YZhqYx"),
+        },
+        "signposts": {
+            "thai": Fact.objects.get(airtable_id="recT0BV8HYAC6SLc5"),
+            "stripes": Fact.objects.get(airtable_id="recMNg9xFKSJyj1Ny"),
+        },
+        "poles": {
+            "thai_holes": Fact.objects.get(airtable_id="rect2AIau42lYOM2A"),
+            "thai_base": Fact.objects.get(airtable_id="recNXaFIXRuvC8BYF"),
+            "malay": Fact.objects.get(airtable_id="recp7OgJbHd9esnHV"),
+            "indo": Fact.objects.get(airtable_id="reclcY3by0A8EsSyE"),
+            "sri_1": Fact.objects.get(airtable_id="recMp7XQEGUnETtTy"),
+            "sri_2": Fact.objects.get(airtable_id="recPdT1aqfphiJW58"),
+            "cambo_1": Fact.objects.get(airtable_id="recdFiozuQF8YO9UQ"),
+            "cambo_2": Fact.objects.get(airtable_id="recu8htmlGJPdx5KH"),
+        },
+        "street_markings": {
+            "yellow": Fact.objects.get(airtable_id="reccQvQPhPHEegZGy"),
+            "white": Fact.objects.get(airtable_id="recrht9uCi0FtXB1g"),
+        },
+        "bollards": {
+            "thai": Fact.objects.get(airtable_id="rect9bMNIiOpXIciK"),
+            "malay_1": Fact.objects.get(airtable_id="recjh73BZi3f9XE2I"),
+            "malay_2": Fact.objects.get(airtable_id="recl4w0TB3S8tYdfZ"),
+            "cambo": Fact.objects.get(airtable_id="recfPLlvDkNs2n0Bx"),
+            "sri": Fact.objects.get(airtable_id="recb2rBbzp7VkEvZK"),
+        },
+        "language": {
+            "thai": Fact.objects.get(airtable_id="recjDJO2LcjNFeU64"),
+            "cambo": Fact.objects.get(airtable_id="recPwhXJyDTSGPW0U"),
+            "sri": Fact.objects.get(airtable_id="rec0St1RDzaSFZQ0U"),
+            "indo_malay": Fact.objects.get(airtable_id="recWdKYhB1l08Zpnx"),
+        },
+        "other": {
+            "indo_dish": Fact.objects.get(airtable_id="rec2BHJKKAcPbrMvt"),
+            "malay_bars": Fact.objects.get(airtable_id="rec1CfzEikASdNM4z"),
+            "malay_stop": Fact.objects.get(airtable_id="recgQOl3kDkul9k9D"),
+            "phili_sidecar": Fact.objects.get(airtable_id="reclQydq3wIjWO6m7"),
+            "phili_roads": Fact.objects.get(airtable_id="recJ13mIV3HqXJXsb"),
+            "phili_bus": Fact.objects.get(airtable_id="recOsooCA6LW660dc"),
+            "sri_googlecar": Fact.objects.get(airtable_id="recEcTUKlov1fzhs5"),
+            "sri_lowcam": Fact.objects.get(airtable_id="rec2jX0WS27uKDBy6"),
+            "sri_soil": Fact.objects.get(airtable_id="recJNy9Vw1VctVkfN"),
+            "cambo_beer": Fact.objects.get(airtable_id="recFaefWPn00C1ytO"),
+            "cambo_houses": Fact.objects.get(airtable_id="rec3uIzFShQEWIvqA"),
+        }
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing South-East Asia",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to identify the South-East Asian countries Thailand, Malaysia, Indonesia, Philippines, Cambodia, and Sri Lanka.",
+        #'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+    }
+    return render(request, 'articles/south_east_asia.html', context)
