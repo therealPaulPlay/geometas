@@ -6,7 +6,7 @@
 {% block content_top_extra %}
     <div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
         <img src="{% static 'seo/south_africa.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
-    </div>
+    </div><div class="md:ml-auto"></div>
 {% endblock %}
 
 
@@ -29,28 +29,28 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.landscape.bw.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.bw.image_url image_link=image_link heading=bw %}
+        {% #card_image_with_description image_url=facts.landscape.bw.image_url image_link=image_link heading=bw %}
             {% #paragraph_text %}
                 {{ facts.landscape.bw.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.landscape.ls.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.ls.image_url image_link=image_link heading=ls %}
+        {% #card_image_with_description image_url=facts.landscape.ls.image_url image_link=image_link heading=ls %}
             {% #paragraph_text %}
                 {{ facts.landscape.ls.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.landscape.sz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.sz.image_url image_link=image_link heading=sz %}
+        {% #card_image_with_description image_url=facts.landscape.sz.image_url image_link=image_link heading=sz %}
             {% #paragraph_text %}
                 {{ facts.landscape.sz.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.landscape.za.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.landscape.za.image_url image_link=image_link heading=za %}
+        {% #card_image_with_description image_url=facts.landscape.za.image_url image_link=image_link heading=za %}
             {% #paragraph_text %}
                 {{ facts.landscape.za.answer }}
             {% /paragraph_text %}
@@ -65,28 +65,28 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.road_names.bw.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.bw.image_url image_link=image_link heading=bw %}
+        {% #card_image_with_description image_url=facts.road_names.bw.image_url image_link=image_link heading=bw %}
             {% #paragraph_text %}
                 Botswana's highway signs have a "A" prefix.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.road_names.ls.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.ls.image_url image_link=image_link heading=ls %}
+        {% #card_image_with_description image_url=facts.road_names.ls.image_url image_link=image_link heading=ls %}
             {% #paragraph_text %}
                 Lesotho's highway signs have a "A" prefix as well, but many signs don't show the letter at all. If you see signs without a letter, you're probably in Lesotho.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.road_names.sz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.sz.image_url image_link=image_link heading=sz %}
+        {% #card_image_with_description image_url=facts.road_names.sz.image_url image_link=image_link heading=sz %}
             {% #paragraph_text %}
                 Eswatini's highway signs have a "MR" prefix.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.road_names.za.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_names.za.image_url image_link=image_link heading=za %}
+        {% #card_image_with_description image_url=facts.road_names.za.image_url image_link=image_link heading=za %}
             {% #paragraph_text %}
                 South Africa's highway signs have a "N", "M", or "R" prefix.
             {% /paragraph_text %}
@@ -101,7 +101,7 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.uniques.za_chevrons.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.za_chevrons.image_url image_link=image_link heading="Red & White Chevrons" %}
+        {% #card_image_with_description image_url=facts.uniques.za_chevrons.image_url image_link=image_link heading="Red & White Chevrons" %}
             {% #paragraph_text %}
                 {{za}} has these red and white chevrons on many roads.
             {% /paragraph_text %}
@@ -111,35 +111,35 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.za_gen2.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.za_gen2.image_url image_link=image_link heading="Gen 2 Halo & Blur" %}
+        {% #card_image_with_description image_url=facts.uniques.za_gen2.image_url image_link=image_link heading="Gen 2 Halo & Blur" %}
             {% #paragraph_text %}
             {{ za }} has Gen 2 camera coverage. You will often see the halo in the sky, the circular blur beneath the Street View car, and a more blurry picture quality.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.bw_signpost.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.bw_signpost.image_url image_link=image_link heading="Black & Yellow Signposts" %}
+        {% #card_image_with_description image_url=facts.uniques.bw_signpost.image_url image_link=image_link heading="Black & Yellow Signposts" %}
             {% #paragraph_text %}
                 {{bw}} uses black & yellow signposts for some, but not all, of their signs.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.ls_huts.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ls_huts.image_url image_link=image_link heading="Round Huts with Thatched Roofs" %}
+        {% #card_image_with_description image_url=facts.uniques.ls_huts.image_url image_link=image_link heading="Round Huts with Thatched Roofs" %}
             {% #paragraph_text %}
                 {{ls}} has many of these traditional round huts with thatched roofs.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.ls_blanket.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.ls_blanket.image_url image_link=image_link heading="Basotho blanket" %}
+        {% #card_image_with_description image_url=facts.uniques.ls_blanket.image_url image_link=image_link heading="Basotho blanket" %}
             {% #paragraph_text %}
                 {{ls}} is known for people wearing the traditional "Basotho blanket".
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.sz_poles.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.sz_poles.image_url image_link=image_link heading="Simple Pole with 3 Insulators" %}
+        {% #card_image_with_description image_css="w-3/6 object-top mx-auto md:ml-auto" image_url=facts.uniques.sz_poles.image_url image_link=image_link heading="Simple Pole with 3 Insulators" %}
             {% #paragraph_text %}
                 {{sz}}'s most common pole is wooden with three insulators on the side and has an overall simple design.
             {% /paragraph_text %}

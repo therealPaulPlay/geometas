@@ -33,7 +33,7 @@
 
     {% #card_image_with_description_container %}
     {% url 'cms:fact_detail' languages.latin.uuid as image_link %}    
-    {% #card_image_with_description image_css="w-28 sm:w-36" image_link=image_link image_url=languages.latin.image_url heading="Latin only" %}
+    {% #card_image_with_description image_link=image_link image_url=languages.latin.image_url heading="Latin only" %}
             <div>{% country name="Poland" %}</div>
             <div>{% country name="Hungary" %}</div>
             <div>{% country name="Croatia" %}</div>
@@ -45,14 +45,14 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' languages.both.uuid as image_link %}
-        {% #card_image_with_description image_css="w-28 sm:w-36" image_link=image_link image_url=languages.both.image_url heading="Latin and Cyrillic" %}
+        {% #card_image_with_description image_link=image_link image_url=languages.both.image_url heading="Latin and Cyrillic" %}
             <div>🇲🇪 Montenegro {% #text_italic html_tag="span" %}(mostly Latin){% /text_italic %}</div>
             <div>🇷🇸 Serbia {% #text_italic html_tag="span" %}(equal Latin and Cyrillic){% /text_italic %}</div>
             <div>🇲🇰 North Macedonia {% #text_italic html_tag="span" %}(mostly Cyrillic){% /text_italic %}</div>
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' languages.cyrillic.uuid as image_link %}
-        {% #card_image_with_description image_css="w-28 sm:w-36" image_link=image_link image_url=languages.cyrillic.image_url heading="Cyrillic only" %}
+        {% #card_image_with_description image_css="object-top" image_link=image_link image_url=languages.cyrillic.image_url heading="Cyrillic only" %}
             <div>🇧🇬 Bulgaria</div>
             <div>🇺🇦 Ukraine</div>
             <div>🇷🇺 Russia</div>
@@ -69,27 +69,27 @@
     {% #card_image_with_description_container %}
     
     {% url 'cms:fact_detail' bollards.hungary.uuid as image_link %}    
-    {% #card_image_with_description image_css="w-24" image_link=image_link image_url=bollards.hungary.image_url %}
+    {% #card_image_with_description_portrait image_link=image_link image_url=bollards.hungary.image_url %}
             <div>🇭🇺 Hungary</div>
             <div>🇭🇷 Croatia</div>
             <div>🇧🇬 Bulgaria</div>
             <div>🇲🇰 North Macedonia</div>
             <div>{% #text_italic %}North Macedonia also has a second type with round shape.{% /text_italic %}</div>
             <div>{% #text_italic %}Ukraine's bollard looks similar but its red rectangle is wider.{% /text_italic %}</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
         
         {% url 'cms:fact_detail' bollards.slovenia.uuid as image_link %}
-        {% #card_image_with_description image_css="w-24" image_link=image_link image_url=bollards.slovenia.image_url %}
+        {% #card_image_with_description_portrait image_link=image_link image_url=bollards.slovenia.image_url %}
             <div>🇸🇮 Slovenia</div>
             <div>🇲🇪 Montenegro</div>
             <div>{% #text_italic %}Serbia's bollard looks similar but its red rectangle is on the left side, not centered.{% /text_italic %}</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
         
         {% url 'cms:fact_detail' bollards.slovakia.uuid as image_link %}
-        {% #card_image_with_description image_css="w-24" image_link=image_link image_url=bollards.slovakia.image_url %}
+        {% #card_image_with_description_portrait image_link=image_link image_url=bollards.slovakia.image_url %}
             <div>🇸🇰 Slovakia</div>
             <div>🇨🇿 Czech Republic</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
     {% #paragraph_text %}
@@ -104,7 +104,7 @@
 
     {% #card_image_with_description_container %}
     {% url 'cms:fact_detail' directional_signs.blue.uuid as image_link %}    
-    {% #card_image_with_description image_css="w-36 sm:w-48" image_link=image_link image_url=directional_signs.blue.image_url heading="Blue" %}
+    {% #card_image_with_description image_link=image_link image_url=directional_signs.blue.image_url heading="Blue" %}
             <div>🇷🇴 Romania</div>
             <div>🇦🇱 Albania</div>
             <div>🇸🇰 Slovakia</div>
@@ -116,7 +116,7 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' directional_signs.yellow.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-48" image_link=image_link image_url=directional_signs.yellow.image_url heading="Yellow" %}
+        {% #card_image_with_description image_link=image_link image_url=directional_signs.yellow.image_url heading="Yellow" %}
             <div>🇸🇮 Slovenia</div>
             <div>🇭🇷 Croatia</div>
             <div>🇲🇪 Montenegro</div>
@@ -125,7 +125,7 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' directional_signs.green.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-48" image_link=image_link image_url=directional_signs.green.image_url heading="Green" %}
+        {% #card_image_with_description image_link=image_link image_url=directional_signs.green.image_url heading="Green" %}
             <div>🇵🇱 Poland</div>
             <div>🇨🇿 Hungary</div>
         {% /card_image_with_description %}
@@ -139,12 +139,12 @@
     
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' warning_signs.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32" image_link=image_link image_url=warning_signs.image_url %}
+        {% #card_image_with_description_portrait image_link=image_link image_url=warning_signs.image_url %}
             <div>🇲🇰 North Macedonia</div>
             <div>🇷🇸 Serbia</div>
             <div>🇵🇱 Poland </div>
             {% #text_italic %}Note that Poland has a thinner red border than the Serbian example shown here. The thinner red border is a great way to identify Poland right away.{% /text_italic %}</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -155,69 +155,69 @@
     
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' uniques.rift.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.rift.image_url image_link=image_link heading="Rifts in the sky" %}
+        {% #card_image_with_description_portrait image_url=uniques.rift.image_url image_link=image_link heading="Rifts in the sky" %}
             <div>🇲🇪 Montenegro</div>
             <div>🇲🇦 Albania</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
         
         {% url 'cms:fact_detail' uniques.holey_pole.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.holey_pole.image_url image_link=image_link heading="Holey pole" %}
+        {% #card_image_with_description_portrait image_url=uniques.holey_pole.image_url image_link=image_link heading="Holey pole" %}
             <div>🇷🇴 Romania</div>
             <div>🇨🇿 Hungary</div>
             <div>🇵🇱 Poland {% #text_italic html_tag="span" %}(not extending to the ground){% /text_italic %}</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.albania_license_plate.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.albania_license_plate.image_url image_link=image_link heading="Red license plate strip" %}
+        {% #card_image_with_description_portrait image_url=uniques.albania_license_plate.image_url image_link=image_link heading="Red license plate strip" %}
             <div>🇲🇦 Albania</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.no_antenna.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.no_antenna.image_url image_link=image_link heading="No Google Car Antenna" %}
+        {% #card_image_with_description_portrait image_url=uniques.no_antenna.image_url image_link=image_link heading="No Google Car Antenna" %}
             <div>🇲🇰 North Macedonia</div>
             <div>🇷🇸 Serbia</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.hungary_road_marker.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.hungary_road_marker.image_url image_link=image_link heading="Road marker #1" %}
+        {% #card_image_with_description_portrait image_url=uniques.hungary_road_marker.image_url image_link=image_link heading="Road marker #1" %}
             <div>🇨🇿 Hungary</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.romania_road_marker.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.romania_road_marker.image_url image_link=image_link heading="Road marker #2" %}
+        {% #card_image_with_description_portrait image_url=uniques.romania_road_marker.image_url image_link=image_link heading="Road marker #2" %}
             <div>🇷🇴 Romania</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.slovenia_road_marker.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.slovenia_road_marker.image_url image_link=image_link heading="Road marker #3" %}
+        {% #card_image_with_description_portrait image_url=uniques.slovenia_road_marker.image_url image_link=image_link heading="Road marker #3" %}
             <div>🇸🇮 Slovenia</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.romania_yellow_sign.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.romania_yellow_sign.image_url image_link=image_link heading="Neon yellow sign outline" %}
+        {% #card_image_with_description_portrait image_url=uniques.romania_yellow_sign.image_url image_link=image_link heading="Neon yellow sign outline" %}
             <div>🇷🇴 Romania</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.white_trees.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.white_trees.image_url image_link=image_link heading="White painted tree or pole base" %}
+        {% #card_image_with_description_portrait image_url=uniques.white_trees.image_url image_link=image_link heading="White painted tree or pole base" %}
             <div>🇺🇦 Ukraine</div>
             <div>🇷🇺 Russia</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.bulgaria_poles.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.bulgaria_poles.image_url image_link=image_link heading="Eiffel-tower like poles" %}
+        {% #card_image_with_description_portrait image_url=uniques.bulgaria_poles.image_url image_link=image_link heading="Eiffel-tower like poles" %}
             <div>🇧🇬 Bulgaria</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.hungary_hydrant.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.hungary_hydrant.image_url image_link=image_link heading="Red hydrant" %}
+        {% #card_image_with_description_portrait image_url=uniques.hungary_hydrant.image_url image_link=image_link heading="Red hydrant" %}
             <div>🇨🇿 Hungary</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' uniques.croatia_hydrant.uuid as image_link %}
-        {% #card_image_with_description image_css="w-32 sm:w-36" image_url=uniques.croatia_hydrant.image_url image_link=image_link heading="Blue hydrant" %}
+        {% #card_image_with_description_portrait image_url=uniques.croatia_hydrant.image_url image_link=image_link heading="Blue hydrant" %}
             <div>🇭🇷 Croatia</div>
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
     {% /card_image_with_description_container %}
 

@@ -1,0 +1,11 @@
+<div class="flex gap-4">
+    <div class="shrink-0">
+        {% if image_1_link %}<a href="{{ image_1_link }}">{% endif %}
+            <img class="{{ image_css }} rounded-md shrink-0" src="{{ image_1_url }}" alt="{{ heading }}" loading="lazy">
+        {% if image_1_link %}</a>{% endif %}
+    </div>
+    <div class="shrink">
+        {% if heading %}{% #heading_secondary mt="-mt-1" %}{{ heading }}{% /heading_secondary %}{% endif %}
+        {{ children }}
+    </div>
+</div>

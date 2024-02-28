@@ -30,7 +30,7 @@ def eastern_europe(request):
     languages = {
         "latin": Fact.objects.get(airtable_id="recqNCngQR2DXrjfz"),
         "both": Fact.objects.get(airtable_id="recS1GDw2ihg83uQv"),
-        "cyrillic": Fact.objects.get(airtable_id="recNUAgPDyiNRZEgQ"),
+        "cyrillic": Fact.objects.get(airtable_id="recRKCFfddnmnFV0U"),
     }
     bollard = {
         "hungary": Fact.objects.filter(category__slug="bollards", country__slug="hungary").first(),

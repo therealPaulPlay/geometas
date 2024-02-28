@@ -1,7 +1,7 @@
 <div class="md:grid md:grid-cols-2 gap-4">
     <div class="">
         {% if image_link %}<a href="{{ image_link }}">{% endif %}
-            <img class="object-cover h-60 w-full rounded-md {{ image_css }}" src="{{ image_url }}" alt="{{ heading }}" loading="lazy">
+            <img class="{{ image_css }} object-cover h-60 w-full rounded-md" src="{{ image_url }}" alt="{{ heading }}" loading="lazy">
         {% if image_link %}</a>{% endif %}
     </div>    
     <div class="pt-4 pb-2">

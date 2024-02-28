@@ -11,4 +11,6 @@ components:
   country: "components/country.html"
 
   card_image_with_description: "components/card_image_with_description.html"
+  card_image_with_description_portrait: "components/card_image_with_description_portrait.html"
+  card_2_images_with_description: "components/card_2_images_with_description.html"
   card_image_with_description_container: "components/card_image_with_description_container.html"

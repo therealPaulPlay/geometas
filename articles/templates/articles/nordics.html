@@ -7,6 +7,7 @@
     <div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
         <img src="{% static 'seo/nordics.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
     </div>
+    <div class="w-3/6"></div>
 {% endblock %}
 
 
@@ -31,28 +32,28 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.isfo.is_landscape.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.isfo.is_landscape.image_url image_link=image_link heading="🇮🇸 Iceland landscape" %}
+        {% #card_image_with_description image_url=facts.isfo.is_landscape.image_url image_link=image_link heading="🇮🇸 Iceland landscape" %}
             {% #paragraph_text %}
                 {{ facts.isfo.is_landscape.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.isfo.is_bollard.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.isfo.is_bollard.image_url image_link=image_link heading="🇮🇸 Iceland bollards" %}
+        {% #card_image_with_description image_css="w-3/6 object-top mx-auto md:ml-auto" image_url=facts.isfo.is_bollard.image_url image_link=image_link heading="🇮🇸 Iceland bollards" %}
             {% #paragraph_text %}
                 {{ facts.isfo.is_bollard.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.isfo.fo_landscape.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.isfo.fo_landscape.image_url image_link=image_link heading="🇫🇴 Faroe Islands landscape" %}
+        {% #card_image_with_description image_url=facts.isfo.fo_landscape.image_url image_link=image_link heading="🇫🇴 Faroe Islands landscape" %}
             {% #paragraph_text %}
                 {{ facts.isfo.fo_landscape.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.isfo.fo_car.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.isfo.fo_car.image_url image_link=image_link heading="🇫🇴 Faroe Islands Google Car" %}
+        {% #card_image_with_description image_url=facts.isfo.fo_car.image_url image_link=image_link heading="🇫🇴 Faroe Islands Google Car" %}
             {% #paragraph_text %}
                 {{ facts.isfo.fo_car.answer }}
             {% /paragraph_text %}
@@ -67,32 +68,32 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.giveway_sign.dk.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway_sign.dk.image_url image_link=image_link heading=den %}
+        {% #card_image_with_description_portrait image_url=facts.giveway_sign.dk.image_url image_link=image_link heading=den %}
             {% #paragraph_text %}
                 {{ facts.giveway_sign.dk.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.giveway_sign.no.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway_sign.no.image_url image_link=image_link heading=nor %}
+        {% #card_image_with_description_portrait image_url=facts.giveway_sign.no.image_url image_link=image_link heading=nor %}
             {% #paragraph_text %}
                 {{ facts.giveway_sign.no.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.giveway_sign.se.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway_sign.se.image_url image_link=image_link heading=swe %}
+        {% #card_image_with_description_portrait image_url=facts.giveway_sign.se.image_url image_link=image_link heading=swe %}
             {% #paragraph_text %}
                 {{ facts.giveway_sign.se.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.giveway_sign.fi.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway_sign.fi.image_url image_link=image_link heading=fin %}
+        {% #card_image_with_description_portrait image_url=facts.giveway_sign.fi.image_url image_link=image_link heading=fin %}
             {% #paragraph_text %}
                 {{ facts.giveway_sign.fi.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -103,28 +104,28 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.road_markings.dk.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.dk.image_url image_link=image_link heading=den %}
+        {% #card_image_with_description image_url=facts.road_markings.dk.image_url image_link=image_link heading=den %}
             {% #paragraph_text %}
                 {{ facts.road_markings.dk.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.road_markings.no.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.no.image_url image_link=image_link heading=nor %}
+        {% #card_image_with_description image_url=facts.road_markings.no.image_url image_link=image_link heading=nor %}
             {% #paragraph_text %}
                 {{ facts.road_markings.no.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.road_markings.se.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.se.image_url image_link=image_link heading=swe %}
+        {% #card_image_with_description image_url=facts.road_markings.se.image_url image_link=image_link heading=swe %}
             {% #paragraph_text %}
                 {{ facts.road_markings.se.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.road_markings.fi.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.road_markings.fi.image_url image_link=image_link heading=fin %}
+        {% #card_image_with_description image_url=facts.road_markings.fi.image_url image_link=image_link heading=fin %}
             {% #paragraph_text %}
                 {{ facts.road_markings.fi.answer }}
             {% /paragraph_text %}
@@ -139,28 +140,28 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.direction_sign.dk.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.direction_sign.dk.image_url image_link=image_link heading=den %}
+        {% #card_image_with_description image_url=facts.direction_sign.dk.image_url image_link=image_link heading=den %}
             {% #paragraph_text %}
                 {{ facts.direction_sign.dk.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.direction_sign.no.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.direction_sign.no.image_url image_link=image_link heading=nor %}
+        {% #card_image_with_description image_url=facts.direction_sign.no.image_url image_link=image_link heading=nor %}
             {% #paragraph_text %}
                 {{ facts.direction_sign.no.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.direction_sign.se.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.direction_sign.se.image_url image_link=image_link heading=swe %}
+        {% #card_image_with_description image_url=facts.direction_sign.se.image_url image_link=image_link heading=swe %}
             {% #paragraph_text %}
                 {{ facts.direction_sign.se.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.direction_sign.fi.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.direction_sign.fi.image_url image_link=image_link heading=fin %}
+        {% #card_image_with_description image_url=facts.direction_sign.fi.image_url image_link=image_link heading=fin %}
             {% #paragraph_text %}
                 {{ facts.direction_sign.fi.answer }}
             {% /paragraph_text %}
@@ -175,32 +176,32 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.bollards.dk.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.dk.image_url image_link=image_link heading=den %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.dk.image_url image_link=image_link heading=den %}
             {% #paragraph_text %}
                 In Denmark, bollards have a distinctive appearance and are abundant throughout the country. 
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.bollards.is.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.is.image_url image_link=image_link heading=ice %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.is.image_url image_link=image_link heading=ice %}
             {% #paragraph_text %}
                 As mentioned in the first section, Iceland's bollards are recognizable for their distinct yellow color and top edge.
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.bollards.se.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.se.image_url image_link=image_link heading=swe %}
+        {% #card_image_with_description_portrait image_css="object-top" image_url=facts.bollards.se.image_url image_link=image_link heading=swe %}
             {% #paragraph_text %}
                 In Sweden, bollards are typically black-and-white, featuring a grey or orange reflector, and come in various shapes.
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.bollards.fi.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.fi.image_url image_link=image_link heading=fin %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.fi.image_url image_link=image_link heading=fin %}
             {% #paragraph_text %}
                 Finnish bollards appear cylindrical from the front.
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -211,35 +212,35 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.language.dk.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.dk.image_url image_link=image_link heading=den %}
+        {% #card_image_with_description image_url=facts.language.dk.image_url image_link=image_link heading=den %}
             {% #paragraph_text %}
                 Denmark uses the special characters <span class="underline decoration-green-600 decoration-4 text-green-600 text-xl">å</span>, <span class="underline decoration-purple-600 decoration-4 text-purple-600 text-xl">æ</span>, and <span class="underline decoration-purple-600 decoration-4 text-purple-600 text-xl">ø</span>.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.language.no.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.no.image_url image_link=image_link heading=nor %}
+        {% #card_image_with_description image_url=facts.language.no.image_url image_link=image_link heading=nor %}
             {% #paragraph_text %}
                 Norway uses the special characters <span class="underline decoration-green-600 decoration-4 text-green-600 text-xl">å</span>, <span class="underline decoration-purple-600 decoration-4 text-purple-600 text-xl">æ</span>, and <span class="underline decoration-purple-600 decoration-4 text-purple-600 text-xl">ø</span>.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.language.se.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.se.image_url image_link=image_link heading=swe %}
+        {% #card_image_with_description image_url=facts.language.se.image_url image_link=image_link heading=swe %}
             {% #paragraph_text %}
                 Sweden uses the special characters <span class="underline decoration-green-600 decoration-4 text-green-600 text-xl">å</span>, <span class="underline decoration-blue-600 decoration-4 text-blue-600 text-xl">ä</span>, and <span class="underline decoration-blue-600 decoration-4 text-blue-600 text-xl">ö</span>.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.language.fi.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.fi.image_url image_link=image_link heading=fin %}
+        {% #card_image_with_description image_url=facts.language.fi.image_url image_link=image_link heading=fin %}
             {% #paragraph_text %}
                 Finland uses the special characters <span class="underline decoration-blue-600 decoration-4 text-blue-600 text-xl">ä</span> and <span class="underline decoration-blue-600 decoration-4 text-blue-600 text-xl">ö</span>. It often has double vowels and many long words.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.language.is.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.language.is.image_url image_link=image_link heading=ice %}
+        {% #card_image_with_description image_url=facts.language.is.image_url image_link=image_link heading=ice %}
             {% #paragraph_text %}
                 Iceland's language is fairly unique and uses the unique characters <span class="underline decoration-red-600 decoration-4 text-red-600 text-xl">Þ</span> and <span class="underline decoration-red-600 decoration-4 text-red-600 text-xl">ð</span>, amongst other special characters.
             {% /paragraph_text %}
@@ -254,35 +255,35 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.uniques.no_green.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.no_green.image_url image_link=image_link heading="Green license plates" %}
+        {% #card_image_with_description image_url=facts.uniques.no_green.image_url image_link=image_link heading="Green license plates" %}
             {% #paragraph_text %}
                 {{nor}} commercial vehicles use green license plates.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.dk_yellow.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.dk_yellow.image_url image_link=image_link heading="Yellow license plates" %}
+        {% #card_image_with_description image_url=facts.uniques.dk_yellow.image_url image_link=image_link heading="Yellow license plates" %}
             {% #paragraph_text %}
              {{den}} commercial vehicles feature yellow license plates on the front and back.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.se_chevron.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.se_chevron.image_url image_link=image_link heading="Yellow & blue chevrons" %}
+        {% #card_image_with_description image_url=facts.uniques.se_chevron.image_url image_link=image_link heading="Yellow & blue chevrons" %}
             {% #paragraph_text %}
                 {{swe}} chevrons use yellow and blue colors.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.fi_dirtroad.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.fi_dirtroad.image_url image_link=image_link heading="Dirt roads in forests" %}
+        {% #card_image_with_description image_url=facts.uniques.fi_dirtroad.image_url image_link=image_link heading="Dirt roads in forests" %}
             {% #paragraph_text %}
                 {{fin}} typically is the best option when you see a dirt or gravel road in a Nordic country without any other meaningful clues.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.uniques.is_pedyellow.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.uniques.is_pedyellow.image_url image_link=image_link heading="Yellow pedestrian signs" %}
+        {% #card_image_with_description image_url=facts.uniques.is_pedyellow.image_url image_link=image_link heading="Yellow pedestrian signs" %}
             {% #paragraph_text %}
                 {{ice}} is the only European country to have a yellow background behind its pedestrian signs.
             {% /paragraph_text %}

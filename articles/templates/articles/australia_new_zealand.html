@@ -24,18 +24,18 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.bollards.au.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.au.image_url image_link=image_link heading=aus %}
+        {% #card_image_with_description_portrait image_css="object-top" image_url=facts.bollards.au.image_url image_link=image_link heading=aus %}
             {% #paragraph_text %}
                 In Australia, bollards are typically white, featuring a red reflector on the front and a grey reflector on the back.<br>Note that on some Australian bollards the red reflector is circular, not rectangular.
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.bollards.nz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.bollards.nz.image_url image_link=image_link heading=zea %}
+        {% #card_image_with_description_portrait image_css="object-top" image_url=facts.bollards.nz.image_url image_link=image_link heading=zea %}
             {% #paragraph_text %}
                 {{ facts.bollards.nz.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -43,18 +43,18 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.giveway.au.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway.au.image_url image_link=image_link heading=aus %}
+        {% #card_image_with_description_portrait image_url=facts.giveway.au.image_url image_link=image_link heading=aus %}
             {% #paragraph_text %}
                 {{ facts.giveway.au.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.giveway.nz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.giveway.nz.image_url image_link=image_link heading=zea %}
+        {% #card_image_with_description_portrait image_url=facts.giveway.nz.image_url image_link=image_link heading=zea %}
             {% #paragraph_text %}
                 {{ facts.giveway.nz.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -62,18 +62,18 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.speed.au.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.speed.au.image_url image_link=image_link heading=aus %}
+        {% #card_image_with_description_portrait image_url=facts.speed.au.image_url image_link=image_link heading=aus %}
             {% #paragraph_text %}
                 {{ facts.speed.au.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.speed.nz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.speed.nz.image_url image_link=image_link heading=zea %}
+        {% #card_image_with_description_portrait image_url=facts.speed.nz.image_url image_link=image_link heading=zea %}
             {% #paragraph_text %}
                 {{ facts.speed.nz.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -81,14 +81,14 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.street.au.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.street.au.image_url image_link=image_link heading=aus %}
+        {% #card_image_with_description image_url=facts.street.au.image_url image_link=image_link heading=aus %}
             {% #paragraph_text %}
                 {{ facts.street.au.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.street.nz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.street.nz.image_url image_link=image_link heading=zea %}
+        {% #card_image_with_description image_url=facts.street.nz.image_url image_link=image_link heading=zea %}
             {% #paragraph_text %}
                 {{ facts.street.nz.answer }}
             {% /paragraph_text %}
@@ -100,18 +100,18 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.chevron.au.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.chevron.au.image_url image_link=image_link heading=aus %}
+        {% #card_image_with_description_portrait image_url=facts.chevron.au.image_url image_link=image_link heading=aus %}
             {% #paragraph_text %}
                 {{ facts.chevron.au.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.chevron.nz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.chevron.nz.image_url image_link=image_link heading=zea %}
+        {% #card_image_with_description_portrait image_url=facts.chevron.nz.image_url image_link=image_link heading=zea %}
             {% #paragraph_text %}
                 {{ facts.chevron.nz.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -119,14 +119,14 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.flora.au.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.flora.au.image_url image_link=image_link heading=aus %}
+        {% #card_image_with_description image_url=facts.flora.au.image_url image_link=image_link heading=aus %}
             {% #paragraph_text %}
                 {{ facts.flora.au.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.flora.nz.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.flora.nz.image_url image_link=image_link heading=zea %}
+        {% #card_image_with_description image_url=facts.flora.nz.image_url image_link=image_link heading=zea %}
             {% #paragraph_text %}
                 {{ facts.flora.nz.answer }}
             {% /paragraph_text %}
@@ -138,14 +138,14 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.others.nz_giveway.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.others.nz_giveway.image_url image_link=image_link heading="Give-way street marking" %}
+        {% #card_image_with_description image_url=facts.others.nz_giveway.image_url image_link=image_link heading="Give-way street marking" %}
             {% #paragraph_text %}
                 {{ facts.others.nz_giveway.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.others.nz_wrap.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.others.nz_wrap.image_url image_link=image_link heading="Silver pole wrapping" %}
+        {% #card_image_with_description image_css="w-3/6 mx-auto" image_url=facts.others.nz_wrap.image_url image_link=image_link heading="Silver pole wrapping" %}
             {% #paragraph_text %}
                 In New Zealand, most utility poles have a lone piece of metal, usually silver or white, wrapping around them.<br>Note that the Australian state of Tasmania also has pole wrappings, but they are usually olive green.
             {% /paragraph_text %}
