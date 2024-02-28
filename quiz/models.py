@@ -4,10 +4,6 @@ import math
 import logging
 log = logging.getLogger(__name__)
 
-from PIL import Image
-import io
-import requests
-
 
 class Region(models.Model):
     name = models.CharField(max_length=250)
@@ -84,16 +80,6 @@ class Fact(models.Model):
 
     def get_question(self):
         return "Which country in %s is this?" % self.country.region.name
-    
-    def update_orientation(self):
-        image_content = requests.get(self.image_url).content
-        with Image.open(io.BytesIO(image_content)) as img:
-            width, height = img.size
-            if width > height:
-                self.image_is_landscape = True
-            elif width <= height:
-                self.image_is_landscape = False
-        self.save()
     
 
 class Quiz(models.Model):

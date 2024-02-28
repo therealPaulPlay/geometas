@@ -56,6 +56,10 @@ def import_all_facts_into_db():
         move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
         db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
         db_fact.save()
+        # Check if image is horizontal
+        if db_fact.image_is_landscape is None:
+            db_fact.image_is_landscape = check_if_image_is_horizontal(db_fact.image_url)
+            db_fact.save()
         log.info(f"Fact '{db_fact.airtable_id}' saved")
     
     # Check if facts have been deleted
@@ -148,3 +152,17 @@ def resize_image_in_memory(image_data, max_size):
     
     # Return original image if it wasnt resized
     return image_data
+
+
+def check_if_image_is_horizontal(image_url):
+    """
+    Could combine this with the initial image down/upload to save performance
+    But keeping separate for now for clarity
+    """
+    image_content = requests.get(image_url).content
+    with Image.open(io.BytesIO(image_content)) as img:
+        width, height = img.size
+        if width > height:
+            return True
+        elif width <= height:
+            return False
