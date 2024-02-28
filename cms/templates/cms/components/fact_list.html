@@ -3,9 +3,9 @@
         {% for fact in facts %}
             <div class="py-6 -mx-4 px-4 sm:-mx-8 sm:px-8">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="items-start">
+                    <div class="items-start bg-slate-100 rounded-md">
                         <a href="{% url 'cms:fact_detail' fact.uuid %}">
-                            <img src="{{ fact.image_url }}" loading="lazy" class="object-contain max-h-60 mx-auto align-top rounded-md">
+                            <img src="{{ fact.image_url }}" loading="lazy" class="{% if fact.image_is_landscape %} object-cover w-full h-60 rounded-md {% else %} object-contain max-h-60 mx-auto align-top rounded-sm {% endif %}">
                         </a>
                     </div>
                     <div class="">

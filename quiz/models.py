@@ -4,6 +4,10 @@ import math
 import logging
 log = logging.getLogger(__name__)
 
+from PIL import Image
+import io
+import requests
+
 
 class Region(models.Model):
     name = models.CharField(max_length=250)
@@ -73,12 +77,23 @@ class Fact(models.Model):
     google_streetview_url = models.CharField(max_length=250, null=True, blank=True)
     google_streetview_latlng = models.CharField(max_length=250, null=True, blank=True)
     airtable_id = models.CharField(max_length=100)
+    image_is_landscape = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.answer[:50] + (self.answer[50:] and '...')
 
     def get_question(self):
         return "Which country in %s is this?" % self.country.region.name
+    
+    def update_orientation(self):
+        image_content = requests.get(self.image_url).content
+        with Image.open(io.BytesIO(image_content)) as img:
+            width, height = img.size
+            if width > height:
+                self.image_is_landscape = True
+            elif width <= height:
+                self.image_is_landscape = False
+        self.save()
     
 
 class Quiz(models.Model):
