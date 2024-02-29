@@ -711,6 +711,10 @@ video {
   margin-top: 2rem;
 }
 
+.-mt-2 {
+  margin-top: -0.5rem;
+}
+
 .block {
   display: block;
 }
@@ -1265,12 +1269,12 @@ video {
   padding-bottom: 8rem;
 }
 
-.pb-4 {
-  padding-bottom: 1rem;
-}
-
 .pb-5 {
   padding-bottom: 1.25rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
 }
 
 .pl-2 {
@@ -1311,10 +1315,6 @@ video {
 
 .pt-\[20\%\] {
   padding-top: 20%;
-}
-
-.pb-6 {
-  padding-bottom: 1.5rem;
 }
 
 .text-center {
