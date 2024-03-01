@@ -1,11 +1,19 @@
-<div class="flex gap-4">
-    <div class="shrink-0">
-        {% if image_1_link %}<a href="{{ image_1_link }}">{% endif %}
-            <img class="{{ image_css }} rounded-md shrink-0" src="{{ image_1_url }}" alt="{{ heading }}" loading="lazy">
-        {% if image_1_link %}</a>{% endif %}
-    </div>
-    <div class="shrink">
+
+<div class="md:grid md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-2">
+        <div class="">
+            {% if image_1_link %}<a href="{{ image_1_link }}">{% endif %}
+                <img class="object-cover h-60 w-full rounded-l-md {{ image_1_css }}" src="{{ image_1_url }}" alt="{{ heading }}" loading="lazy">
+            {% if image_1_link %}</a>{% endif %}
+        </div>
+        <div class="">
+            {% if image_2_link %}<a href="{{ image_2_link }}">{% endif %}
+                <img class="object-cover h-60 w-full rounded-r-md {{ image_2_css }}" src="{{ image_2_url }}" alt="{{ heading }}" loading="lazy">
+            {% if image_2_link %}</a>{% endif %}
+        </div>
+    </div>    
+    <div class="pt-4 pb-6">
         {% if heading %}{% #heading_secondary mt="-mt-1" %}{{ heading }}{% /heading_secondary %}{% endif %}
-        {{ children }}
+        <div class="-mt-2">{{ children }}</div>
     </div>
 </div>

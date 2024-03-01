@@ -28,17 +28,18 @@
     {% #paragraph_text %}The direction of traffic is one of the easiest way to quickly narrow down the list of possible South-East Asian countries,{% /paragraph_text %}
     <div class="grid grid-cols-2 gap-2 max-w-md">
         <div class="space-y-1">
-            {% #heading_secondary %}Right-hand{% /heading_secondary %}
-            <p class="">{{ phili }}</p>
-            <p class="">{{ cambo }}</p>
-        </div>
-        <div class="space-y-1">
-            {% #heading_secondary %}Left-hand{% /heading_secondary %}
+            {% #heading_secondary %}◀️ Left-hand{% /heading_secondary %}
             <p class="">{{ thai }}</p>
             <p class="">{{ malay }}</p>
             <p class="">{{ indo }}</p>
             <p class="">{{ sri }}</p>
         </div>
+        <div class="space-y-1">
+            {% #heading_secondary %}▶️ Right-hand{% /heading_secondary %}
+            <p class="">{{ phili }}</p>
+            <p class="">{{ cambo }}</p>
+        </div>
+        
     </div>
             
 
@@ -46,18 +47,18 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.signposts.thai.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.thai.image_url image_link=image_link heading=thai %}
+        {% #card_image_with_description_portrait image_url=facts.signposts.thai.image_url image_link=image_link heading=thai %}
             {% #paragraph_text %}
                 {{ facts.signposts.thai.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.signposts.stripes.uuid as image_link %}
-        {% #card_image_with_description image_css="w-36 sm:w-44" image_url=facts.signposts.stripes.image_url image_link=image_link heading=stripes %}
+        {% #card_image_with_description_portrait image_url=facts.signposts.stripes.image_url image_link=image_link heading=stripes %}
             {% #paragraph_text %}
                 {{ facts.signposts.stripes.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -65,47 +66,47 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.poles.thai_holes.uuid as image_link %}
-        {% #card_image_with_description_v2 image_css="object-center" image_url=facts.poles.thai_holes.image_url image_link=image_link heading=thai_holes %}
+        {% #card_image_with_description image_url=facts.poles.thai_holes.image_url image_link=image_link heading=thai_holes %}
             {% #paragraph_text %}
                 {{ facts.poles.thai_holes.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description_v2 %}
+        {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.thai_base.uuid as image_link %}
-        {% #card_image_with_description_v2 image_css="" image_url=facts.poles.thai_base.image_url image_link=image_link heading=thai_base %}
+        {% #card_image_with_description image_css="" image_url=facts.poles.thai_base.image_url image_link=image_link heading=thai_base %}
             {% #paragraph_text %}
                 {{ facts.poles.thai_base.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description_v2 %}
+        {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.malay.uuid as image_link %}
-        {% #card_image_with_description_v2 image_css="" image_url=facts.poles.malay.image_url image_link=image_link heading=malay %}
+        {% #card_image_with_description image_css="" image_url=facts.poles.malay.image_url image_link=image_link heading=malay %}
             {% #paragraph_text %}
                 {{ facts.poles.malay.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description_v2 %}
+        {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.indo.uuid as image_link %}
-        {% #card_image_with_description_v2 image_css="" image_url=facts.poles.indo.image_url image_link=image_link heading=indo %}
+        {% #card_image_with_description image_css="" image_url=facts.poles.indo.image_url image_link=image_link heading=indo %}
             {% #paragraph_text %}
                 {{ facts.poles.indo.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description_v2 %}
+        {% /card_image_with_description %}
 
-        <!--{% url 'cms:fact_detail' facts.poles.sri_1.uuid as image_1_link %}
+        {% url 'cms:fact_detail' facts.poles.sri_1.uuid as image_1_link %}
         {% url 'cms:fact_detail' facts.poles.sri_2.uuid as image_2_link %}
-        {% #card_2_images_with_description image_css="" image_1_url=facts.poles.sri_1.image_url image_1_link=image_1_link image_2_url=facts.poles.sri_2.image_url image_2_link=image_2_link heading=sri_1 %}
+        {% #card_2_images_with_description image_1_url=facts.poles.sri_1.image_url image_1_link=image_1_link image_2_url=facts.poles.sri_2.image_url image_2_link=image_2_link heading=sri %}
             {% #paragraph_text %}
                 {{ facts.poles.sri_1.answer }}
             {% /paragraph_text %}
-        {% /card_2_images_with_description %}-->
+        {% /card_2_images_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.cambo_1.uuid as image_link %}
-        {% #card_image_with_description_v2 image_css="" image_url=facts.poles.cambo_1.image_url image_link=image_link heading=cambo_1 %}
+        {% #card_image_with_description image_css="" image_url=facts.poles.cambo_1.image_url image_link=image_link heading=cambo %}
             {% #paragraph_text %}
                 {{ facts.poles.cambo_1.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description_v2 %}
+        {% /card_image_with_description %}
     {% /card_image_with_description_container %}
 
 
