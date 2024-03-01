@@ -8,7 +8,7 @@ SYSTEM_MESSAGE = """
     The response should sound like a normal human writes. Use everyday, simple, straightforward, everyday words. Go straight into the content, no intro sentences or salutations.
     Do not use idioms, figures of speech, or fluffy sentences. 
     Do not respond with generic introduction sentence but go straight into the relevant content.
-    Limit your response to 700 characters or 125 words.
+    Limit your response to 3 sentences, 300 characters or 50 words.
     Do not use new lines. The response should be one paragraph.
 """
 
