@@ -1,10 +1,10 @@
-<div class="grid grid-cols-3 md:grid-cols-5 gap-4">
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
     <div class="">
         {% if image_link %}<a href="{{ image_link }}">{% endif %}
             <img class="object-cover h-60 w-full rounded-md {{ image_css }}" src="{{ image_url }}" alt="{{ heading }}" loading="lazy">
         {% if image_link %}</a>{% endif %}
     </div>    
-    <div class="col-span-2 md:col-span-4 pt-4 pb-2">
+    <div class="sm:col-span-2 lg:col-span-4 pt-4 pb-2">
         {% if heading %}{% #heading_secondary mt="-mt-1" %}{{ heading }}{% /heading_secondary %}{% endif %}
         {{ children }}
     </div>

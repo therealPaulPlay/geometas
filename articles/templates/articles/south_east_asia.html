@@ -4,9 +4,9 @@
 {% block title_main %}{{ html_meta_title }}{% endblock %}
 
 {% block content_top_extra %}
-    <!--<div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
-        <img src="{% static 'seo/australia_new_zealand.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
-    </div>-->
+    <div class="-mx-4 -my-4 sm:-my-6 sm:-mx-8 sm:rounded-t-lg">    
+        <img src="{% static 'seo/south_east_asia.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
+    </div>
 {% endblock %}
 
 
@@ -28,39 +28,20 @@
     {% #paragraph_text %}The direction of traffic is one of the easiest way to quickly narrow down the list of possible South-East Asian countries,{% /paragraph_text %}
     <div class="grid grid-cols-2 gap-2 max-w-md">
         <div class="space-y-1">
-            {% #heading_secondary %}◀️ Left-hand{% /heading_secondary %}
+            {% #heading_secondary %}<span class="text-green-500">◀️ Left-hand</span>{% /heading_secondary %}
             <p class="">{{ thai }}</p>
             <p class="">{{ malay }}</p>
             <p class="">{{ indo }}</p>
             <p class="">{{ sri }}</p>
         </div>
         <div class="space-y-1">
-            {% #heading_secondary %}▶️ Right-hand{% /heading_secondary %}
+            {% #heading_secondary %}<span class="text-blue-500">▶️ Right-hand</span>{% /heading_secondary %}
             <p class="">{{ phili }}</p>
             <p class="">{{ cambo }}</p>
         </div>
         
     </div>
             
-
-    {% #heading_primary %}Signposts{% /heading_primary %}
-
-    {% #card_image_with_description_container %}
-        {% url 'cms:fact_detail' facts.signposts.thai.uuid as image_link %}
-        {% #card_image_with_description_portrait image_url=facts.signposts.thai.image_url image_link=image_link heading=thai %}
-            {% #paragraph_text %}
-                {{ facts.signposts.thai.answer }}
-            {% /paragraph_text %}
-        {% /card_image_with_description_portrait %}
-
-        {% url 'cms:fact_detail' facts.signposts.stripes.uuid as image_link %}
-        {% #card_image_with_description_portrait image_url=facts.signposts.stripes.image_url image_link=image_link heading=stripes %}
-            {% #paragraph_text %}
-                {{ facts.signposts.stripes.answer }}
-            {% /paragraph_text %}
-        {% /card_image_with_description_portrait %}
-    {% /card_image_with_description_container %}
-
 
     {% #heading_primary %}Poles{% /heading_primary %}
 
@@ -87,7 +68,7 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.indo.uuid as image_link %}
-        {% #card_image_with_description image_width="w-3/6" image_url=facts.poles.indo.image_url image_link=image_link heading=indo %}
+        {% #card_image_with_description image_width="w-2/6" image_url=facts.poles.indo.image_url image_link=image_link heading=indo %}
             {% #paragraph_text %}
                 {{ facts.poles.indo.answer }}
             {% /paragraph_text %}
@@ -97,15 +78,15 @@
         {% url 'cms:fact_detail' facts.poles.sri_2.uuid as image_2_link %}
         {% #card_2_images_with_description image_1_url=facts.poles.sri_1.image_url image_1_link=image_1_link image_2_url=facts.poles.sri_2.image_url image_2_link=image_2_link heading=sri %}
             {% #paragraph_text %}
-                {{ facts.poles.sri_1.answer }}
+                Sri Lanka has two common types of poles: one has small holes in the top part (left image); the other is a holey pole in the lower part (right).
             {% /paragraph_text %}
         {% /card_2_images_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.cambo_1.uuid as image_1_link %}
         {% url 'cms:fact_detail' facts.poles.cambo_2.uuid as image_2_link %}
-        {% #card_2_images_with_description image_1_url=facts.poles.cambo_1.image_url image_1_link=image_1_link image_2_url=facts.poles.cambo_2.image_url image_2_link=image_2_link heading=cambo %}
+        {% #card_2_images_with_description image_1_url=facts.poles.cambo_1.image_url image_1_link=image_1_link image_1_width="w-4/6" image_1_css="object-top" image_2_url=facts.poles.cambo_2.image_url image_2_link=image_2_link image_2_width="w-4/6" heading=cambo %}
             {% #paragraph_text %}
-                {{ facts.poles.cambo_1.answer }}
+                Cambodia has two common types of poles. one is a round pole with small holes on the side (left image); the other is a ladder-type pole (right).
             {% /paragraph_text %}
         {% /card_2_images_with_description %}
     {% /card_image_with_description_container %}
@@ -115,16 +96,16 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.street_markings.yellow.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.street_markings.yellow.image_url image_link=image_link heading=yellow %}
+        {% #card_image_with_description image_url=facts.street_markings.yellow.image_url image_link=image_link heading="Yellow or white" %}
             {% #paragraph_text %}
-                {{ facts.street_markings.yellow.answer }}
+                Thailand, Indonesia, Cambodia, Sri Lanka, and the Philippines can have yellow or white street markings.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.street_markings.white.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.street_markings.white.image_url image_link=image_link heading=white %}
+        {% #card_image_with_description image_url=facts.street_markings.white.image_url image_link=image_link heading="White only" %}
             {% #paragraph_text %}
-                {{ facts.street_markings.white.answer }}
+                Malaysia is the only country that never has yellow street markings.
             {% /paragraph_text %}
         {% /card_image_with_description %}
     {% /card_image_with_description_container %}
@@ -134,32 +115,33 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.bollards.thai.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.bollards.thai.image_url image_link=image_link heading=thai %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.thai.image_url image_link=image_link heading=thai %}
             {% #paragraph_text %}
                 {{ facts.bollards.thai.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
-        {% url 'cms:fact_detail' facts.bollards.malay_1.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.bollards.malay_1.image_url image_link=image_link heading=malay_1 %}
+        {% url 'cms:fact_detail' facts.bollards.malay_1.uuid as image_1_link %}
+        {% url 'cms:fact_detail' facts.bollards.malay_2.uuid as image_2_link %}
+        {% #card_2_images_with_description_portrait image_1_url=facts.bollards.malay_1.image_url image_1_link=image_1_link image_2_url=facts.bollards.malay_2.image_url image_2_link=image_2_link heading=malay %}
             {% #paragraph_text %}
-                {{ facts.bollards.malay_1.answer }}
+                Malaysian bollards come in different shapes but will often have the colours black, white, grey and red. 
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_2_images_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.bollards.cambo.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.bollards.cambo.image_url image_link=image_link heading=cambo %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.cambo.image_url image_link=image_link heading=cambo %}
             {% #paragraph_text %}
                 {{ facts.bollards.cambo.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
 
         {% url 'cms:fact_detail' facts.bollards.sri.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.bollards.sri.image_url image_link=image_link heading=sri %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.sri.image_url image_link=image_link heading=sri %}
             {% #paragraph_text %}
                 {{ facts.bollards.sri.answer }}
             {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_image_with_description_portrait %}
     {% /card_image_with_description_container %}
 
 
@@ -167,25 +149,19 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.license_plates.yellow.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.license_plates.yellow.image_url image_link=image_link heading=yellow %}
+        {% #card_image_with_description image_url=facts.license_plates.yellow.image_url image_link=image_link heading="🇹🇭 Thailand & 🇱🇰 Sri Lanka" %}
             {% #paragraph_text %}
-                {{ facts.license_plates.yellow.answer }}
+                In Thailand, commercial vehicles have yellow license plates. In Sri Lanka, rear license plates are yellow. No other country in South-East Asia has yellow license plates.
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
-        {% url 'cms:fact_detail' facts.license_plates.black_malay.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.license_plates.black_malay.image_url image_link=image_link heading=black_malay %}
+        {% url 'cms:fact_detail' facts.license_plates.black_malay.uuid as image_1_link %}
+        {% url 'cms:fact_detail' facts.license_plates.black_indo.uuid as image_2_link %}
+        {% #card_2_images_with_description image_1_url=facts.license_plates.black_malay.image_url image_1_link=image_1_link image_2_url=facts.license_plates.black_indo.image_url image_2_link=image_2_link heading="🇲🇾 Malaysia & 🇮🇩 Indonesia" %}
             {% #paragraph_text %}
-                {{ facts.license_plates.black_malay.answer }}
+                Malaysian license plates typically feature black areas dividing the plate into TWO white sections (left image); Indonesian plates have THREE white sections (right).
             {% /paragraph_text %}
-        {% /card_image_with_description %}
-
-        {% url 'cms:fact_detail' facts.license_plates.black_indo.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.license_plates.black_indo.image_url image_link=image_link heading=black_indo %}
-            {% #paragraph_text %}
-                {{ facts.license_plates.black_indo.answer }}
-            {% /paragraph_text %}
-        {% /card_image_with_description %}
+        {% /card_2_images_with_description %}
 
         {% url 'cms:fact_detail' facts.license_plates.phili.uuid as image_link %}
         {% #card_image_with_description image_url=facts.license_plates.phili.image_url image_link=image_link heading=phili %}
@@ -229,81 +205,100 @@
     {% /card_image_with_description_container %}
 
 
+    {% #heading_primary %}Signposts{% /heading_primary %}
+
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.signposts.thai.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.signposts.thai.image_url image_link=image_link heading=thai %}
+            {% #paragraph_text %}
+                Thailand has signposts that are painted white with a black section on their base.
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+
+        {% url 'cms:fact_detail' facts.signposts.stripes.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.signposts.stripes.image_url image_link=image_link heading="🇲🇾 Malaysia & 🇱🇰 Sri Lanka" %}
+            {% #paragraph_text %}
+                Malaysia & Sri Lanka often have black-and-white striped signposts.
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+    {% /card_image_with_description_container %}
+
+
     {% #heading_primary %}Others{% /heading_primary %}
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.other.indo_dish.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.indo_dish.image_url image_link=image_link heading=indo_dish %}
+        {% #card_image_with_description image_url=facts.other.indo_dish.image_url image_link=image_link image_width="w-4/6" heading=indo %}
             {% #paragraph_text %}
                 {{ facts.other.indo_dish.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.malay_bars.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.malay_bars.image_url image_link=image_link heading=malay_bars %}
+        {% #card_image_with_description image_url=facts.other.malay_bars.image_url image_link=image_link heading=malay %}
             {% #paragraph_text %}
                 {{ facts.other.malay_bars.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.malay_stop.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.malay_stop.image_url image_link=image_link heading=malay_stop %}
+        {% #card_image_with_description image_url=facts.other.malay_stop.image_url image_link=image_link image_width="w-4/6" heading=malay %}
             {% #paragraph_text %}
                 {{ facts.other.malay_stop.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.phili_sidecar.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.phili_sidecar.image_url image_link=image_link heading=phili_sidecar %}
+        {% #card_image_with_description image_url=facts.other.phili_sidecar.image_url image_link=image_link heading=phili %}
             {% #paragraph_text %}
                 {{ facts.other.phili_sidecar.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.phili_roads.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.phili_roads.image_url image_link=image_link heading=phili_roads %}
+        {% #card_image_with_description image_url=facts.other.phili_roads.image_url image_link=image_link heading=phili %}
             {% #paragraph_text %}
                 {{ facts.other.phili_roads.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.phili_bus.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.phili_bus.image_url image_link=image_link heading=phili_bus %}
+        {% #card_image_with_description image_url=facts.other.phili_bus.image_url image_link=image_link heading=phili %}
             {% #paragraph_text %}
                 {{ facts.other.phili_bus.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.sri_googlecar.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.sri_googlecar.image_url image_link=image_link heading=sri_googlecar %}
+        {% #card_image_with_description image_url=facts.other.sri_googlecar.image_url image_link=image_link heading=sri %}
             {% #paragraph_text %}
                 {{ facts.other.sri_googlecar.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.sri_lowcam.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.sri_lowcam.image_url image_link=image_link heading=sri_lowcam %}
+        {% #card_image_with_description image_url=facts.other.sri_lowcam.image_url image_link=image_link heading=sri %}
             {% #paragraph_text %}
                 {{ facts.other.sri_lowcam.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.sri_soil.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.sri_soil.image_url image_link=image_link heading=sri_soil %}
+        {% #card_image_with_description image_url=facts.other.sri_soil.image_url image_link=image_link heading=sri %}
             {% #paragraph_text %}
                 {{ facts.other.sri_soil.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.cambo_beer.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.cambo_beer.image_url image_link=image_link heading=cambo_beer %}
+        {% #card_image_with_description image_url=facts.other.cambo_beer.image_url image_link=image_link image_width="w-3/6" heading=cambo %}
             {% #paragraph_text %}
                 {{ facts.other.cambo_beer.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.other.cambo_houses.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.other.cambo_houses.image_url image_link=image_link heading=cambo_houses %}
+        {% #card_image_with_description image_url=facts.other.cambo_houses.image_url image_link=image_link image_width="w-4/6" heading=cambo %}
             {% #paragraph_text %}
                 {{ facts.other.cambo_houses.answer }}
             {% /paragraph_text %}

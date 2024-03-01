@@ -1,5 +1,4 @@
-
-<div class="md:grid md:grid-cols-2 gap-4">
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
     <div class="grid grid-cols-2">
         <div class="">
             {% if image_1_link %}<a href="{{ image_1_link }}">{% endif %}
@@ -11,9 +10,9 @@
                 <img class="object-cover h-60 rounded-r-md mr-auto {{ image_2_width|default:'w-full' }} {{ image_2_css }}" src="{{ image_2_url }}" alt="{{ heading }}" loading="lazy">
             {% if image_2_link %}</a>{% endif %}
         </div>
-    </div>    
-    <div class="pt-4 pb-6">
+    </div>
+    <div class="sm:col-span-2 lg:col-span-4 pt-4 pb-2">
         {% if heading %}{% #heading_secondary mt="-mt-1" %}{{ heading }}{% /heading_secondary %}{% endif %}
-        <div class="-mt-2">{{ children }}</div>
+        {{ children }}
     </div>
 </div>

@@ -354,6 +354,6 @@ def south_east_asia(request):
         'facts': facts,
         'html_meta_title': "Country-guessing South-East Asia",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the South-East Asian countries Thailand, Malaysia, Indonesia, Philippines, Cambodia, and Sri Lanka.",
-        #'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_east_asia.png'),
     }
     return render(request, 'articles/south_east_asia.html', context)
