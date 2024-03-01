@@ -47,14 +47,14 @@
 
     {% #card_image_with_description_container %}
         {% url 'cms:fact_detail' facts.poles.thai_holes.uuid as image_link %}
-        {% #card_image_with_description image_url=facts.poles.thai_holes.image_url image_link=image_link heading=thai_holes %}
+        {% #card_image_with_description image_url=facts.poles.thai_holes.image_url image_link=image_link heading=thai %}
             {% #paragraph_text %}
                 {{ facts.poles.thai_holes.answer }}
             {% /paragraph_text %}
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.poles.thai_base.uuid as image_link %}
-        {% #card_image_with_description image_css="" image_url=facts.poles.thai_base.image_url image_link=image_link heading=thai_base %}
+        {% #card_image_with_description image_css="" image_url=facts.poles.thai_base.image_url image_link=image_link heading=thai %}
             {% #paragraph_text %}
                 {{ facts.poles.thai_base.answer }}
             {% /paragraph_text %}
