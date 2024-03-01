@@ -39,7 +39,7 @@
         {% /card_image_with_description %}
 
         {% url 'cms:fact_detail' facts.isfo.is_bollard.uuid as image_link %}
-        {% #card_image_with_description image_css="w-3/6 object-top mx-auto md:ml-auto" image_url=facts.isfo.is_bollard.image_url image_link=image_link heading="🇮🇸 Iceland bollards" %}
+        {% #card_image_with_description image_width="w-3/6" image_url=facts.isfo.is_bollard.image_url image_link=image_link heading="🇮🇸 Iceland bollards" %}
             {% #paragraph_text %}
                 {{ facts.isfo.is_bollard.answer }}
             {% /paragraph_text %}
