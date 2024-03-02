@@ -1565,6 +1565,16 @@ video {
   color: rgb(34 197 94 / var(--tw-text-opacity));
 }
 
+.text-sky-800 {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
+}
+
+.text-sky-900 {
+  --tw-text-opacity: 1;
+  color: rgb(12 74 110 / var(--tw-text-opacity));
+}
+
 .underline {
   text-decoration-line: underline;
 }
@@ -1652,6 +1662,11 @@ video {
 .hover\:text-sky-700:hover {
   --tw-text-opacity: 1;
   color: rgb(3 105 161 / var(--tw-text-opacity));
+}
+
+.hover\:text-sky-800:hover {
+  --tw-text-opacity: 1;
+  color: rgb(7 89 133 / var(--tw-text-opacity));
 }
 
 .focus\:outline-none:focus {
