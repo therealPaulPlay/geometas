@@ -1,27 +1,20 @@
 {% extends "template_content_with_extra.html" %}
 {% load static %}
 
+{% block title_main_override %}{% endblock %}
 {% block title_main %}📍 Welcome&nbsp;&nbsp;<span class="text-xs font-thin text-slate-300">{{total_fact_count}} metas available</span>{% endblock %}
 
 {% block content_top_extra %}
-    <div class="text-slate-700 font-light text-sm">
-        Become a Geoguessr champion with Geometas: find new Geoguessr metas from Google Streetview around the world and test your knowledge with quizzes.
-    </div>
-
-    <div class="mt-4 sm:flex gap-x-4">
-        {% if quiz_session %}
-            {% url 'quiz:start_quiz' quiz_session.quiz.uuid as button_url %}
-            {% #button_primary url=button_url %}
-                <div class="text-xs font-light">Continue your in-progress quiz</div>
-                <div class="font-bold">{{quiz_session.quiz.name}}</div>
-            {% /button_primary %}
-        {% endif %}
-        
-        {% url 'quiz:start_quiz' random_quiz_uuid as button_url %}
-        {% #button_accent url=button_url %}
-            <div class="text-xs font-light">Learn some Geometas</div>
-            <div class="font-bold">Start new random quiz</div>
-        {% /button_accent %}
+    <div class="text-slate-600 font-base tracking-tighter leading-tight sm:space-y-2">
+        <p>Welcome to Geometas - your resource to become a Geoguessr champion!<p>
+        <ul class="hidden sm:block py-2 list-disc-none pl-8 space-y-1">
+            <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world and its countries</li>
+            <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your country- and region-guessing skills</li>
+            <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Practice your knowledge with meta quizzes</li>
+            <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;Free to use - no subscriptions or fees</li>
+        </ul>
+            
+        <p class="hidden sm:block">You can {% url 'login' as link_url %}{% #link_primary url=link_url %}create an account{% /link_primary %} to save your quiz progress and analyze your success over time. </p>
     </div>
     
 {% endblock %}
@@ -49,8 +42,12 @@
             
             </div>
 
+            <div class="mt-10">
+                {% include 'components/random_quiz_teaser.html' %}
+            </div>
 
-            {% #heading_primary mt="mt-16" %}Country-guessing Key Regions{% /heading_primary %}
+
+            {% #heading_primary mt="mt-12" %}Country-guessing Key Regions{% /heading_primary %}
 
             <div class="mt-4 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
 

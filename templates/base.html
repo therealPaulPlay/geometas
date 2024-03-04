@@ -84,11 +84,13 @@
                 </div>
             </nav>
 
-            <header class="py-5 sm:py-8">
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <h1 class="text-3xl font-bold tracking-tight text-white">{% block title_main %}Placeholder{% endblock %}</h1>
-                </div>
-            </header>
+            {% block title_main_override %}
+                <header class="py-5 sm:py-8">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <h1 class="text-3xl font-bold tracking-tight text-white">{% block title_main %}Placeholder{% endblock %}</h1>
+                    </div>
+                </header>
+            {% endblock %}
         </div>
 
     {% block main %}{% endblock %}
