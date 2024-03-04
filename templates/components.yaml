@@ -15,3 +15,5 @@ components:
   card_2_images_with_description: "components/card_2_images_with_description.html"
   card_2_images_with_description_portrait: "components/card_2_images_with_description_portrait.html"
   card_image_with_description_container: "components/card_image_with_description_container.html"
+
+  content_card_home: "components/content_card_home.html"

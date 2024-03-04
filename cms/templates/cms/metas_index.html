@@ -1,4 +1,5 @@
 {% extends "template_content_with_extra.html" %}
+{% load static %}
 
 {% block title_main %}📍 Welcome&nbsp;&nbsp;<span class="text-xs font-thin text-slate-300">{{total_fact_count}} metas available</span>{% endblock %}
 
@@ -30,49 +31,59 @@
     <div class="">
 
         <div class="">
-            <h2 class="text-2xl font-bold text-slate-900">Learn Geoguessr</h2>
-            <ul class="ml-6 mt-2 list-disc list-outside sm:grid sm:grid-cols-2">
-                <li class="mt-1">
-                    {% url 'articles:country_coverage' as link_url %}
-                    {% #link_primary url=link_url %}Country Coverage{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:driving_direction' as link_url %}
-                    {% #link_primary url=link_url %}Driving Direction{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:world_map_common_locations' as link_url %}
-                    {% #link_primary url=link_url %}Common World Map locations{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:eastern_europe' as link_url %}
-                    {% #link_primary url=link_url %}Country-guessing Eastern Europe{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:south_african_countries' as link_url %}
-                    {% #link_primary url=link_url %}Country-guessing Southern Africa{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:latin_america' as link_url %}
-                    {% #link_primary url=link_url %}Country-guessing Latin America{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:nordics' as link_url %}
-                    {% #link_primary url=link_url %}Country-guessing the Nordics{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:australia_new_zealand' as link_url %}
-                    {% #link_primary url=link_url %}Country-guessing Australia vs. New Zealand{% /link_primary %}
-                </li>
-                <li class="mt-1">
-                    {% url 'articles:south_east_asia' as link_url %}
-                    {% #link_primary url=link_url %}Country-guessing South-East Asia{% /link_primary %}
-                </li>
-            </ul>
+            {% #heading_primary mt="mt-0" %}Basic Geoguessr Tips{% /heading_primary %}
+
+            <div class="mt-4 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
+                
+                {% static 'cards/country_coverage.png' as image_url %}
+                {% url 'articles:country_coverage' as link_url %}
+                {% content_card_home heading="Country Coverage" description="Geoguessr / Google Streetview countries" image_url=image_url link_url=link_url %}
+
+                {% static 'cards/driving_direction.png' as image_url %}
+                {% url 'articles:driving_direction' as link_url %}
+                {% content_card_home heading="Driving Direction" description="Direction of traffic in all countries" image_url=image_url link_url=link_url %}
+
+                {% static 'cards/world_map_common_locations.png' as image_url %}
+                {% url 'articles:world_map_common_locations' as link_url %}
+                {% content_card_home heading="Common Locations" description="Most frequent World Map locations to know" image_url=image_url link_url=link_url %}
+            
+            </div>
+
+
+            {% #heading_primary mt="mt-16" %}Country-guessing Key Regions{% /heading_primary %}
+
+            <div class="mt-4 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
+
+                {% static 'cards/eastern_europe.png' as image_url %}
+                {% url 'articles:eastern_europe' as link_url %}
+                {% content_card_home heading="Eastern Europe" description="Hungary, Czech Republic, Slovakia, Slovenia, Romania, Bulgaria, Montenegro, North Macedonia, Albania, Croatia, Serbia, Ukraine, Russia" image_url=image_url link_url=link_url %}
+                
+                {% static 'cards/latin_america.png' as image_url %}
+                {% url 'articles:latin_america' as link_url %}
+                {% content_card_home heading="Latin America" description="Chile, Mexico, Ecuador, Peru, Bolivia, Argentina, Brazil, Uruguay" image_url=image_url link_url=link_url %}
+                
+                {% static 'cards/nordics.png' as image_url %}
+                {% url 'articles:nordics' as link_url %}
+                {% content_card_home heading="Nordics" description="Norway, Sweden, Finland, Denmark, Iceland, Faroe Islands" image_url=image_url link_url=link_url %}
+
+                {% static 'cards/australia_new_zealand.png' as image_url %}
+                {% url 'articles:australia_new_zealand' as link_url %}
+                {% content_card_home heading="Oceania" description="Australia, New Zealand" image_url=image_url link_url=link_url %}
+
+                {% static 'cards/south_africa.png' as image_url %}
+                {% url 'articles:south_african_countries' as link_url %}
+                {% content_card_home heading="South Africa" description="South Africa, Botswana, Eswatini, Lesotho" image_url=image_url link_url=link_url %}
+
+                {% static 'cards/south_east_asia.png' as image_url %}
+                {% url 'articles:south_east_asia' as link_url %}
+                {% content_card_home heading="South-East Asia" description="Thailand, Cambodia, Malaysia, Indonesia, Philippines, Sri Lanka" image_url=image_url link_url=link_url %}
+
+            </div>
+
         </div>
 
         <div class="mt-4 sm:mt-12">
-            {% #heading_primary %}Categories{% /heading_primary %}
+            {% #heading_primary mt="mt-16" %}Categories{% /heading_primary %}
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-x-6 mt-4">
                 {% for category in categories %}
                     {% url 'cms:category' category.slug as link_url %}
