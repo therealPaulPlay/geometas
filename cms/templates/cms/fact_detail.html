@@ -15,10 +15,10 @@
         </div>
         <div class="pt-7 md:py-0 md:flex-grow">
             <div class="">{{ fact.answer }}</div>
-            <div class="mt-4 text-sm font-light text-slate-500">{{fact.notes|default:''|safe|linebreaksbr}}</div>
+            <div class="mt-4 text-sm font-light text-stone-500">{{fact.notes|default:''|safe|linebreaksbr}}</div>
             <div class="mt-8 flex gap-2">
-                <span class="bg-slate-300 text-slate-600 rounded-xl px-2 py-1 tracking-wide text-xs">{{ fact.category.name }}</span>
-                <span class="bg-slate-300 text-slate-600 rounded-xl px-2 py-1 tracking-wide text-xs">{{ fact.country.flag_emoji }} {{fact.country}}</span>
+                <span class="bg-stone-300 text-stone-600 rounded-xl px-2 py-1 tracking-wide text-xs">{{ fact.category.name }}</span>
+                <span class="bg-stone-300 text-stone-600 rounded-xl px-2 py-1 tracking-wide text-xs">{{ fact.country.flag_emoji }} {{fact.country}}</span>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
                 src="https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDZJ2U4vQ0agW_byslDEWc8sKiHd5ydtiY&location={{fact.google_streetview_latlng}}"
                 allowfullscreen>
             </iframe>
-            <div id="map-overlay" class="absolute inset-0 w-100 h-100 bg-white/50 backdrop-blur-md text-slate-700 text-center pt-[20%] text-3xl font-semibold cursor-pointer">Click to enable</div>
+            <div id="map-overlay" class="absolute inset-0 w-100 h-100 bg-white/50 backdrop-blur-md text-stone-700 text-center pt-[20%] text-3xl font-semibold cursor-pointer">Click to enable</div>
         </div>
         <script>
             document.getElementById('map-overlay').addEventListener('click', function() {

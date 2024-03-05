@@ -63,17 +63,17 @@
                                 <div class="relative ml-3">
                                     {% if user.is_authenticated %}
                                         <a href="{% url 'accounts:profile' %}">
-                                            <div class="py-1.5 px-3 bg-sky-50 hover:bg-sky-100 rounded-xl flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-sky-700">
+                                            <div class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 rounded-xl flex items-center justify-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-stone-700">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                                 </svg>
-                                                <div class="text-sky-700 ml-1 font-medium text-sm">Profile</div>
+                                                <div class="text-stone-700 ml-1 font-medium text-sm">Profile</div>
                                             </div>
                                         </a>
                                     {% else %}
                                         <a href="{% url 'login' %}">
-                                            <div class="py-1.5 px-3 bg-sky-50 hover:bg-sky-100 rounded-xl flex items-center justify-center">
-                                                <div class="text-sky-700 ml-1 font-medium text-sm">Sign up for free</div>
+                                            <div class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 rounded-xl flex items-center justify-center">
+                                                <div class="text-stone-700 ml-1 font-medium text-sm">Sign up for free</div>
                                             </div>
                                         </a>
                                     {% endif %}
@@ -87,7 +87,7 @@
 
         <main class="">
             <div class="mx-auto max-w-7xl pb-12 sm:px-6 lg:px-8">
-                <div class="bg-white px-4 py-6 sm:p-8 shadow shadow-slate-300 sm:rounded-2xl">
+                <div class="bg-white px-4 py-6 sm:p-8 shadow shadow-stone-300 sm:rounded-2xl">
                     <div class="flex-grow">
                         {% block main %}{% endblock %}
                     </div>
@@ -100,7 +100,7 @@
 
 <footer class="bg-[#F9F7F5]">
     <div class="mx-auto max-w-7xl py-16 px-6 lg:px-8">
-        <div class="text-slate-500 text-center text-sm mx-auto font-light">
+        <div class="text-stone-500 text-center text-sm mx-auto font-light">
             <p class="font-medium">💙 Important Thank-You Credits</p>
             <p>The content was imported from these amazing Geoguessr resources sites:</p>
             <p><a href="https://www.plonkit.net/" target="_blanc">Plonk It</a>, <a href="https://somerandomstuff1.wordpress.com/2019/02/08/geoguessr-the-top-tips-tricks-and-techniques/" target="_blanc">The Digital Labyrinth</a></p>

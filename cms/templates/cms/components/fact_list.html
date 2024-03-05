@@ -3,7 +3,7 @@
         {% for fact in facts %}
             <div class="py-6 -mx-4 px-4 sm:-mx-8 sm:px-8">
                 <div class="md:grid md:grid-cols-2 gap-4">
-                    <div class="items-start bg-slate-100 rounded-md">
+                    <div class="items-start bg-stone-100 rounded-md">
                         <a href="{% url 'cms:fact_detail' fact.uuid %}">
                             <img src="{{ fact.image_url }}" loading="lazy" class="{% if fact.image_is_landscape %} object-cover w-full h-60 rounded-md {% else %} object-contain max-h-60 mx-auto align-top rounded-sm {% endif %}">
                         </a>
@@ -14,10 +14,10 @@
                         </div>
                         <div class="flex flex-wrap gap-x-2 gap-y-1">
                             {% if not category %}
-                                <span class="bg-slate-300 text-slate-600 rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.category.name }}</span>
+                                <span class="bg-stone-300 text-stone-600 rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.category.name }}</span>
                             {% endif %}
                             {% if not country %}
-                                <span class="bg-slate-300 text-slate-600 rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.country.flag_emoji }} {{fact.country}}</span>
+                                <span class="bg-stone-300 text-stone-600 rounded-xl px-2 py-1 font-medium text-xs truncate">{{ fact.country.flag_emoji }} {{fact.country}}</span>
                             {% endif %}
                         </div>
                     </div>

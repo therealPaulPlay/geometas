@@ -7,89 +7,97 @@
 
     <div class="">
 
-        <div class="sm:-mt-4 pb-12 text-slate-600 font-base tracking-tighter leading-tight sm:space-y-2">
-            <p>Geometas helps you become a Geoguessr champion!<p>
-            <ul class="pt-6 list-disc-none pl-4 sm:pl-8 space-y-1">
-                <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world and its countries</li>
-                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your country- and region-guessing skills</li>
-                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Practice your knowledge with meta quizzes</li>
-                <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;Free to use - no subscriptions or fees</li>
+        <div class="sm:-mt-4 pb-12 text-stone-700 font-base tracking-tighter leading-tight sm:space-y-2">
+            <p class="text-xl font-semibold tracking-tight text-center sm:text-left">Geometas helps you become a Geoguessr champion<p>
+            <ul class="pt-4 list-disc-none pl-4 sm:pl-8 space-y-2">
+                <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world</li>
+                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your plonking skills</li>
+                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Practice with meta quizzes</li>
+                <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;100% free to use</li>
             </ul>
                 
-            <div class="pt-8 sm:pt-6 sm:flex space-x-4 space-y-4">
+            <div class="pt-8 sm:pt-6 sm:flex text-center sm:text-left space-x-4 space-y-4">
                 {% url 'login' as link_url %}
-                {% #button_secondary url=link_url %}Sign up free to track your quiz progress{% /button_secondary %}
+                {% #button_secondary url=link_url %}Sign up free to track your progress{% /button_secondary %}
 
                 <div class="my-auto text-center sm:text-left">
-                    {% url 'login' as link_url %}
+                    {% url 'quiz:start_quiz' random_quiz_uuid as link_url %}
                     {% #link_primary url=link_url %}Or try a meta quiz{% /link_primary %}
                 </div>
             </div>
         </div>
 
-        <div class="">
-            {% #heading_primary mt="mt-4" %}Basic Geoguessr Tips{% /heading_primary %}
+        {% include 'components/hr-wavy.html' %}
 
-            <div class="mt-4 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="">
+            {% #heading_primary mt="mt-10" %}Basic Geoguessr Tips{% /heading_primary %}
+
+            <div class="mt-4 mb-14 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
                 
                 {% static 'cards/country_coverage.jpeg' as image_url %}
                 {% url 'articles:country_coverage' as link_url %}
-                {% content_card_home heading="Country Coverage" description="Geoguessr / Google Streetview countries" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Country Coverage" image_url=image_url link_url=link_url %}
 
                 {% static 'cards/driving_direction.jpeg' as image_url %}
                 {% url 'articles:driving_direction' as link_url %}
-                {% content_card_home heading="Driving Direction" description="Direction of traffic in all countries" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Driving Direction" image_url=image_url link_url=link_url %}
 
                 {% static 'cards/world_map_common_locations.jpeg' as image_url %}
                 {% url 'articles:world_map_common_locations' as link_url %}
-                {% content_card_home heading="Common Locations" description="Most frequent World Map locations to know" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Common Locations" image_url=image_url link_url=link_url %}
             
             </div>
+
+            {% include 'components/hr-wavy.html' %}
 
 
             {% #heading_primary mt="mt-12" %}Country-guessing Key Regions{% /heading_primary %}
 
-            <div class="mt-4 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="mt-4 mb-14 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
 
                 {% static 'cards/eastern_europe.jpeg' as image_url %}
                 {% url 'articles:eastern_europe' as link_url %}
-                {% content_card_home heading="Eastern Europe" description="Hungary, Czech Republic, Slovakia, Slovenia, Romania, Bulgaria, Montenegro, North Macedonia, Albania, Croatia, Serbia, Ukraine, Russia" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Eastern Europe" image_url=image_url link_url=link_url %}
                 
                 {% static 'cards/latin_america.jpeg' as image_url %}
                 {% url 'articles:latin_america' as link_url %}
-                {% content_card_home heading="Latin America" description="Chile, Mexico, Ecuador, Peru, Bolivia, Argentina, Brazil, Uruguay" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Latin America" image_url=image_url link_url=link_url %}
                 
                 {% static 'cards/nordics.jpeg' as image_url %}
                 {% url 'articles:nordics' as link_url %}
-                {% content_card_home heading="Nordics" description="Norway, Sweden, Finland, Denmark, Iceland, Faroe Islands" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Nordics" image_url=image_url link_url=link_url %}
 
                 {% static 'cards/australia_new_zealand.jpeg' as image_url %}
                 {% url 'articles:australia_new_zealand' as link_url %}
-                {% content_card_home heading="Oceania" description="Australia, New Zealand" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="Oceania" image_url=image_url link_url=link_url %}
 
                 {% static 'cards/south_africa.jpeg' as image_url %}
                 {% url 'articles:south_african_countries' as link_url %}
-                {% content_card_home heading="South Africa" description="South Africa, Botswana, Eswatini, Lesotho" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="South Africa" image_url=image_url link_url=link_url %}
 
                 {% static 'cards/south_east_asia.jpeg' as image_url %}
                 {% url 'articles:south_east_asia' as link_url %}
-                {% content_card_home heading="South-East Asia" description="Thailand, Cambodia, Malaysia, Indonesia, Philippines, Sri Lanka" image_url=image_url link_url=link_url %}
+                {% content_card_home heading="South-East Asia" image_url=image_url link_url=link_url %}
 
             </div>
 
         </div>
 
-        <div class="mt-4 sm:mt-12">
+        {% include 'components/hr-wavy.html' %}
+
+        <div class="mt-4 mb-14 sm:mt-12">
             {% #heading_primary mt="mt-16" %}Categories{% /heading_primary %}
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-x-6 mt-4">
                 {% for category in categories %}
                     {% url 'cms:category' category.slug as link_url %}
                     {% #link_primary url=link_url %}
-                        {{category.name}}<span class="text-slate-400 text-sm"> ({{ category.quiz.num_facts }})</span>
+                        {{category.name}}<span class="text-stone-400 text-sm"> ({{ category.quiz.num_facts }})</span>
                     {% /link_primary %}
                 {% endfor %}
             </div>
         </div> 
+
+        {% include 'components/hr-wavy.html' %}
         
         <div class="mt-4 sm:mt-12">
             {% include 'cms/components/country_quiz_list.html' %}

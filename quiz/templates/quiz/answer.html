@@ -6,25 +6,25 @@
 
     {% include 'quiz/components/progress_bar.html' %}
 
-    <h2 class="text-2xl mt-8 sm:mt-10 mb-8 text-slate-900">    
+    <h2 class="text-2xl mt-8 sm:mt-10 mb-8 text-stone-900">    
         <span class="text-nowrap">{{ fact.country.flag_emoji }} {{fact.country}}</span>
     </h2>
 
-    <p class="text-base mb-4 text-slate-900">{{fact.answer|safe|linebreaksbr}}</p>
+    <p class="text-base mb-4 text-stone-900">{{fact.answer|safe|linebreaksbr}}</p>
     
-    <p class="text-sm font-light text-slate-700">{{fact.notes|default:''|safe|linebreaksbr}}</p>
+    <p class="text-sm font-light text-stone-700">{{fact.notes|default:''|safe|linebreaksbr}}</p>
 
     {% include 'quiz/components/quiz_image.html' %}
 
     <div class="max-w-full flex pt-6 fixed bottom-0 inset-x-0 sm:relative sm:bottom-auto">
         <a 
-            class="font-semibold h-16 px-6 w-1/2 sm:mr-4 sm:rounded-lg flex items-center justify-center bg-green-500 border border-t-0 border-b-0 border-l-0 border-white rounded-tr-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
+            class="font-semibold h-16 px-6 w-1/2 sm:mr-4 sm:rounded-lg flex items-center justify-center bg-green-500 border border-t-0 border-b-0 border-l-0 border-white rounded-tr-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-stone-50 text-white " 
             href="{% url 'quiz:rate' quiz_session.uuid fact.uuid %}?r=correct"
             id="eKeyShortcut">
             Easy<span class="hidden sm:block pl-2 text-green-100"> (e)</span>
         </a>
         <a 
-            class="font-semibold h-16 px-6 w-1/2 sm:rounded-lg flex items-center justify-center bg-red-500 rounded-tl-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-50 text-white " 
+            class="font-semibold h-16 px-6 w-1/2 sm:rounded-lg flex items-center justify-center bg-red-500 rounded-tl-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-stone-50 text-white " 
             href="{% url 'quiz:rate' quiz_session.uuid fact.uuid %}?r=false"
             id="dKeyShortcut">
             Didn't know<span class="hidden sm:block pl-2 text-red-100"> (d)</span>
