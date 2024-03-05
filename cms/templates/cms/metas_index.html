@@ -6,7 +6,7 @@
 
 {% block content_top_extra %}
     <div class="text-slate-600 font-base tracking-tighter leading-tight sm:space-y-2">
-        <p>Welcome to Geometas - your resource to become a Geoguessr champion!<p>
+        <p>Geometas helps you become a Geoguessr champion!<p>
         <ul class="hidden sm:block py-2 list-disc-none pl-8 space-y-1">
             <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world and its countries</li>
             <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your country- and region-guessing skills</li>
@@ -14,7 +14,10 @@
             <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;Free to use - no subscriptions or fees</li>
         </ul>
             
-        <p class="hidden sm:block">You can {% url 'login' as link_url %}{% #link_primary url=link_url %}create an account{% /link_primary %} to save your quiz progress and analyze your success over time. </p>
+        <div class="pt-4">
+            {% url 'login' as link_url %}
+            {% #button_secondary url=link_url %}Sign up free to track your quiz progress{% /button_secondary %}
+        </div>
     </div>
     
 {% endblock %}
