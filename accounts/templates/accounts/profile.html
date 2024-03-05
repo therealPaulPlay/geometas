@@ -6,11 +6,11 @@
 <div class="max-w-2xl">
     <div class="">
         
-        <h2 class="text-2xl font-bold text-slate-900">Account</h2>
+        {% #heading_primary mt="mt-0" %}Account{% /heading_primary %}
         <p class="mt-2 text-slate-800">You're logged in as: {{ user.username }}</p>
 
         <div class="mt-8 sm:mt-16">
-            <h2 class="text-2xl font-bold text-slate-900">Statistics</h2>
+            {% #heading_primary mt="mt-0" %}Statistics{% /heading_primary %}
 
             <div class="">
                 <table class="table-auto bg-slate-100 my-2 border">
@@ -53,7 +53,7 @@
         </div>
 
         <div class="mt-8 sm:mt-16">
-            <h2 class="text-2xl mb-2 font-bold text-slate-900">Actions</h2>
+            {% #heading_primary mt="mt-0" %}Actions{% /heading_primary %}
             <a href="{% url 'logout' %}" class="text-red-500">Logout</a>
         </div>
 

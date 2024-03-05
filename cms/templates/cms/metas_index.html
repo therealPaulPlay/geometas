@@ -1,33 +1,34 @@
-{% extends "template_content_with_extra.html" %}
+{% extends "template_content.html" %}
 {% load static %}
 
 {% block title_main_override %}{% endblock %}
-{% block title_main %}📍 Welcome&nbsp;&nbsp;<span class="text-xs font-thin text-slate-300">{{total_fact_count}} metas available</span>{% endblock %}
-
-{% block content_top_extra %}
-    <div class="text-slate-600 font-base tracking-tighter leading-tight sm:space-y-2">
-        <p>Geometas helps you become a Geoguessr champion!<p>
-        <ul class="hidden sm:block py-2 list-disc-none pl-8 space-y-1">
-            <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world and its countries</li>
-            <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your country- and region-guessing skills</li>
-            <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Practice your knowledge with meta quizzes</li>
-            <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;Free to use - no subscriptions or fees</li>
-        </ul>
-            
-        <div class="pt-4">
-            {% url 'login' as link_url %}
-            {% #button_secondary url=link_url %}Sign up free to track your quiz progress{% /button_secondary %}
-        </div>
-    </div>
-    
-{% endblock %}
 
 {% block content %}
 
     <div class="">
 
+        <div class="sm:-mt-4 pb-12 text-slate-600 font-base tracking-tighter leading-tight sm:space-y-2">
+            <p>Geometas helps you become a Geoguessr champion!<p>
+            <ul class="pt-6 list-disc-none pl-4 sm:pl-8 space-y-1">
+                <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world and its countries</li>
+                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your country- and region-guessing skills</li>
+                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Practice your knowledge with meta quizzes</li>
+                <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;Free to use - no subscriptions or fees</li>
+            </ul>
+                
+            <div class="pt-8 sm:pt-6 sm:flex space-x-4 space-y-4">
+                {% url 'login' as link_url %}
+                {% #button_secondary url=link_url %}Sign up free to track your quiz progress{% /button_secondary %}
+
+                <div class="my-auto text-center sm:text-left">
+                    {% url 'login' as link_url %}
+                    {% #link_primary url=link_url %}Or try a meta quiz{% /link_primary %}
+                </div>
+            </div>
+        </div>
+
         <div class="">
-            {% #heading_primary mt="mt-0" %}Basic Geoguessr Tips{% /heading_primary %}
+            {% #heading_primary mt="mt-4" %}Basic Geoguessr Tips{% /heading_primary %}
 
             <div class="mt-4 grid grid-cols-1 sm:auto-rows-auto sm:grid-cols-2 md:grid-cols-3 gap-4">
                 
@@ -43,10 +44,6 @@
                 {% url 'articles:world_map_common_locations' as link_url %}
                 {% content_card_home heading="Common Locations" description="Most frequent World Map locations to know" image_url=image_url link_url=link_url %}
             
-            </div>
-
-            <div class="mt-10">
-                {% include 'components/random_quiz_teaser.html' %}
             </div>
 
 

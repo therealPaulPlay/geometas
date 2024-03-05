@@ -44,10 +44,10 @@
 
 <body class="h-full text-base">
     <div class="bg-[#F9F7F5] min-h-full">
-        <div class=" pb-32">
-            <nav class="">
+        <div class="">
+            <nav class="py-1">
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div class="border-b border-sky-300/10">
+                    <div class="">
                         <div class="flex h-16 items-center justify-between px-4 sm:px-0">
                             <div class="flex space-x-6 sm:space-x-8">
                                 <a class="flex" href="{% url 'metas_index' %}">
@@ -83,17 +83,18 @@
                     </div>
                 </div>
             </nav>
-
-            {% block title_main_override %}
-                <header class="py-5 sm:py-6">
-                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-3xl font-bold text-sky-900">{% block title_main %}Placeholder{% endblock %}</h1>
-                    </div>
-                </header>
-            {% endblock %}
         </div>
 
-        {% block main %}{% endblock %}
+        <main class="">
+            <div class="mx-auto max-w-7xl pb-12 sm:px-6 lg:px-8">
+                <div class="bg-white px-4 py-6 sm:p-8 shadow shadow-slate-300 sm:rounded-2xl">
+                    <div class="flex-grow">
+                        {% block main %}{% endblock %}
+                    </div>
+                </div>
+            </div>
+        </main>
+
     </div>
 </body>
 
