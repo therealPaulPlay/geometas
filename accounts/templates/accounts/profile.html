@@ -6,46 +6,46 @@
 <div class="max-w-2xl">
     <div class="">
         
-        <h2 class="text-2xl font-bold text-slate-900">Account</h2>
-        <p class="mt-2 text-slate-800">You're logged in as: {{ user.username }}</p>
+        {% #heading_primary mt="mt-0" %}Account{% /heading_primary %}
+        <p class="mt-2 text-stone-800">You're logged in as: {{ user.username }}</p>
 
         <div class="mt-8 sm:mt-16">
-            <h2 class="text-2xl font-bold text-slate-900">Statistics</h2>
+            {% #heading_primary mt="mt-0" %}Statistics{% /heading_primary %}
 
             <div class="">
-                <table class="table-auto bg-slate-100 my-2 border">
+                <table class="table-auto bg-stone-100 my-2 border">
                     <thead>
                         <tr>
-                            <th class="border-b font-medium py-2 px-2 sm:px-10 text-slate-600 text-right"></th>
-                            <th class="border-b font-medium py-2 px-2 sm:px-10 text-slate-600 text-right">Count</th>
-                            <th class="border-b font-medium py-2 px-2 sm:px-10 text-slate-600 text-right">% of all</th>
+                            <th class="border-b font-medium py-2 px-2 sm:px-10 text-stone-600 text-right"></th>
+                            <th class="border-b font-medium py-2 px-2 sm:px-10 text-stone-600 text-right">Count</th>
+                            <th class="border-b font-medium py-2 px-2 sm:px-10 text-stone-600 text-right">% of all</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr class="bg-white">
-                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-slate-800 font-medium">New / not reviewed</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_new }}</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_new_pct }}%</td>
+                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-stone-800 font-medium">New / not reviewed</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_new }}</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_new_pct }}%</td>
                         </tr>
                         <tr class="bg-white">
-                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-slate-800 font-medium">Marked wrong</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_box_1 }}</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_box_1_pct }}%</td>
+                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-stone-800 font-medium">Marked wrong</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_box_1 }}</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_box_1_pct }}%</td>
                         </tr>
                         <tr class="bg-white">
-                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-slate-800 font-medium">Marked correct once</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_box_2 }}</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_box_2_pct }}%</td>
+                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-stone-800 font-medium">Marked correct once</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_box_2 }}</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_box_2_pct }}%</td>
                         </tr>
                         <tr class="bg-white">
-                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-slate-800 font-medium">Marked correct twice</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_box_3 }}</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right">{{ user_facts_box_3_pct }}%</td>
+                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-stone-800 font-medium">Marked correct twice</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_box_3 }}</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right">{{ user_facts_box_3_pct }}%</td>
                         </tr>
                         <tr>
-                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-slate-800 font-medium">Total</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right font-medium">{{ total_facts }}</td>
-                            <td class="border-b py-2 px-2 sm:px-10 text-slate-800 text-right font-medium">100%</td>
+                            <td class="border-b py-2 px-2 sm:pl-2 sm:pr-10 text-stone-800 font-medium">Total</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right font-medium">{{ total_facts }}</td>
+                            <td class="border-b py-2 px-2 sm:px-10 text-stone-800 text-right font-medium">100%</td>
                         </tr>
                     </tbody>
                 </table>
@@ -53,7 +53,7 @@
         </div>
 
         <div class="mt-8 sm:mt-16">
-            <h2 class="text-2xl mb-2 font-bold text-slate-900">Actions</h2>
+            {% #heading_primary mt="mt-0" %}Actions{% /heading_primary %}
             <a href="{% url 'logout' %}" class="text-red-500">Logout</a>
         </div>
 

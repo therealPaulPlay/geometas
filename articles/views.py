@@ -65,7 +65,7 @@ def eastern_europe(request):
         'warning_signs': warning_sign,
         'directional_signs': directional_signs,
         'uniques': uniques,
-        'html_meta_title': "Eastern Europe in Geoguessr",
+        'html_meta_title': "Country-guessing Eastern Europe",
         'html_meta_description': "Eastern Europe is a region in Geoguessr. Learn the countries in Eastern Europe to become a Geoguessr champion.",
         'html_meta_image_url': request.build_absolute_uri('/static/seo/eastern_europe.png'),
     }

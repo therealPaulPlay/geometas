@@ -21,9 +21,9 @@
               </div>
         {% endif %}
 
-        <div class="py-4">
-            {% #heading_primary %}
-                You mastered {{ correct_fact_count }} of {{ total_fact_count }} metas ({{correct_percentage|floatformat:"0"}}%)
+        <div class="">
+            {% #heading_primary mt="mt-2" %}
+                {{ correct_fact_count }} of {{ total_fact_count }} correct metas <span class="text-base font-medium text-stone-500">({{correct_percentage|floatformat:"0"}}%)</span>
             {% /heading_primary %}
         </div>
 

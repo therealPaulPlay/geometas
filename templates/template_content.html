@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <main class="-mt-32">
-        <div class="mx-auto max-w-7xl pb-12 sm:px-6 lg:px-8">
-            <div class="bg-white px-4 py-6 sm:p-8 sm:shadow sm:shadow-slate-300 sm:rounded-lg">
-                <div class="flex-grow">
-                    {% block content %}{% endblock %}
-                </div>
-            </div>
-        </div>
-    </main>
+    
+    <div class="">
+        {% block title_main_override %}
+            <h1 class="text-3xl font-bold text-stone-800">
+                {% block title_main %}Placeholder{% endblock %}
+            </h1>
+        {% endblock %}
+    </div>
+    <div class="pt-2 sm:pt-6">
+        {% block content %}{% endblock %}
+    </div>
+                
 {% endblock %}

@@ -5,6 +5,7 @@ components:
 
   button_accent: "components/button_primary_green.html"
   button_primary: "components/button_primary_blue.html"
+  button_secondary: "components/button_secondary_blue.html"
 
   paragraph_text: "components/paragraph_text.html"
   text_italic: "components/text_italic.html"

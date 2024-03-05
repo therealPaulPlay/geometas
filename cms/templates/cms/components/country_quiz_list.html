@@ -9,7 +9,7 @@
             <div class="mb-2">
                 <a href="{% url 'cms:region' region.grouper.slug %}" class="text-lg font-semibold text-sky-700 hover:text-sky-800">
                     <span class="text-xl font-bold mb-2 mt-4">{{ region.grouper.name }}</span>
-                    <span class="text-slate-400 font-base text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
+                    <span class="text-stone-400 font-base text-sm"> ({{ region.grouper.quiz.num_facts }})</span>
                 </a>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-1 gap-x-2">
@@ -17,8 +17,8 @@
                     <div class="mb-1">
                         {% url 'cms:country' country.slug as link_url %}
                         {% #link_primary url=link_url %}
-                            <p class="block sm:hidden">{{ country.flag_emoji }} {{ country.name|truncatechars:13 }}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span></p>
-                            <p class="hidden sm:block">{{ country.flag_emoji }} {{ country.name }}<span class="text-slate-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span></p>
+                            <p class="block sm:hidden">{{ country.flag_emoji }} {{ country.name|truncatechars:13 }}<span class="text-stone-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span></p>
+                            <p class="hidden sm:block">{{ country.flag_emoji }} {{ country.name }}<span class="text-stone-400 text-sm"> ({{ country.quiz.num_facts|default:"0" }})</span></p>
                         {% /link_primary %}
                     </div>
                 {% endfor %}
