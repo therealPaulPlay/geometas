@@ -1,0 +1,202 @@
+{% extends "template_content_with_extra.html" %}
+{% load static %} 
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <div class="-mx-4 -mt-6 sm:-mt-8 sm:-mx-8 sm:rounded-t-lg">    
+        <img src="{% static 'seo/baltics.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% fragment as lit %}{% country name="Lithuania" %}{% endfragment %}
+    {% fragment as lat %}{% country name="Latvia" %}{% endfragment %}
+    {% fragment as est %}{% country name="Estonia" %}{% endfragment %}
+
+
+    {% #paragraph_text %}
+        The Baltics in Europe, consisting of {{ lit }}, {{ lat }} and {{ est }}, come up quite often on Geoguessr and are hence important to recognize. There are a few easy metas that will help you quickly identify the country you are in.
+    {% /paragraph_text %}
+    
+
+    {% #heading_primary %}Warning & speed signs{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.warning_signs.lit.uuid as image_link %}
+        {% #card_image_with_description image_width="w-34" image_url=facts.warning_signs.lit.image_url image_link=image_link heading=lit %}
+            {% #paragraph_text %}
+                {{ facts.warning_signs.lit.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.warning_signs.lat.uuid as image_link %}
+        {% #card_image_with_description image_width="w-34" image_url=facts.warning_signs.lat.image_url image_link=image_link heading=lat %}
+            {% #paragraph_text %}
+                {{ facts.warning_signs.lat.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.warning_signs.est.uuid as image_link %}
+        {% #card_image_with_description image_width="w-34" image_url=facts.warning_signs.est.image_url image_link=image_link heading=est %}
+            {% #paragraph_text %}
+                {{ facts.warning_signs.est.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+    {% #heading_primary %}Bollards{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.bollards.lit.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.lit.image_url image_link=image_link heading=lit %}
+            {% #paragraph_text %}
+                {{ facts.bollards.lit.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+
+        {% url 'cms:fact_detail' facts.bollards.lat.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.lat.image_url image_link=image_link heading=lat %}
+            {% #paragraph_text %}
+                {{ facts.bollards.lat.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+
+        {% url 'cms:fact_detail' facts.bollards.est.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.bollards.est.image_url image_link=image_link heading=est %}
+            {% #paragraph_text %}
+                {{ facts.bollards.est.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Kilometer milestone signs{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.milestones.lit.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.milestones.lit.image_url image_link=image_link heading=lit %}
+            {% #paragraph_text %}
+                {{ facts.milestones.lit.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+
+        {% url 'cms:fact_detail' facts.milestones.lat.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.milestones.lat.image_url image_link=image_link heading=lat %}
+            {% #paragraph_text %}
+                {{ facts.milestones.lat.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+
+        {% url 'cms:fact_detail' facts.milestones.est.uuid as image_link %}
+        {% #card_image_with_description_portrait image_url=facts.milestones.est.image_url image_link=image_link heading=est %}
+            {% #paragraph_text %}
+                {{ facts.milestones.est.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description_portrait %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Pedestrian crossing sign{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.ped_sign.lit.uuid as image_link %}
+        {% #card_image_with_description image_width="w-34" image_url=facts.ped_sign.lit.image_url image_link=image_link heading=lit %}
+            {% #paragraph_text %}
+                {{ facts.ped_sign.lit.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.ped_sign.lat.uuid as image_link %}
+        {% #card_image_with_description image_width="w-34" image_url=facts.ped_sign.lat.image_url image_link=image_link heading=lat %}
+            {% #paragraph_text %}
+                {{ facts.ped_sign.lat.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.ped_sign.est.uuid as image_link %}
+        {% #card_image_with_description image_width="w-34" image_url=facts.ped_sign.est.image_url image_link=image_link heading=est %}
+            {% #paragraph_text %}
+                {{ facts.ped_sign.est.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Guardrail reflectors{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.guardrails.lit.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.guardrails.lit.image_url image_link=image_link heading=lit %}
+            {% #paragraph_text %}
+                {{ facts.guardrails.lit.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.guardrails.lat.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.guardrails.lat.image_url image_link=image_link heading=lat %}
+            {% #paragraph_text %}
+                {{ facts.guardrails.lat.answer }}
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% #paragraph_text %}
+            {{est}} doesn't use any guardrail reflectors. Note that {{lat}} and {{lit}} don't always use reflectors, so the lack of reflectors is not a reliable indicator.
+        {% /paragraph_text %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Language{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.language.lit.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.language.lit.image_url image_link=image_link heading="🇱🇹 Lithuanian & 🇱🇻 Latvian" %}
+            {% #paragraph_text %}
+                Lithuanian (this one) and Latvian are Baltic languages. They look very similar and have special characters such as š, ž, and č.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.language.est.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.language.est.image_url image_link=image_link heading="🇪🇪 Estonian" %}
+            {% #paragraph_text %}
+                Estonian is similar to Finnish. Compared to the Baltic languages, the Õ and Ä characters are unique. 
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Unique metas{% /heading_primary %}
+    {% #card_image_with_description_container %}
+        {% url 'cms:fact_detail' facts.unique.est_chevron.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.unique.est_chevron.image_url image_link=image_link heading="White-on-red chevrons" %}
+            {% #paragraph_text %}
+                {{est}} chevrons have red background with white arrows.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.unique.est_signpost.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.unique.est_signpost.image_url image_link=image_link heading="Blue-wrapped signposts" %}
+            {% #paragraph_text %}
+                {{est}} signposts are sometimes wrapped in blue/white wrappers on the base.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.unique.est_dirtroad.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.unique.est_dirtroad.image_url image_link=image_link heading="Dirtroad guess" %}
+            {% #paragraph_text %}
+                {{est}} tends to be a good bet when you're on a dirt road in an open European-style field and you have no other clues.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.unique.lat_bus.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.unique.lat_bus.image_url image_link=image_link heading="Bus sign with 5 windows" %}
+            {% #paragraph_text %}
+                {{lat}} bus stop signs have 5 windows.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.unique.lat_arrow.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.unique.lat_arrow.image_url image_link=image_link heading="Stylized direction arrow" %}
+            {% #paragraph_text %}
+                {{lat}} direction signs have arrows that look slightly more stylzed than the straight arrows in Lithuania and Estonia.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+    {% /card_image_with_description_container %}
+    
+
+{% endblock %}

@@ -357,3 +357,50 @@ def south_east_asia(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/south_east_asia.png'),
     }
     return render(request, 'articles/south_east_asia.html', context)
+
+
+def baltics(request):
+    facts = {
+        "warning_signs": {
+            "lit": Fact.objects.get(airtable_id="rec5zPhbvY5Mh2yAn"),
+            "lat": Fact.objects.get(airtable_id="recTyC11qJ88lohSu"),
+            "est": Fact.objects.get(airtable_id="recQNrvIHsoEfovqH"),
+        },
+        "milestones": {
+            "lit": Fact.objects.get(airtable_id="recugr6KFnA9EPEBn"),
+            "lat": Fact.objects.get(airtable_id="reckIkD92egZDYScN"),
+            "est": Fact.objects.get(airtable_id="recbVseQXkyxJJf2e"),
+        },
+        "bollards": {
+            "lit": Fact.objects.get(airtable_id="recrgqpx9VaTRBWl9"),
+            "lat": Fact.objects.get(airtable_id="recvWmbEZGhlYFLhG"),
+            "est": Fact.objects.get(airtable_id="recwBRPW6PDGlrODr"),
+        },
+        "guardrails": {
+            "lit": Fact.objects.get(airtable_id="recAENipDgLmDASHj"),
+            "lat": Fact.objects.get(airtable_id="receJQgsUs1P2Rw34"),
+        },
+        "language": {
+            "lit": Fact.objects.get(airtable_id="recyrMNCWLpE6Rx7I"),
+            "est": Fact.objects.get(airtable_id="recjdofPeSFSpaURo"),
+        },
+        "ped_sign": {
+            "lit": Fact.objects.get(airtable_id="rec0wzTb5aWSJUQ7B"),
+            "lat": Fact.objects.get(airtable_id="rec998cvj0RP8xHHA"),
+            "est": Fact.objects.get(airtable_id="reccKUcwsb76tzgl6"),
+        },
+        "unique": {
+            "est_chevron": Fact.objects.get(airtable_id="recLwKnRVzz2gCqmg"),
+            "est_signpost": Fact.objects.get(airtable_id="recG9BoEIlV3InRNV"),
+            "est_dirtroad": Fact.objects.get(airtable_id="recznHA7DcWpedTyi"),
+            "lat_bus": Fact.objects.get(airtable_id="recXaYFx85dH6445i"),
+            "lat_arrow": Fact.objects.get(airtable_id="recYvkJCnqTM1HIxU"),
+        },
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing the Baltics",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to identify the European Baltic countries Estonia, Latvia, and Lithuania.",
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/baltics.png'),
+    }
+    return render(request, 'articles/baltics.html', context)

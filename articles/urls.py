@@ -12,4 +12,5 @@ urlpatterns = [
     path('nordics', views.nordics, name='nordics'),
     path('australia_new_zealand', views.australia_new_zealand, name='australia_new_zealand'),
     path('south_east_asia', views.south_east_asia, name='south_east_asia'),
+    path('baltics', views.baltics, name='baltics'),
 ]
