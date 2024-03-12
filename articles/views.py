@@ -404,3 +404,33 @@ def baltics(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/baltics.png'),
     }
     return render(request, 'articles/baltics.html', context)
+
+
+def central_africa(request):
+    facts = {
+        "car": {
+            "sen_car": Fact.objects.get(airtable_id="recMQ5yDIt29YG7ET"),
+            "sen_rack": Fact.objects.get(airtable_id="recnk9VnH2eqlKJ2W"),
+            "gha": Fact.objects.get(airtable_id="recZvIZwZGSVXjXyo"),
+            "nig_car": Fact.objects.get(airtable_id="recYn8tIEkySzhtRC"),
+            "nig_rack": Fact.objects.get(airtable_id="recjYhCu54fmchlZA"),
+            "ken_snorkel": Fact.objects.get(airtable_id="recCS5u7xRUuELSB2"),
+            "ken_new": Fact.objects.get(airtable_id="rec1geksQKUNC6PCX"),
+            "uga": Fact.objects.get(airtable_id="rec9QaFTRwnFoeOEQ"),
+            "rwa": Fact.objects.get(airtable_id="receHySKSmCssxEGY"),
+        },
+         "uniques": {
+            "nig_follow": Fact.objects.get(airtable_id="rec8VBIcnJmtzXOkJ"),
+            "rwa_street": Fact.objects.get(airtable_id="recEKx0ioG4gLtUj9"),
+            "sen_french": Fact.objects.get(airtable_id="recf4mILaTlMLyoa2"),
+            "sen_plates": Fact.objects.get(airtable_id="recCT2R0808yzCaHE"),
+            "uga_gun": Fact.objects.get(airtable_id="recDhJoQwFeqij5Q0"),
+        },
+    }
+    context = {
+        'facts': facts,
+        'html_meta_title': "Country-guessing Central Africa",
+        'html_meta_description': "Learn the most relevant Geoguessr metas to identify the African countries Ghana, Kenya, Nigeria, Rwanda, Senegal, and Uganda.",
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/central_africa.png'),
+    }
+    return render(request, 'articles/central_africa.html', context)

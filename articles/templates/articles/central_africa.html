@@ -1,0 +1,124 @@
+{% extends "template_content_with_extra.html" %}
+{% load static %} 
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <div class="-mx-4 -mt-6 sm:-mt-8 sm:-mx-8 sm:rounded-t-lg">    
+        <img src="{% static 'seo/central_africa.png' %}" alt="{{ html_meta_title }}" class="w-full sm:rounded-t-lg">
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% fragment as gha %}{% country name="Ghana" %}{% endfragment %}
+    {% fragment as ken %}{% country name="Kenya" %}{% endfragment %}
+    {% fragment as nig %}{% country name="Nigeria" %}{% endfragment %}
+    {% fragment as rwa %}{% country name="Rwanda" %}{% endfragment %}
+    {% fragment as sen %}{% country name="Senegal" %}{% endfragment %}
+    {% fragment as uga %}{% country name="Uganda" %}{% endfragment %}
+
+
+    {% #paragraph_text %}
+        The Central African countries {{ gha }}, {{ ken }}, {{ nig }}, {{ rwa }}, {{ sen }}, and {{ uga }} can be very hard to distinguish at first. Fortunately, there is one key meta: the Google Streetview car. Once you know the various cars used across these African countries, you can instantly recognize each country. 
+    {% /paragraph_text %}
+    
+
+    {% #heading_primary %}Google Streetview Car{% /heading_primary %}
+    {% #card_image_with_description_container %}
+
+        {% url 'cms:fact_detail' facts.car.sen_car.uuid as image_1_link %}
+        {% url 'cms:fact_detail' facts.car.sen_rack.uuid as image_2_link %}
+        {% #card_2_images_with_description image_1_url=facts.car.sen_car.image_url image_1_link=image_1_link image_2_url=facts.car.sen_rack.image_url image_2_link=image_2_link heading=sen %}
+            {% #paragraph_text %}In Senegal a silver or white truck cab is visible in the gen 4 coverage.{% /paragraph_text %}
+            {% #paragraph_text %}In gen 3, you can see the Google car's roof rack.{% /paragraph_text %}
+        {% /card_2_images_with_description %}
+
+        {% url 'cms:fact_detail' facts.car.gha.uuid as image_link %}
+        {% #card_image_with_description image_width="w-5/6" image_url=facts.car.gha.image_url image_link=image_link heading=gha %}
+            {% #paragraph_text %}
+            Ghana's Google car has a visible roof rack with a <span class="font-bold">black tape</span> on the right end of the front bar.
+            {% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.car.nig_car.uuid as image_1_link %}
+        {% url 'cms:fact_detail' facts.car.nig_rack.uuid as image_2_link %}
+        {% #card_2_images_with_description image_1_url=facts.car.nig_car.image_url image_1_link=image_1_link image_2_url=facts.car.nig_rack.image_url image_2_link=image_2_link heading=nig %}
+            {% #paragraph_text %}The Nigerian Google car is a large pickup truck with the cab and bed often visible. It can be white or red.{% /paragraph_text %}
+            {% #paragraph_text %}In gen 3, you can sometimes see the Google car's roof rack with its yellow-and-black rack pattern.{% /paragraph_text %}
+            {% #paragraph_text %}Nigeria also almost always has a <span class="font-bold">police follow-car</span>, see section below.{% /paragraph_text %}
+        {% /card_2_images_with_description %}
+
+        {% url 'cms:fact_detail' facts.car.ken_snorkel.uuid as image_1_link %}
+        {% url 'cms:fact_detail' facts.car.ken_new.uuid as image_2_link %}
+        {% #card_2_images_with_description image_1_url=facts.car.ken_snorkel.image_url image_1_link=image_1_link image_2_url=facts.car.ken_new.image_url image_2_link=image_2_link heading=ken %}
+            {% #paragraph_text %}Kenya has a <span class="font-bold">snorkel</span> on the front of the Google Streetview car.{% /paragraph_text %}
+            {% #paragraph_text %}New coverage has a truck that can appear with a snorkel, antenna, both, or neither.{% /paragraph_text %}
+        {% /card_2_images_with_description %}
+
+        {% url 'cms:fact_detail' facts.car.uga.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.car.uga.image_url image_link=image_link heading=uga %}
+            {% #paragraph_text %}{{ facts.car.uga.answer }}{% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.car.rwa.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.car.rwa.image_url image_link=image_link heading=rwa %}
+            {% #paragraph_text %}{{ facts.car.rwa.answer }}{% /paragraph_text %}
+        {% /card_image_with_description %}        
+        
+    {% /card_image_with_description_container %}
+
+
+    {% #heading_primary %}Driving Direction{% /heading_primary %}
+    {% #paragraph_text %}
+        It's helpful to also check the direction of traffic in case you can't easily identify the Google car meta.
+    {% /paragraph_text %}
+    <div class="grid grid-cols-2 gap-2 max-w-md">
+        <div class="space-y-1">
+            {% #heading_secondary %}<span class="text-green-500">◀️ Left-hand</span>{% /heading_secondary %}
+            <p class="">{{ ken }}</p>
+            <p class="">{{ uga }}</p>
+        </div>
+        <div class="space-y-1">
+            {% #heading_secondary %}<span class="text-blue-500">▶️ Right-hand</span>{% /heading_secondary %}
+            <p class="">{{ gha }}</p>
+            <p class="">{{ nig }}</p>
+            <p class="">{{ rwa }}</p>
+            <p class="">{{ sen }}</p>
+        </div>
+    </div>
+
+
+    {% #heading_primary %}Unique Metas{% /heading_primary %}
+    {% #card_image_with_description_container %}
+
+        {% url 'cms:fact_detail' facts.uniques.nig_follow.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.uniques.nig_follow.image_url image_link=image_link heading="Police follow car" %}
+            {% #paragraph_text %}{{nig}} has a white police follow car. It can alternatively be a black police car, or a silver, white, black, or red SUV.{% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.rwa_street.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.uniques.rwa_street.image_url image_link=image_link heading="Paved streets with black/white curb" %}
+            {% #paragraph_text %}{{rwa}} has high-quality paved roads. Black-and-white curbs are common.{% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.sen_french.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.uniques.sen_french.image_url image_link=image_link heading="French language" %}
+            {% #paragraph_text %}{{sen}}'s official language is French.{% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.sen_plates.uuid as image_link %}
+        {% #card_image_with_description image_url=facts.uniques.sen_plates.image_url image_link=image_link heading="Blue license plates" %}
+            {% #paragraph_text %}{{sen}} uses license plates with blue background.{% /paragraph_text %}
+        {% /card_image_with_description %}
+
+        {% url 'cms:fact_detail' facts.uniques.uga_gun.uuid as image_link %}
+        {% #card_image_with_description image_width="w-4/6" image_url=facts.uniques.uga_gun.image_url image_link=image_link heading="Solider with a gun" %}
+            {% #paragraph_text %}{{uga}} has a surprise spot where a soldier holding a gun is following you. Maybe not the most useful meta - but certainly unique!{% /paragraph_text %}
+        {% /card_image_with_description %}
+        
+    {% /card_image_with_description_container %}
+    
+    
+
+{% endblock %}
