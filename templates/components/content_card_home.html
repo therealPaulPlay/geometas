@@ -1,7 +1,7 @@
 <a href="{{ link_url }}" >
     <div class="h-full rounded-md border border-stone hover:shadow-md">
         <div class="">
-            <img src="{{ image_url|default:'https://placehold.co/600x400' }}" class="h-24 sm:h-28 w-full object-cover rounded-t-md">
+            <img src="{{ image_url|default:'https://placehold.co/600x400' }}" loading="lazy" class="h-24 sm:h-28 w-full object-cover rounded-t-md">
         </div>
         <div class="px-3 pt-5 pb-3 sm:px-4 sm:pt-6 sm:pb-4">
             <div class="leading-tight">{% #heading_secondary mt="mt-0" %}{{ heading|truncatechars:"17" }}{% /heading_secondary %}</div>
