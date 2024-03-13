@@ -57,9 +57,8 @@ def import_all_facts_into_db():
         db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
         db_fact.save()
         # Check if image is horizontal
-        if db_fact.image_is_landscape is None:
-            db_fact.image_is_landscape = check_if_image_is_horizontal(db_fact.image_url)
-            db_fact.save()
+        db_fact.image_is_landscape = check_if_image_is_horizontal(db_fact.image_url)
+        db_fact.save()
         log.info(f"Fact '{db_fact.airtable_id}' saved")
     
     # Check if facts have been deleted
