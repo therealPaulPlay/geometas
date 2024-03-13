@@ -8,19 +8,19 @@
     <div class="">
 
         <div class="sm:-mt-4 pb-12 text-stone-700 font-base tracking-tighter leading-tight sm:space-y-2">
-            <p class="text-xl font-semibold tracking-tight text-center sm:text-left">With Geometas you will become a Geoguessr champion<p>
+            <p class="text-xl font-semibold tracking-tight text-center sm:text-left">Geometas is the easiest way to become a Geoguessr champion<p>
             <ul class="pt-4 list-disc-none pl-4 sm:pl-8 space-y-2">
-                <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn about the world</li>
-                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Sharpen your plonking skills</li>
-                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Practice with meta quizzes</li>
+                <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn the best metas from around the world</li>
+                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Don't try to memorize 100 metas per country - focus on what matters</li>
+                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Smart practice with meta quizzes</li>
                 <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;100% free to use</li>
             </ul>
                 
-            <div class="pt-8 sm:pt-6 sm:flex text-center sm:text-left space-x-4 space-y-4">
+            <div class="pt-8 sm:pt-6 sm:flex text-center sm:text-left space-x-4">
                 {% url 'login' as link_url %}
                 {% #button_secondary url=link_url %}Sign up free to track your progress{% /button_secondary %}
 
-                <div class="my-auto text-center sm:text-left">
+                <div class="mt-4 sm:my-auto text-center sm:text-left">
                     {% url 'quiz:start_quiz' random_quiz_uuid as link_url %}
                     {% #link_primary url=link_url %}Or try a meta quiz{% /link_primary %}
                 </div>
