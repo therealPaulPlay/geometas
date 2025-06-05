@@ -37,8 +37,15 @@
     <!-- Robots tag -->
     <meta name="robots" content="index, follow">
 
-    <!-- Plausible -->
-    <script defer data-domain="geometas.com" src="https://plausible.io/js/script.js"></script>
+    <!-- GA -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6GD169L1P8"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-6GD169L1P8');
+    </script>
     
 </head>
 
@@ -97,9 +104,6 @@
 
     </div>
 
-    <!-- Simple Analytics -->
-    <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-    <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
 </body>
 
 <footer class="bg-[#F9F7F5]">
