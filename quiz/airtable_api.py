@@ -88,8 +88,8 @@ def deserialize_fact(fact_response):
 def move_image_from_airtable_to_s3(image_url, image_name):
     """ Moves an image from airtable to S3 """
     image_content = download_image_from_airtable(image_url)
-    image_content = resize_image_in_memory(image_content, 1000)
-    return upload_image_to_s3_via_boto(image_content, image_name)
+    image_content, file_type = resize_image_in_memory(image_content, 1000)
+    return upload_image_to_s3_via_boto(image_content, image_name, file_type)
 
 
 def download_image_from_airtable(image_url):
@@ -98,7 +98,7 @@ def download_image_from_airtable(image_url):
     return response.content
 
 
-def upload_image_to_s3_via_boto(image_content, image_name):
+def upload_image_to_s3_via_boto(image_content, image_name, file_type):
     """ Uploads an image to S3 via boto """
     bucket_name = settings.AWS_S3_IMAGE_STORAGE_BUCKET_NAME
     log.info("Uploading %s to S3 bucket %s" % (image_name, bucket_name))
@@ -108,9 +108,17 @@ def upload_image_to_s3_via_boto(image_content, image_name):
         aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY', settings.AWS_SECRET_ACCESS_KEY)
     )
     s3_object = s3.Object(bucket_name, image_name)
+    
+    put_kwargs = {
+        'Body': image_content,
+        'CacheControl': 'public, max-age=2592000',  # 30 days
+    }
+    if file_type:
+        # e.g. file_type == 'png' or 'jpeg'
+        put_kwargs['ContentType'] = f'image/{file_type}'
+        
     try:
-        s3_object.put(Body=image_content)
-        # log.info("S3 upload successful")
+        s3_object.put(**put_kwargs)
     except Exception as e:
         log.exception("S3 upload failed %s" % e)
         return False
@@ -118,6 +126,7 @@ def upload_image_to_s3_via_boto(image_content, image_name):
 
 
 def resize_image_in_memory(image_data, max_size):
+    img_format = None
     # Load the image from bytes
     with Image.open(io.BytesIO(image_data)) as img:
         # Get the size of the image
@@ -147,10 +156,10 @@ def resize_image_in_memory(image_data, max_size):
                 img_format = img.format if img.format else 'JPEG' 
             img.save(output, format=img_format)
             log.info("Resized image to %sx%s" % (new_width, new_height))
-            return output.getvalue()
+            return output.getvalue(), img_format
     
     # Return original image if it wasnt resized
-    return image_data
+    return image_data, img_format
 
 
 def check_if_image_is_horizontal(image_url):
