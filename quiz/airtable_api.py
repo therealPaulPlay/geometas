@@ -54,7 +54,7 @@ def import_all_facts_into_db():
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
         image_name = f"{db_fact.uuid}.jpg"
         move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
-        db_fact.image_url = settings.AWS_S3_BASE_URL + image_name
+        db_fact.image_url = settings.AWS_CLOUDFRONT_BASE_URL + image_name
         db_fact.save()
         # Check if image is horizontal
         db_fact.image_is_landscape = check_if_image_is_horizontal(db_fact.image_url)

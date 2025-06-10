@@ -213,6 +213,7 @@ AIRTABLE_API_TOKEN = os.environ.get('AIRTABLE_API_TOKEN')
 # AWS S3
 AWS_S3_IMAGE_STORAGE_BUCKET_NAME = 'geobin-images'
 AWS_S3_BASE_URL = "https://geobin-images.s3.eu-west-3.amazonaws.com/"
+AWS_CLOUDFRONT_BASE_URL = 'https://d2uvuuqntjpbp3.cloudfront.net/'
 AWS_ACCESS_KEY_ID = "AKIA2PKVSGWSYXZZBWHI"
 AWS_SECRET_ACCESS_KEY = "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"
 
