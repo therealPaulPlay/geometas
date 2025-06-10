@@ -119,10 +119,30 @@ def upload_image_to_s3_via_boto(image_content, image_name, file_type):
         
     try:
         s3_object.put(**put_kwargs)
+        # Invalidate CloudFront cache for immediate updates
+        invalidate_cloudfront_cache(image_name)
     except Exception as e:
         log.exception("S3 upload failed %s" % e)
         return False
     return True 
+
+
+def invalidate_cloudfront_cache(image_name):
+    """Invalidate CloudFront cache for immediate updates (costs $0.005 per path)"""
+    try:
+        cloudfront = boto3.client('cloudfront')
+        cloudfront.create_invalidation(
+            DistributionId=settings.AWS_CLOUDFRONT_DISTRIBUTION_ID,
+            InvalidationBatch={
+                'Paths': {
+                    'Quantity': 1,
+                    'Items': [f'/{image_name}']
+                },
+                'CallerReference': str(datetime.datetime.now().timestamp())
+            }
+        )
+    except Exception as e:
+        log.exception("CloudFront invalidation failed %s" % e)
 
 
 def resize_image_in_memory(image_data, max_size):
