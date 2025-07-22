@@ -7,7 +7,7 @@ from quiz.db_seeds.openai_content import OPENAI_CATEGORIES
 
 CATEGORY_CHOICES = [
     ('coverage', 'Coverage'), 
-    ('driving_direction', 'Driving direction'), 
+    ('driving_direction', 'Driving Direction'), 
     ('google_car', 'Google Car'), 
     ('language', 'Language'), 
     ('license_plate', 'License Plate'), 
@@ -30,18 +30,28 @@ CATEGORY_CHOICES = [
 def update_categories():
     # Create Categories
     for input_category in CATEGORY_CHOICES:
-        category_db = Category.objects.filter(slug=input_category[0]).first()
+        category_slug = input_category[0]
+        category_name = input_category[1]
+        
+        # Check if description exists in OPENAI_CATEGORIES
+        if category_slug not in OPENAI_CATEGORIES:
+            log.warning(f"No description found for category '{category_slug}' in OPENAI_CATEGORIES")
+            description = ""
+        else:
+            description = OPENAI_CATEGORIES[category_slug]
+        
+        category_db = Category.objects.filter(slug=category_slug).first()
         if category_db:
-            category_db.name = input_category[1]
-            category_db.description = OPENAI_CATEGORIES[input_category[0]]
+            category_db.name = category_name
+            category_db.description = description
             category_db.save()
         else:
             Category.objects.create(
-                name=input_category[1],
-                slug=input_category[0],
-                description=OPENAI_CATEGORIES[input_category[0]]
+                name=category_name,
+                slug=category_slug,
+                description=description
             )
-            log.info(f"Category {input_category[1]} created")
+            log.info(f"Category {category_name} created")
     
     # Delete Categories
     db_categories = Category.objects.all()
@@ -133,5 +143,3 @@ def update_quizzes():
         if quiz.num_facts == 0:
             quiz.delete()
             log.info(f"Quiz {quiz.name} deleted")
-    
-        
