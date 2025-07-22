@@ -17,12 +17,10 @@
     <div class="max-w-full pt-10 fixed bottom-0 inset-x-0 sm:relative sm:bottom-auto">
         {% url 'quiz:answer' quiz_session.uuid fact.uuid as button_url %}
         {% #button_primary url=button_url html_id='spaceShortcut' %}
-            See Answer
+            See answer
         {% /button_primary %}
     </div>
 
-    <script>
-        {% include 'quiz/components/js/space-shortcut.html' %}
-    </script>
+    {% include 'quiz/components/js/space-shortcut.html' %}
 
 {% endblock %}

@@ -1,12 +1,14 @@
-document.addEventListener('keydown', function(event) {
-    if (event.code === 'Space') {
-        event.preventDefault();
-        document.getElementById('spaceShortcut').click();
-    } else if (event.key === 'e') {
-        event.preventDefault();
-        document.getElementById('eKeyShortcut').click();
-    } else if (event.key === 'd') {
-        event.preventDefault();
-        document.getElementById('dKeyShortcut').click();
-    }
-});
+<script>
+    document.addEventListener('keydown', function (event) {
+        if (event.code === 'Space') {
+            event.preventDefault();
+            document.getElementById('spaceShortcut').click();
+        } else if (event.key === 'e') {
+            event.preventDefault();
+            document.getElementById('eKeyShortcut').click();
+        } else if (event.key === 'd') {
+            event.preventDefault();
+            document.getElementById('dKeyShortcut').click();
+        }
+    });
+</script>

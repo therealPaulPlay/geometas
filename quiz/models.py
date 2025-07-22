@@ -62,7 +62,7 @@ class Category(models.Model):
 
 
 class Fact(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.CharField(max_length=36, primary_key=True, default=lambda: str(uuid.uuid4()), editable=False)
     answer = models.CharField(max_length=1000)
     image_url = models.CharField(max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -85,7 +85,7 @@ class Fact(models.Model):
 class Quiz(models.Model):
     QUIZ_NUM_FACTS = 7
     RANDOM_QUIZ_NAME = "Random"
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.CharField(max_length=36, primary_key=True, default=lambda: str(uuid.uuid4()), editable=False)
     name = models.CharField(max_length=250)
     countries = models.ManyToManyField(Country, related_name='quizzes', blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='quizzes', null=True, blank=True)
@@ -126,7 +126,7 @@ class QuizSession(models.Model):
         ("finished", "Finished"),
         ("cancelled", "Cancelled"),
     ]
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.CharField(max_length=36, primary_key=True, default=lambda: str(uuid.uuid4()), editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
@@ -269,7 +269,7 @@ class QuizSessionFact(models.Model):
         ("false", "False"),
         ("not_set", "Not Set"),
     ]
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.CharField(max_length=36, primary_key=True, default=lambda: str(uuid.uuid4()), editable=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=True)
@@ -284,7 +284,8 @@ class QuizSessionFact(models.Model):
         verbose_name_plural = "Quiz Session Facts"
 
     def __str__(self):
-        return f"{self.user.username} - {self.quiz_session} - {self.fact}"
+        username = self.user.username if self.user else "anonymous"
+        return f"{username} - {self.quiz_session} - {self.fact}"
     
     def set_correct(self):
         # Set this session fact result to correct

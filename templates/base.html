@@ -20,7 +20,8 @@
 
 
     <meta name="description" content="{{ html_meta_description }}">
-    <meta name="keywords" content="geoguessr, metas, country, continent, bollard, cars, driving direction, license plate, google car, street view, poles, street, markings, numbering, coverage, flora, language, settlement, sign">
+    <meta name="keywords"
+        content="geoguessr, openguessr, metas, country, continent, bollard, cars, driving direction, license plate, google car, street view, poles, street, markings, numbering, coverage, flora, language, settlement, sign">
 
     <!-- Open Graph tags for Facebook and other social media -->
     <meta property="og:title" content="{{ html_meta_title }}">
@@ -40,13 +41,18 @@
     <!-- GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6GD169L1P8"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-6GD169L1P8');
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag("config", 'G-6GD169L1P8', {
+            cookie_flags: "SameSite=None; Secure",
+            ad_storage: "denied",
+            ad_personalization: "denied",
+            ad_user_data: "denied",
+            analytics_storage: "granted",
+        });
     </script>
-    
+
 </head>
 
 <body class="h-full text-base">
@@ -56,7 +62,7 @@
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="">
                         <div class="flex h-16 items-center justify-between px-4 sm:px-0">
-                            <div class="flex space-x-6 sm:space-x-8">
+                            <div class="flex space-x-6">
                                 <a class="flex" href="{% url 'metas_index' %}">
                                     <div class="items-center my-auto mr-0.5">
                                         <img class="h-10 w-10 p-1" src="{% static 'logo/logo.png' %}" alt="Geometas logo">
@@ -69,20 +75,24 @@
                             <div class="ml-4 flex items-center md:ml-6">
                                 <div class="relative ml-3">
                                     {% if user.is_authenticated %}
-                                        <a href="{% url 'accounts:profile' %}">
-                                            <div class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 rounded-xl flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-stone-700">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                                                </svg>
-                                                <div class="text-stone-700 ml-1 font-medium text-sm">Profile</div>
-                                            </div>
-                                        </a>
+                                    <a href="{% url 'accounts:profile' %}">
+                                        <div
+                                            class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 rounded-xl flex items-center justify-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-stone-700">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                            </svg>
+                                            <div class="text-stone-700 ml-1 font-medium text-sm">Profile</div>
+                                        </div>
+                                    </a>
                                     {% else %}
-                                        <a href="{% url 'login' %}">
-                                            <div class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 rounded-xl flex items-center justify-center">
-                                                <div class="text-stone-700 ml-1 font-medium text-sm">Sign up for free</div>
-                                            </div>
-                                        </a>
+                                    <a href="{% url 'login' %}">
+                                        <div
+                                            class="py-1.5 px-3 bg-stone-200 hover:bg-stone-300 rounded-xl flex items-center justify-center">
+                                            <div class="text-stone-700 ml-1 font-medium text-sm">Sign up for free</div>
+                                        </div>
+                                    </a>
                                     {% endif %}
                                 </div>
                             </div>
@@ -107,11 +117,17 @@
 </body>
 
 <footer class="bg-[#F9F7F5]">
-    <div class="mx-auto max-w-7xl py-16 px-6 lg:px-8">
+    <div class="mx-auto max-w-5xl py-16 px-6">
         <div class="text-stone-500 text-center text-sm mx-auto font-light">
-            <p class="font-medium">💙 Important Thank-You Credits</p>
+            <p class="font-medium">💙 Thank-you credits</p>
             <p>The content was imported from these amazing Geoguessr resources sites:</p>
-            <p><a href="https://www.plonkit.net/" target="_blanc">Plonk It</a>, <a href="https://somerandomstuff1.wordpress.com/2019/02/08/geoguessr-the-top-tips-tricks-and-techniques/" target="_blanc">The Digital Labyrinth</a></p>
+            <p><a href="https://www.plonkit.net/" target="_blanc">Plonk It</a>, <a
+                    href="https://somerandomstuff1.wordpress.com/2019/02/08/geoguessr-the-top-tips-tricks-and-techniques/"
+                    target="_blanc">The Digital Labyrinth</a></p>
+        </div>
+        <div class="mx-auto max-w-7xl mt-8 flex justify-center gap-4 items-center">
+            {% #link_primary url="https://openguessr.com/legal" target="_blank" %}Legal{% /link_primary %}
+            {% #link_primary url="https://paulplay.studio/imprint" target="_blank" %}Imprint{% /link_primary %}
         </div>
     </div>
 </footer>
