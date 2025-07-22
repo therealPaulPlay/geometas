@@ -127,11 +127,11 @@ def update_quizzes():
     
     # Create 'Random' quiz for all facts
     random_quiz_name = Quiz.RANDOM_QUIZ_NAME
-    try:
-        quiz_db = Quiz.objects.get(name=random_quiz_name)
-    except Quiz.DoesNotExist:
-        quiz_db = Quiz.objects.create(name=random_quiz_name)
+    quiz_db, created = Quiz.objects.get_or_create(name=random_quiz_name)
+    if created:
         log.info(f"Quiz {random_quiz_name} created")
+    else:
+        log.info(f"Quiz {random_quiz_name} already exists")
     
     
     # Compute and set the number of facts for each quiz

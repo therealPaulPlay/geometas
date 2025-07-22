@@ -24,12 +24,25 @@ def metas_index(request):
     # Get total fact count
     total_fact_count = Fact.objects.all().count()
 
+    # Get random quiz UUID, handling potential duplicates
+    try:
+        random_quiz = Quiz.objects.get(name=Quiz.RANDOM_QUIZ_NAME)
+        random_quiz_uuid = random_quiz.uuid
+    except Quiz.MultipleObjectsReturned:
+        # If multiple exist, just use the first one
+        random_quiz = Quiz.objects.filter(name=Quiz.RANDOM_QUIZ_NAME).first()
+        random_quiz_uuid = random_quiz.uuid
+    except Quiz.DoesNotExist:
+        # If no Random quiz exists, create one
+        random_quiz = Quiz.objects.create(name=Quiz.RANDOM_QUIZ_NAME)
+        random_quiz_uuid = random_quiz.uuid
+
     context = {
         'countries': Country.objects.all().order_by('region__sort_order', 'name').select_related('quiz', 'region__quiz'),
         'categories': Category.objects.all().order_by('name').select_related('quiz'),
         'quiz_session': quiz_session,
         'total_fact_count': total_fact_count,
-        'random_quiz_uuid': Quiz.objects.get(name=Quiz.RANDOM_QUIZ_NAME).uuid,
+        'random_quiz_uuid': random_quiz_uuid,
         'html_meta_title': None,
         'html_meta_description': 'Become a Geoguessr champion: find new Geoguessr metas from Google Streetview around the world and test your knowledge with quizzes.',
         'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
