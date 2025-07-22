@@ -11,7 +11,7 @@ def country_coverage(request):
         'country_count': country_count,
         'html_meta_title': "Geoguessr Country Coverage",
         'html_meta_description': "In Geoguessr you can encounter up to %s countries. Learn the Geoguessr metas for each country to become a Geoguessr champion." % country_count,
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/country_coverage.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/country_coverage.jpg'),
     }
     return render(request, 'articles/country_coverage.html', context)
 
@@ -21,7 +21,7 @@ def driving_direction(request):
         'countries': Country.objects.all().order_by('name').select_related('quiz'),
         'html_meta_title': "Driving direction in Geoguessr",
         'html_meta_description': "The direction of traffic is a key meta in Geoguessr. Learn the driving direction for each country to become a Geoguessr champion.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/driving_direction.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/driving_direction.jpg'),
     }
     return render(request, 'articles/driving_direction.html', context)
 
@@ -67,7 +67,7 @@ def eastern_europe(request):
         'uniques': uniques,
         'html_meta_title': "Country-guessing Eastern Europe",
         'html_meta_description': "Eastern Europe is a region in Geoguessr. Learn the countries in Eastern Europe to become a Geoguessr champion.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/eastern_europe.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/eastern_europe.jpg'),
     }
     return render(request, 'articles/eastern_europe.html', context)
 
@@ -120,7 +120,7 @@ def south_african_countries(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Southern Africa",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify South Africa, Botswana, Eswatini, and Lesotho.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_africa.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_africa.jpg'),
     }
     return render(request, 'articles/south_african_countries.html', context)
 
@@ -196,7 +196,7 @@ def latin_america(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Latin America",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the main Latin American countries: Brazil, Argentina, Mexico, Peru, Uruguay, Ecuador, Colombia, Bolivia, and Chile.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/latin_america.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/latin_america.jpg'),
     }
     return render(request, 'articles/latin_america.html', context)
 
@@ -252,7 +252,7 @@ def nordics(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Europe's Nordic Countries",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the Nordic countries in Europe: Norway, Sweden, Finland, Denmark, Iceland, and the Faroe Islands.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/nordics.jpg'),
     }
     return render(request, 'articles/nordics.html', context)
 
@@ -292,7 +292,7 @@ def australia_new_zealand(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Australia vs. New Zealand",
         'html_meta_description': "Learn the most relevant Geoguessr metas to tell Australia apart from New Zealand.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/australia_new_zealand.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/australia_new_zealand.jpg'),
     }
     return render(request, 'articles/australia_new_zealand.html', context)
 
@@ -354,7 +354,7 @@ def south_east_asia(request):
         'facts': facts,
         'html_meta_title': "Country-guessing South-East Asia",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the South-East Asian countries Thailand, Malaysia, Indonesia, Philippines, Cambodia, and Sri Lanka.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_east_asia.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/south_east_asia.jpg'),
     }
     return render(request, 'articles/south_east_asia.html', context)
 
@@ -401,7 +401,7 @@ def baltics(request):
         'facts': facts,
         'html_meta_title': "Country-guessing the Baltics",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the European Baltic countries Estonia, Latvia, and Lithuania.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/baltics.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/baltics.jpg'),
     }
     return render(request, 'articles/baltics.html', context)
 
@@ -431,6 +431,6 @@ def central_africa(request):
         'facts': facts,
         'html_meta_title': "Country-guessing Central Africa",
         'html_meta_description': "Learn the most relevant Geoguessr metas to identify the African countries Ghana, Kenya, Nigeria, Rwanda, Senegal, and Uganda.",
-        'html_meta_image_url': request.build_absolute_uri('/static/seo/central_africa.png'),
+        'html_meta_image_url': request.build_absolute_uri('/static/seo/central_africa.jpg'),
     }
     return render(request, 'articles/central_africa.html', context)
