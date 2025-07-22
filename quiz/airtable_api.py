@@ -53,8 +53,8 @@ def import_all_facts_into_db():
         db_fact.save()
         # Move image from airtable to S3 (needs instance uuid hence post initial save)
         image_name = f"{db_fact.uuid}.jpg"
-        move_image_from_airtable_to_s3(deserialized_fact['image_url'], image_name)
-        db_fact.image_url = settings.AWS_CLOUDFRONT_BASE_URL + image_name
+        move_image_from_airtable_to_spaces(deserialized_fact['image_url'], image_name)
+        db_fact.image_url = settings.SPACES_BASE_URL + image_name
         db_fact.save()
         # Check if image is horizontal
         db_fact.image_is_landscape = check_if_image_is_horizontal(db_fact.image_url)
@@ -84,12 +84,11 @@ def deserialize_fact(fact_response):
         'google_streetview_url': fact_response['fields'].get('GSV URL'),
     }
 
-
-def move_image_from_airtable_to_s3(image_url, image_name):
-    """ Moves an image from airtable to S3 """
+def move_image_from_airtable_to_spaces(image_url, image_name):
+    """ Moves an image from airtable to Digital Ocean Spaces """
     image_content = download_image_from_airtable(image_url)
     image_content, file_type = resize_image_in_memory(image_content, 1000)
-    return upload_image_to_s3_via_boto(image_content, image_name, file_type)
+    return upload_image_to_spaces_via_boto(image_content, image_name, file_type)
 
 
 def download_image_from_airtable(image_url):
@@ -98,52 +97,38 @@ def download_image_from_airtable(image_url):
     return response.content
 
 
-def upload_image_to_s3_via_boto(image_content, image_name, file_type):
-    """ Uploads an image to S3 via boto """
-    bucket_name = settings.AWS_S3_IMAGE_STORAGE_BUCKET_NAME
-    log.info("Uploading %s to S3 bucket %s" % (image_name, bucket_name))
-    s3 = boto3.resource(
+def upload_image_to_spaces_via_boto(image_content, image_name, file_type):
+    """ Uploads an image to Digital Ocean Spaces via boto3 """
+    bucket_name = settings.SPACES_BUCKET_NAME
+    # Add geometas folder prefix to organize files
+    spaces_key = f"{settings.SPACES_FOLDER}/{image_name}"
+    log.info("Uploading %s to DO Spaces bucket %s" % (spaces_key, bucket_name))
+    
+    s3_client = boto3.client(
         's3',
-        aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID', settings.AWS_ACCESS_KEY_ID),
-        aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY', settings.AWS_SECRET_ACCESS_KEY)
+        endpoint_url=settings.SPACES_ENDPOINT_URL,
+        aws_access_key_id=settings.SPACES_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.SPACES_SECRET_ACCESS_KEY,
+        region_name=settings.SPACES_REGION
     )
-    s3_object = s3.Object(bucket_name, image_name)
     
     put_kwargs = {
+        'Bucket': bucket_name,
+        'Key': spaces_key,  # This will be 'geometas/uuid.jpg'
         'Body': image_content,
         'CacheControl': 'public, max-age=2592000',  # 30 days
+        'ACL': 'public-read'
     }
+    
     if file_type:
-        # e.g. file_type == 'png' or 'jpeg'
         put_kwargs['ContentType'] = f'image/{file_type}'
         
     try:
-        s3_object.put(**put_kwargs)
-        # Invalidate CloudFront cache for immediate updates
-        invalidate_cloudfront_cache(image_name)
+        s3_client.put_object(**put_kwargs)
+        return True
     except Exception as e:
-        log.exception("S3 upload failed %s" % e)
+        log.exception("DO Spaces upload failed %s" % e)
         return False
-    return True 
-
-
-def invalidate_cloudfront_cache(image_name):
-    """Invalidate CloudFront cache for immediate updates (costs $0.005 per path)"""
-    try:
-        cloudfront = boto3.client('cloudfront')
-        cloudfront.create_invalidation(
-            DistributionId=settings.AWS_CLOUDFRONT_DISTRIBUTION_ID,
-            InvalidationBatch={
-                'Paths': {
-                    'Quantity': 1,
-                    'Items': [f'/{image_name}']
-                },
-                'CallerReference': str(datetime.datetime.now().timestamp())
-            }
-        )
-    except Exception as e:
-        log.exception("CloudFront invalidation failed %s" % e)
-
 
 def resize_image_in_memory(image_data, max_size):
     img_format = None

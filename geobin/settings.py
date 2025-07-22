@@ -38,7 +38,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = ['www.geometas.com', 'geometas.com', 'static.geometas.com']
+ALLOWED_HOSTS = ['www.geometas.com', 'geometas.com', 'static.geometas.com', 'openguessr.com', 'education.openguessr.com']
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
@@ -220,13 +220,14 @@ AIRTABLE_APP_ID = os.environ.get('AIRTABLE_APP_ID')
 AIRTABLE_TABLE_ID = os.environ.get('AIRTABLE_TABLE_ID')
 AIRTABLE_API_TOKEN = os.environ.get('AIRTABLE_API_TOKEN')
 
-# AWS S3
-AWS_S3_IMAGE_STORAGE_BUCKET_NAME = 'geobin-images'
-AWS_S3_BASE_URL = "https://geobin-images.s3.eu-west-3.amazonaws.com/"
-AWS_CLOUDFRONT_BASE_URL = 'https://d2uvuuqntjpbp3.cloudfront.net/'
-AWS_CLOUDFRONT_DISTRIBUTION_ID = 'E5P7R6QJ6PXCJ'
-AWS_ACCESS_KEY_ID = "AKIA2PKVSGWSYXZZBWHI"
-AWS_SECRET_ACCESS_KEY = "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"
+# Digital Ocean Spaces (Previously AWS S3)
+SPACES_ACCESS_KEY_ID = os.environ.get('SPACES_ACCESS_KEY_ID')
+SPACES_SECRET_ACCESS_KEY = os.environ.get('SPACES_SECRET_ACCESS_KEY')
+SPACES_BUCKET_NAME = os.environ.get('SPACES_BUCKET_NAME')
+SPACES_REGION = os.environ.get('SPACES_REGION', 'nyc3')
+SPACES_ENDPOINT_URL = f'https://{SPACES_REGION}.digitaloceanspaces.com'
+SPACES_FOLDER = 'geometas'  # Organize files under this folder
+SPACES_BASE_URL = f'https://{SPACES_BUCKET_NAME}.{SPACES_REGION}.digitaloceanspaces.com/{SPACES_FOLDER}/'
 
 # Auth0
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
