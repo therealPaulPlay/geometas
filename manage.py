@@ -3,6 +3,13 @@
 import os
 import sys
 
+# Load environment variables FIRST, before anything else
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # dotenv not installed, skip
+    pass
 
 def main():
     """Run administrative tasks."""

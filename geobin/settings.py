@@ -10,6 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+# Add this at the very top of settings.py if using PyMySQL
+try:
+    import pymysql
+    pymysql.install_as_MySQLdb()
+except ImportError:
+    pass
+
+# Environment variables are now loaded in manage.py
+# No need for dotenv here anymore!
+
 from pathlib import Path
 import os
 import dj_database_url
@@ -89,18 +99,31 @@ WSGI_APPLICATION = 'geobin.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# Default SQLite for development
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-if not DEBUG:
-    DATABASES['default'] = dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+
+# MySQL configuration for production/when env vars are set
+if os.environ.get('DB_HOST'):
+    # Use individual env vars to build MySQL config
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('DB_NAME'),
+            'USER': os.environ.get('DB_USER'),
+            'PASSWORD': os.environ.get('DB_PASSWORD'),
+            'HOST': os.environ.get('DB_HOST'),
+            'PORT': os.environ.get('DB_PORT', '3306'),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
+    }
 
 
 # Password validation
@@ -212,6 +235,9 @@ AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
 LOGIN_URL = 'login'
 
 if DEBUG:
-    from .settings_local import *
+    try:
+        from .settings_local import *
+    except ImportError:
+        pass
     ALLOWED_HOSTS.append('localhost')
     ALLOWED_HOSTS.append('127.0.0.1')
