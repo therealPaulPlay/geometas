@@ -44,7 +44,7 @@ def metas_index(request):
         'total_fact_count': total_fact_count,
         'random_quiz_uuid': random_quiz_uuid,
         'html_meta_title': None,
-        'html_meta_description': 'Become a Geoguessr champion: find new Geoguessr metas from Google Streetview around the world and test your knowledge with quizzes.',
+        'html_meta_description': 'Become a GeoGuessr champion: find new GeoGuessr metas from Google Streetview around the world and test your knowledge with quizzes.',
         'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'cms/metas_index.html', context)
@@ -67,7 +67,7 @@ def country(request, country_slug):
         'facts': facts,
         'quiz': country.quiz,
         'html_meta_title': country.name,
-        'html_meta_description': "Learn the Geoguessr metas for %s to become a Geoguessr champion" % country.name,
+        'html_meta_description': "Learn the GeoGuessr metas for %s to become a GeoGuessr champion" % country.name,
         # 'html_meta_image_url': request.build_absolute_uri('/static/logo/logo.png'),
     }
     return render(request, 'cms/country.html', context)

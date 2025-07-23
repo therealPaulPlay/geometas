@@ -1,0 +1,44 @@
+name: Deploy Django Geometas Server
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-primary:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Install SSH keys for Primary Server
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
+
+      - name: Connect to Primary Server, build image, and deploy
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          cd ${{ secrets.WORK_DIR }}
+          
+          # Write .env file from secret
+          echo "${{ secrets.ENV_FILE }}" > .env
+          
+          # Pull latest changes from Git
+          git checkout main
+          git pull
+          
+          # Build Docker image
+          docker build -t geometas-app .
+          
+          # Check if container geometas-app exists
+          if ! docker ps -a --format '{{.Names}}' | grep -q "^geometas-app$"; then
+            echo "Container geometas-app does not exist, creating..."
+            docker run -d -p 3011:3011 --network host --restart unless-stopped --name geometas-app geometas-app
+          else
+            echo "Container geometas-app exists, stopping and removing..."
+            docker stop geometas-app || true
+            docker rm geometas-app || true
+            docker run -d -p 3011:3011 --network host --restart unless-stopped --name geometas-app geometas-app
+          fi
+          EOF
+
+      - name: Cleanup SSH for Primary Server
+        run: rm -rf ~/.ssh
