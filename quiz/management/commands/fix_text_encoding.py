@@ -11,6 +11,7 @@ class Command(BaseCommand):
             
             replacements = {
                 'â€™': "'",     # right single quotation mark
+                '"˜' : "'",     # left single quotation mark
                 'â€œ': '"',     # left double quotation mark  
                 'â€': '"',      # right double quotation mark
                 'â€"': '—',     # em dash
