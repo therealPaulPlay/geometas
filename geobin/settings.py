@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'cms.apps.CmsConfig',
     'articles.apps.ArticlesConfig',
+    'api',
 ]
 
 MIDDLEWARE = [

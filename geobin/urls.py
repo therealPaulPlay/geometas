@@ -22,6 +22,7 @@ urlpatterns = [
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('metas/', include(('cms.urls', 'cms'), namespace='cms')),
     path('learn/', include(('articles.urls', 'articles'), namespace='articles')),
+    path('api/metas/', include(('api.urls', 'api'), namespace='api')),
     path('login/', accounts_login, name='login'),
     path('logout/', accounts_logout, name='logout'),
     path('sitemap.xml', django_sitemap_view, {'sitemaps': SITEMAPS_DICT}, name='django.contrib.sitemaps.views.sitemap'),

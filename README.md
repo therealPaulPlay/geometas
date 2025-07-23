@@ -8,3 +8,9 @@
 
 ## Run site locally
 ```python3 manage.py runserver```
+
+## API
+There is a simple API for fetching metas.
+
+Country example: ```GET https://geometas.com/api/metas/countries/germany```
+Category example: ```GET https://geometas.com/api/metas/categories/bollards```
