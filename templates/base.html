@@ -14,10 +14,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'logo/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'logo/favicon-16x16.png' %}">
 
-
     <!-- Meta tags -->
     <title>{% if html_meta_title %}{{ html_meta_title }} - {% endif %}Geometas</title>
-
 
     <meta name="description" content="{{ html_meta_description }}">
     <meta name="keywords"
@@ -52,7 +50,6 @@
             analytics_storage: "granted",
         });
     </script>
-
 </head>
 
 <body class="h-full text-base">
@@ -62,13 +59,21 @@
                 <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div class="">
                         <div class="flex h-16 items-center justify-between px-4 sm:px-0">
-                            <div class="flex space-x-6">
-                                <a class="flex" href="{% url 'metas_index' %}">
-                                    <div class="items-center my-auto mr-0.5">
-                                        <img class="h-10 w-10 p-1" src="{% static 'logo/logo.png' %}" alt="Geometas logo">
+                            <div class="flex">
+                                <a class="flex items-center" href="{% url 'metas_index' %}">
+                                    <div class="flex-shrink-0">
+                                        <img class="h-10 w-10 p-1" src="{% static 'logo/logo.png' %}"
+                                            alt="Geometas logo">
                                     </div>
-                                    <div class="flex flex-shrink-0 items-center">
-                                        <span class="font-bold text-2xl bg-gradient-to-br from-blue-600 to-sky-500 bg-clip-text text-transparent tracking-tighter pt-0.5">Geometas</span>
+                                    <div class="flex flex-col justify-center ml-1">
+                                        <span
+                                            class="font-bold text-xl bg-gradient-to-br from-blue-600 to-sky-500 bg-clip-text text-transparent tracking-tighter leading-tight">Geometas</span>
+                                        <div
+                                            class="text-xs text-stone-500 font-medium -mt-1 leading-none flex items-center ml-0.5">
+                                            <span class="mr-1">by</span>
+                                            <a href="https://openguessr.com" target="_blank"
+                                                class="text-stone-600 hover:text-stone-800 transition-colors underline underline-offset-1">OpenGuessr</a>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
@@ -111,13 +116,11 @@
                 </div>
             </div>
         </main>
-
     </div>
-
 </body>
 
 <footer class="bg-[#F9F7F5]">
-    <div class="mx-auto max-w-5xl py-16 px-6">
+    <div class="mx-auto max-w-3xl py-16 px-6">
         <div class="text-stone-500 text-center text-sm mx-auto font-light">
             <p class="font-medium">💙 Thank-you credits</p>
             <p>The content was imported from these amazing Geoguessr resources sites:</p>
@@ -125,9 +128,11 @@
                     href="https://somerandomstuff1.wordpress.com/2019/02/08/geoguessr-the-top-tips-tricks-and-techniques/"
                     target="_blanc">The Digital Labyrinth</a></p>
         </div>
-        <div class="mx-auto max-w-7xl mt-8 flex justify-center gap-4 items-center">
-            {% #link_primary url="https://openguessr.com/legal" target="_blank" %}Legal{% /link_primary %}
-            {% #link_primary url="https://paulplay.studio/imprint" target="_blank" %}Imprint{% /link_primary %}
+        <div class="mx-auto max-w-5xl mt-8 flex justify-center gap-4 items-center">
+            <a href="https://openguessr.com/legal" target="_blank"
+                class="text-stone-600 hover:text-stone-800 transition-colors underline underline-offset-1">Legal</a>
+            <a href="https://paulplay.studio/imprint" target="_blank"
+                class="text-stone-600 hover:text-stone-800 transition-colors underline underline-offset-1">Imprint</a>
         </div>
     </div>
 </footer>
