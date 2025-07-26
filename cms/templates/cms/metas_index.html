@@ -8,24 +8,21 @@
 <div class="">
 
     <div class="flex">
-        <div class="sm:-mt-4 pb-12 text-stone-700 font-base tracking-tighter leading-tight sm:space-y-2">
-            <p class="text-xl font-semibold tracking-tight text-center sm:text-left">Geometas is the easiest way to
+        <div class="sm:-mt-4 pb-12 text-stone-700 font-base tracking-tighter leading-tight sm:space-y-2 px-4">
+            <p class="text-xl font-semibold tracking-tight text-left">Geometas is the easiest way to
                 become a GeoGuessr champion!
             <p>
-            <ul class="pt-4 list-disc-none pl-4 sm:pl-8 space-y-2">
+            <ul class="pt-4 list-disc-none space-y-2">
                 <li>🌍&nbsp;&nbsp;&nbsp;&nbsp;Learn the best metas from around the world</li>
-                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Focus on the facts and metas that matter to you</li>
-                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Reinforcement learning with smart meta quizzes</li>
+                <li>🔍&nbsp;&nbsp;&nbsp;&nbsp;Focus on the facts and metas that matter</li>
+                <li>🧠&nbsp;&nbsp;&nbsp;&nbsp;Reinforcement learning with meta quizzes</li>
                 <li>🤑&nbsp;&nbsp;&nbsp;&nbsp;100% free to use</li>
             </ul>
 
-            <div class="pt-8 sm:pt-6 sm:flex text-center sm:text-left space-x-4">
+            <div class="pt-8 sm:justify-start justify-center flex max-sm:flex-wrap gap-4 my-auto">
                 {% url 'quiz:start_quiz' random_quiz_uuid as link_url %}
                 {% #button_secondary url=link_url %}Try a meta quiz{% /button_secondary %}
-
-                <div class="mt-4 sm:my-auto text-center sm:text-left">
-                    {% #link_primary url="https://education.openguessr.com" target="_blank" %}OpenGuessr Education{% /link_primary %}
-                </div>
+                <div class="my-auto">{% #link_primary url="https://education.openguessr.com" target="_blank"%}Visit OpenGuessr Education{% /link_primary %}</div>
             </div>
         </div>
         <div class="hidden lg:block -mt-10 mx-auto">

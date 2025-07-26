@@ -9,10 +9,11 @@ module.exports = {
     'articles/**/*.html',
   ],
   theme: {
-    fontFamily: {
+    extend: {
+      fontFamily: {
         'sans': ['Rubik', 'ui-sans-serif', 'system-ui', 'sans-serif', "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"],
-    },
-    fontSize: {
+      },
+      fontSize: {
         xs: '0.75rem',
         sm: '0.8rem',
         base: '0.95rem',
@@ -21,8 +22,8 @@ module.exports = {
         '3xl': '1.953rem',
         '4xl': '2.441rem',
         '5xl': '3.052rem',
+      },
     },
-    extend: {},
   },
   plugins: [],
 }
