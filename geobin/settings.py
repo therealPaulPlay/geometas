@@ -50,7 +50,6 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 INSTALLED_APPS = [
     'corsheaders',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -58,7 +57,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'slippers',
-    #'debug_toolbar',
     'quiz.apps.QuizConfig',
     'accounts.apps.AccountsConfig',
     'cms.apps.CmsConfig',
@@ -69,7 +67,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

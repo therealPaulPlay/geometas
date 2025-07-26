@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap as django_sitemap_view
 from django.views.generic.base import TemplateView
 from django.urls import include, path
@@ -17,7 +16,6 @@ SITEMAPS_DICT = {
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('quiz/', include(('quiz.urls', 'quiz'), namespace='quiz')),
     path('accounts/', include(('accounts.urls', 'accounts'), namespace='accounts')),
     path('metas/', include(('cms.urls', 'cms'), namespace='cms')),
@@ -27,6 +25,5 @@ urlpatterns = [
     path('logout/', accounts_logout, name='logout'),
     path('sitemap.xml', django_sitemap_view, {'sitemaps': SITEMAPS_DICT}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
-    #path('__debug__/', include('debug_toolbar.urls')),
     path('', metas_index, name='metas_index')
 ]
