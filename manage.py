@@ -6,29 +6,9 @@ import sys
 # Load environment variables FIRST, before anything else
 try:
     from dotenv import load_dotenv
-    # Try multiple paths to find the .env file
-    env_paths = [
-        '.env',
-        '/usr/src/app/.env',
-        os.path.join(os.path.dirname(__file__), '.env')
-    ]
-    
-    env_loaded = False
-    for env_path in env_paths:
-        if os.path.exists(env_path):
-            load_dotenv(env_path)
-            print(f"Environment file loaded from: {env_path}")
-            env_loaded = True
-            break
-    
-    if not env_loaded:
-        print("No .env file found in any of these paths:")
-        for path in env_paths:
-            print(f"  - {path} (exists: {os.path.exists(path)})")
-    
-    # Debug: Print some environment variables (safely)
-    print(f"DB_HOST is set: {'Yes' if os.environ.get('DB_HOST') else 'No'}")
-    
+    # Explicitly specify the .env file path
+    load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+    print("Environment file loaded successfully")  # Debug line
 except ImportError:
     print("python-dotenv not installed, skipping .env loading")
 except Exception as e:
