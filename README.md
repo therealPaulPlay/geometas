@@ -8,6 +8,9 @@
 
 ...this command can be found under `/quiz/management/commands`.
 
+## Collect static files for production
+`python manage.py collectstatic --noinput`
+
 ## Run site locally
 `python3 manage.py runserver`
 

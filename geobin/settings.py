@@ -38,10 +38,18 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.geometas.com', 'geometas.com', 'static.geometas.com', 'openguessr.com', 'education.openguessr.com', 'localhost:3000', 'localhost:3001']
+ALLOWED_HOSTS = ['www.geometas.com', 'geometas.com', 'static.geometas.com', '127.0.0.1', 'localhost']
+
+CORS_ALLOWED_ORIGINS = [
+    "https://openguessr.com",
+    "https://education.openguessr.com", 
+    "http://localhost:3000",
+    "http://localhost:3001",
+]
 
 # Application definition
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,6 +67,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -223,11 +232,3 @@ AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
 AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
 LOGIN_URL = 'login'
-
-if DEBUG:
-    try:
-        from .settings_local import *
-    except ImportError:
-        pass
-    ALLOWED_HOSTS.append('localhost')
-    ALLOWED_HOSTS.append('127.0.0.1')
