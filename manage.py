@@ -6,10 +6,13 @@ import sys
 # Load environment variables FIRST, before anything else
 try:
     from dotenv import load_dotenv
-    load_dotenv()
+    # Explicitly specify the .env file path
+    load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+    print("Environment file loaded successfully")  # Debug line
 except ImportError:
-    # dotenv not installed, skip
-    pass
+    print("python-dotenv not installed, skipping .env loading")
+except Exception as e:
+    print(f"Error loading .env file: {e}")
 
 def main():
     """Run administrative tasks."""
