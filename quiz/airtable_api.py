@@ -17,11 +17,6 @@ from quiz.models import Country, Fact, Category
 https://pyairtable.readthedocs.io/en/stable/getting-started.html
 """
 
-"""
-from quiz.airtable_api import import_all_facts_into_db
-import_all_facts_into_db()
-"""
-
 
 def import_all_facts_into_db():
     """ Imports all facts from airtable into the database """
