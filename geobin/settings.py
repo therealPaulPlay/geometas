@@ -40,6 +40,10 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['www.geometas.com', 'geometas.com', 'static.geometas.com', '127.0.0.1', 'localhost']
 
+# Trust the X-Forwarded-Proto header set by nginx so request.is_secure() and
+# build_absolute_uri() produce https:// URLs (e.g. the Auth0 callback URL).
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 CORS_ALLOWED_ORIGINS = [
     "https://openguessr.com",
     "https://education.openguessr.com", 

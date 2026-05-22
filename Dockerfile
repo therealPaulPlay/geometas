@@ -32,4 +32,4 @@ USER app
 EXPOSE 3011
 
 # Use gunicorn for production
-CMD ["gunicorn", "--bind", "[::]:3011", "--workers", "3", "geobin.wsgi:application"]
+CMD ["gunicorn", "--bind", "[::1]:3011", "--workers", "3", "geobin.wsgi:application"]
