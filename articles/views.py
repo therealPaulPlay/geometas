@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import copy
 
 from quiz.models import Country, Fact
 

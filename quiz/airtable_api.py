@@ -5,7 +5,6 @@ from pyairtable import Api
 import requests
 import boto3
 import datetime
-import os
 import io
 import logging
 log = logging.getLogger(__name__)
@@ -170,7 +169,4 @@ def check_if_image_is_horizontal(image_url):
     image_content = requests.get(image_url).content
     with Image.open(io.BytesIO(image_content)) as img:
         width, height = img.size
-        if width > height:
-            return True
-        elif width <= height:
-            return False
+        return width > height

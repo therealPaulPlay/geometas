@@ -10,15 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-# Add this at the very top of settings.py if using PyMySQL
 try:
     import pymysql
     pymysql.install_as_MySQLdb()
 except ImportError:
     pass
-
-# Environment variables are now loaded in manage.py
-# No need for dotenv here anymore!
 
 from pathlib import Path
 import os

@@ -86,13 +86,13 @@ def auto0_logout(request):
 def profile(request):
     total_facts = Fact.objects.count()
     user_facts_box_1 = UserFactPerformance.objects.filter(user=request.user, box=1).count()
-    user_facts_box_1_pct = int(user_facts_box_1 / total_facts * 100)
+    user_facts_box_1_pct = int(user_facts_box_1 / total_facts * 100) if total_facts else 0
     user_facts_box_2 = UserFactPerformance.objects.filter(user=request.user, box=2).count()
-    user_facts_box_2_pct = int(user_facts_box_2 / total_facts * 100)
+    user_facts_box_2_pct = int(user_facts_box_2 / total_facts * 100) if total_facts else 0
     user_facts_box_3 = UserFactPerformance.objects.filter(user=request.user, box=3).count()
-    user_facts_box_3_pct = int(user_facts_box_3 / total_facts * 100)
+    user_facts_box_3_pct = int(user_facts_box_3 / total_facts * 100) if total_facts else 0
     user_facts_new = total_facts - user_facts_box_1 - user_facts_box_2 - user_facts_box_3
-    user_facts_new_pct = int(user_facts_new / total_facts * 100)
+    user_facts_new_pct = int(user_facts_new / total_facts * 100) if total_facts else 0
     context = {
         'total_facts': total_facts,
         'user_facts_box_1': user_facts_box_1,
