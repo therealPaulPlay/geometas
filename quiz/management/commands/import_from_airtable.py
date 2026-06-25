@@ -26,7 +26,11 @@ class Command(BaseCommand):
         # Load quizzes
         from quiz.db_seeds.quiz_seeder import update_quizzes
         update_quizzes()
-        
+
+        # Build and upload the meta guessr map
+        from quiz.meta_guessr_map import build_and_upload_meta_guessr_map
+        build_and_upload_meta_guessr_map()
+
         # Delete QuizSession without user created 1+ day ago
         old_anon_quiz_sessions = QuizSession.objects.filter(user__isnull=True, created_at__lte=timezone.now()-timedelta(days=1))
         log.info("Deleting %s old anonymous QuizSessions" % old_anon_quiz_sessions.count())

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from urllib.parse import urlparse, parse_qs, unquote
+import re
 import requests
 import logging
 log = logging.getLogger(__name__)
@@ -86,7 +87,7 @@ def fact_detail(request, fact_uuid):
 
     # Ensure we have latlng for Fact
     if not fact.google_streetview_latlng:
-        fact.google_streetview_latlng = get_streetview_latlng(fact.google_streetview_url)
+        fact.google_streetview_latlng = resolve_streetview_url(fact.google_streetview_url)[0]
         fact.save()
     
     context = {
@@ -99,13 +100,16 @@ def fact_detail(request, fact_uuid):
     return render(request, 'cms/fact_detail.html', context)
 
 
-def get_streetview_latlng(url):
+def resolve_streetview_url(url):
+    # Follows short link redirects, then parses the resolved URL into (viewpoint, heading, panorama_id)
     if not url:
-        return None
-    response = requests.get(url, allow_redirects=True)  
+        return None, None, None
+    response = requests.get(url, allow_redirects=True, timeout=30)
     return parse_viewpoint_from_url(response.url)
-    
+
+
 def parse_viewpoint_from_url(url):
+    # Returns a (viewpoint, heading, panorama_id) tuple, heading and panorama_id are None when the URL lacks them
     try:
         # Parse the URL
         parsed_url = urlparse(url)
@@ -115,7 +119,9 @@ def parse_viewpoint_from_url(url):
 
         # Attempt 1
         viewpoint = query_params.get("viewpoint", [None])[0]
-        
+        heading = parse_heading(parsed_url, query_params)
+        panorama_id = parse_panorama_id(parsed_url, query_params)
+
         # Attempt 2
         if not viewpoint:
             path = parsed_url.path
@@ -127,7 +133,7 @@ def parse_viewpoint_from_url(url):
                 if second_comma_index != -1:
                     # Extract everything before the second comma
                     viewpoint = coordinates_part[:second_comma_index]
-        
+
         # Attempt 3
         if not viewpoint:
             google_maps_url = query_params.get('continue', [None])[0]
@@ -139,7 +145,12 @@ def parse_viewpoint_from_url(url):
                 # The coordinates are in the 'viewpoint' parameter
                 maps_query_params = parse_qs(parsed_maps_url.query)
                 viewpoint = maps_query_params.get('viewpoint', [None])[0]
-        
+                # The heading and panorama id live in the same nested URL
+                if not heading:
+                    heading = parse_heading(parsed_maps_url, maps_query_params)
+                if not panorama_id:
+                    panorama_id = parse_panorama_id(parsed_maps_url, maps_query_params)
+
         # Attempt 4
         if not viewpoint:
             maps_url = query_params.get('continue', [''])[0]
@@ -147,12 +158,35 @@ def parse_viewpoint_from_url(url):
             maps_parsed = urlparse(maps_url)
             coordinates = maps_parsed.path.split('@')[1].split(',')[0:2]
             viewpoint =  ','.join(coordinates)
-        
+
         if not viewpoint:
             log.error("Could not extract viewpoint from URL: %s" % url)
-            return None
-        
-        return viewpoint
+            return None, None, None
+
+        return viewpoint, heading, panorama_id
     except Exception as ex:
         log.error("Error extracting viewpoint from URL: %s due to %s" % (url, ex))
-        return None
+        return None, None, None
+
+
+def parse_heading(parsed_url, query_params):
+    # The heading is the heading parameter (pano format) or the h in the path
+    heading = query_params.get('heading', [None])[0]
+    if not heading:
+        at_symbol_index = parsed_url.path.find('@')
+        if at_symbol_index != -1:
+            camera_part = parsed_url.path[at_symbol_index + 1:].split('/')[0]  # Get the part after '@'
+            for token in camera_part.split(','):
+                if token.endswith('h'):  # The heading token, e.g. '41.46h'
+                    heading = token[:-1]
+    return float(heading) if heading else None
+
+
+def parse_panorama_id(parsed_url, query_params):
+    # The panorama id is the pano parameter (pano format) or the '!1s...!2e' token in the path
+    panorama_id = query_params.get('pano', [None])[0]
+    if not panorama_id:
+        match = re.search(r'!1s([^!?]+)!2e', parsed_url.path)
+        if match:
+            panorama_id = match.group(1)
+    return panorama_id or None

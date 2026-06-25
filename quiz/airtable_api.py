@@ -91,21 +91,26 @@ def download_image_from_airtable(image_url):
     return response.content
 
 
-def upload_image_to_spaces_via_boto(image_content, image_name, file_type):
-    """ Uploads an image to Digital Ocean Spaces via boto3 """
-    bucket_name = settings.SPACES_BUCKET_NAME
-    # Add geometas folder prefix to organize files
-    spaces_key = f"{settings.SPACES_FOLDER}/{image_name}"
-    log.info("Uploading %s to DO Spaces bucket %s" % (spaces_key, bucket_name))
-    
-    s3_client = boto3.client(
+def get_spaces_client():
+    """ Returns a boto3 client for Digital Ocean Spaces """
+    return boto3.client(
         's3',
         endpoint_url=settings.SPACES_ENDPOINT_URL,
         aws_access_key_id=settings.SPACES_ACCESS_KEY_ID,
         aws_secret_access_key=settings.SPACES_SECRET_ACCESS_KEY,
         region_name=settings.SPACES_REGION
     )
-    
+
+
+def upload_image_to_spaces_via_boto(image_content, image_name, file_type):
+    """ Uploads an image to Digital Ocean Spaces via boto3 """
+    bucket_name = settings.SPACES_BUCKET_NAME
+    # Add geometas folder prefix to organize files
+    spaces_key = f"{settings.SPACES_FOLDER}/{image_name}"
+    log.info("Uploading %s to DO Spaces bucket %s" % (spaces_key, bucket_name))
+
+    s3_client = get_spaces_client()
+
     put_kwargs = {
         'Bucket': bucket_name,
         'Key': spaces_key,  # This will be 'geometas/uuid.jpg'
