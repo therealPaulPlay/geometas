@@ -14,4 +14,7 @@ urlpatterns = [
     path('south_east_asia', views.south_east_asia, name='south_east_asia'),
     path('baltics', views.baltics, name='baltics'),
     path('central_africa', views.central_africa, name='central_africa'),
+    path('geoguessr_vs_openguessr', views.geoguessr_vs_openguessr, name='geoguessr_vs_openguessr'),
+    path('openguessr_vs_worldguessr', views.openguessr_vs_worldguessr, name='openguessr_vs_worldguessr'),
+    path('openguessr_vs_geotastic', views.openguessr_vs_geotastic, name='openguessr_vs_geotastic'),
 ]

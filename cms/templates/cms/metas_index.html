@@ -114,6 +114,20 @@
         {% include 'cms/components/country_quiz_list.html' %}
     </div>
 
+    {% include 'components/hr-wavy.html' %}
+
+    <div class="mt-8 sm:mt-10 pb-2">
+        <div class="text-sm font-medium text-stone-500">More articles</div>
+        <div class="mt-2 flex flex-col gap-1">
+            {% url 'articles:geoguessr_vs_openguessr' as link_url %}
+            <a href="{{ link_url }}" class="text-sm text-sky-600 hover:text-sky-700">GeoGuessr vs. OpenGuessr: A detailed comparison</a>
+            {% url 'articles:openguessr_vs_worldguessr' as link_url %}
+            <a href="{{ link_url }}" class="text-sm text-sky-600 hover:text-sky-700">OpenGuessr vs. WorldGuessr: A detailed comparison</a>
+            {% url 'articles:openguessr_vs_geotastic' as link_url %}
+            <a href="{{ link_url }}" class="text-sm text-sky-600 hover:text-sky-700">OpenGuessr vs. Geotastic: A detailed comparison</a>
+        </div>
+    </div>
+
 </div>
 
 {% endblock %}

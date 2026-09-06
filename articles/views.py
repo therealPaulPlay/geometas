@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.templatetags.static import static
+from django.utils import timezone
 
 from quiz.models import Country, Fact
 
@@ -433,3 +435,53 @@ def central_africa(request):
         'html_meta_image_url': request.build_absolute_uri('/static/seo/central_africa.jpg'),
     }
     return render(request, 'articles/central_africa.html', context)
+
+###########################################################
+# Game comparisons
+###########################################################
+
+COMPARISON_DATE = "September 5, 2026"
+
+
+def _comparison_context(request, title, description, image_name):
+    return {
+        'comparison_date': COMPARISON_DATE,
+        'html_meta_title': title,
+        'html_meta_description': description,
+        'html_meta_image_url': request.build_absolute_uri(
+            static('images/game-comparisons/%s' % image_name)
+        ),
+    }
+
+
+def geoguessr_vs_openguessr(request):
+    context = _comparison_context(
+        request,
+        "GeoGuessr vs. OpenGuessr: A detailed comparison (%s)" % timezone.now().year,
+        "A detailed comparison of GeoGuessr and OpenGuessr: price, modes, maps, multiplayer, ranked play, "
+        "customization and what each one gives you for free.",
+        'play-geoguessr.avif',
+    )
+    return render(request, 'articles/geoguessr_vs_openguessr.html', context)
+
+
+def openguessr_vs_worldguessr(request):
+    context = _comparison_context(
+        request,
+        "OpenGuessr vs. WorldGuessr: A detailed comparison (%s)" % timezone.now().year,
+        "A detailed comparison of OpenGuessr and WorldGuessr: singleplayer, maps, custom rooms, ranked duels, "
+        "competitions, NMPZ, ads and design.",
+        'play-worldguessr.avif',
+    )
+    return render(request, 'articles/openguessr_vs_worldguessr.html', context)
+
+
+def openguessr_vs_geotastic(request):
+    context = _comparison_context(
+        request,
+        "OpenGuessr vs. Geotastic: A detailed comparison (%s)" % timezone.now().year,
+        "A detailed comparison of OpenGuessr and Geotastic: modes, editors, multiplayer, ranked play, ads "
+        "and how each game is funded.",
+        'play-geotastic.avif',
+    )
+    return render(request, 'articles/openguessr_vs_geotastic.html', context)

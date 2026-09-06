@@ -1,0 +1,313 @@
+{% extends "template_content_with_extra.html" %}
+{% load static %}
+
+{% block container_width %}max-w-3xl{% endblock %}
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+    <div class="-mx-4 -mt-6 sm:-mt-8 sm:-mx-8 grid grid-cols-2 gap-px bg-stone-200 sm:rounded-t-lg overflow-hidden">
+        <img src="{% static 'images/game-comparisons/play-geoguessr.avif' %}"
+            alt="A GeoGuessr round in a Norwegian valley" class="w-full">
+        <img src="{% static 'images/game-comparisons/play-openguessr.avif' %}"
+            alt="An OpenGuessr round on a straight road through open grassland" class="w-full">
+    </div>
+{% endblock %}
+
+
+{% block content %}
+
+    {% static 'images/game-comparisons/menu-geoguessr.avif' as menu_geoguessr %}
+    {% static 'images/game-comparisons/menu-openguessr.avif' as menu_openguessr %}
+    {% static 'images/game-comparisons/challenges-geoguessr.avif' as challenges_geoguessr %}
+    {% static 'images/game-comparisons/maps-openguessr.avif' as maps_openguessr %}
+    {% static 'images/game-comparisons/multiplayer-geoguessr.avif' as multiplayer_geoguessr %}
+    {% static 'images/game-comparisons/multiplayer-openguessr.avif' as multiplayer_openguessr %}
+    {% static 'images/game-comparisons/competitions-openguessr.avif' as competitions_openguessr %}
+    {% static 'images/game-comparisons/pricing-geoguessr.avif' as pricing_geoguessr %}
+    {% static 'images/game-comparisons/supporter-perks-openguessr.avif' as supporter_openguessr %}
+    {% static 'images/game-comparisons/customization-geoguessr.avif' as customization_geoguessr %}
+    {% static 'images/game-comparisons/customization-openguessr.avif' as customization_openguessr %}
+    {% static 'images/game-comparisons/guides-openguessr-education.avif' as guides_education %}
+    {% static 'images/game-comparisons/quizzes-openguessr-education.avif' as quizzes_education %}
+
+<div class="[&_p]:max-w-[65ch]">
+
+    {% #paragraph_text %}
+        GeoGuessr made this genre popular and still has the largest player base, the largest map library and the
+        only official world championship. OpenGuessr covers most of the same ground for free.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        The split is mostly about price and access. GeoGuessr keeps everything past the daily challenge behind a
+        subscription and an account. OpenGuessr puts every mode in front of you without either, funded by a single
+        ad slot shown only during play. Which one is better therefore depends on whether the scene and the
+        production values around GeoGuessr are what you are paying for.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Overview{% /heading_primary %}
+
+    {% #comparison_table col_a="GeoGuessr" col_b="OpenGuessr" %}
+        {% comparison_row label="Price" a="Only the daily challenge is free." b="Free, including every mode." %}
+        {% comparison_row label="Account" a="Required." b="Optional, multiplayer included." %}
+        {% comparison_row label="Singleplayer" a="Five rounds per game." b="Endless rounds, with an optional timer." %}
+        {% comparison_row label="World map" a="Maintained and updated by GeoGuessr." b="Rebuilt continuously by a generation server for fresh locations and the latest coverage." %}
+        {% comparison_row label="Community maps" a="The largest library in the genre." b="Tens of thousands, browsable by category and search." %}
+        {% comparison_row label="Multiplayer" a="Duels, team duels, two battle royale modes and parties. Hosting a party needs a plan." b="Duels, 2v2, tournaments and custom rooms. Hosting is free and needs no account." %}
+        {% comparison_row label="Ranked" a="Divisions, seasons and a battle pass." b="Divisions climbed on elo, with tokens for wins and a choice of matchmaking pool." %}
+        {% comparison_row label="Restrictions" a="Move, No Move and NMPZ." b="NMPZ, grayscale, hue shift, fade and inverted, in rooms and competitions." %}
+        {% comparison_row label="Other modes" a="Daily challenge, challenges and play-along." b="Country Guessr, Image Guessr, Meta Guessr, competitions and the OpenGuessr Education quizzes." %}
+        {% comparison_row label="Social" a="Friends, clubs and a built-in messenger." b="Friends, notifications, and a built-in messenger." %}
+        {% comparison_row label="Ads" a="None on a paid plan." b="One slot during play, none in the menus. Removed from the second supporter tier (one-time purchase)." %}
+        {% comparison_row label="Established" a="2013" b="2023" %}
+    {% /comparison_table %}
+
+
+    {% #heading_primary %}Getting started{% /heading_primary %}
+
+    {% #paragraph_text %}
+        GeoGuessr opens on a menu, and it is a good-looking one: 3D models and animation with the polish of a
+        big-budget release rather than a browser game. An account is required before you can play anything, the
+        daily challenge included.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr loads straight into a location. Its menu is a light overlay you open when you want it, which works
+        because you are always mid-round rather than between games. A short tutorial with the game's mascot, Guessy,
+        covers how to play.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=menu_geoguessr image_1_alt="The GeoGuessr main menu" image_1_caption="GeoGuessr's menu, which you sign in to reach." image_2_url=menu_openguessr image_2_alt="The OpenGuessr menu overlay above a Street View panorama" image_2_caption="OpenGuessr's menu overlay, opened on top of a live round." %}
+
+
+    {% #heading_primary %}Singleplayer and maps{% /heading_primary %}
+
+    {% #paragraph_text %}
+        GeoGuessr singleplayer runs five rounds per game. You pick a map, a movement restriction and a round timer,
+        and every map page carries its own statistics and leaderboard.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr's main singleplayer is endless. Rounds follow each other with no menu in between, and a timer is
+        optional, with a blink setting built into it. It also tracks a country streak, with an XP multiplier that
+        grows as the streak does.
+    {% /paragraph_text %}
+
+    {% figure_screenshot image_url=challenges_geoguessr image_alt="The GeoGuessr map page for Japan with its location count, plays and leaderboard" caption="A GeoGuessr map page." %}
+
+    {% #paragraph_text %}
+        Both games have a map called World, and they build it differently. GeoGuessr maintains and updates its
+        official maps. OpenGuessr's World map is rebuilt continuously by a generation server, so it always draws on
+        the latest Street View coverage, and the generator favours interesting and urban locations over long empty
+        roads. OpenGuessr's other official maps are put together much like GeoGuessr's.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        Both carry large community libraries with requirements attached to publishing. GeoGuessr's is the biggest in
+        the genre. OpenGuessr's runs to tens of thousands, organised into categories with search and sorting for
+        finding something specific.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        Three OpenGuessr modes have no GeoGuessr counterpart. Country Guessr asks for the country rather than a pin.
+        Image Guessr uses photographs instead of panoramas. Meta Guessr serves locations that contain well-known
+        meta clues and explains them once you have guessed, so you pick up metas while playing.
+    {% /paragraph_text %}
+
+    {% figure_screenshot image_url=maps_openguessr image_alt="The OpenGuessr map browser with base maps, special modes and a country list" caption="The OpenGuessr map browser. Scrolling further down shows the community maps." %}
+
+
+    {% #heading_primary %}Multiplayer{% /heading_primary %}
+
+    {% #paragraph_text %}
+        GeoGuessr covers duels, team duels, two battle royale modes and private parties. Duels are health-based: both
+        players start with a pool of HP and lose it according to how far their guess lands from the other's. Hosting
+        a party needs a paid plan.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr has ranked duels and 2v2 alongside custom rooms that anyone can host, with no account required
+        from anyone in them. Rooms run on PlaySocket, an open-source library built for the game, which keeps a room
+        responsive: actions register immediately, late joiners sync to the correct state, and dropped players
+        reconnect without stalling everyone else.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        Hosts can kick, mute, and lock or unlock the room, and they can also make it public, which lists it on the
+        join page so strangers can fill the empty slots.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=multiplayer_geoguessr image_1_alt="The GeoGuessr multiplayer screen with the ranked queue and weekly leaderboard" image_1_caption="GeoGuessr multiplayer." image_2_url=multiplayer_openguessr image_2_alt="The OpenGuessr multiplayer screen with custom rooms and matchmade queues" image_2_caption="OpenGuessr multiplayer: custom rooms on the left, matchmaking on the right." %}
+
+
+    {% #heading_primary %}Competitive play{% /heading_primary %}
+
+    {% #paragraph_text %}
+        GeoGuessr's competitive layer is the largest in the genre. Ranked duels feed divisions and seasons, a battle
+        pass runs alongside them, and the World Championship sits on top with a broadcast behind it. Challenges send
+        an exact set of rounds to someone else, play-along is built for streaming to an audience, and the per-map
+        statistics are detailed enough to review your own games properly.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr duels are five rounds with a multiplier at the end, so a match can turn on the last location.
+        Wins pay elo and tokens, losses cost elo, and divisions are climbed on elo. You choose which pool you queue
+        into as well, either your own division for an even match or everyone for a faster one.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        Every match lands in a duel history that keeps the round-by-round scores, both players' guesses, the
+        original panoramas and whether a round was refunded, which makes it usable for actual analysis rather than
+        just a record of who won.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        Competitions are the closer counterpart to GeoGuessr challenges. There is a daily competition, community
+        competitions run in the hundreds and anyone can create one, and they can use the same restrictions available
+        in rooms. Leaderboards separate your friends' scores from the global ones. Tournaments sit above that: free
+        to enter, paying out in-game prizes, and structured a little like a battle royale, with the field turning
+        into spectators as players drop out.
+    {% /paragraph_text %}
+
+    {% figure_screenshot image_url=competitions_openguessr image_alt="The OpenGuessr competitions screen with the daily competition and community competitions" caption="OpenGuessr competitions." %}
+
+
+    {% #heading_primary %}What it costs{% /heading_primary %}
+
+    {% #paragraph_text %}
+        GeoGuessr's free tier covers the daily challenge. Ad-free play, private parties, creator mode, unlimited
+        play, community play, mobile access and the Steam version sit on the paid plans, sold monthly or yearly with
+        discounts running from time to time.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr gates no features, which is what the Open in the name refers to. Supporter tiers at 3.99, 6.99 and 19.99 USD are bought
+        once rather than subscribed to, and add a pin, a highlighted name, an XP boost and a badge. The 6.99 tier
+        and up removes the ad.
+        Every mode, map, room and competition works without it.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=pricing_geoguessr image_1_alt="The GeoGuessr pricing page comparing the free and paid plans" image_1_caption="GeoGuessr plans." image_2_url=supporter_openguessr image_2_alt="The OpenGuessr supporter page with three one-off tiers" image_2_caption="OpenGuessr supporter tiers, bought once rather than subscribed to." %}
+
+
+    {% #heading_primary %}Friends and messaging{% /heading_primary %}
+
+    {% #paragraph_text %}
+        These two are the only games in this bracket with a real messenger. GeoGuessr has one, and on OpenGuessr
+        430,000 registered players use the social features with their friends: a messenger with threads, replies
+        and reactions, wired into a friend system. It shows you which friends are online, and you
+        can invite them straight from any multiplayer menu and have the invite reach them as a notification.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        The messaging works outside multiplayer too. You can send message requests to players who are not friends yet, and
+        anything unread is waiting with a red dot the next time you open the game.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Presentation and profiles{% /heading_primary %}
+
+    {% #paragraph_text %}
+        GeoGuessr has a large team behind it and you can see where the money goes. It is the most
+        expensive-feeling game in the genre by a clear margin. OpenGuessr is the closest thing to it on that front,
+        and everything else in this category is further back.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr's site does scale down to mobile with layouts built for it rather than a shrunken desktop view,
+        and it does that for free, where GeoGuessr keeps mobile access on the paid plans.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        GeoGuessr dresses an avatar, and you see the result in play: avatars appear during a match and on the map
+        pins. The shop sells clothing, animations, emotes and borders for coins.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        OpenGuessr has over forty pins once progression unlocks are counted, each one its own design rather than a
+        recolour, earned by playing or bought with tokens earned from duels and tournaments. Badges work like achievements, awarded for things
+        you pull off and shown in multiplayer and on your profile, next to flags, a description and a supporter
+        label.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=customization_geoguessr image_1_alt="The GeoGuessr shop with avatar cosmetics priced in coins" image_1_caption="The GeoGuessr cosmetics shop." image_2_url=customization_openguessr image_2_alt="The OpenGuessr pin picker with progression and purchased rows" image_2_caption="OpenGuessr pins." %}
+
+
+    {% #heading_primary %}Learning the game{% /heading_primary %}
+
+    {% #paragraph_text %}
+        Both games get easier once you know what to look for. OpenGuessr Education is a free companion site with
+        guides, quizzes and articles covering most individual countries, and it is source-available. Geometas, the
+        site you are reading this on, is a separate platform by OpenGuessr built around flashcard-style meta quizzes that learn
+        what you already know and show you more of what you do not.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=guides_education image_1_alt="The OpenGuessr Education guides page" image_1_caption="Guides on OpenGuessr Education, sorted by difficulty." image_2_url=quizzes_education image_2_alt="The OpenGuessr Education quiz browser" image_2_caption="Quizzes for countries and regions." %}
+
+
+    {% #heading_primary %}So, which one is better?{% /heading_primary %}
+
+    {% #paragraph_text %}
+        For playing a lot of rounds without paying, OpenGuessr. Every mode, map, room and competition is open, the
+        World map stays current, the free education material behind it is unusually good, and there is no account or
+        subscription in the way.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        GeoGuessr is worth the subscription if the scene around the game matters as much as the game. The World
+        Championship, clubs, play-along streaming and the analytics serious players review their games with have no
+        free equivalent, a paid account carries no ads at all, and it is the most polished product in the genre.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+        We build OpenGuessr, so weigh that accordingly.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Frequently asked questions{% /heading_primary %}
+
+    {% #faq_item question="Is OpenGuessr really free?" %}
+        {% #paragraph_text %}
+            Yes, and that includes multiplayer, ranked duels, competitions and every map. It is funded by one ad
+            slot shown during play and by optional supporter purchases, which buy cosmetics, an XP boost and
+            ad-free play rather than features.
+        {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Is GeoGuessr still free to play?" %}
+        {% #paragraph_text %}
+            Only the daily challenge. Unlimited rounds, multiplayer, community maps and ranked play sit on the paid
+            plans, and you need an account either way.
+        {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Can I play with friends without an account?" %}
+        {% #paragraph_text %}
+            In OpenGuessr, yes. A host creates a room, shares the link, and players join without signing up. Rooms
+            can also be made public so other players can find them. GeoGuessr requires an account from everyone and
+            a paid plan from the host.
+        {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Which is better for a beginner?" %}
+        {% #paragraph_text %}
+            We would start with OpenGuessr, and not only because it is free. Country Guessr lets you guess at the
+            level of a country instead of a pin, Meta Guessr explains the clues as you play, and the endless format
+            means a bad round costs you nothing.
+        {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Is OpenGuessr open-source?" %}
+        {% #paragraph_text %}
+            Several parts of it are, including PlaySocket for multiplayer, OpenReport for moderation and Bugspot for
+            bug reporting. The OpenGuessr about page lists them all. The Open in the name is about features being
+            available to everyone rather than about the licence.
+        {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% comparison_note date=comparison_date %}
+
+</div>
+
+{% endblock %}

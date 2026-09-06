@@ -1,0 +1,360 @@
+{% extends "template_content_with_extra.html" %}
+{% load static %}
+
+{% block container_width %}max-w-3xl{% endblock %}
+
+{% block title_main %}{{ html_meta_title }}{% endblock %}
+
+{% block content_top_extra %}
+<div class="-mx-4 -mt-6 sm:-mt-8 sm:-mx-8 grid grid-cols-2 gap-px bg-stone-200 sm:rounded-t-lg overflow-hidden">
+    <img src="{% static 'images/game-comparisons/play-openguessr.avif' %}"
+        alt="An OpenGuessr round on a straight road through open grassland" class="w-full">
+    <img src="{% static 'images/game-comparisons/play-worldguessr.avif' %}"
+        alt="A WorldGuessr round at a city crossing beneath an elevated roadway" class="w-full">
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+{% static 'images/game-comparisons/menu-openguessr.avif' as menu_openguessr %}
+{% static 'images/game-comparisons/menu-worldguessr.avif' as menu_worldguessr %}
+{% static 'images/game-comparisons/maps-openguessr.avif' as maps_openguessr %}
+{% static 'images/game-comparisons/multiplayer-openguessr.avif' as multiplayer_openguessr %}
+{% static 'images/game-comparisons/multiplayer-worldguessr.avif' as multiplayer_worldguessr %}
+{% static 'images/game-comparisons/competitions-openguessr.avif' as competitions_openguessr %}
+{% static 'images/game-comparisons/daily-challenge-worldguessr.avif' as daily_worldguessr %}
+{% static 'images/game-comparisons/customization-openguessr.avif' as customization_openguessr %}
+{% static 'images/game-comparisons/customization-worldguessr.avif' as customization_worldguessr %}
+{% static 'images/game-comparisons/guides-openguessr-education.avif' as guides_education %}
+{% static 'images/game-comparisons/quizzes-openguessr-education.avif' as quizzes_education %}
+{% static 'images/game-comparisons/room-moderation-openguessr.avif' as moderation_openguessr %}
+{% static 'images/game-comparisons/remaining-player-indicator-openguessr.avif' as indicator_openguessr %}
+{% static 'images/game-comparisons/nmpz-openguessr.avif' as nmpz_openguessr %}
+{% static 'images/game-comparisons/nmpz-worldguessr.avif' as nmpz_worldguessr %}
+{% static 'images/game-comparisons/misaligned-join-button-worldguessr.avif' as misaligned_worldguessr %}
+
+<div class="[&_p]:max-w-[65ch]">
+
+    {% #paragraph_text %}
+    OpenGuessr and WorldGuessr are both free, both use real Street View, and both have ranked duels, community
+    maps and custom rooms. On the headline features most people go looking for, the two are close, which is why
+    picking between them takes more than a feature list.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    The difference is in scope. OpenGuessr is a refined GeoGuessr alternative with duels inside it: you
+    land in an endless run of rounds, with modes, custom rooms, competitions and education offerings around
+    them. WorldGuessr routes you through a menu and puts duels front and centre as the main focus of the game.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Overview{% /heading_primary %}
+
+    {% #comparison_table col_a="OpenGuessr" col_b="WorldGuessr" %}
+    {% comparison_row label="Price" a="Free." b="Free." %}
+    {% comparison_row label="Account" a="Optional, custom rooms and 2v2 included." b="Optional for singleplayer." %}
+    {% comparison_row label="Singleplayer" a="Endless rounds, with optional timer." b="Five rounds per game." %}
+    {% comparison_row label="World map" a="Rebuilt continuously by a generation server, so new Google coverage appears within hours." b="Maintained official world map." %}
+    {% comparison_row label="Community maps" a="Around 30,000, with a minimum of 50 locations per map and minimum description length." b="Around 72,000, with lighter publishing requirements." %}
+    {% comparison_row label="Custom rooms" a="Up to 500 players." b="Up to 200 players." %}
+    {% comparison_row label="Ranked" a="Elo division duels, tokens for wins, duel history, skill-based as an option." b="Ranked duel and unranked match, with leagues and elo analytics." %}
+    {% comparison_row label="Restrictions" a="NMPZ, grayscale, hue shift, fade and inverted, also available for competitions." b="Moving, No Move and NMPZ." %}
+    {% comparison_row label="Other modes" a="Country Guessr, Image Guessr, Meta Guessr, competitions and the OpenGuessr Education quizzes." b="Daily challenge, country and continent guessing." %}
+    {% comparison_row label="Social" a="Friends, public profiles, built-in messenger." b="Friends, public profiles." %}
+    {% comparison_row label="Mobile" a="Responsive site with layouts built for mobile." b="Android and iOS apps." %}
+    {% comparison_row label="Ads" a="One slot during play, none in the menus." b="One slot during play and one in the menu. The first five tutorial rounds are ad-free." %}
+    {% comparison_row label="Source code" a="Reusable parts are open-sourced as libraries and platforms, including PlaySocket, Overfade, OpenReport and Bugspot." b="Full game code public under the PolyForm Noncommercial license, it cannot be used by other developers." %}
+    {% comparison_row label="Established" a="2023" b="2024" %}
+    {% /comparison_table %}
+
+
+    {% #heading_primary %}Getting started{% /heading_primary %}
+
+    {% #paragraph_text %}
+    OpenGuessr loads straight into a location, with the menu as a light overlay you open when you want it. A
+    short tutorial with the mascot, Guessy, covers how to play only if the user chooses to.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    WorldGuessr opens with a skippable tutorial, after which the user lands on a menu with its modes listed down one side and a signup popup.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=menu_openguessr image_1_alt="The OpenGuessr menu overlay above a Street View panorama" image_1_caption="OpenGuessr's menu overlay, opened on top of a live round." image_2_url=menu_worldguessr image_2_alt="The WorldGuessr menu listing singleplayer, duels, parties and the daily challenge" image_2_caption="WorldGuessr's menu." %}
+
+
+    {% #heading_primary %}Singleplayer and maps{% /heading_primary %}
+
+    {% #paragraph_text %}
+    OpenGuessr's main singleplayer is endless: rounds follow each other with no menu in between, and a timer is
+    optional, with a blink setting built into it. It also tracks a country streak, with an XP multiplier that
+    grows as the streak does. WorldGuessr keeps the traditional five rounds per game, with a hint feature when you need help.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    The World maps are built differently. OpenGuessr rebuilds its World map continuously with a generation server
+    rather than by hand, so coverage Google publishes today turns up in it within hours, and the generator favours
+    interesting and urban locations over long empty roads. A badge on the map itself opens an explanation of how
+    that works.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    WorldGuessr has the larger community catalogue. Its own site puts it at around 72,000 maps, against around
+    30,000 on OpenGuessr. The gap is explained by the bar to publish. OpenGuessr requires at least 50 locations in a map, along with the details it has
+    to provide, so only higher-effort maps clear it.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    That tends to pay off when you are after a specific place you want a full map for, and OpenGuessr's library is
+    sorted into categories with search and sorting on top.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    OpenGuessr lists 102 official maps at the time of writing and WorldGuessr 93. Both cover the countries with
+    Street View coverage, and OpenGuessr adds continent maps, Famous Places and Capital Cities.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    Both let you guess at country level, OpenGuessr through Country Guessr and WorldGuessr through its country and
+    continent guessing. Two OpenGuessr modes have no counterpart: Image Guessr uses photographs instead of
+    panoramas, and Meta Guessr shows locations with prominent meta clues and explains them once you have guessed, so you learn as you play.
+    {% /paragraph_text %}
+
+    {% figure_screenshot image_url=maps_openguessr image_alt="The OpenGuessr map browser with base maps, special modes and a country list" caption="The OpenGuessr map browser. Scrolling further down shows the community maps." %}
+
+
+    {% #heading_primary %}Multiplayer{% /heading_primary %}
+
+    {% #paragraph_text %}
+    OpenGuessr rooms go up to 500 players against WorldGuessr's 200, and neither game requires an account for hosting or joining. The bigger difference is inside a room. OpenGuessr runs on PlaySocket, an open-source library built
+    for the game: actions register optimistically for a snappy feel, late joiners synchronize mid-game, and dropped
+    players reconnect smoothly. This is the third iteration of OpenGuessr's multiplayer, and it shows.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    A room can split into a chosen number of teams seamlessly, or put everyone on one team to play the whole thing
+    together. A room can also be made public so it appears on the join page for players looking for a game.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    Hosts get a moderation panel: mute or kick a player, mute everyone at once, or lock/unlock the room.
+    There is a built-in chat too, and the game names whoever it is still waiting on before a round closes.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=moderation_openguessr image_1_alt="The OpenGuessr room moderation panel with mute all, lock room and per-player kick controls" image_1_caption="The host moderation panel in an OpenGuessr room." image_2_url=indicator_openguessr image_2_alt="The OpenGuessr in-room chat showing the message Waiting for PaulPlay" image_2_caption="The in-room chat, with the round waiting on a named player." %}
+
+    {% #paragraph_text %}
+    Communication in a WorldGuessr party is emotes rather than chat, and hosts have no moderation tools. There are
+    also team-based modes, although only two teams can be formed. Just like in OpenGuessr, players can choose to
+    play in the style of a duel.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    One extra that OpenGuessr doesn't offer: WorldGuessr has a plain No Move mode. Though, OpenGuessr makes up for that with its wide range of restrictions.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=multiplayer_openguessr image_1_alt="The OpenGuessr multiplayer screen with custom rooms and matchmade queues" image_1_caption="OpenGuessr multiplayer: custom rooms on the left, matchmaking on the right." image_2_url=multiplayer_worldguessr image_2_alt="The WorldGuessr party options dialog" image_2_caption="WorldGuessr party settings." %}
+
+
+    {% #heading_primary %}NMPZ and road names{% /heading_primary %}
+
+    {% #paragraph_text %}
+    Both games render NMPZ in a custom viewer, and both hide road names there. In moving rounds both show
+    them, where they appear in around half of panoramas and mostly tell you the language rather than the place.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=nmpz_openguessr image_1_alt="An OpenGuessr NMPZ round on a residential street in a capital city" image_1_caption="An OpenGuessr NMPZ round on a named city street, with no road name shown." image_2_url=nmpz_worldguessr image_2_alt="A WorldGuessr NMPZ round on a paved village road" image_2_caption="A WorldGuessr NMPZ round. The same." %}
+
+
+    {% #heading_primary %}Competitive play{% /heading_primary %}
+
+    {% #paragraph_text %}
+    Both run ranked duels with elo, and both ladders are similarly active. OpenGuessr pays tokens for wins on top
+    of the rating, and keeps a duel history with the round-by-round scores, both players' guesses and the original
+    panoramas. You also pick the pool you queue into, your own division for an even match or everyone for a faster
+    one.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    WorldGuessr's ranked duels use a health-based format, and it offers unranked matches. Public rooms are
+    OpenGuessr's version of a game with nothing at stake, and they can run whatever configuration you set them to.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    The daily challenges look alike. WorldGuessr runs three shared Street View locations at 60 seconds each, with a
+    score distribution to measure yourself against and a streak if you sign in. OpenGuessr runs a daily competition
+    of its own, and it sits inside something larger.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    Competitions are the feature with no WorldGuessr equivalent. Anyone can create one, 189 were running as we
+    wrote this, and they take the same restrictions as rooms. Everyone plays the same locations whenever they get
+    to them, so this is how you settle something with friends without all being online at once. Tournaments run alongside, free to enter and paying out
+    in-game prizes.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=competitions_openguessr image_1_alt="The OpenGuessr competitions screen with the daily and community competitions" image_1_caption="OpenGuessr competitions." image_2_url=daily_worldguessr image_2_alt="The WorldGuessr daily challenge page with a chart of today's scores" image_2_caption="The WorldGuessr daily challenge." %}
+
+
+    {% #heading_primary %}What it costs{% /heading_primary %}
+
+    {% #paragraph_text %}
+    Both games are free and feature advertising. Each runs one banner of the same size at the edge of the screen
+    during a round, WorldGuessr's along the top and OpenGuessr's along the bottom. Both pull from the same ad
+    exchanges, and OpenGuessr runs Confiant on top of that to pre-screen for ad quality.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    The menus are where the two differ. OpenGuessr shows no ads outside a round and never asks you to make an
+    account. WorldGuessr runs one unit in its main menu and prompts you to sign up on arrival, and its first five
+    tutorial rounds are ad-free.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    OpenGuessr also sells supporter tiers at 3.99, 6.99 and 19.99 USD, bought once rather than subscribed to. The
+    6.99 tier and up removes the in-round banner. No feature is gated behind any of them, instead they serve as a way to support the game.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Friends and messaging{% /heading_primary %}
+
+    {% #paragraph_text %}
+    Both games let you add friends, but on OpenGuessr it's part of the core experience. At the time of writing, 430,000 registered players actively use its social features with their friends: 
+    a full messenger with threads, replies and reactions, invites for every mode, online indicators, friend leaderboards, and notifications, built directly into the game.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    You can send message requests to players who are not friends yet, and
+    anything unread is waiting with a red dot the next time you open the game.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Profiles and customization{% /heading_primary %}
+
+    {% #paragraph_text %}
+    OpenGuessr is illustrated by hand throughout, with its own sound effects and a soundtrack composed for the
+    game. It scales down to mobile with layouts built for it, so parts like the chat get a mobile version rather
+    than a shrunken desktop one. WorldGuessr also ships Android and iOS apps, which package the site with similar
+    mobile adjustments.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    OpenGuessr has over forty pins once progression unlocks are counted, each one its own illustration built
+    around a specific object or idea, earned through progression or bought with tokens. Badges work like
+    achievements, awarded for things you pull off and shown in multiplayer and on your profile, next to flags, a
+    description and a supporter label.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    WorldGuessr sells six pins, numerous backgrounds, name glows in different colors and emote emojis for an in-game currency called stamps. Moreover, there's the ability to
+    buy passes that grant 60 minutes of ad-free play. Its menu backgrounds allow players to give the game their own preferred look.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=customization_openguessr image_1_alt="The OpenGuessr pin picker with progression and purchased rows" image_1_caption="OpenGuessr pins." image_2_url=customization_worldguessr image_2_alt="The WorldGuessr customize screen with pins and city backgrounds" image_2_caption="WorldGuessr pins and menu backgrounds." %}
+
+
+    {% #heading_primary %}Learning the game{% /heading_primary %}
+
+    {% #paragraph_text %}
+    Both games get easier once you understand their tricks and metas. OpenGuessr Education is a free companion site with
+    guides, quizzes and articles covering most individual countries, and it is source-available. Geometas, the
+    site you are reading this on, is a separate platform by OpenGuessr built around flashcard-style meta quizzes that learn
+    what you already know and show you more of what you do not.
+    {% /paragraph_text %}
+
+    {% figure_screenshot_pair image_1_url=guides_education image_1_alt="The OpenGuessr Education guides page" image_1_caption="Guides on OpenGuessr Education, sorted by difficulty." image_2_url=quizzes_education image_2_alt="The OpenGuessr Education quiz browser" image_2_caption="Quizzes for countries and regions." %}
+
+    {% #heading_primary %}Design and feel{% /heading_primary %}
+
+    {% #paragraph_text %}
+    OpenGuessr, as the title that's been in development for longer, is more refined. We build it, so weigh that
+    accordingly.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    Its strict design guidelines, tailormade components, subtle interaction sounds and animations lead to a more
+    coherent experience. All scrollable content fades out smoothly powered by Overfade that completes the 'blue
+    velvet' design language. The panorama always shines through the UI, keeping the focus on the gameplay.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    WorldGuessr isn't poorly designed either. Though, you'll see a misaligned icon here and there, overflowing buttons, and loud colors aren't everyone's cup of tea. The menus are very straightforward and follow a more traditional approach.
+    {% /paragraph_text %}
+
+
+    {% figure_screenshot max_width="max-w-sm" image_url=misaligned_worldguessr image_alt="The WorldGuessr join party page, with the Go button extending past the right edge of the card" caption="The Go button on WorldGuessr's join party page, sitting past the edge of the card." %}
+
+
+    {% #heading_primary %}So, which one is better?{% /heading_primary %}
+
+    {% #paragraph_text %}
+    A lot of this is taste. WorldGuessr's health-based duels are fun to play, its ranked community is about as
+    active, and its menu backgrounds are neat. Both games moderate cheating and misbehavior, WorldGuessr through its moderation 
+    panel and OpenGuessr through OpenReport, a separate purpose-built platform, along with its in-house profanity filter.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    Our opinion is that OpenGuessr
+    is the more polished of the two and the one we would suggest to most players. It is not just the look and feel. The endless singleplayer, reliable duels, 
+    extra modes, competitions, music and sounds, the messenger and the ad-free menus add up to form a richer experience. And OpenGuessr Education gives it a knowledge base that gets you from beginner to pro.
+    {% /paragraph_text %}
+
+    {% #paragraph_text %}
+    Both are free, so you can settle it yourself in an evening.
+    {% /paragraph_text %}
+
+
+    {% #heading_primary %}Frequently asked questions{% /heading_primary %}
+
+    {% #faq_item question="Are OpenGuessr and WorldGuessr both free?" %}
+    {% #paragraph_text %}
+    Yes. No gameplay aspect is locked behind a paywall.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Do I need an account?" %}
+    {% #paragraph_text %}
+    No, you can play either game without one. Both keep some features, ranked duels among them, for signed-in
+    players.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Which one has better duels?" %}
+    {% #paragraph_text %}
+    Both are good and the difference is mostly feel. WorldGuessr's are health-based. OpenGuessr's run five rounds
+    with a multiplier at the end and pay tokens on top of elo.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Who is Guessy?" %}
+    {% #paragraph_text %}
+    OpenGuessr's mascot. Guessy runs the tutorial, fronts the daily competition, and is the Discord bot that lets
+    you play from a Discord server.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Which game has more restrictions?" %}
+    {% #paragraph_text %}
+    OpenGuessr does, with NMPZ, grayscale, hue change, inverted colors, and fade. WorldGuessr however has No Move.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Do road names show up during a round?" %}
+    {% #paragraph_text %}
+    In moving rounds, yes, in both games, in around half of panoramas. They are omitted in NMPZ in both.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% #faq_item question="Is WorldGuessr open-source?" %}
+    {% #paragraph_text %}
+    Its code is public on GitHub under a licence that bars commercial use, so it is source-available rather than
+    open-source. Several OpenGuessr components are open-source, including PlaySocket, OpenReport, fast-profanity-filter, and Bugspot, all
+    listed on the OpenGuessr about page.
+    {% /paragraph_text %}
+    {% /faq_item %}
+
+    {% comparison_note date=comparison_date %}
+
+</div>
+
+{% endblock %}

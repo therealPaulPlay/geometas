@@ -25,6 +25,9 @@ class StaticViewSitemap(sitemaps.Sitemap):
                 'articles:south_east_asia',
                 'articles:baltics',
                 'articles:central_africa',
+                'articles:geoguessr_vs_openguessr',
+                'articles:openguessr_vs_worldguessr',
+                'articles:openguessr_vs_geotastic',
                ]
 
     def location(self, item):

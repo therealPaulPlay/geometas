@@ -18,3 +18,10 @@ components:
   card_image_with_description_container: "components/card_image_with_description_container.html"
 
   content_card_home: "components/content_card_home.html"
+
+  figure_screenshot: "components/figure_screenshot.html"
+  figure_screenshot_pair: "components/figure_screenshot_pair.html"
+  comparison_table: "components/comparison_table.html"
+  comparison_row: "components/comparison_row.html"
+  comparison_note: "components/comparison_note.html"
+  faq_item: "components/faq_item.html"
