@@ -54,7 +54,7 @@
         {% comparison_row label="Other modes" a="Country Guessr, Image Guessr, Meta Guessr, competitions and the OpenGuessr Education quizzes." b="Flag rounds, aerial rounds, country streaks, GeoBingo, seasons and a Twitch mode." %}
         {% comparison_row label="Editors" a="Map and competition creation, with locations uploadable as JSON." b="Map editor and challenge editor, both unusually detailed." %}
         {% comparison_row label="Multiplayer" a="Custom rooms, free to host and open to players without an account." b="Custom local and online lobbies, from supporter level 1." %}
-        {% comparison_row label="Ranked" a="Elo divisions, tokens for wins, a duel history and a choice of matchmaking pool." b="Matchmaking, blitz duels and seasonal ranked play." %}
+        {% comparison_row label="Ranked" a="Elo divisions, tokens for wins, a duel history and skill-based matchmaking with an adjustable search range." b="Matchmaking, blitz duels and seasonal ranked play." %}
         {% comparison_row label="Social" a="Friends with online status, invites from the multiplayer menus, and a built-in messenger." b="Squads and detailed player profiles." %}
         {% comparison_row label="Ads" a="One slot during play, none in the menus." b="Two slots during play, plus video ads. Removed by a donation." %}
         {% comparison_row label="Presentation" a="Illustrations, sound effects and music composed for the game." b="Desktop-first, with a steeper learning curve." %}
@@ -65,14 +65,14 @@
     {% #heading_primary %}Getting started{% /heading_primary %}
 
     {% #paragraph_text %}
-        OpenGuessr loads straight into a location, with the menu as a light overlay you open when you want it. A
+        OpenGuessr's main menu is a light overlay on top of the gameplay, which shines through. A
         short tutorial with the mascot, Guessy, covers how to play. Nothing is locked and no account is required.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Geotastic starts from a home screen that lays its modes out as tiles: highscore hunts, challenges, custom
+        Geotastic starts from a home screen that lays its modes out as tiles. There are highscore hunts, challenges, custom
         local and online games, the current season, and the Twitch mode. The two custom game tiles are locked until
-        you reach supporter level 1 or until that month's API costs have been covered by other players. Most of the
+        you reach supporter level 1 or until that month's API costs have been covered by other players (this varies based on how much funding the game has received that month). Most of the
         game expects an account.
     {% /paragraph_text %}
 
@@ -82,7 +82,7 @@
     {% #heading_primary %}Singleplayer and maps{% /heading_primary %}
 
     {% #paragraph_text %}
-        OpenGuessr's main singleplayer is endless: rounds follow each other with no menu in between, and a timer is
+        OpenGuessr's main singleplayer is endless. Rounds follow each other with no menu in between, and a timer is
         optional, with a blink setting built into it, and a country streak runs alongside with an XP multiplier that
         grows as the streak does.
     {% /paragraph_text %}
@@ -90,12 +90,12 @@
     {% #paragraph_text %}
         Its World map is rebuilt continuously with a generation server rather than by hand, so it always uses the
         latest Street View coverage, and the generator favours interesting and urban locations over long empty
-        roads. The community library runs to tens of thousands of maps, organised into categories with search and
+        roads. The community library includes tens of thousands of maps, organised into categories with search and
         sorting.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Geotastic sends you into a round through quick play or one of its structured formats, and back out to a
+        Geotastic sends you into a round through quick play or one of its structured formats, and then back out to a
         results screen.
     {% /paragraph_text %}
 
@@ -110,7 +110,7 @@
     {% #heading_primary %}Modes and editors{% /heading_primary %}
 
     {% #paragraph_text %}
-        OpenGuessr goes wide by adding separate games. Country Guessr asks for the country rather than a pin. Image
+        OpenGuessr expands horizontally by adding separate games. Country Guessr asks for the country rather than a pin. Image
         Guessr uses photographs instead of panoramas. Meta Guessr serves locations that contain well-known meta
         clues and explains them once you have guessed, so you pick up metas while playing.
     {% /paragraph_text %}
@@ -119,37 +119,37 @@
         Alongside those sits OpenGuessr Education, a free companion site with guides, quizzes and articles covering
         most individual countries, and it is source-available. Geometas, the site you are reading this on, is a
         separate platform by OpenGuessr built around flashcard-style meta quizzes that learn what you already know
-        and show you more of what you do not. Geotastic has no equivalent.
+        and show you more of what you do not.
     {% /paragraph_text %}
 
     {% figure_screenshot_pair image_1_url=guides_education image_1_alt="The OpenGuessr Education guides page" image_1_caption="Guides on OpenGuessr Education, sorted by difficulty." image_2_url=quizzes_education image_2_alt="The OpenGuessr Education quiz browser" image_2_caption="Quizzes for countries and regions." %}
 
     {% #paragraph_text %}
-        Geotastic goes wide by bending the classic round. Highscore hunts run across a range of rule sets, including
+        Geotastic goes wide by putting additional twists on the traditional gameplay. Highscore hunts run across a range of rule sets, including
         select-country rules, country streaks and multiple-try formats. Seasons run on their own calendar, GeoBingo
         is a recent addition worth trying, and the Twitch mode hands the guessing to a streamer's chat. Several of
         these are original to Geotastic, and geography enthusiasts who like to tinker will get a lot out of them.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Both games let you build your own content, and they approach it from opposite ends. Geotastic's map and
-        challenge editors are the more sophisticated pair, particularly for assembling large maps by hand.
+        Both games let you build your own content, and they approach it slightly differently. Geotastic's map and
+        challenge editors are a bit more sophisticated though complex, suitable for assembling large maps by hand.
         OpenGuessr has a competition editor and community map creation, and leans on letting you upload locations as
-        JSON, so the heavy lifting happens outside the game.
+        JSON as well as links straight from Google Maps.
     {% /paragraph_text %}
 
 
     {% #heading_primary %}Multiplayer{% /heading_primary %}
 
     {% #paragraph_text %}
-        OpenGuessr rooms are free to host and need no account from anyone in them. They run on PlaySocket, an
+        OpenGuessr rooms are free to host and need no account from anyone in them. They are powered by PlaySocket, an
         open-source library built for the game, which keeps a room responsive: actions register immediately, late
-        joiners sync to the correct state mid-game, and dropped players reconnect without stalling everyone else.
+        joiners sync to the correct state mid-game, and dropped players reconnect without impacting everyone else.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
         Hosts can kick, mute, and lock or unlock the room, and a room can be made public so it appears on the join
-        page. A room can run with restrictions such as NMPZ, grayscale, hue shift, fade or inverted, and the same
+        page. A room can be created with restrictions such as NMPZ, grayscale, hue shift, fade or inverted, and the same
         ones are available for competitions.
     {% /paragraph_text %}
 
@@ -173,8 +173,8 @@
 
     {% #paragraph_text %}
         Duels are five rounds with a multiplier at the end, wins pay elo and tokens, and a duel history keeps the
-        round-by-round scores, both players' guesses and the original panoramas for later analysis. You also choose
-        which pool you queue into, either your own division for an even match or everyone for a faster one.
+        round-by-round scores, both players' guesses and the original panoramas for later analysis. Matchmaking is skill-based and balances queue times with finding an
+        adequate opponent, and you can also select the search range manually.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
@@ -188,15 +188,15 @@
     {% #heading_primary %}What it costs{% /heading_primary %}
 
     {% #paragraph_text %}
-        OpenGuessr gates no features, which is what the Open in the name refers to. Supporter tiers at 3.99, 6.99 and 19.99 USD are bought
+        OpenGuessr gates no features, which is what the Open in the name stands for. Supporter tiers at 3.99, 6.99 and 19.99 USD are bought
         once rather than subscribed to, and add a pin, a highlighted name, an XP boost and a badge. The 6.99 tier
         and up removes the ad.
         Every mode, map, room and competition works without it.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Geotastic is donation funded and open about it. Your account page shows your own costs against your own
-        donations, and a negative balance means you play with ads. A 3 EUR contribution clears ads for a month even
+        Geotastic is donation funded and very transparent about it. Your account page shows your own costs against your own
+        donations, and a negative balance means you play with ads. A 3 EUR contribution removes ads for a month even
         while the balance stays negative.
     {% /paragraph_text %}
 
@@ -220,8 +220,8 @@
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        The messaging works outside multiplayer too. You can send requests to players who are not friends yet, and
-        anything unread is waiting with a red dot the next time you open the game.
+        The messaging works outside multiplayer as well. You can send requests to players who are not friends yet, and
+        anything unread is waiting for you (indicated by a red dot) the next time you open the game.
     {% /paragraph_text %}
 
 
@@ -235,7 +235,7 @@
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Geotastic gives a profile plenty to fill: trophies, seasons, achievements, statistics, created maps, played
+        Geotastic gives a profile plenty to show. That includes trophies, seasons, achievements, statistics, created maps, played
         challenges and your own challenges. The interface around it is desktop-first and has a steeper learning
         curve than its rivals, which suits players who want the depth. There is no in-game music.
     {% /paragraph_text %}
@@ -252,29 +252,26 @@
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Geotastic builds on Material UI. The components are functional and familiar rather than distinctive, which
-        works well for a game with this much packed into it.
+        Geotastic builds on Material UI. The components are functional and familiar rather than distinctive. This works decently well for a game with this many controls and options.
     {% /paragraph_text %}
 
 
     {% #heading_primary %}So, which one is better?{% /heading_primary %}
 
     {% #paragraph_text %}
-        OpenGuessr is the better pick if you want to start playing immediately and keep playing: endless
-        singleplayer, a World map that stays current, several separate modes plus the Education quizzes and country
-        articles, free rooms, competitions every day, no account and one ad slot.
+        OpenGuessr is the better pick if you want to start playing immediately and keep playing. Endless
+        singleplayer, a World map that stays fresh, several separate modes plus the Education quizzes and country
+        articles, free rooms, competitions every day, no account and one ad slot only shown during play.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Geotastic is the better pick if the rule sets and the editors are the appeal. Country streaks, highscore
-        hunts, GeoBingo and blitz duels are formats you will not find elsewhere, the challenge editor behind them is
-        the most detailed in the genre, and hidden road names make it the stricter training ground. Budget for a
-        donation, or expect locked tiles and video ads.
+        Geotastic is the better choice if the rule sets and the editors are the appeal. Country streaks, highscore
+        hunts, GeoBingo and blitz duels are great formats, the challenge editor is very sophisticated, and hidden road names make it the stricter training ground. Budget for a
+        donation, or expect locked tiles and heavier video ads.
     {% /paragraph_text %}
 
     {% #paragraph_text %}
-        Our view is that OpenGuessr is the better free game and Geotastic the better sandbox, and that the sandbox
-        is worth a donation if its formats are what you came for. We build OpenGuessr, so weigh that accordingly.
+        Our view is that OpenGuessr is the better free game, and Geotastic the better sandbox with loads of modifiers to try out. We build OpenGuessr, so please weigh that accordingly.
     {% /paragraph_text %}
 
 
@@ -283,7 +280,7 @@
     {% #faq_item question="Is OpenGuessr free?" %}
         {% #paragraph_text %}
             Yes, and no feature is locked. It is funded by one ad slot during play and by optional supporter
-            purchases, which buy cosmetics, an XP boost and ad-free play rather than features.
+            purchases, which buy cosmetics, an XP boost and ad-free play, but no gatekept features.
         {% /paragraph_text %}
     {% /faq_item %}
 
@@ -299,14 +296,14 @@
         {% #paragraph_text %}
             It depends what you count. Geotastic has more variations on the classic round, including highscore
             hunts, country streaks, GeoBingo, seasons, aerial and flag rounds and the Twitch mode. OpenGuessr has
-            more separate ways to play once you include Country Guessr, Image Guessr, Meta Guessr, competitions and
+            more separate ways to play such as Country Guessr, Image Guessr, Meta Guessr, competitions and
             the Education quizzes.
         {% /paragraph_text %}
     {% /faq_item %}
 
     {% #faq_item question="Can I play with friends for free?" %}
         {% #paragraph_text %}
-            In OpenGuessr, yes: the host creates a room, shares the link, and nobody needs an account. Geotastic's
+            In OpenGuessr, yes! The host creates a room, shares the link, and nobody needs an account. Geotastic's
             quick play takes up to two friends, but its full custom lobbies need supporter level 1 or community
             funding for the month.
         {% /paragraph_text %}
@@ -314,16 +311,15 @@
 
     {% #faq_item question="Which is better for making custom games?" %}
         {% #paragraph_text %}
-            Geotastic, if you want to build inside the game. Its map and challenge editors expose far more rules
-            than anything comparable. OpenGuessr's competition editor is quicker to use and accepts locations as a
+            Geotastic, if you want to create them inside the game. Its map and challenge editors expose more rules and options. OpenGuessr's competition editor is quicker to use and accepts locations as a
             JSON upload, which suits people who prepare their maps elsewhere.
         {% /paragraph_text %}
     {% /faq_item %}
 
     {% #faq_item question="Which one should a beginner start with?" %}
         {% #paragraph_text %}
-            OpenGuessr, in our opinion. Country Guessr lets you guess at the level of a country, Meta Guessr
-            explains the clues as you play, and there is no account or donation step in the way. Geotastic makes
+            OpenGuessr, in our opinion. Country Guessr lets you guess countries rather than placing a pin, Meta Guessr
+            explains metas as you play, and there is no account or donation step in the way. Geotastic makes
             more sense once you know what you want out of it.
         {% /paragraph_text %}
     {% /faq_item %}
